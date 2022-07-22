@@ -1,0 +1,2 @@
+C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Debug\SistemaHotel.csproj.AssemblyReference.cache
+C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Debug\SistemaHotel.csproj.CoreCompileInputs.cache
