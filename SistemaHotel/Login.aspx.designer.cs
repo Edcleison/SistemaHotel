@@ -51,42 +51,6 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.TextBox txtSenha;
 
         /// <summary>
-        /// divSenhaCliente control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSenhaCliente;
-
-        /// <summary>
-        /// txtNovaSenha control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNovaSenha;
-
-        /// <summary>
-        /// txtConfirmaSenha control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtConfirmaSenha;
-
-        /// <summary>
-        /// lnkSenha control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkSenha;
-
-        /// <summary>
         /// btlogar control.
         /// </summary>
         /// <remarks>

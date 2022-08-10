@@ -14,6 +14,40 @@ namespace SistemaHotel.Controller
     public class DALUsuario
     {
         string cnn = @"Data Source=LAPTOP-JV98S2OU\SQLEXPRESS;Initial Catalog=hotelServicos;Integrated Security=True";
+
+        //Creat
+        public void inserirUsuario(Usuario usu)
+        {
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [dbo].[USUARIO]
+                                                   ([NOME]
+                                                   ,[EMAIL]
+                                                   ,[SENHA])                                                 
+                                             VALUES(@NOME,@EMAIL,@SENHA)", connection))
+                {
+
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("NOME", usu.Nome);
+                        cmd.Parameters.AddWithValue("EMAIL", usu.Email);
+                        cmd.Parameters.AddWithValue("SENHA", usu.Senha);
+                        cmd.ExecuteNonQuery();
+                        cmd.Connection.Close();
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+
+                }
+            }
+        }
+
+
+        //Read
+
         public DataTable buscarTodosUsuarios()
         {
             DataTable dta = new DataTable();
@@ -25,87 +59,100 @@ namespace SistemaHotel.Controller
                     using (SqlCommand cmd = new SqlCommand(@"SELECT [ID]
                                                       ,[NOME]
                                                       ,[EMAIL]
-                                                      ,[SENHA]
-                                                      ,[ATIVO]
-                                                  FROM [DBO].[USUARIO] WHERE ATIVO = 'S'", connection))
+                                                      ,[SENHA]                                                     
+                                                  FROM [DBO].[USUARIO]", connection))
                     {
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
                         adp = new SqlDataAdapter(cmd);
                         adp.Fill(dta);
                         cmd.Connection.Close();
-                        return dta;
+
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception erro)
             {
-                return null;
+                throw new Exception(erro.Message);
             }
-
+            return dta;
         }
 
 
-        public void inserirUsuario(string Nome, string Email, string Senha)
+        public Usuario buscarUsuarioId(string Id)
         {
-            using (SqlConnection connection = new SqlConnection(cnn))
+            Usuario usu = new Usuario();
+            try
             {
-                using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [dbo].[USUARIO]
-                                                   ([NOME]
-                                                   ,[EMAIL]
-                                                   ,[SENHA]
-                                                   ,[ATIVO])
-                                             VALUES(@NOME,@EMAIL,@SENHA,'" + "S" + "')", connection))
+
+                using (SqlConnection connection = new SqlConnection(cnn))
                 {
-
-                    try
+                    using (SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTES WHERE ID = @ID"))
                     {
+
+                        cmd.Parameters.AddWithValue("@id", Id);
                         cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("NOME", Nome);
-                        cmd.Parameters.AddWithValue("EMAIL", Email);
-                        cmd.Parameters.AddWithValue("SENHA", Senha);
-                        cmd.ExecuteNonQuery();
-                        cmd.Connection.Close();
-                    }
-                    catch
-                    {
+                        SqlDataReader registro = cmd.ExecuteReader();
+                        if (registro.HasRows)
+                        {
+                            registro.Read();
+                            usu.Id = Convert.ToInt32(registro["ID"]);
+                            usu.Nome = Convert.ToString(registro["NOME"]);
+                            usu.Email = Convert.ToString(registro["EMAIL"]);
+                            usu.Senha = Convert.ToString(registro["SENHA"]);                           
 
+                        }
                     }
-
                 }
             }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+
+            return usu;
         }
 
-        public void inserirPerfil(string Perfil, string Email)
+        public Usuario buscaUsuarioEmail(string Email)
         {
-            using (SqlConnection connection = new SqlConnection(cnn))
+            Usuario usu = new Usuario();
+            SqlDataAdapter adp;
+
+            try
             {
-                using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [DBO].[PERFIL_USUARIO]
-                                                   ([PERFIL]
-                                                   ,[EMAIL])
-                                             VALUES(@PERFIL,@EMAIL)", connection))
+                using (SqlConnection connection = new SqlConnection(cnn))
                 {
-
-                    try
+                    using (SqlCommand cmd = new SqlCommand(@"SELECT [ID]
+                                                      ,[NOME]
+                                                      ,[EMAIL]
+                                                      ,[SENHA]                                                     
+                                                  FROM[DBO].[USUARIO] WHERE EMAIL = @EMAIL", connection))
                     {
-                        cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("PERFIL", Perfil);
                         cmd.Parameters.AddWithValue("EMAIL", Email);
-                        cmd.ExecuteNonQuery();
-                        cmd.Connection.Close();
+                        cmd.Connection.Open();
+                        SqlDataReader registro = cmd.ExecuteReader();
+                        if (registro.HasRows)
+                        {
+                            registro.Read();
+                            usu.Id = Convert.ToInt32(registro["ID"]);
+                            usu.Nome = Convert.ToString(registro["NOME"]);
+                            usu.Email = Convert.ToString(registro["EMAIL"]);
+                            usu.Senha = Convert.ToString(registro["SENHA"]);
+                        }
                     }
-                    catch
-                    {
-
-                    }
-
                 }
             }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+            return usu;
 
         }
+        
 
-
-        public void alterarUsuario(string Nome, string Email, string Senha, string Id)
+        //Update
+        public void alterarUsuario(Usuario usu)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
@@ -115,22 +162,25 @@ namespace SistemaHotel.Controller
                     try
                     {
                         cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("NOME", Nome);
-                        cmd.Parameters.AddWithValue("EMAIL", Email);
-                        cmd.Parameters.AddWithValue("ID", Id);
+                        cmd.Parameters.AddWithValue("NOME", usu.Nome);
+                        cmd.Parameters.AddWithValue("EMAIL", usu.Email);
+                        cmd.Parameters.AddWithValue("ID", usu.Id);
                         cmd.ExecuteNonQuery();
                         cmd.Connection.Close();
                     }
-                    catch
+                    catch (Exception erro)
                     {
-
+                        throw new Exception(erro.Message);
                     }
 
+
                 }
+                
             }
         }
 
-        public void alterarSenha(string Senha, string Id)
+
+        public void alterarSenha(Usuario usu)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
@@ -140,231 +190,31 @@ namespace SistemaHotel.Controller
                     try
                     {
                         cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("SENHA", Senha);
-                        cmd.Parameters.AddWithValue("ID", Id);
+                        cmd.Parameters.AddWithValue("SENHA", usu.Senha);
+                        cmd.Parameters.AddWithValue("ID", usu.Id);
                         cmd.ExecuteNonQuery();
                         cmd.Connection.Close();
                     }
-                    catch
+                    catch (Exception erro)
                     {
-
+                        throw new Exception(erro.Message);
                     }
 
                 }
             }
         }
 
-        
+       
 
-        public void inativarUsuario(string Id)
-        {
-            Usuario usu = new Usuario();
 
-            //usu.
-            using (SqlConnection connection = new SqlConnection(cnn))
-            {
-                using (SqlCommand cmd = new SqlCommand("UPDATE USUARIO SET ATIVO = 'N' WHERE ID = @ID", connection))
-                {
 
-                    try
-                    {
 
-                        connection.Open();
-                        cmd.Parameters.AddWithValue("ID", Id);
-                        cmd.ExecuteNonQuery();
-                        cmd.Connection.Close();
-                    }
-                    catch
-                    {
 
-                    }
-                }
-            }
-        }
 
-        public void ativarUsuario(string Nome, string Email, string Senha)
-        {
-            using (SqlConnection connection = new SqlConnection(cnn))
-            {
-                using (SqlCommand cmd = new SqlCommand("UPDATE USUARIO SET ATIVO = 'S', NOME= @NOME, SENHA= @SENHA WHERE EMAIL = @EMAIL", connection))
-                {
 
-                    try
-                    {
 
-                        connection.Open();
-                        cmd.Parameters.AddWithValue("NOME", Nome);
-                        cmd.Parameters.AddWithValue("SENHA", Senha);
-                        cmd.Parameters.AddWithValue("EMAIL", Email);
-                        cmd.ExecuteNonQuery();
-                        cmd.Connection.Close();
-                    }
-                    catch
-                    {
 
-                    }
-                }
-            }
-        }
 
-        public DataTable buscarUsuarioId(string Id)
-        {
-            DataTable dta = new DataTable();
-            SqlDataAdapter adp;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(cnn))
-                {
-                    using (SqlCommand cmd = new SqlCommand(@"SELECT [ID]
-                                                      ,[NOME]
-                                                      ,[EMAIL]
-                                                      ,[SENHA]
-                                                      ,[ATIVO]
-                                                  FROM[DBO].[USUARIO] WHERE ID = @ID", connection))
-                    {
-                        cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("ID", Id);
-                        cmd.ExecuteNonQuery();
-                        adp = new SqlDataAdapter(cmd);
-                        adp.Fill(dta);
-                        cmd.Connection.Close();
-                        return dta;
-                    }
-                }
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public DataTable buscaUsuarioEmailAtivo(string Email)
-        {
-
-            DataTable dta = new DataTable();
-            SqlDataAdapter adp;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(cnn))
-                {
-                    using (SqlCommand cmd = new SqlCommand(@"SELECT [ID]
-                                                      ,[NOME]
-                                                      ,[EMAIL]
-                                                      ,[SENHA]
-                                                      ,[ATIVO]
-                                                  FROM[DBO].[USUARIO] WHERE EMAIL = @EMAIL AND ATIVO ='S'" + "", connection))
-                    {
-                        cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("EMAIL", Email);
-                        cmd.ExecuteNonQuery();
-                        adp = new SqlDataAdapter(cmd);
-                        adp.Fill(dta);
-                        cmd.Connection.Close();
-                        return dta;
-                    }
-                }
-            }
-            catch
-            {
-                return null;
-            }
-        }
-        public DataTable buscaUsuarioEmailInativo(string Email)
-        {
-
-            DataTable dta = new DataTable();
-            SqlDataAdapter adp;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(cnn))
-                {
-                    using (SqlCommand cmd = new SqlCommand(@"SELECT [ID]
-                                                      ,[NOME]
-                                                      ,[EMAIL]
-                                                      ,[SENHA]
-                                                      ,[ATIVO]
-                                                  FROM[DBO].[USUARIO] WHERE EMAIL = @EMAIL AND ATIVO ='N'" + "", connection))
-                    {
-                        cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("EMAIL", Email);
-                        cmd.ExecuteNonQuery();
-                        adp = new SqlDataAdapter(cmd);
-                        adp.Fill(dta);
-                        cmd.Connection.Close();
-                        return dta;
-                    }
-                }
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public string Encrypt(string textToEncrypt)
-        {
-            try
-            {
-
-                string ToReturn = "";
-                string publickey = "12345678";
-                string secretkey = "87654321";
-                byte[] secretkeyByte = { };
-                secretkeyByte = System.Text.Encoding.UTF8.GetBytes(secretkey);
-                byte[] publickeybyte = { };
-                publickeybyte = System.Text.Encoding.UTF8.GetBytes(publickey);
-                MemoryStream ms = null;
-                CryptoStream cs = null;
-                byte[] inputbyteArray = System.Text.Encoding.UTF8.GetBytes(textToEncrypt);
-                using (DESCryptoServiceProvider des = new DESCryptoServiceProvider())
-                {
-                    ms = new MemoryStream();
-                    cs = new CryptoStream(ms, des.CreateEncryptor(publickeybyte, secretkeyByte), CryptoStreamMode.Write);
-                    cs.Write(inputbyteArray, 0, inputbyteArray.Length);
-                    cs.FlushFinalBlock();
-                    ToReturn = Convert.ToBase64String(ms.ToArray());
-                }
-                return ToReturn;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message, ex.InnerException);
-            }
-        }
-        public string Decrypt(string textToDecrypt)
-        {
-            try
-            {
-                string ToReturn = "";
-                string publickey = "12345678";
-                string secretkey = "87654321";
-                byte[] privatekeyByte = { };
-                privatekeyByte = System.Text.Encoding.UTF8.GetBytes(secretkey);
-                byte[] publickeybyte = { };
-                publickeybyte = System.Text.Encoding.UTF8.GetBytes(publickey);
-                MemoryStream ms = null;
-                CryptoStream cs = null;
-                byte[] inputbyteArray = new byte[textToDecrypt.Replace(" ", "+").Length];
-                inputbyteArray = Convert.FromBase64String(textToDecrypt.Replace(" ", "+"));
-                using (DESCryptoServiceProvider des = new DESCryptoServiceProvider())
-                {
-                    ms = new MemoryStream();
-                    cs = new CryptoStream(ms, des.CreateDecryptor(publickeybyte, privatekeyByte), CryptoStreamMode.Write);
-                    cs.Write(inputbyteArray, 0, inputbyteArray.Length);
-                    cs.FlushFinalBlock();
-                    Encoding encoding = Encoding.UTF8;
-                    ToReturn = encoding.GetString(ms.ToArray());
-                }
-                return ToReturn;
-            }
-            catch (Exception ae)
-            {
-                throw new Exception(ae.Message, ae.InnerException);
-            }
-        }
 
     }
 }

@@ -1,79 +1,84 @@
-﻿using System;
+﻿using SistemaHotel.Controller;
+using SistemaHotel.Model;
+using SistemaHotel.Utils;
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class RedefinirSenha : System.Web.UI.Page
+namespace SistemaHotel
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class RedefinirSenha : System.Web.UI.Page
     {
-        
-        
+        protected void Page_Load(object sender, EventArgs e)
+        {
 
-    }
-   
-    protected void lnkEmail_Click(object sender, EventArgs e)
-    {
-        Usuario usu = new Usuario();
-        string email = txtEmail.Text;
-        DataTable dta = new DataTable();
-        dta = usu.buscaUsuarioEmailAtivo(email);
-        if (dta.Rows.Count > 0)
-        {
-            divSenha.Visible = true;
-        }
-        else
-        {
-            string msg = "<script> alert('Email não encontrado!'); </script>";
-            Response.Write(msg);
-            divSenha.Visible = false;
+
+
         }
 
-
-    }
-
-    protected void lnkSenha_Click(object sender, EventArgs e)
-    {
-        Usuario usu = new Usuario();
-        string email = txtEmail.Text;
-        DataTable dta = new DataTable();
-        dta = usu.buscaUsuarioEmailAtivo(email);
-        if (dta.Rows.Count > 0)
+        protected void lnkEmail_Click(object sender, EventArgs e)
         {
-            if (txtNovaSenha.Text == txtConfirmaSenha.Text)
+           
+            DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
+            string email = txtEmail.Text;
+            PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(email);
+            if (perfUsu.Ativo == 'S')
             {
-
-                string senha = usu.Encrypt(txtConfirmaSenha.Text);
-                string id = dta.Rows[0]["ID"].ToString();
-                usu.alterarSenha(senha, id);
-
-                string msg = "<script> alert('Senha Atualizada!'); </script>";
-                Response.Write(msg);
-                limparCampos();
-                divSenha.Visible = false;
+                divSenha.Visible = true;
             }
             else
             {
-                string msg = "<script> alert('Digite as Senhas Iguais!'); </script>";
+                string msg = "<script> alert('Email não encontrado!'); </script>";
                 Response.Write(msg);
+                divSenha.Visible = false;
             }
-            
+
 
         }
-        else
+
+        protected void lnkSenha_Click(object sender, EventArgs e)
         {
-            string msg = "<script> alert('Email não encontrado!'); </script>";
-            Response.Write(msg);
+            string email = txtEmail.Text;
+            DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();          
+            PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(email);
+
+            if (perfUsu.Ativo == 'S')
+            {
+                if (txtNovaSenha.Text == txtConfirmaSenha.Text)
+                {
+                    DALUsuario dalUsu = new DALUsuario();
+                    Usuario usu = new Usuario();
+                    usu.Id = perfUsu.Id;
+                    usu.Senha = Criptografia.Encrypt(txtConfirmaSenha.Text);
+                    dalUsu.alterarSenha(usu);
+                    string msg = "<script> alert('Senha Atualizada!'); </script>";
+                    Response.Write(msg);
+                    limparCampos();
+                    divSenha.Visible = false;
+                }
+                else
+                {
+                    string msg = "<script> alert('Digite as Senhas Iguais!'); </script>";
+                    Response.Write(msg);
+                }
+
+
+            }
+            else
+            {
+                string msg = "<script> alert('Email não encontrado!'); </script>";
+                Response.Write(msg);
+            }
+
         }
-        
-    }
-    private void limparCampos()
-    {
-        txtEmail.Text = "";
-        txtNovaSenha.Text = "";
-        txtConfirmaSenha.Text = "";
+        private void limparCampos()
+        {
+            txtEmail.Text = "";
+            txtNovaSenha.Text = "";
+            txtConfirmaSenha.Text = "";
+        }
     }
 }

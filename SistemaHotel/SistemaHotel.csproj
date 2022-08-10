@@ -1066,6 +1066,7 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
     <Content Include="layout\website.publishproj" />
+    <Content Include="RedefinirSenha.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -5855,7 +5856,6 @@
     <Content Include="Login.aspx" />
     <Content Include="NovoUsuario.aspx" />
     <Content Include="PaginaMestre.Master" />
-    <Content Include="RedefinirSenha.aspx" />
     <Content Include="Scripts\dataTables.bootstrap4.min.js.js" />
     <Content Include="Scripts\JavaScriptFunctions.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
@@ -5873,7 +5873,7 @@
     </Compile>
     <Compile Include="Controller\DALUsuario.cs" />
     <Compile Include="Controller\DALCliente.cs" />
-    <Compile Include="Controller\DALUsuarioPerfil.cs" />
+    <Compile Include="Controller\DALPerfilUsuario.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5889,11 +5889,14 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Model\Cliente.cs" />
-    <Compile Include="Model\UsuarioPerfil.cs" />
+    <Compile Include="Model\PerfilUsuario.cs" />
     <Compile Include="Model\Usuario.cs" />
     <Compile Include="NovoUsuario.aspx.cs">
       <DependentUpon>NovoUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NovoUsuario.aspx.designer.cs">
+      <DependentUpon>NovoUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="PaginaMestre.Master.cs">
       <DependentUpon>PaginaMestre.Master</DependentUpon>
@@ -5907,6 +5910,10 @@
       <DependentUpon>RedefinirSenha.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="RedefinirSenha.aspx.designer.cs">
+      <DependentUpon>RedefinirSenha.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\Criptografia.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

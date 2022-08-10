@@ -13,5 +13,15 @@ namespace SistemaHotel.Model
         public string Email { get; set; }
         public string Telefone { get; set; }
         public char Ativo { get; set; }
+
+        public Cliente()
+        {
+            this.Id = 0;
+            this.Nome = "";
+            this.CPF = "";
+            this.Email = "";
+            this.Telefone = "";
+            this.Ativo = 'S';
+        }
     }
 }

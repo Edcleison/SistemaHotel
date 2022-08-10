@@ -1,5 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="RedefinirSenha.aspx.cs" Inherits="RedefinirSenha" %>
-   
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RedefinirSenha.aspx.cs" Inherits="SistemaHotel.RedefinirSenha" %>
+
 
 <!DOCTYPE html>
 

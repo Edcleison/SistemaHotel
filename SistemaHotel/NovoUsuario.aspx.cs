@@ -1,4 +1,7 @@
-﻿using System;
+﻿using SistemaHotel.Controller;
+using SistemaHotel.Model;
+using SistemaHotel.Utils;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -22,29 +25,22 @@ namespace SistemaHotel
 
         protected void lnkSenha_Click(object sender, EventArgs e)
         {
-            string perfil = ddlPerfil.SelectedValue;
-            Usuario usu = new Usuario();
+            DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
             string email = txtEmail.Text;
-            DataTable dta = new DataTable();
-            DataTable dta1 = new DataTable();
-            dta = usu.buscaUsuarioEmailInativo(email);
-            dta1 = usu.buscaUsuarioEmailAtivo(email);
-
+            PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(email);
             if (txtNome.Text != "" && txtEmail.Text != "" && txtNovaSenha.Text != "" && txtConfirmaSenha.Text != "" && ddlPerfil.SelectedValue != "SELECIONE")
             {
                 if (txtNovaSenha.Text == txtConfirmaSenha.Text)
                 {
-                    if (dta.Rows.Count > 0)
+                    if (perfUsu.Email != "")
                     {
-                        string nome = txtNome.Text;
-                        string senha = txtNovaSenha.Text;
-                        usu = new Usuario();
-                        usu.ativarUsuario(nome, email, senha);
+                        dalPerfUsu.ativarUsuario(perfUsu.Id);
+
                         string msg = "<script> alert('Cadastro realizado!'); </script>";
                         Response.Write(msg);
                         limparCampos();
                     }
-                    else if (dta1.Rows.Count > 0)
+                    else if (perfUsu.Ativo == 'S')
                     {
                         string msg = "<script> alert('Usuário já cadastrado!'); </script>";
                         Response.Write(msg);
@@ -52,12 +48,18 @@ namespace SistemaHotel
                     }
                     else
                     {
-
-                        string nome = txtNome.Text;
-                        string senha = usu.Encrypt(txtNovaSenha.Text);
-                        usu = new Usuario();
-                        usu.inserirUsuario(nome, email, senha);
-                        usu.inserirPerfil(perfil, email);
+                        DALUsuario dalUsu = new DALUsuario();
+                        Usuario usu = dalUsu.buscaUsuarioEmail(email);
+                        if (usu.Email == "")
+                        {
+                            usu.Nome = txtNome.Text;
+                            usu.Email = txtEmail.Text;
+                            usu.Senha = Criptografia.Encrypt(txtNovaSenha.Text);
+                            dalUsu.inserirUsuario(usu);
+                        }
+                        perfUsu.Perfil = ddlPerfil.SelectedIndex;
+                        perfUsu.Email = txtEmail.Text;
+                        dalPerfUsu.inserirPerfil(perfUsu);
                         string msg = "<script> alert('Cadastro realizado!'); </script>";
                         Response.Write(msg);
                         limparCampos();
@@ -110,8 +112,10 @@ namespace SistemaHotel
                         ddlPerfil.DataBind();
                         ddlPerfil.Items.Insert(0, "SELECIONE");
                     }
-                    catch (Exception ex)
-                    { }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
 
                 }
             }

@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="NovoUsuario.aspx.cs" Inherits="NovoUsuario" %>
-   
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="NovoUsuario.aspx.cs" Inherits="SistemaHotel.NovoUsuario" %>
 
 <!DOCTYPE html>
 
@@ -50,7 +49,7 @@
 
                     olho.mouseup(function () {
                         senha.attr("type", "password");
-                        
+
                     });
                     // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
                     //citada pelo nosso amigo nos comentários
@@ -67,7 +66,7 @@
                     });
 
                     olhoDois.mouseup(function () {
-                        ConfirmaSenha.attr("type", "password");                       
+                        ConfirmaSenha.attr("type", "password");
                     });
                     // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
                     //citada pelo nosso amigo nos comentários
