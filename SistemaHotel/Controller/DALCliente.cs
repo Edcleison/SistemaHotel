@@ -14,7 +14,7 @@ namespace SistemaHotel.Controller
 
     public class DALCliente
     {
-        string cnn = @"Data Source=LAPTOP-JV98S2OU\SQLEXPRESS;Initial Catalog=HOTEL_RESTAURANTE;Integrated Security=True";
+        string cnn = @"Data Source=LAPTOP-JV98S2OU\SQLEXPRESS;Initial Catalog=hotelServicos;Integrated Security=True";
 
         public void inserirCliente(string Nome, string Cpf, string Email, string Telefone)
         {
