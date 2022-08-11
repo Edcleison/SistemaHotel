@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="ControleUsuario.aspx.cs" Inherits="SistemaHotel.ControleUsuario" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <link href="CSS/bootstrap.css" rel="stylesheet" />
@@ -9,6 +10,7 @@
     <script src="Scripts/jquery-3.5.1.js"></script>
     <script src="Scripts/jquery.dataTables.min.js"></script>
     <script src="Scripts/dataTables.bootstrap4.min.js.js"></script>
+
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -22,18 +24,19 @@
                     },
                     "search": "Pesquisar:",
 
-                },
-                "paging": true,
-                "pageLength": 3,
-                "ordering": false,
-                "info": false,
-                dom: 'Bfrtip',
-                buttons: [
+                },          
+                    "paging": true,
+                    "pageLength": 3,
+                    "ordering": false,
+                    "info": false,
+                    dom: 'Bfrtip',
+                    buttons: [
 
-                ]
+                    ]
 
 
-            });
+
+                });
         })
     </script>
 

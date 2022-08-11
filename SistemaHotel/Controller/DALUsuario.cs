@@ -47,7 +47,6 @@ namespace SistemaHotel.Controller
 
 
         //Read
-
         public DataTable buscarTodosUsuarios()
         {
             DataTable dta = new DataTable();
@@ -78,8 +77,42 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
+        public DataTable buscarTodosUsuariosAtivos()
+        {
+            DataTable dta = new DataTable();
+            SqlDataAdapter adp;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(cnn))
+                {
+                    using (SqlCommand cmd = new SqlCommand(@"SELECT U.[ID]
+                                                            ,U.[NOME]
+                                                            ,U.[EMAIL]
+                                                            ,U.[SENHA]
+                                                            ,P.Ativo
+                                                            ,P.PERFIL
+                                                            FROM [DBO].[USUARIO] U
+                                                            INNER JOIN PERFIL_USUARIO P
+                                                            ON (P.ID_USUARIO = U.ID) WHERE P.ATIVO ='S'", connection))
+                    {
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                        adp = new SqlDataAdapter(cmd);
+                        adp.Fill(dta);
+                        cmd.Connection.Close();
 
-        public Usuario buscarUsuarioId(string Id)
+                    }
+                }
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+            return dta;
+        }
+
+
+        public Usuario buscarUsuarioId(int Id)
         {
             Usuario usu = new Usuario();
             try
@@ -87,10 +120,13 @@ namespace SistemaHotel.Controller
 
                 using (SqlConnection connection = new SqlConnection(cnn))
                 {
-                    using (SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTES WHERE ID = @ID"))
+                    using (SqlCommand cmd = new SqlCommand(@"SELECT [ID]
+                                                                  ,[NOME]
+                                                                  ,[EMAIL]
+                                                                  ,[SENHA] FROM USUARIO WHERE ID = @ID", connection))
                     {
 
-                        cmd.Parameters.AddWithValue("@id", Id);
+                        cmd.Parameters.AddWithValue("@ID", Id);
                         cmd.Connection.Open();
                         SqlDataReader registro = cmd.ExecuteReader();
                         if (registro.HasRows)
@@ -116,8 +152,7 @@ namespace SistemaHotel.Controller
         public Usuario buscaUsuarioEmail(string Email)
         {
             Usuario usu = new Usuario();
-            SqlDataAdapter adp;
-
+           
             try
             {
                 using (SqlConnection connection = new SqlConnection(cnn))

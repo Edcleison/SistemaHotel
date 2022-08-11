@@ -22,9 +22,12 @@ namespace SistemaHotel
         protected void lnkEmail_Click(object sender, EventArgs e)
         {
            
-            DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
+            DALUsuario dalUsu = new DALUsuario();
             string email = txtEmail.Text;
-            PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(email);
+            Usuario usu = dalUsu.buscaUsuarioEmail(email);
+            DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
+            PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.Id);
+
             if (perfUsu.Ativo == 'S')
             {
                 divSenha.Visible = true;
@@ -41,16 +44,17 @@ namespace SistemaHotel
 
         protected void lnkSenha_Click(object sender, EventArgs e)
         {
+            DALUsuario dalUsu = new DALUsuario();
             string email = txtEmail.Text;
-            DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();          
-            PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(email);
+            Usuario usu = dalUsu.buscaUsuarioEmail(email);
+            DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
+            PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.Id);
 
             if (perfUsu.Ativo == 'S')
             {
                 if (txtNovaSenha.Text == txtConfirmaSenha.Text)
                 {
-                    DALUsuario dalUsu = new DALUsuario();
-                    Usuario usu = new Usuario();
+                    
                     usu.Id = perfUsu.Id;
                     usu.Senha = Criptografia.Encrypt(txtConfirmaSenha.Text);
                     dalUsu.alterarSenha(usu);

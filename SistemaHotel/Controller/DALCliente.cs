@@ -21,8 +21,9 @@ namespace SistemaHotel.Controller
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [dbo].[CLIENTE]
-           ([NOME]
+                using (SqlCommand cmd = new SqlCommand                   
+                    (@"INSERT INTO [dbo].[CLIENTE]
+           ([NOME] 
            ,[CPF]
            ,[EMAIL]
            ,[TELEFONE]

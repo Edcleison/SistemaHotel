@@ -77,6 +77,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="CSS\StyleSheet.css.exclude" />
+    <Content Include="imagens_cardapio\lasanha.png" />
     <Content Include="layout\assets\css\vssver.scc" />
     <Content Include="layout\assets\fonts\fontawesome-webfont.ttf" />
     <Content Include="layout\assets\fonts\fontawesome-webfont.woff" />
@@ -1094,7 +1095,6 @@
     <Content Include="CSS\Estilos.css" />
     <Content Include="CSS\jquery.dataTables.min.css.css" />
     <Content Include="Default.aspx" />
-    <Content Include="IMAGENS\AUTORES\358GTA_V.jpg" />
     <Content Include="IMAGENS\SISTEMA\logo-normal.png" />
     <Content Include="IMAGENS\SISTEMA\logo_hotel.png" />
     <Content Include="IMAGENS\SISTEMA\topocurso.png" />

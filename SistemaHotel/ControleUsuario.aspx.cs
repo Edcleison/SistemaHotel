@@ -23,23 +23,18 @@ namespace SistemaHotel
         protected void Page_Load(object sender, EventArgs e)
 
         {
-            string rParametro = "";
+            int rParametro = 0;
 
             if (!IsPostBack)
             {
 
                 if (Request.QueryString["USUARIO_D"] != null)
                 {
-                    rParametro = Criptografia.Decrypt(Request.QueryString["USUARIO_D"]);
+                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_D"]));
 
-                    DataTable dta = new DataTable();
-                    dalUsu.buscarUsuarioId(rParametro);
-
-                    Usuario usu = new Usuario();
-                    // captura o Id do Objeto pra mandar a requisição via API
-                    usu.Id = Convert.ToInt32(dta.Rows[0]["ID"]);
-
-                    if (usu.Id.ToString() != null)
+                    Usuario usu = dalUsu.buscarUsuarioId(rParametro);
+                                    
+                    if (usu.Id != 0)
                     {
                         dalPerfUsu.inativarUsuario(usu.Id);
                         string msg = "<script> alert('Usuário Inativado!'); </script>";
@@ -64,14 +59,14 @@ namespace SistemaHotel
         {
 
             DataTable rDta = new DataTable();
-            rDta = dalUsu.buscarTodosUsuarios();
+            rDta = dalUsu.buscarTodosUsuariosAtivos();
             StringBuilder sb = new StringBuilder();
 
 
             sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:15px;'>");
             sb.AppendLine("<thead>");
             sb.AppendLine("<tr>");
-            sb.AppendLine("<th><center>ID</th></center>");
+            sb.AppendLine("<th><center>ID</th></center>");            
             sb.AppendLine("<th><center>NOME</th></center>");
             sb.AppendLine("<th><center>EMAIL</th></center>");
             sb.AppendLine("<th><center>INATIVAR</th></center>");
@@ -83,7 +78,7 @@ namespace SistemaHotel
             {
 
                 sb.AppendLine("<tr>");
-                sb.AppendLine("<td><center>" + dtr["ID"] + "</td></center>");
+                sb.AppendLine("<td><center>" + dtr["ID"] + "</td></center>");                
                 sb.AppendLine("<td><center>" + dtr["NOME"] + "</td></center>");
                 sb.AppendLine("<td><center>" + dtr["EMAIL"] + "</td></center>");
                 sb.AppendLine("<td><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID"].ToString()) + "'><i class='fa fa-trash'></i></center></td>");

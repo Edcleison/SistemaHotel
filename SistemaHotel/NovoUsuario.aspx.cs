@@ -25,59 +25,69 @@ namespace SistemaHotel
 
         protected void lnkSenha_Click(object sender, EventArgs e)
         {
-            DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
             string email = txtEmail.Text;
-            PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(email);
+            DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
+            DALUsuario dalUsu = new DALUsuario();
+            Usuario usu = dalUsu.buscaUsuarioEmail(email);
+            PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.Id);
             if (txtNome.Text != "" && txtEmail.Text != "" && txtNovaSenha.Text != "" && txtConfirmaSenha.Text != "" && ddlPerfil.SelectedValue != "SELECIONE")
             {
-                if (txtNovaSenha.Text == txtConfirmaSenha.Text)
+                if (email.Contains("@") && email.Contains("."))
                 {
-                    if (perfUsu.Email != "")
-                    {
-                        dalPerfUsu.ativarUsuario(perfUsu.Id);
 
-                        string msg = "<script> alert('Cadastro realizado!'); </script>";
-                        Response.Write(msg);
-                        limparCampos();
-                    }
-                    else if (perfUsu.Ativo == 'S')
+                    if (txtNovaSenha.Text == txtConfirmaSenha.Text)
                     {
-                        string msg = "<script> alert('Usuário já cadastrado!'); </script>";
-                        Response.Write(msg);
+                        if (perfUsu.Ativo == 'N')
+                        {
+                            dalPerfUsu.ativarUsuario(perfUsu.Id);
 
+                            string msg = "<script> alert('Cadastro realizado!'); </script>";
+                            Response.Write(msg);
+                            limparCampos();
+                        }
+                        else if (perfUsu.Ativo == 'S')
+                        {
+                            string msg = "<script> alert('Usuário já cadastrado!'); </script>";
+                            Response.Write(msg);
+
+                        }
+                        else
+                        {
+                            if (usu.Email == "")
+                            {
+                                usu.Nome = txtNome.Text;
+                                usu.Email = txtEmail.Text;
+                                usu.Senha = Criptografia.Encrypt(txtNovaSenha.Text);
+                                dalUsu.inserirUsuario(usu);
+                            }
+                            usu = dalUsu.buscaUsuarioEmail(usu.Email);
+                            perfUsu.Perfil = ddlPerfil.SelectedIndex;
+                            perfUsu.ID_USUARIO = usu.Id;
+                            dalPerfUsu.inserirPerfil(perfUsu);
+                            string msg = "<script> alert('Cadastro realizado!'); </script>";
+                            Response.Write(msg);
+                            limparCampos();
+                        }
                     }
                     else
                     {
-                        DALUsuario dalUsu = new DALUsuario();
-                        Usuario usu = dalUsu.buscaUsuarioEmail(email);
-                        if (usu.Email == "")
-                        {
-                            usu.Nome = txtNome.Text;
-                            usu.Email = txtEmail.Text;
-                            usu.Senha = Criptografia.Encrypt(txtNovaSenha.Text);
-                            dalUsu.inserirUsuario(usu);
-                        }
-                        perfUsu.Perfil = ddlPerfil.SelectedIndex;
-                        perfUsu.Email = txtEmail.Text;
-                        dalPerfUsu.inserirPerfil(perfUsu);
-                        string msg = "<script> alert('Cadastro realizado!'); </script>";
+                        string msg = "<script> alert('Senhas Diferentes!'); </script>";
                         Response.Write(msg);
-                        limparCampos();
+
                     }
                 }
                 else
                 {
-                    string msg = "<script> alert('Senhas Diferentes!'); </script>";
+                    string msg = "<script> alert('Digite um e-mail válido'); </script>";
                     Response.Write(msg);
-                    limparCampos();
-
                 }
+
+
             }
             else
             {
                 string msg = "<script> alert('Preencha todos os campos!'); </script>";
                 Response.Write(msg);
-                limparCampos();
             }
         }
 

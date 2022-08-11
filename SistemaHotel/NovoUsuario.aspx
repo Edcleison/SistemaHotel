@@ -36,7 +36,7 @@
                 <br />
                 <br />
                 <asp:LinkButton ID="lnkSenha" class="btn btn-primary" OnClick="lnkSenha_Click" runat="server">[Salvar]</asp:LinkButton>
-                <asp:LinkButton ID="lnkVoltar" class="btn btn-primary"  runat="server" PostBackUrl="~/Login.aspx">[Voltar]</asp:LinkButton>
+                <asp:LinkButton ID="lnkVoltar" class="btn btn-primary"  runat="server" PostBackUrl="~/Default.aspx">[Voltar]</asp:LinkButton>
                 
                 <script src="Scripts/jquery.min.js"></script>
                 <script type="text/javascript">

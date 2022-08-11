@@ -19,18 +19,18 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [DBO].[PERFIL_USUARIO]
-                                                   ([PERFIL]
-                                                   ,[EMAIL]
-                                                    ,[ATIVO])
-                                             VALUES(@PERFIL,@EMAIL,@ATIVO)", connection))
+                                                   ([PERFIL]                                                   
+                                                    ,[ATIVO]
+                                                     ,[ID_USUARIO])
+                                             VALUES(@PERFIL,@ATIVO,@ID_USUARIO)", connection))
                 {
 
                     try
                     {
                         cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("PERFIL", pUsu.Perfil);
-                        cmd.Parameters.AddWithValue("EMAIL", pUsu.Email);
+                        cmd.Parameters.AddWithValue("PERFIL", pUsu.Perfil);                        
                         cmd.Parameters.AddWithValue("ATIVO",'S');
+                        cmd.Parameters.AddWithValue("ID_USUARIO",pUsu.ID_USUARIO);
                         cmd.ExecuteNonQuery();
                         cmd.Connection.Close();
                     }
@@ -44,7 +44,7 @@ namespace SistemaHotel.Controller
 
         }
 
-        public PerfilUsuario buscarUsuarioPerfil(string email)
+        public PerfilUsuario buscarUsuarioPerfil(int IdUsuario)
         {
             PerfilUsuario pUsu = new PerfilUsuario();      
             try
@@ -53,20 +53,20 @@ namespace SistemaHotel.Controller
                 {
                     using (SqlCommand cmd = new SqlCommand(@"SELECT [ID]
                                                         ,[PERFIL]
-                                                        ,[EMAIL]
                                                         ,[ATIVO]
-                                                    FROM[DBO].[PERFIL_USUARIO] where EMAIL = @EMAIL", connection))
+                                                        ,[ID_USUARIO]
+                                                    FROM[DBO].[PERFIL_USUARIO] where ID_USUARIO = @ID_USUARIO", connection))
                     {
-                        cmd.Parameters.AddWithValue("@EMAIL", email);
+                        cmd.Parameters.AddWithValue("@ID_USUARIO", IdUsuario);
                         connection.Open();
                         SqlDataReader registro = cmd.ExecuteReader();
                         if (registro.HasRows)
                         {
                             registro.Read();
                             pUsu.Id = Convert.ToInt32(registro["ID"]);
-                            pUsu.Perfil = Convert.ToInt32(registro["PERFIL"]);
-                            pUsu.Email = Convert.ToString(registro["EMAIL"]);
+                            pUsu.Perfil = Convert.ToInt32(registro["PERFIL"]);                            
                             pUsu.Ativo = Convert.ToChar(registro["ATIVO"]);
+                            pUsu.ID_USUARIO = Convert.ToInt32(registro["ID_USUARIO"]);
                             
 
                         }
@@ -81,20 +81,20 @@ namespace SistemaHotel.Controller
 
         }
 
-        public void inativarUsuario(int Id)
+        public void inativarUsuario(int IdUsuario)
         {
 
             //usu.
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand("UPDATE PERFIL_USUARIO SET ATIVO = 'N' WHERE ID = @ID", connection))
+                using (SqlCommand cmd = new SqlCommand("UPDATE PERFIL_USUARIO SET ATIVO = 'N' WHERE ID_USUARIO = @ID_USUARIO", connection))
                 {
 
                     try
                     {
 
                         connection.Open();
-                        cmd.Parameters.AddWithValue("ID", Id);
+                        cmd.Parameters.AddWithValue("ID_USUARIO", IdUsuario);
                         cmd.ExecuteNonQuery();
                         cmd.Connection.Close();
                     }
@@ -106,18 +106,18 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public void ativarUsuario(int Id)
+        public void ativarUsuario(int IdUsuario)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand("UPDATE USUARIO SET ATIVO = 'S', NOME= @NOME, SENHA= @SENHA WHERE EMAIL = @EMAIL", connection))
+                using (SqlCommand cmd = new SqlCommand("UPDATE PERFIL_USUARIO SET ATIVO = 'S', NOME= @NOME, SENHA= @SENHA WHERE ID_USUARIO = @ID_USUARIO", connection))
                 {
 
                     try
                     {
 
                         connection.Open();
-                        cmd.Parameters.AddWithValue("ID", Id);
+                        cmd.Parameters.AddWithValue("ID", IdUsuario);
                         cmd.ExecuteNonQuery();
                         cmd.Connection.Close();
                     }

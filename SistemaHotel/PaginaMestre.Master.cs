@@ -22,8 +22,10 @@ namespace SistemaHotel
             }
             else
             {
-                DALPerfilUsuario dalUsu = new DALPerfilUsuario();
-                PerfilUsuario usuPerfil = dalUsu.buscarUsuarioPerfil(Session["email"].ToString());
+                DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
+                DALUsuario dalUsu = new DALUsuario();
+                Usuario usu =dalUsu.buscaUsuarioEmail(Session["email"].ToString());
+                PerfilUsuario usuPerfil = dalPerfUsu.buscarUsuarioPerfil(usu.Id);
 
                 if (usuPerfil.Perfil == 1)
                 {
