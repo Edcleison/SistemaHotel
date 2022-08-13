@@ -14,7 +14,9 @@ namespace SistemaHotel
 {
     public partial class NovoUsuario : System.Web.UI.Page
     {
-        string cnn = @"Data Source=LAPTOP-JV98S2OU\SQLEXPRESS;Initial Catalog=hotelServicos;Integrated Security=True";
+        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=hotelservicos;Persist Security Info=True;User ID=hotelservicos;Password=Sc3f_r4_104t";
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

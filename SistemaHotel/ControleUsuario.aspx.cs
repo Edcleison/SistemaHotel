@@ -15,7 +15,7 @@ namespace SistemaHotel
 {
     public partial class ControleUsuario : System.Web.UI.Page
     {
-        string cnn = @"Data Source=LAPTOP-JV98S2OU\SQLEXPRESS;Initial Catalog=sisFrases;Integrated Security=True";
+        string cnn = @"Password=Sc3f_r4_104t;Persist Security Info=True;User ID = hotelservicos; Initial Catalog = hotelservicos; Data Source =den1.mssql8.gear.host;Initial";
 
         DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
         DALUsuario dalUsu = new DALUsuario();

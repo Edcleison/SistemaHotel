@@ -17,7 +17,7 @@ namespace SistemaHotel
         {
             if (Session["email"] == null)
             {
-                Response.Redirect("~/login.aspx");
+               Response.Redirect("~/login.aspx");
 
             }
             else

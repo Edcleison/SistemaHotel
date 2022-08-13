@@ -14,7 +14,7 @@ namespace SistemaHotel.Controller
 
     public class DALCliente
     {
-        string cnn = @"Data Source=LAPTOP-JV98S2OU\SQLEXPRESS;Initial Catalog=hotelServicos;Integrated Security=True";
+        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=hotelservicos;Persist Security Info=True;User ID=hotelservicos;Password=Sc3f_r4_104t";
 
         public void inserirCliente(string Nome, string Cpf, string Email, string Telefone)
         {
