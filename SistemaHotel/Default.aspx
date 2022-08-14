@@ -5,7 +5,9 @@
     <asp:Label ID="Label1" runat="server" Text="Nome:"></asp:Label>
     <asp:Label ID="lbNome" runat="server" Text="Nome do Usuário"></asp:Label>
     <br />
+    <div id="UsuEmail">
     <asp:Label ID="Label2" runat="server" Text="Email:"></asp:Label>
     <asp:Label ID="lbEmail" runat="server" Text="Email do Usuário"></asp:Label>
+     </div>
     <br />
 </asp:Content>
