@@ -14,8 +14,8 @@
     <form id="form1" runat="server">
         <div>
             <asp:Panel ID="Panel1" runat="server" GroupingText="Redefinir Senha" CssClass="login">
-                <span>Digite seu Email: </span>
-                <asp:Textbox type="email" runat="server" id="txtEmail"></asp:Textbox>
+                <span>Digite seu Login: </span>
+                <asp:Textbox type="text" runat="server" id="txtLogin"></asp:Textbox>
                 <asp:LinkButton ID="lnkEmail" class="btn btn-primary" OnClick="lnkEmail_Click" runat="server">Localizar</asp:LinkButton>
                 <br />
                 <br />

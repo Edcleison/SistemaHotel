@@ -8,20 +8,18 @@ namespace SistemaHotel.Model
     public class Cliente
     {
         public int Id { get; set; }
-        public string Nome { get; set; }
-        public string CPF { get; set; }
-        public string Email { get; set; }
-        public string Telefone { get; set; }
+        public string Cd_Reserva { get; set; }
+        public DateTime  DataInicio { get; set; }
+        public DateTime  DataFim { get; set; }
         public char Ativo { get; set; }
 
         public Cliente()
         {
             this.Id = 0;
-            this.Nome = "";
-            this.CPF = "";
-            this.Email = "";
-            this.Telefone = "";
-            this.Ativo = 'S';
+            this.Cd_Reserva = "";
+            this.DataInicio = DateTime.Now;
+            this.DataFim = DateTime.Now;
+            this.Ativo = 'P';
         }
     }
 }

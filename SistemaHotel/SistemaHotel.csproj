@@ -51,6 +51,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -5856,7 +5857,6 @@
     <Content Include="layout\Scripts\modernizr-2.5.3.js" />
     <Content Include="layout\status_os.css" />
     <Content Include="Login.aspx" />
-    <Content Include="NovoUsuario.aspx" />
     <Content Include="PaginaMestre.Master" />
     <Content Include="Scripts\dataTables.bootstrap4.min.js.js" />
     <Content Include="Scripts\JavaScriptFunctions.js" />
@@ -5893,13 +5893,6 @@
     <Compile Include="Model\Cliente.cs" />
     <Compile Include="Model\PerfilUsuario.cs" />
     <Compile Include="Model\Usuario.cs" />
-    <Compile Include="NovoUsuario.aspx.cs">
-      <DependentUpon>NovoUsuario.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="NovoUsuario.aspx.designer.cs">
-      <DependentUpon>NovoUsuario.aspx</DependentUpon>
-    </Compile>
     <Compile Include="PaginaMestre.Master.cs">
       <DependentUpon>PaginaMestre.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5916,6 +5909,7 @@
       <DependentUpon>RedefinirSenha.aspx</DependentUpon>
     </Compile>
     <Compile Include="Utils\Criptografia.cs" />
+    <Compile Include="Utils\SenhaRandomica.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -23,8 +23,8 @@ namespace SistemaHotel
         {
            
             DALUsuario dalUsu = new DALUsuario();
-            string email = txtEmail.Text;
-            Usuario usu = dalUsu.buscaUsuarioEmail(email);
+            string login = txtLogin.Text;
+            Usuario usu = dalUsu.buscaUsuarioLogin(login);
             DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
             PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.Id);
 
@@ -45,8 +45,8 @@ namespace SistemaHotel
         protected void lnkSenha_Click(object sender, EventArgs e)
         {
             DALUsuario dalUsu = new DALUsuario();
-            string email = txtEmail.Text;
-            Usuario usu = dalUsu.buscaUsuarioEmail(email);
+            string login = txtLogin.Text;
+            Usuario usu = dalUsu.buscaUsuarioLogin(login);
             DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
             PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.Id);
 
@@ -80,7 +80,7 @@ namespace SistemaHotel
         }
         private void limparCampos()
         {
-            txtEmail.Text = "";
+            txtLogin.Text = "";
             txtNovaSenha.Text = "";
             txtConfirmaSenha.Text = "";
         }

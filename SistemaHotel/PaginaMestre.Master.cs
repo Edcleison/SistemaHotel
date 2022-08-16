@@ -15,16 +15,16 @@ namespace SistemaHotel
         DataTable dta = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["email"] == null)
+            if (Session["login"] == null)
             {
-               Response.Redirect("~/login.aspx");
+               //Response.Redirect("~/login.aspx");
 
             }
             else
             {
                 DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
                 DALUsuario dalUsu = new DALUsuario();
-                Usuario usu =dalUsu.buscaUsuarioEmail(Session["email"].ToString());
+                Usuario usu =dalUsu.buscaUsuarioLogin(Session["login"].ToString());
                 PerfilUsuario usuPerfil = dalPerfUsu.buscarUsuarioPerfil(usu.Id);
 
                 if (usuPerfil.Perfil == 1)

@@ -21,25 +21,25 @@ namespace SistemaHotel
 
         protected void btlogar_Click(object sender, EventArgs e)
         {
-            string email = txtLogin.Text;
+            string login = txtLogin.Text;
             string senha = Criptografia.Encrypt(txtSenha.Text);
 
             DALUsuario du = new DALUsuario();
-            Usuario u = du.buscaUsuarioEmail(email);
+            Usuario u = du.buscaUsuarioLogin(login);
 
-            if (email != "" && senha != "")
+            if (login != "" && senha != "")
             {
-                if (email != u.Email && senha == u.Senha)
+                if (login != u.Login && senha == u.Senha)
                 {
-                    String msg = "<script> alert('E-mail incorreto!'); </script>";
+                    String msg = "<script> alert('Login incorreto!'); </script>";
                     Response.Write(msg);
                 }
-                else if (email == u.Email && senha != u.Senha)
+                else if (login == u.Login && senha != u.Senha)
                 {
                     String msg = "<script> alert('Senha incorreta!'); </script>";
                     Response.Write(msg);
                 }
-                else if (email != u.Email && senha != u.Senha)
+                else if (login != u.Login && senha != u.Senha)
                 {
                     String msg = "<script> alert('Login e senha incorretos'); </script>";
                     Response.Write(msg);
@@ -50,7 +50,7 @@ namespace SistemaHotel
 
                     Session["id"] = u.Id;
                     Session["nome"] = u.Nome;
-                    Session["email"] = email;
+                    Session["Login"] = u.Login;
                     Response.Redirect("~/Default.aspx");
                 }
             }
@@ -61,7 +61,63 @@ namespace SistemaHotel
             }
         }
 
+        protected void lnkRecadastrarSenha_Click(object sender, EventArgs e)
+        {
+
+            mdLog.Visible = false;
+            mdRedPass.Visible = true;
+        }
+
+        protected void lnkVoltar_Click(object sender, EventArgs e)
+        {
+
+            mdLog.Visible = true;
+            mdRedPass.Visible = false;
+        }
+
+        protected void lnkSenha_Click(object sender, EventArgs e)
+        {
+            DALUsuario dalUsu = new DALUsuario();
+            string login = txtLogin.Text;
+            Usuario usu = dalUsu.buscaUsuarioLogin(login);
+            DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
+            PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.Id);
+
+            if (perfUsu.Ativo == 'S')
+            {
+                if (txtNovaSenha.Text == txtConfirmaSenha.Text)
+                {
+
+                    usu.Id = perfUsu.Id;
+                    usu.Senha = Criptografia.Encrypt(txtConfirmaSenha.Text);
+                    dalUsu.alterarSenha(usu);
+                    string msg = "<script> alert('Senha Atualizada!'); </script>";
+                    Response.Write(msg);
+                    limparCampos(); 
+                }
+                else
+                {
+                    string msg = "<script> alert('Digite as Senhas Iguais!'); </script>";
+                    Response.Write(msg);
+                }
 
 
+            }
+            else
+            {
+                string msg = "<script> alert('Email não encontrado!'); </script>";
+                Response.Write(msg);
+            }
+
+        }
+        private void limparCampos()
+        {
+            txtLogin.Text = "";
+            txtNovaSenha.Text = "";
+            txtConfirmaSenha.Text = "";
+            txtLoginR.Text = "";
+            txtSenha.Text = "";
+        }
     }
 }
+

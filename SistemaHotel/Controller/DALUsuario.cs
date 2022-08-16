@@ -22,16 +22,16 @@ namespace SistemaHotel.Controller
             {
                 using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [dbo].[USUARIO]
                                                    ([NOME]
-                                                   ,[EMAIL]
+                                                   ,[LOGIN]
                                                    ,[SENHA])                                                 
-                                             VALUES(@NOME,@EMAIL,@SENHA)", connection))
+                                             VALUES(@NOME,@LOGIN,@SENHA)", connection))
                 {
 
                     try
                     {
                         cmd.Connection.Open();
                         cmd.Parameters.AddWithValue("NOME", usu.Nome);
-                        cmd.Parameters.AddWithValue("EMAIL", usu.Email);
+                        cmd.Parameters.AddWithValue("LOGIN", usu.Login);
                         cmd.Parameters.AddWithValue("SENHA", usu.Senha);
                         cmd.ExecuteNonQuery();
                         cmd.Connection.Close();
@@ -57,7 +57,7 @@ namespace SistemaHotel.Controller
                 {
                     using (SqlCommand cmd = new SqlCommand(@"SELECT [ID]
                                                       ,[NOME]
-                                                      ,[EMAIL]
+                                                      ,[LOGIN]
                                                       ,[SENHA]                                                     
                                                   FROM [DBO].[USUARIO]", connection))
                     {
@@ -77,7 +77,7 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-        public DataTable buscarTodosUsuariosAtivos()
+        public DataTable buscarUsuariosAtivos()
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
@@ -85,15 +85,86 @@ namespace SistemaHotel.Controller
             {
                 using (SqlConnection connection = new SqlConnection(cnn))
                 {
-                    using (SqlCommand cmd = new SqlCommand(@"SELECT U.[ID]
+                    using (SqlCommand cmd = new SqlCommand($@"SELECT U.[ID]
                                                             ,U.[NOME]
-                                                            ,U.[EMAIL]
+                                                            ,U.[LOGIN]
                                                             ,U.[SENHA]
                                                             ,P.Ativo
                                                             ,P.PERFIL
                                                             FROM [DBO].[USUARIO] U
                                                             INNER JOIN PERFIL_USUARIO P
                                                             ON (P.ID_USUARIO = U.ID) WHERE P.ATIVO ='S'", connection))
+                    {
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                        adp = new SqlDataAdapter(cmd);
+                        adp.Fill(dta);
+                        cmd.Connection.Close();
+
+                    }
+                }
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+            return dta;
+        }
+
+        public DataTable buscarUsuariosPerfilAtivos(string perfil)
+        {
+            DataTable dta = new DataTable();
+            SqlDataAdapter adp;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(cnn))
+                {
+                    using (SqlCommand cmd = new SqlCommand($@"SELECT U.[ID]
+                                                            ,U.[NOME]
+                                                            ,U.[LOGIN]
+                                                            ,U.[SENHA]
+                                                            ,P.Ativo
+                                                            ,P.PERFIL
+                                                            FROM [DBO].[USUARIO] U
+                                                            INNER JOIN PERFIL_USUARIO P
+                                                            ON (P.ID_USUARIO = U.ID) WHERE P.ATIVO ='S' AND P.PERFIL = '{perfil}'", connection))
+                    {
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                        adp = new SqlDataAdapter(cmd);
+                        adp.Fill(dta);
+                        cmd.Connection.Close();
+
+                    }
+                }
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+            return dta;
+        }
+        public DataTable buscarUsuariosClientesAtivos(string perfil)
+        {
+            DataTable dta = new DataTable();
+            SqlDataAdapter adp;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(cnn))
+                {
+                    using (SqlCommand cmd = new SqlCommand($@"SELECT U.[ID]
+                                                            ,U.[NOME]
+                                                            ,U.[LOGIN]
+                                                            ,U.[SENHA]
+                                                            ,P.ATIVO
+                                                            ,P.PERFIL
+                                                            ,C.DATA_INICIO
+                                                            ,C.DATA_FIM
+                                                            FROM [DBO].[USUARIO] U
+                                                            INNER JOIN CLIENTE C ON(C.CD_RESERVA = U.LOGIN)
+                                                            INNER JOIN PERFIL_USUARIO P
+                                                            ON (P.ID_USUARIO = U.ID)
+                                                            WHERE P.ATIVO ='S' AND P.PERFIL = '{perfil}'", connection))
                     {
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
@@ -122,7 +193,7 @@ namespace SistemaHotel.Controller
                 {
                     using (SqlCommand cmd = new SqlCommand(@"SELECT [ID]
                                                                   ,[NOME]
-                                                                  ,[EMAIL]
+                                                                  ,[LOGIN]
                                                                   ,[SENHA] FROM USUARIO WHERE ID = @ID", connection))
                     {
 
@@ -134,7 +205,7 @@ namespace SistemaHotel.Controller
                             registro.Read();
                             usu.Id = Convert.ToInt32(registro["ID"]);
                             usu.Nome = Convert.ToString(registro["NOME"]);
-                            usu.Email = Convert.ToString(registro["EMAIL"]);
+                            usu.Login = Convert.ToString(registro["LOGIN"]);
                             usu.Senha = Convert.ToString(registro["SENHA"]);                           
 
                         }
@@ -149,7 +220,7 @@ namespace SistemaHotel.Controller
             return usu;
         }
 
-        public Usuario buscaUsuarioEmail(string Email)
+        public Usuario buscaUsuarioLogin(string Login)
         {
             Usuario usu = new Usuario();
            
@@ -159,11 +230,11 @@ namespace SistemaHotel.Controller
                 {
                     using (SqlCommand cmd = new SqlCommand(@"SELECT [ID]
                                                       ,[NOME]
-                                                      ,[EMAIL]
+                                                      ,[LOGIN]
                                                       ,[SENHA]                                                     
-                                                  FROM[DBO].[USUARIO] WHERE EMAIL = @EMAIL", connection))
+                                                  FROM[DBO].[USUARIO] WHERE LOGIN = @LOGIN", connection))
                     {
-                        cmd.Parameters.AddWithValue("EMAIL", Email);
+                        cmd.Parameters.AddWithValue("LOGIN", Login);
                         cmd.Connection.Open();
                         SqlDataReader registro = cmd.ExecuteReader();
                         if (registro.HasRows)
@@ -171,7 +242,7 @@ namespace SistemaHotel.Controller
                             registro.Read();
                             usu.Id = Convert.ToInt32(registro["ID"]);
                             usu.Nome = Convert.ToString(registro["NOME"]);
-                            usu.Email = Convert.ToString(registro["EMAIL"]);
+                            usu.Login = Convert.ToString(registro["LOGIN"]);
                             usu.Senha = Convert.ToString(registro["SENHA"]);
                         }
                     }
@@ -191,14 +262,14 @@ namespace SistemaHotel.Controller
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"UPDATE USUARIO SET NOME = @NOME, EMAIL = @EMAIL where  ID = @ID", connection))
+                using (SqlCommand cmd = new SqlCommand(@"UPDATE USUARIO SET NOME = @NOME, LOGIN = @LOGIN where  ID = @ID", connection))
                 {
 
                     try
                     {
                         cmd.Connection.Open();
                         cmd.Parameters.AddWithValue("NOME", usu.Nome);
-                        cmd.Parameters.AddWithValue("EMAIL", usu.Email);
+                        cmd.Parameters.AddWithValue("LOGIN", usu.Login);
                         cmd.Parameters.AddWithValue("ID", usu.Id);
                         cmd.ExecuteNonQuery();
                         cmd.Connection.Close();
