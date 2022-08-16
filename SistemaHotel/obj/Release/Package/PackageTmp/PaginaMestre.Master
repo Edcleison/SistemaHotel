@@ -1,0 +1,80 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PaginaMestre.master.cs" Inherits="SistemaHotel.PaginaMestre" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Sitema de Serviços de Hotel</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="stylesheet" href="CSS/Estilos.css" />   
+    <script type="text/javascript" src="Scripts/JavaScriptFunctions.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/bower_components/bootstrap/css/bootstrap.min.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/bower_components/sweetalert/css/sweetalert.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/icon/themify-icons/themify-icons.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/icon/icofont/css/icofont.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/icon/feather/css/feather.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/css/component.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/css/jquery.mCustomScrollbar.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/icon/icofont/css/icofont.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/icon/font-awesome/css/font-awesome.min.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/css/style.css") %>" />
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/bootstrap/js/bootstrap.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net/js/jquery.dataTables.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/pages/data-table/js/jszip.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/pages/data-table/js/pdfmake.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/pages/data-table/js/vfs_fonts.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/pages/data-table/extensions/key-table/js/dataTables.keyTable.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-buttons/js/buttons.print.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-buttons/js/buttons.html5.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js") %>"></script> 
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/js/bootstrap-growl.min.js") %>"></script>
+    <!-- layout padrao  -->
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/plugins/bootstrap-notify/bootstrap-notify.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/js/script.js") %>"></script>
+    <!-- fim layout padrao  -->
+
+</head>
+<body>
+    <form id="form1" runat="server">
+        <header>
+            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.png" CssClass="linkhome" />         
+            <nav>
+                <h1>100% Atualizado</h1>
+                <asp:HyperLink ID="h1Home" runat="server" CssClass="linkBotoes" NavigateUrl="~/Default.aspx">Home</asp:HyperLink>
+                <asp:HyperLink ID="h1Usuario" Visible="false" runat="server" CssClass="linkBotoes" NavigateUrl="~/ControleUsuario.aspx">Usuários</asp:HyperLink>
+                <asp:HyperLink ID="h1Cliente"  Visible="false" runat="server" CssClass="linkBotoes"  NavigateUrl="~/ControleUsuario.aspx" >Clientes</asp:HyperLink>
+                <asp:HyperLink ID="h1Atendimento"  Visible="false" runat="server" CssClass="linkBotoes"  NavigateUrl="~/ControleUsuario.aspx" >Atender Solicitações</asp:HyperLink>
+                <asp:HyperLink ID="h1Restaurante"  Visible="false" runat="server" CssClass="linkBotoes" >Restaurante</asp:HyperLink>
+                <asp:HyperLink ID="h1Frigobar"  Visible="false" runat="server" CssClass="linkBotoes" >Frigobar</asp:HyperLink>             
+                <asp:HyperLink ID="h1ArCondicionado"  Visible="false" runat="server" CssClass="linkBotoes" >Ar-condicionado</asp:HyperLink>             
+                <asp:HyperLink ID="h1Banheira"  Visible="false" runat="server" CssClass="linkBotoes" >Banheira</asp:HyperLink>             
+                <asp:HyperLink ID="hlSair" runat="server" CssClass="linkBotoes" NavigateUrl="~/Login.aspx">Sair</asp:HyperLink>
+            </nav>
+        </header>
+        <main>
+            <div>
+                <div>
+                    <div id="cxFloatMsg" class ="cxFloatMsg" onclick="HideMsg()">
+                        <h2 id="msgTitulo">A mensagem irá aparecer aqui</h2>
+                        <p id="msgTexto">A mensagem irá aparecer aqui</p>
+
+                    </div>
+                </div>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </main>
+        <footer>
+            <p>Serviços de Hotel - Site voltado para o administrador do sistema</p>
+            <p>Site desenvolvido por <a href="https://www.linkedin.com/in/edcleison-morais-059658178/">Cleison</a></p>
+        </footer>
+    
+    </form>
+</body>
+</html>
