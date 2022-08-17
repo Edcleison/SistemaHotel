@@ -149,7 +149,7 @@ namespace SistemaHotel
 
         protected void lnkSenha_Click(object sender, EventArgs e)
         {
-            string login = txtLogin.Text;
+            string login = txtLogin.Text.ToUpper();
             DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
             DALUsuario dalUsu = new DALUsuario();
             Usuario usu = dalUsu.buscaUsuarioLogin(login);
@@ -178,8 +178,8 @@ namespace SistemaHotel
                     {
                         if (usu.Login == "")
                         {
-                            usu.Nome = txtNome.Text;
-                            usu.Login = txtLogin.Text;
+                            usu.Nome = txtNome.Text.ToUpper();
+                            usu.Login = txtLogin.Text.ToUpper();
                             usu.Senha = Criptografia.Encrypt(txtNovaSenha.Text);
                             dalUsu.inserirUsuario(usu);
                         }
@@ -314,14 +314,13 @@ namespace SistemaHotel
         {
             mdBack.Visible = true;
             mdCli.Visible = true;
-            txtCodReserva.Text = SenhaRandomica.RandLetras(4) + SenhaRandomica.RandNumeros(4);
-
         }
 
 
         protected void salvarNovoCliente_Click(object sender, EventArgs e)
         {
-            txtSenhaRand.Text = SenhaRandomica.RandLetras(3) + SenhaRandomica.RandNumeros(5);
+           
+            txtSenhaRand.Text = SenhaRandomica.RandLetras(3)+SenhaRandomica.RandNumeros(5);
             DALCliente dalCli = new DALCliente();
             Cliente cli = new Cliente();
             cli.Cd_Reserva = txtCodReserva.Text;
@@ -330,7 +329,7 @@ namespace SistemaHotel
             dalCli.inserirCliente(cli);
             Usuario usu = new Usuario();
             usu.Login = txtCodReserva.Text;
-            usu.Senha = txtSenhaRand.Text;
+            usu.Senha = Criptografia.Encrypt(txtSenhaRand.Text);
             usu.Nome = txtCodReserva.Text;
             dalUsu.inserirUsuario(usu);
             usu = dalUsu.buscaUsuarioLogin(txtCodReserva.Text);

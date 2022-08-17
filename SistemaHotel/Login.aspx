@@ -51,7 +51,7 @@
                                         <span>Digite seu Login: </span>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtLogin" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtLogin" runat="server" Style="text-transform: uppercase;"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -59,7 +59,7 @@
                                         <span>Digite sua Senha: </span>
                                     </td>
                                     <td>
-                                        <asp:TextBox type="password" runat="server" ID="txtSenha"></asp:TextBox>
+                                        <asp:TextBox type="password" runat="server" ID="txtSenha" MaxLength="8"></asp:TextBox>
                                         <img id="olho" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
                                     </td>
                                 </tr>
@@ -108,7 +108,7 @@
                                         <span>Digite seu Login: </span>
                                     </td>
                                     <td>
-                                        <asp:TextBox type="text" runat="server" ID="txtLoginR"></asp:TextBox>
+                                        <asp:TextBox type="text" runat="server" ID="txtLoginR" Style="text-transform: uppercase;"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -116,7 +116,7 @@
                                         <span>Digite a Nova Senha: </span>
                                     </td>
                                     <td>
-                                        <asp:TextBox type="password" runat="server" ID="txtNovaSenha"></asp:TextBox>
+                                        <asp:TextBox type="password" runat="server" ID="txtNovaSenha" MaxLength="8"></asp:TextBox>
                                         <img id="olhoR" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
                                     </td>
                                 </tr>
@@ -125,7 +125,7 @@
                                         <span>Confirme a senha: </span>
                                     </td>
                                     <td>
-                                        <asp:TextBox type="password" runat="server" ID="txtConfirmaSenha"></asp:TextBox>
+                                        <asp:TextBox type="password" runat="server" ID="txtConfirmaSenha" MaxLength="8"></asp:TextBox>
                                         <img id="olhoDois" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
 
                                     </td>
