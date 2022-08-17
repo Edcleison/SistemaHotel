@@ -78,6 +78,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="CSS\StyleSheet.css.exclude" />
+    <Content Include="IMAGENS\SISTEMA\papel de parede.jpg" />
     <Content Include="imagens_cardapio\lasanha.png" />
     <Content Include="layout\assets\css\vssver.scc" />
     <Content Include="layout\assets\fonts\fontawesome-webfont.ttf" />

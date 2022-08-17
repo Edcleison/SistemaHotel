@@ -66,20 +66,36 @@
                                 <tr>
                                     <td>
 
-                                        <asp:LinkButton ID="btlogar" runat="server" class="btn btn-primary"  OnClick="btlogar_Click">Logar</asp:LinkButton>
-                                   
+                                        <asp:LinkButton ID="btlogar" runat="server" class="btn btn-primary" OnClick="btlogar_Click">Logar</asp:LinkButton>
+
                                         <asp:LinkButton ID="lnkRecadastrarSenha" runat="server" class="btn btn-primary" OnClick="lnkRecadastrarSenha_Click">Redefinir Senha</asp:LinkButton>
                                     </td>
 
                                 </tr>
-
                             </table>
-
                         </div>
                     </div>
                 </div>
-            </div>
+                <script src="Scripts/jquery.min.js"></script>
+                <script type="text/javascript">
+                    var senha = $('#txtSenha');
+                    var olho = $("#olho");
 
+                    olho.mousedown(function () {
+                        senha.attr("type", "text");
+                    });
+
+                    olho.mouseup(function () {
+                        senha.attr("type", "password");
+
+                    });
+                    // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
+                    //citada pelo nosso amigo nos comentários
+                    $("#olho").mouseout(function () {
+                        $("#txtSenha").attr("type", "password");
+                    });
+                </script>
+            </div>
             <div class="modal fade show" id="mdRedPass" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content" visible="false" style="border-radius: 10px;">
@@ -128,65 +144,43 @@
                         </div>
                     </div>
                 </div>
+                <script src="Scripts/jquery.min.js"></script>
+                <script type="text/javascript">
+                    var senha = $('#txtNovaSenha');
+                    var olho = $("#olhoR");
+
+                    olho.mousedown(function () {
+                        senha.attr("type", "text");
+                    });
+
+                    olho.mouseup(function () {
+                        senha.attr("type", "password");
+
+                    });
+                    // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
+                    //citada pelo nosso amigo nos comentários
+                    $("#olhoR").mouseout(function () {
+                        $("#txtNovaSenha").attr("type", "password");
+                    });
+                </script>
+                <script type="text/javascript">
+                    var ConfirmaSenha = $('#txtConfirmaSenha');
+                    var olhoDois = $("#olhoDois");
+
+                    olhoDois.mousedown(function () {
+                        ConfirmaSenha.attr("type", "text");
+                    });
+
+                    olhoDois.mouseup(function () {
+                        ConfirmaSenha.attr("type", "password");
+                    });
+                    // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
+                    //citada pelo nosso amigo nos comentários
+                    $("#olhoDois").mouseout(function () {
+                        $("#txtConfimaSenha").attr("type", "password");
+                    });
+                </script>
             </div>
-
-            <script src="Scripts/jquery.min.js"></script>
-            <script type="text/javascript">
-                var senha = $('#txtSenha');
-                var olho = $("#olho");
-
-                olho.mousedown(function () {
-                    senha.attr("type", "text");
-                });
-
-                olho.mouseup(function () {
-                    senha.attr("type", "password");
-
-                });
-                // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-                //citada pelo nosso amigo nos comentários
-                $("#olhoR").mouseout(function () {
-                    $("#txtSenha").attr("type", "password");
-                });
-            </script>
-            <script src="Scripts/jquery.min.js"></script>
-            <script type="text/javascript">
-                var senha = $('#txtNovaSenha');
-                var olho = $("#olhoR");
-
-                olho.mousedown(function () {
-                    senha.attr("type", "text");
-                });
-
-                olho.mouseup(function () {
-                    senha.attr("type", "password");
-
-                });
-                // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-                //citada pelo nosso amigo nos comentários
-                $("#olho").mouseout(function () {
-                    $("#txtNovaSenha").attr("type", "password");
-                });
-            </script>
-            <script type="text/javascript">
-                var ConfirmaSenha = $('#txtConfirmaSenha');
-                var olhoDois = $("#olhoDois");
-
-                olhoDois.mousedown(function () {
-                    ConfirmaSenha.attr("type", "text");
-                });
-
-                olhoDois.mouseup(function () {
-                    ConfirmaSenha.attr("type", "password");
-                });
-                // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-                //citada pelo nosso amigo nos comentários
-                $("#olhoDois").mouseout(function () {
-                    $("#txtConfimaSenha").attr("type", "password");
-                });
-            </script>
-
-
 
         </div>
     </form>
