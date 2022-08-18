@@ -90,61 +90,61 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/17/2022 18:46:02</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>07/17/2022 18:46:02</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap.css.map">
-      <publishTime>07/17/2022 18:46:02</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>07/17/2022 18:46:02</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css.map">
-      <publishTime>07/17/2022 18:46:02</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap.rtl.css">
-      <publishTime>07/17/2022 18:46:02</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap.rtl.css.map">
-      <publishTime>07/17/2022 18:46:01</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap.rtl.min.css">
-      <publishTime>07/17/2022 18:46:01</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap.rtl.min.css.map">
-      <publishTime>07/17/2022 18:46:01</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="ControleUsuario.aspx">
       <publishTime>08/17/2022 00:50:27</publishTime>
     </File>
     <File Include="CSS/bootstrap.css">
-      <publishTime>05/11/2022 19:29:21</publishTime>
+      <publishTime>11/05/2022 19:29:21</publishTime>
     </File>
     <File Include="CSS/dataTables.bootstrap4.min.css">
-      <publishTime>05/11/2022 19:29:53</publishTime>
+      <publishTime>11/05/2022 19:29:53</publishTime>
     </File>
     <File Include="CSS/Estilos.css">
-      <publishTime>08/16/2022 21:34:23</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="CSS/jquery.dataTables.min.css.css">
-      <publishTime>05/11/2022 20:37:35</publishTime>
+      <publishTime>11/05/2022 20:37:35</publishTime>
     </File>
     <File Include="CSS/StyleSheet.css.exclude">
-      <publishTime>05/11/2022 22:55:43</publishTime>
+      <publishTime>11/05/2022 22:55:43</publishTime>
     </File>
     <File Include="Default.aspx">
       <publishTime>08/16/2022 21:34:23</publishTime>
     </File>
     <File Include="IMAGENS/SISTEMA/logo-normal.png">
-      <publishTime>09/18/2021 14:58:48</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="IMAGENS/SISTEMA/logo_hotel.png">
-      <publishTime>05/10/2022 21:06:55</publishTime>
+      <publishTime>10/05/2022 21:06:55</publishTime>
     </File>
     <File Include="IMAGENS/SISTEMA/topocurso.png">
-      <publishTime>09/18/2021 13:36:51</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="imagens_cardapio/lasanha.png">
-      <publishTime>08/11/2022 13:06:29</publishTime>
+      <publishTime>11/08/2022 13:06:29</publishTime>
     </File>
     <File Include="layout/assets/css/component.css">
       <publishTime>09/09/2019 10:05:12</publishTime>
@@ -1095,16 +1095,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/09/2019 10:05:21</publishTime>
     </File>
     <File Include="layout/favicon.ico">
-      <publishTime>01/05/2018 15:46:23</publishTime>
+      <publishTime>05/01/2018 15:46:23</publishTime>
     </File>
     <File Include="layout/status_os.css">
-      <publishTime>10/23/2020 16:06:48</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="layout/web.config">
-      <publishTime>03/12/2019 12:36:42</publishTime>
+      <publishTime>12/03/2019 12:36:42</publishTime>
     </File>
     <File Include="layout/website.publishproj">
-      <publishTime>03/12/2019 12:39:27</publishTime>
+      <publishTime>12/03/2019 12:39:27</publishTime>
     </File>
     <File Include="Login.aspx">
       <publishTime>08/17/2022 00:50:27</publishTime>

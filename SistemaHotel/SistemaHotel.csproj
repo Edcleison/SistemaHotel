@@ -1083,8 +1083,10 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\sistemahotel - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\sistemahotel - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy.pubxml" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy1.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

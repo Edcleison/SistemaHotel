@@ -154,7 +154,7 @@ namespace SistemaHotel
             DALUsuario dalUsu = new DALUsuario();
             Usuario usu = dalUsu.buscaUsuarioLogin(login);
             PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.Id);
-            if (txtNome.Text != "" && txtLogin.Text != "" && txtNovaSenha.Text != "" && txtConfirmaSenha.Text != "" && ddlPerfil.SelectedValue != "SELECIONE")
+            if (txtNome.Text.ToUpper() != "" && txtLogin.Text.ToUpper() != "" && txtNovaSenha.Text != "" && txtConfirmaSenha.Text != "" && ddlPerfil.SelectedValue != "SELECIONE")
             {
 
 
