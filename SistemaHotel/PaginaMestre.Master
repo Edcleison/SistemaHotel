@@ -41,20 +41,30 @@
 
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" itemtype="~/CSS/Estilos.css">
         <header>
             <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.png" CssClass="linkhome" />         
             <nav>
                 <h1>100% Atualizado</h1>
-                <asp:HyperLink ID="h1Home" runat="server" CssClass="linkBotoes" NavigateUrl="~/Default.aspx">Home</asp:HyperLink>
-                <asp:HyperLink ID="h1Usuario" Visible="false" runat="server" CssClass="linkBotoes" NavigateUrl="~/ControleUsuario.aspx">Usuários</asp:HyperLink>
-                <asp:HyperLink ID="h1Cliente"  Visible="false" runat="server" CssClass="linkBotoes"  NavigateUrl="~/ControleUsuario.aspx" >Clientes</asp:HyperLink>
-                <asp:HyperLink ID="h1Atendimento"  Visible="false" runat="server" CssClass="linkBotoes"  NavigateUrl="~/ControleUsuario.aspx" >Atender Solicitações</asp:HyperLink>
-                <asp:HyperLink ID="h1Restaurante"  Visible="false" runat="server" CssClass="linkBotoes" >Restaurante</asp:HyperLink>
-                <asp:HyperLink ID="h1Frigobar"  Visible="false" runat="server" CssClass="linkBotoes" >Frigobar</asp:HyperLink>             
-                <asp:HyperLink ID="h1ArCondicionado"  Visible="false" runat="server" CssClass="linkBotoes" >Ar-condicionado</asp:HyperLink>             
-                <asp:HyperLink ID="h1Banheira"  Visible="false" runat="server" CssClass="linkBotoes" >Banheira</asp:HyperLink>             
-                <asp:HyperLink ID="hlSair" runat="server" CssClass="linkBotoes" NavigateUrl="~/Login.aspx">Sair</asp:HyperLink>
+                <asp:TreeView ID="TreeView1" runat="server" CssClass="linkBotoes" ImageSet="Arrows" ExpandDepth="0">
+                    <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
+                    <Nodes>
+                        <asp:TreeNode Text="Menu" PopulateOnDemand="False">
+                            <asp:TreeNode Expanded="True" Text="Home" Value="Home" NavigateUrl="Default.aspx"></asp:TreeNode>
+                            <asp:TreeNode Expanded="True" Text="Usuarios" Value="Usuarios" NavigateUrl="ControleUsuario.aspx"></asp:TreeNode>
+                            <asp:TreeNode Text="Clientes" Value="Novo Nó" NavigateUrl="ControleUsuario.aspx"></asp:TreeNode>
+                            <asp:TreeNode Text="Atender Solicitações" Value="Novo Nó" NavigateUrl="ControleUsuario.aspx"></asp:TreeNode>
+                            <asp:TreeNode Text="Restaurante" Value="Novo Nó"></asp:TreeNode>
+                            <asp:TreeNode Text="Frigobar" Value="Novo Nó"></asp:TreeNode>
+                            <asp:TreeNode Text="Ar-condicionado" Value="Novo Nó"></asp:TreeNode>
+                            <asp:TreeNode Text="Banheira" Value="Novo Nó"></asp:TreeNode>
+                            <asp:TreeNode Text="Sair" Value="Novo Nó"></asp:TreeNode>
+                        </asp:TreeNode>
+                    </Nodes>
+                    <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
+                    <ParentNodeStyle Font-Bold="False" />
+                    <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
+                </asp:TreeView>
             </nav>
         </header>
         <main>
