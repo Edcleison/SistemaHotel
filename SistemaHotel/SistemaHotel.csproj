@@ -5898,7 +5898,11 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Model\Cliente.cs" />
+    <Compile Include="Model\ProdutoFrigobar.cs" />
+    <Compile Include="Model\ProdutoRestaurante.cs" />
     <Compile Include="Model\PerfilUsuario.cs" />
+    <Compile Include="Model\PedidoFrigobar.cs" />
+    <Compile Include="Model\PedidoRestaurante.cs" />
     <Compile Include="Model\Usuario.cs" />
     <Compile Include="PaginaMestre.Master.cs">
       <DependentUpon>PaginaMestre.Master</DependentUpon>

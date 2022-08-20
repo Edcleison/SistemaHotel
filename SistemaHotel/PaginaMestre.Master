@@ -47,13 +47,12 @@
             <nav>
                 <h1>100% Atualizado</h1>
                 <asp:HyperLink ID="h1Home" runat="server" CssClass="linkBotoes" NavigateUrl="~/Default.aspx">Home</asp:HyperLink>
-                <asp:HyperLink ID="h1Usuario" Visible="false" runat="server" CssClass="linkBotoes" NavigateUrl="~/ControleUsuario.aspx">Usuários</asp:HyperLink>
-                <asp:HyperLink ID="h1Cliente"  Visible="false" runat="server" CssClass="linkBotoes"  NavigateUrl="~/ControleUsuario.aspx" >Clientes</asp:HyperLink>
-                <asp:HyperLink ID="h1Atendimento"  Visible="false" runat="server" CssClass="linkBotoes"  NavigateUrl="~/ControleUsuario.aspx" >Atender Solicitações</asp:HyperLink>
-                <asp:HyperLink ID="h1Restaurante"  Visible="false" runat="server" CssClass="linkBotoes" >Restaurante</asp:HyperLink>
-                <asp:HyperLink ID="h1Frigobar"  Visible="false" runat="server" CssClass="linkBotoes" >Frigobar</asp:HyperLink>             
-                <asp:HyperLink ID="h1ArCondicionado"  Visible="false" runat="server" CssClass="linkBotoes" >Ar-condicionado</asp:HyperLink>             
-                <asp:HyperLink ID="h1Banheira"  Visible="false" runat="server" CssClass="linkBotoes" >Banheira</asp:HyperLink>             
+                <asp:HyperLink ID="h1Usuario" Visible="false" runat="server" CssClass="linkBotoes" NavigateUrl="~/ControleUsuario.aspx">Usuarios</asp:HyperLink>           
+                <asp:HyperLink ID="h1Produtos" Visible="false" runat="server" CssClass="linkBotoes" NavigateUrl="~/ControleProdutos.aspx">Produtos</asp:HyperLink>           
+                <asp:HyperLink ID="h1PedidosRestaurante" Visible="false" runat="server" CssClass="linkBotoes">Pedidos Restaurante</asp:HyperLink>
+                <asp:HyperLink ID="h1PedidosFrigobar"  Visible="false" runat="server" CssClass="linkBotoes">Pedidos Frigobar</asp:HyperLink>           
+                <asp:HyperLink ID="h1NovoPedidoRestaurante"  Visible="false" runat="server" CssClass="linkBotoes">Restaurante</asp:HyperLink>             
+                <asp:HyperLink ID="h1NovoPedidoFrigobar"  Visible="false" runat="server" CssClass="linkBotoes">Kit - Frigobar</asp:HyperLink>                                       
                 <asp:HyperLink ID="hlSair" runat="server" CssClass="linkBotoes" NavigateUrl="~/Login.aspx">Sair</asp:HyperLink>
             </nav>
         </header>

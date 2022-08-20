@@ -60,58 +60,49 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.HyperLink h1Usuario;
 
         /// <summary>
-        /// h1Cliente control.
+        /// h1Produtos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink h1Cliente;
+        protected global::System.Web.UI.WebControls.HyperLink h1Produtos;
 
         /// <summary>
-        /// h1Atendimento control.
+        /// h1PedidosRestaurante control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink h1Atendimento;
+        protected global::System.Web.UI.WebControls.HyperLink h1PedidosRestaurante;
 
         /// <summary>
-        /// h1Restaurante control.
+        /// h1PedidosFrigobar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink h1Restaurante;
+        protected global::System.Web.UI.WebControls.HyperLink h1PedidosFrigobar;
 
         /// <summary>
-        /// h1Frigobar control.
+        /// h1NovoPedidoRestaurante control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink h1Frigobar;
+        protected global::System.Web.UI.WebControls.HyperLink h1NovoPedidoRestaurante;
 
         /// <summary>
-        /// h1ArCondicionado control.
+        /// h1NovoPedidoFrigobar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink h1ArCondicionado;
-
-        /// <summary>
-        /// h1Banheira control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink h1Banheira;
+        protected global::System.Web.UI.WebControls.HyperLink h1NovoPedidoFrigobar;
 
         /// <summary>
         /// hlSair control.

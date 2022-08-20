@@ -50,8 +50,6 @@ namespace SistemaHotel.Controller
         public Cliente buscarClienteId(int Id)
         {
             Cliente cli = new Cliente();
-            SqlDataAdapter adp;
-
             try
             {
                 using (SqlConnection connection = new SqlConnection(cnn))

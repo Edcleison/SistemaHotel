@@ -9,7 +9,7 @@ namespace SistemaHotel.Utils
 {
     public class SenhaRandomica
     {
-        private const string SenhaCaracteresValidos = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const string SenhaCaracteresValidos = "abcdefghijklmnopqrstuvwxyz";
         private const string SenhaNumerosValidos = "1234567890";
 
         public static string RandLetras(int tamanho)

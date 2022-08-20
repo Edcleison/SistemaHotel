@@ -51,7 +51,7 @@
                                         <span>Digite seu Login: </span>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtLogin" runat="server" Style="text-transform: uppercase;"></asp:TextBox>
+                                        <asp:TextBox ID="txtLogin" runat="server" MaxLength="9" Style="text-transform: uppercase;"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -108,7 +108,7 @@
                                         <span>Digite seu Login: </span>
                                     </td>
                                     <td>
-                                        <asp:TextBox type="text" runat="server" ID="txtLoginR" Style="text-transform: uppercase;"></asp:TextBox>
+                                        <asp:TextBox type="text" runat="server" ID="txtLoginR" MaxLength="9" Style="text-transform: uppercase;"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>

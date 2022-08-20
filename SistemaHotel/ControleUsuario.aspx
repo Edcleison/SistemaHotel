@@ -133,7 +133,7 @@
                             <tr>
                                 <td><span>Digite o Login: </span></td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtLogin" Style="text-transform: uppercase;"></asp:TextBox></td>
+                                    <asp:TextBox runat="server" ID="txtLogin" MaxLength="9" Style="text-transform: uppercase;"></asp:TextBox></td>
                             </tr>
                             <tr>
                                 <td><span>Perfil: </span></td>
