@@ -39,6 +39,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -1068,7 +1069,6 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
     <Content Include="layout\website.publishproj" />
-    <Content Include="RedefinirSenha.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -1083,13 +1083,15 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\sistemahotel - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\sistemahotel - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy.pubxml" />
-    <Content Include="web.config" />
-    <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy1.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
     </None>
-    <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -5861,8 +5863,12 @@
     <Content Include="PaginaMestre.Master" />
     <Content Include="Scripts\dataTables.bootstrap4.min.js.js" />
     <Content Include="Scripts\JavaScriptFunctions.js" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.maskedinput.min.js" />
     <Content Include="Scripts\jquery.min.js" />
   </ItemGroup>
   <ItemGroup>
@@ -5891,7 +5897,11 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Model\Cliente.cs" />
+    <Compile Include="Model\ProdutoFrigobar.cs" />
+    <Compile Include="Model\ProdutoRestaurante.cs" />
     <Compile Include="Model\PerfilUsuario.cs" />
+    <Compile Include="Model\PedidoFrigobar.cs" />
+    <Compile Include="Model\PedidoRestaurante.cs" />
     <Compile Include="Model\Usuario.cs" />
     <Compile Include="PaginaMestre.Master.cs">
       <DependentUpon>PaginaMestre.Master</DependentUpon>
@@ -5901,13 +5911,6 @@
       <DependentUpon>PaginaMestre.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RedefinirSenha.aspx.cs">
-      <DependentUpon>RedefinirSenha.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="RedefinirSenha.aspx.designer.cs">
-      <DependentUpon>RedefinirSenha.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Utils\Criptografia.cs" />
     <Compile Include="Utils\SenhaRandomica.cs" />
   </ItemGroup>

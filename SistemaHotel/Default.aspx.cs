@@ -11,9 +11,9 @@ namespace SistemaHotel
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["email"] != null)
+            if (Session["login"] != null)
             {
-                lbEmail.Text = Session["email"].ToString();
+                lbLogin.Text = Session["login"].ToString();
                 lbNome.Text = Session["nome"].ToString();
             }
 

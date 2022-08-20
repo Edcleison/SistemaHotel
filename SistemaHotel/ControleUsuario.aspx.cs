@@ -54,7 +54,7 @@ namespace SistemaHotel
                     dtFim.SelectedDate = cli.DataFim;
                     txtDataIniE.Text = cli.DataInicio.ToString("dd/MM/yyyy");
                     txtDataFimE.Text = cli.DataFim.ToString("dd/MM/yyyy");
-                    modEditCli.Visible = true; 
+                    modEditCli.Visible = true;
                 }
                 else
                 {
@@ -114,7 +114,7 @@ namespace SistemaHotel
             sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:15px;'>");
             sb.AppendLine("<thead>");
             sb.AppendLine("<tr>");
-            sb.AppendLine("<th><center>ID</th></center>");           
+            sb.AppendLine("<th><center>ID</th></center>");
             sb.AppendLine("<th><center>RESERVA</th></center>");
             sb.AppendLine("<th><center>DATA INICIO</th></center>");
             sb.AppendLine("<th><center>DATA FIM</th></center>");
@@ -128,10 +128,10 @@ namespace SistemaHotel
             {
 
                 sb.AppendLine("<tr>");
-                sb.AppendLine("<td><center>" + dtr["ID"] + "</td></center>");             
+                sb.AppendLine("<td><center>" + dtr["ID"] + "</td></center>");
                 sb.AppendLine("<td><center>" + dtr["LOGIN"] + "</td></center>");
-                sb.AppendLine("<td><center>" + Convert.ToDateTime(dtr["DATA_INICIO"]).ToString("dd/MM/yyyy")+ "</td></center>");
-                sb.AppendLine("<td><center>" + Convert.ToDateTime(dtr["DATA_FIM"]).ToString("dd/MM/yyyy") + "</td></center>");  
+                sb.AppendLine("<td><center>" + Convert.ToDateTime(dtr["DATA_INICIO"]).ToString("dd/MM/yyyy") + "</td></center>");
+                sb.AppendLine("<td><center>" + Convert.ToDateTime(dtr["DATA_FIM"]).ToString("dd/MM/yyyy") + "</td></center>");
                 sb.AppendLine("<td><center><a href='ControleUsuario.aspx?CLIENTE_E=" + Criptografia.Encrypt(dtr["ID"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
                 sb.AppendLine("<td><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID"].ToString()) + "'><i class='fa fa-trash'></i></center></td>");
                 sb.AppendLine("</tr>");
@@ -143,18 +143,16 @@ namespace SistemaHotel
             Panel1.Controls.Clear();
             Panel1.Controls.Add(new LiteralControl(sb.ToString()));
 
-
-
         }
 
         protected void lnkSenha_Click(object sender, EventArgs e)
         {
-            string login = txtLogin.Text;
+            string login = txtLogin.Text.ToUpper();
             DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
             DALUsuario dalUsu = new DALUsuario();
             Usuario usu = dalUsu.buscaUsuarioLogin(login);
             PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.Id);
-            if (txtNome.Text != "" && txtLogin.Text != "" && txtNovaSenha.Text != "" && txtConfirmaSenha.Text != "" && ddlPerfil.SelectedValue != "SELECIONE")
+            if (txtNome.Text != "" && txtLogin.Text != "" && txtNovaSenha.Text != "" && txtConfirmaSenha.Text != "" && ddlPerfilNovoUsu.SelectedValue != "SELECIONE")
             {
 
 
@@ -174,17 +172,15 @@ namespace SistemaHotel
                         Response.Write(msg);
 
                     }
-                    else
+                    else if(usu.Login == "")
                     {
-                        if (usu.Login == "")
-                        {
-                            usu.Nome = txtNome.Text;
-                            usu.Login = txtLogin.Text;
-                            usu.Senha = Criptografia.Encrypt(txtNovaSenha.Text);
-                            dalUsu.inserirUsuario(usu);
-                        }
+                        
+                        usu.Nome = txtNome.Text.ToUpper();
+                        usu.Login = txtLogin.Text.ToUpper();
+                        usu.Senha = Criptografia.Encrypt(txtNovaSenha.Text);
+                        dalUsu.inserirUsuario(usu);   
                         usu = dalUsu.buscaUsuarioLogin(usu.Login);
-                        perfUsu.Perfil = ddlPerfil.SelectedIndex;
+                        perfUsu.Perfil = int.Parse(ddlPerfilNovoUsu.SelectedValue);
                         perfUsu.ID_USUARIO = usu.Id;
                         dalPerfUsu.inserirPerfil(perfUsu);
                         string msg = "<script> alert('Cadastro realizado!'); </script>";
@@ -221,8 +217,8 @@ namespace SistemaHotel
             txtDataIni.Text = "";
             txtDataIniE.Text = "";
             ddlPerfilNovoUsu.SelectedIndex = -1;
-            txtSenhaRand.Text = "";          
-            dtInicioE.SelectedDate = DateTime.Now;
+            txtSenhaRand.Text = "";
+            dtInicio.SelectedDate = DateTime.Now;
             dtFim.SelectedDate = DateTime.Now;
             dtInicioE.SelectedDate = DateTime.Now;
             dtFimE.SelectedDate = DateTime.Now;
@@ -298,7 +294,7 @@ namespace SistemaHotel
             mdBack.Visible = true;
             mdUsu.Visible = true;
             carregaDdlNovoUsuario();
-           
+
         }
 
         protected void lnkVoltar_Click(object sender, EventArgs e)
@@ -314,41 +310,51 @@ namespace SistemaHotel
         {
             mdBack.Visible = true;
             mdCli.Visible = true;
-            txtCodReserva.Text = SenhaRandomica.RandLetras(4) + SenhaRandomica.RandNumeros(4);
-
         }
 
 
         protected void salvarNovoCliente_Click(object sender, EventArgs e)
         {
-            txtSenhaRand.Text = SenhaRandomica.RandLetras(3) + SenhaRandomica.RandNumeros(5);
-            DALCliente dalCli = new DALCliente();
-            Cliente cli = new Cliente();
-            cli.Cd_Reserva = txtCodReserva.Text;
-            cli.DataInicio = dtInicio.SelectedDate;
-            cli.DataFim = dtFim.SelectedDate;
-            dalCli.inserirCliente(cli);
-            Usuario usu = new Usuario();
-            usu.Login = txtCodReserva.Text;
-            usu.Senha = txtSenhaRand.Text;
-            usu.Nome = txtCodReserva.Text;
-            dalUsu.inserirUsuario(usu);
-            usu = dalUsu.buscaUsuarioLogin(txtCodReserva.Text);
-            PerfilUsuario perfUsu = new PerfilUsuario();
-            perfUsu.Perfil = 3;
-            perfUsu.ID_USUARIO = usu.Id;
-            dalPerfUsu.inserirPerfil(perfUsu);
-            txtDataIni.Text = cli.DataInicio.ToString("dd/MM/yyyy");
-            txtDataFim.Text = cli.DataFim.ToString("dd/MM/yyyy");
-            string msg = "<script> alert('Cadastro realizado!'); </script>";
-            Response.Write(msg);
+            if (txtCodReserva.Text != "")
+            {
+                string sCdReserva = txtCodReserva.Text.ToUpper();
+                txtSenhaRand.Text = SenhaRandomica.RandLetras(3) + SenhaRandomica.RandNumeros(5);
+                DALCliente dalCli = new DALCliente();
+                Cliente cli = new Cliente();
+                cli.Cd_Reserva = sCdReserva;
+                cli.DataInicio = dtInicio.SelectedDate;               
+                cli.DataFim = dtFim.SelectedDate;
+                dalCli.inserirCliente(cli);
+                Usuario usu = new Usuario();
+                usu.Login = sCdReserva;
+                usu.Senha = Criptografia.Encrypt(txtSenhaRand.Text);
+                usu.Nome = sCdReserva;
+                dalUsu.inserirUsuario(usu);
+                usu = dalUsu.buscaUsuarioLogin(sCdReserva);
+                PerfilUsuario perfUsu = new PerfilUsuario();
+                perfUsu.Perfil = 3;
+                perfUsu.ID_USUARIO = usu.Id;
+                dalPerfUsu.inserirPerfil(perfUsu);
+                txtDataIni.Text = cli.DataInicio.ToString();
+                txtDataFim.Text = cli.DataFim.ToString();
+                string msg = "<script> alert('Cadastro realizado!'); </script>";
+                Response.Write(msg);
+
+            }
+            else
+            {
+                string msg = "<script> alert('Insira o Código da Reserva!'); </script>";
+                Response.Write(msg);
+
+            }
+
 
         }
 
         protected void alterarData_Click(object sender, EventArgs e)
         {
             DALCliente dalCliente = new DALCliente();
-            Cliente cli = dalCliente.buscarClienteReserva(txtCdReservaE.Text);
+            Cliente cli = dalCliente.buscarClienteReserva(txtCdReservaE.Text.ToUpper());
             cli.DataFim = dtFimE.SelectedDate;
             dalCliente.alterarCliente(cli);
             txtDataFimE.Text = dtFimE.SelectedDate.ToString("dd/MM/yyyy");
@@ -366,15 +372,15 @@ namespace SistemaHotel
                 {
                     carregarTabela(ddlPerfil.SelectedValue.ToString());
                 }
-                else 
-                { 
+                else
+                {
                     carregarTabelaCliente(ddlPerfil.SelectedValue.ToString());
                 }
-                
+
             }
 
         }
-        
+
     }
 }
 

@@ -69,12 +69,25 @@
         })
     </script>
 
+    <script src="Scripts/jquery-2.1.1.min.js"></script>
+    <script src="Scripts/jquery.maskedinput.min.js"></script>
+    <title>jQuery - Formatando campos em formulários WebForms</title>
+    <script type="text/javascript">
+        jQuery(function ($) {
+
+            $("#txtCodReserva").mask("aaaa-9999");
+
+        });
+    </script>
+
+    
 
 
 </asp:Content>
 
 
 <asp:Content ID="Content12" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+
     <asp:Panel ID="Panel3" runat="server" GroupingText="Controle de Usuários">
         <table>
             <tr>
@@ -115,12 +128,12 @@
                             <tr>
                                 <td><span>Digite seu Nome: </span></td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtNome"></asp:TextBox></td>
+                                    <asp:TextBox runat="server" ID="txtNome" Style="text-transform: uppercase;"></asp:TextBox></td>
                             </tr>
                             <tr>
                                 <td><span>Digite o Login: </span></td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtLogin"></asp:TextBox></td>
+                                    <asp:TextBox runat="server" ID="txtLogin" MaxLength="9" Style="text-transform: uppercase;"></asp:TextBox></td>
                             </tr>
                             <tr>
                                 <td><span>Perfil: </span></td>
@@ -130,7 +143,7 @@
                             <tr>
                                 <td><span>Digite a Senha: </span></td>
                                 <td>
-                                    <asp:TextBox type="password" runat="server" ID="txtNovaSenha"></asp:TextBox></td>
+                                    <asp:TextBox type="password" runat="server" ID="txtNovaSenha" MaxLength="8"></asp:TextBox></td>
                                 <td>
                                     <img id="olho" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
                                 </td>
@@ -138,7 +151,7 @@
                             <tr>
                                 <td><span>Confirme a senha: </span></td>
                                 <td>
-                                    <asp:TextBox type="password" runat="server" ID="txtConfirmaSenha"></asp:TextBox></td>
+                                    <asp:TextBox type="password" runat="server" ID="txtConfirmaSenha" MaxLength="8"></asp:TextBox></td>
                                 <td>
                                     <img id="olhoDois" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
 
@@ -146,7 +159,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:LinkButton ID="lnkSenha" class="btn btn-sucess" OnClick="lnkSenha_Click" runat="server">Salvar</asp:LinkButton></td>
+                                    <asp:LinkButton ID="lnkSenha" class="btn btn-success" OnClick="lnkSenha_Click" runat="server">Salvar</asp:LinkButton></td>
                                 <td>
                                     <asp:LinkButton ID="lnkVoltar" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
                             </tr>
@@ -155,7 +168,42 @@
 
                     </div>
                 </div>
-            </div>
+            </div> 
+            <script src="Scripts/jquery.min.js"></script>
+            <script type="text/javascript">
+                var senha = $('#txtNovaSenha');
+                var olho = $("#olho");
+                olho.mousedown(function () {
+                    senha.attr("type", "text");
+                });
+
+                olho.mouseup(function () {
+                    senha.attr("type", "password");
+
+                });
+                // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
+                //citada pelo nosso amigo nos comentários
+                $("#olho").mouseout(function () {
+                    $("#txtNovaSenha").attr("type", "password");
+                });
+            </script>        
+            <script type="text/javascript">
+                var ConfirmaSenha = $('#txtConfirmaSenha');
+                var olhoDois = $("#olhoDois");
+
+                olhoDois.mousedown(function () {
+                    ConfirmaSenha.attr("type", "text");
+                });
+
+                olhoDois.mouseup(function () {
+                    ConfirmaSenha.attr("type", "password");
+                });
+                // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
+                //citada pelo nosso amigo nos comentários
+                $("#olhoDois").mouseout(function () {
+                    $("#txtConfimaSenha").attr("type", "password");
+                });
+            </script>           
         </div>
         <div class="modal fade show" id="mdCli" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
             <div class="modal-dialog modal-lg" role="document">
@@ -168,7 +216,7 @@
                             <tr>
                                 <td><span>Código da Reserva: </span></td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtCodReserva"></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="txtCodReserva" Style="text-transform: uppercase;" ClientIDMode="Static"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -206,6 +254,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="modal fade show" id="modEditCli" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
             <div class="modal-dialog modal-lg" role="document">
@@ -253,44 +302,9 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </div>            
         </div>
-        <script src="Scripts/jquery.min.js"></script>
-        <script type="text/javascript">
-            var senha = $('#txtNovaSenha');
-            var olho = $("#olho");
-            olho.mousedown(function () {
-                senha.attr("type", "text");
-            });
 
-            olho.mouseup(function () {
-                senha.attr("type", "password");
-
-            });
-            // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-            //citada pelo nosso amigo nos comentários
-            $("#olho").mouseout(function () {
-                $("#txtNovaSenha").attr("type", "password");
-            });
-        </script>
-        <script src="Scripts/jquery.min.js"></script>
-        <script type="text/javascript">
-            var ConfirmaSenha = $('#txtConfirmaSenha');
-            var olhoDois = $("#olhoDois");
-
-            olhoDois.mousedown(function () {
-                ConfirmaSenha.attr("type", "text");
-            });
-
-            olhoDois.mouseup(function () {
-                ConfirmaSenha.attr("type", "password");
-            });
-            // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-            //citada pelo nosso amigo nos comentários
-            $("#olhoDois").mouseout(function () {
-                $("#txtConfimaSenha").attr("type", "password");
-            });
-        </script>
     </asp:Panel>
 </asp:Content>
 

@@ -21,8 +21,8 @@ namespace SistemaHotel
 
         protected void btlogar_Click(object sender, EventArgs e)
         {
-            string login = txtLogin.Text;
-            string senha = Criptografia.Encrypt(txtSenha.Text);
+            string login = txtLogin.Text.ToUpper();
+            string senha = Criptografia.Encrypt(txtSenha.Text.ToUpper());
 
             DALUsuario du = new DALUsuario();
             Usuario u = du.buscaUsuarioLogin(login);
@@ -50,7 +50,7 @@ namespace SistemaHotel
 
                     Session["id"] = u.Id;
                     Session["nome"] = u.Nome;
-                    Session["Login"] = u.Login;
+                    Session["login"] = u.Login;
                     Response.Redirect("~/Default.aspx");
                 }
             }
@@ -73,12 +73,13 @@ namespace SistemaHotel
 
             mdLog.Visible = true;
             mdRedPass.Visible = false;
+            limparCampos();
         }
 
         protected void lnkSenha_Click(object sender, EventArgs e)
         {
             DALUsuario dalUsu = new DALUsuario();
-            string login = txtLogin.Text;
+            string login = txtLoginR.Text.ToUpper();
             Usuario usu = dalUsu.buscaUsuarioLogin(login);
             DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
             PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.Id);
@@ -105,7 +106,7 @@ namespace SistemaHotel
             }
             else
             {
-                string msg = "<script> alert('Email não encontrado!'); </script>";
+                string msg = "<script> alert('Login não encontrado!'); </script>";
                 Response.Write(msg);
             }
 
