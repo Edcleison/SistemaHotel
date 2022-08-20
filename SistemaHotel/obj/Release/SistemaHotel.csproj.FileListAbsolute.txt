@@ -5,3 +5,16 @@ C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Release\SistemaHotel.csp
 C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Release\SistemaHotel.csproj.CoreCompileInputs.cache
 C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Release\SistemaHotel.dll
 C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Release\SistemaHotel.pdb
+D:\TCC - Sistema Hotel\SistemaHotel\SistemaHotel\bin\SistemaHotel.dll.config
+D:\TCC - Sistema Hotel\SistemaHotel\SistemaHotel\bin\SistemaHotel.dll
+D:\TCC - Sistema Hotel\SistemaHotel\SistemaHotel\bin\SistemaHotel.pdb
+D:\TCC - Sistema Hotel\SistemaHotel\SistemaHotel\obj\Release\SistemaHotel.csproj.CoreCompileInputs.cache
+D:\TCC - Sistema Hotel\SistemaHotel\SistemaHotel\obj\Release\SistemaHotel.dll
+D:\TCC - Sistema Hotel\SistemaHotel\SistemaHotel\obj\Release\SistemaHotel.pdb
+D:\TCC - Sistema Hotel\SistemaHotel\SistemaHotel\obj\Release\SistemaHotel.csproj.AssemblyReference.cache
+C:\Curso\Projetos WebSite\AlteracoesLayout\SistemaHotel\bin\SistemaHotel.dll
+C:\Curso\Projetos WebSite\AlteracoesLayout\SistemaHotel\bin\SistemaHotel.pdb
+C:\Curso\Projetos WebSite\AlteracoesLayout\SistemaHotel\obj\Release\SistemaHotel.csproj.AssemblyReference.cache
+C:\Curso\Projetos WebSite\AlteracoesLayout\SistemaHotel\obj\Release\SistemaHotel.csproj.CoreCompileInputs.cache
+C:\Curso\Projetos WebSite\AlteracoesLayout\SistemaHotel\obj\Release\SistemaHotel.dll
+C:\Curso\Projetos WebSite\AlteracoesLayout\SistemaHotel\obj\Release\SistemaHotel.pdb

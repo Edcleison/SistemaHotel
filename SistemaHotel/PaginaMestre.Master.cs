@@ -27,30 +27,39 @@ namespace SistemaHotel
                 Usuario usu =dalUsu.buscaUsuarioLogin(Session["login"].ToString());
                 PerfilUsuario usuPerfil = dalPerfUsu.buscarUsuarioPerfil(usu.Id);
 
+                //if (usuPerfil.Perfil == 1)
+                //{
+                //    h1Usuario.Visible = true;
+                //    h1Cliente.Visible = true;
+                //    h1Atendimento.Visible = true;
+                //    h1Restaurante.Visible = true;
+                //    h1Frigobar.Visible = true;
+                //    h1ArCondicionado.Visible = true;
+                //    h1Banheira.Visible = true;
 
-                if (usuPerfil.Perfil == 1)
-                {
-                    //h1Usuario.Visible = true;
-                    
-                    
+                //}
+                //else if (usuPerfil.Perfil == 2)
+                //{
 
-                }
-                else if (usuPerfil.Perfil == 2)
-                {
-
+                //    h1Cliente.Visible = true;
+                //    h1Atendimento.Visible = true;
                     //h1Cliente.Visible = true;
                     //h1Atendimento.Visible = true;
 
-                }
-                else
-                {
+                //}
+                //else
+                //{
 
+                //    h1Restaurante.Visible = true;
+                //    h1Frigobar.Visible = true;
+                //    h1ArCondicionado.Visible = true;
+                //    h1Banheira.Visible = true;
                     //h1Restaurante.Visible = true;
                     //h1Frigobar.Visible = true;
                     //h1ArCondicionado.Visible = true;
                     //h1Banheira.Visible = true;
 
-                }
+                //}
             }
         }
     }
