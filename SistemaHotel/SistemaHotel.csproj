@@ -1087,6 +1087,7 @@
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy.pubxml" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy1.pubxml" />
+    <Content Include="Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
