@@ -111,7 +111,7 @@ namespace SistemaHotel
             DALUsuario dalUsu = new DALUsuario();
             Usuario usu = dalUsu.buscaUsuarioLogin(login);
             PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.Id);
-            if (txtLogin.Text != "" && txtNovaSenha.Text != "" && txtConfirmaSenha.Text != "" && ddlPerfilNovoUsu.SelectedValue != "SELECIONE")
+            if (!string.IsNullOrEmpty(txtLogin.Text) && !string.IsNullOrEmpty(txtNovaSenha.Text) && !string.IsNullOrEmpty(txtConfirmaSenha.Text) && ddlPerfilNovoUsu.SelectedValue != "SELECIONE")
             {
                 if (txtNovaSenha.Text == txtConfirmaSenha.Text)
                 {
@@ -123,13 +123,13 @@ namespace SistemaHotel
                     }
                     else if (usu.Login == "")
                     {
-                      
+                        usu.NomeUsuario = txtNome.Text;
                         usu.Login = txtLogin.Text.ToUpper();
                         usu.Senha = Criptografia.Encrypt(txtNovaSenha.Text);                        
                         dalUsu.inserirUsuario(usu);
                         usu = dalUsu.buscaUsuarioLogin(usu.Login);
                         perfUsu.Perfil = int.Parse(ddlPerfilNovoUsu.SelectedValue);
-                        perfUsu.ID_USUARIO = usu.Id;
+                        perfUsu.IdUsuario = usu.Id;
                         dalPerfUsu.inserirPerfil(perfUsu);
                         string msg = "<script> alert('Cadastro realizado!'); </script>";
                         Response.Write(msg);
@@ -244,41 +244,49 @@ namespace SistemaHotel
         protected void salvarNovoCliente_Click(object sender, EventArgs e)
         {
 
-            if (txtCodReserva.Text != "" && ddlHoraIni.SelectedValue != "SELECIONE" && ddlHoraFim.SelectedValue != "SELECIONE")
+            if (!string.IsNullOrEmpty(txtCodReserva.Text) && !string.IsNullOrEmpty(txtInputDataIni.Text) && !string.IsNullOrEmpty(txtInputDataFim.Text))
             {
-                DateTime dataIni = Convert.ToDateTime(dtInicio.SelectedDate.ToString("dd/MM/yyyy") + " " + ddlHoraIni.SelectedValue);
-                DateTime dataFim = Convert.ToDateTime(dtFim.SelectedDate.ToString("dd/MM/yyyy") + " " + ddlHoraFim.SelectedValue);
+                DateTime dataIni = Convert.ToDateTime(txtInputDataIni.Text);
+                DateTime dataFim = Convert.ToDateTime(txtInputDataFim.Text);
 
-                if (dataIni < dataFim)
+                if (dataIni > DateTime.Now)
                 {
+                    if (dataIni < dataFim)
+                    {
+                        string sCdReserva = txtCodReserva.Text.ToUpper();
+                        txtSenhaRand.Text = SenhaRandomica.RandLetras(5) + SenhaRandomica.RandNumeros(3);
+                        DALCliente dalCli = new DALCliente();
+                        Cliente cli = new Cliente();
+                        cli.Cd_Reserva = sCdReserva;
+                        cli.DataInicio = dataIni;
+                        cli.DataFim = dataFim;
+                        dalCli.inserirCliente(cli);
+                        Usuario usu = new Usuario();
+                        usu.CogidoReserva = txtCodReserva.Text;
+                        usu.Login = sCdReserva;
+                        usu.Senha = Criptografia.Encrypt(txtSenhaRand.Text);
+                        dalUsu.inserirUsuarioCliente(usu);
+                        usu = dalUsu.buscaUsuarioLogin(sCdReserva);
+                        PerfilUsuario perfUsu = new PerfilUsuario();
+                        perfUsu.Perfil = 3;
+                        perfUsu.IdUsuario = usu.Id;
+                        dalPerfUsu.inserirPerfil(perfUsu);
+                        txtDataIni.Text = cli.DataInicio.ToString();
+                        txtDataFim.Text = cli.DataFim.ToString();
+                        string msg = "<script> alert('Cadastro realizado!'); </script>";
+                        Response.Write(msg);
+                    }
+                    else
+                    {
+                        string msg = "<script> alert('Datas não permitidas!'); </script>";
+                        Response.Write(msg);
 
-                    string sCdReserva = txtCodReserva.Text.ToUpper();
-                    txtSenhaRand.Text = SenhaRandomica.RandLetras(5) + SenhaRandomica.RandNumeros(3);
-                    DALCliente dalCli = new DALCliente();
-                    Cliente cli = new Cliente();
-                    cli.Cd_Reserva = sCdReserva;
-                    cli.DataInicio = dataIni;
-                    cli.DataFim = dataFim;
-                    dalCli.inserirCliente(cli);
-                    Usuario usu = new Usuario();       
-                    usu.Login = sCdReserva;
-                    usu.Senha = Criptografia.Encrypt(txtSenhaRand.Text);                   
-                    dalUsu.inserirUsuario(usu);
-                    usu = dalUsu.buscaUsuarioLogin(sCdReserva);
-                    PerfilUsuario perfUsu = new PerfilUsuario();
-                    perfUsu.Perfil = 3;
-                    perfUsu.ID_USUARIO = usu.Id;
-                    dalPerfUsu.inserirPerfil(perfUsu);
-                    txtDataIni.Text = cli.DataInicio.ToString();
-                    txtDataFim.Text = cli.DataFim.ToString();
-                    string msg = "<script> alert('Cadastro realizado!'); </script>";
-                    Response.Write(msg);
+                    }
                 }
                 else
                 {
                     string msg = "<script> alert('Datas não permitidas!'); </script>";
                     Response.Write(msg);
-
                 }
 
             }
@@ -293,7 +301,7 @@ namespace SistemaHotel
 
         protected void alterarData_Click(object sender, EventArgs e)
         {
-            DateTime dataFim = Convert.ToDateTime(dtFimE.SelectedDate.ToString("dd/MM/yyyy") + " " + ddlHoraFimE.SelectedValue);
+            DateTime dataFim = Convert.ToDateTime(txtDataFimE.Text);
             DALCliente dalCliente = new DALCliente();
             Cliente cli = dalCliente.buscarClienteReserva(txtCdReservaE.Text.ToUpper());
             cli.DataFim = Convert.ToDateTime(dataFim);

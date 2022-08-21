@@ -90,7 +90,7 @@
     </script>
 
 
-
+    <script src="Scripts/mascara.js"></script>
 
 </asp:Content>
 
@@ -131,53 +131,83 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" visible="false" style="border-radius: 10px;">
                     <div class="modal-header">
+                        <h5 class="modal-title">Novo Usuário:</h5>
+                        <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </asp:LinkButton>
                     </div>
                     <div class="modal-body">
-                        <table>                            
-                            <tr>
-                                <td><span>Digite o Login: </span></td>
-                                <td>
-                                    <asp:TextBox runat="server" ID="txtLogin" MaxLength="9" Style="text-transform: uppercase;"></asp:TextBox>
-                                </td>
-                                <td>
-                                    <p> *Login até 9 caracteres</p>
-                                </td>
-                           
-                            </tr>
-                            <tr>
-                                <td><span>Perfil: </span></td>
-                                <td>
-                                    <asp:DropDownList ID="ddlPerfilNovoUsu" runat="server"></asp:DropDownList></td>
-                            </tr>
-                            <tr>
-                                <td><span>Digite a Senha: </span></td>
-                                <td>
-                                    <asp:TextBox type="password" runat="server" ID="txtNovaSenha" MaxLength="8"></asp:TextBox><p> **Senha até 8 caracteres</p>
-                                </td>
-                                <td>
-                                    <img id="olho" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />            
-                                </td>
-                                </tr>              
-                                    <p> **Senha até 8 caracteres</p>
+                        <div class="container">
 
-                            <tr>
-                                <td><span>Confirme a senha: </span></td>
-                                <td>
-                                    <asp:TextBox type="password" runat="server" ID="txtConfirmaSenha" MaxLength="8"></asp:TextBox></td>
-                                <td>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Nome: </span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox runat="server" ID="txtNome"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Digite o Login: </span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox runat="server" ID="txtLogin" MaxLength="9" Style="text-transform: uppercase;"></asp:TextBox><p>*Login até 9 caracteres</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Perfil: </span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:DropDownList ID="ddlPerfilNovoUsu" runat="server"></asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Digite a Senha: </span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox type="password" runat="server" ID="txtNovaSenha" MaxLength="8">                                    
+                                    </asp:TextBox>
+                                    <img id="olho" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
+                                    <p>**Senha até 8 caracteres</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Confirme a senha: </span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox type="password" runat="server" ID="txtConfirmaSenha" MaxLength="8"></asp:TextBox>
                                     <img id="olhoDois" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:LinkButton ID="lnkSenha" class="btn btn-success" OnClick="lnkSenha_Click" runat="server">Salvar</asp:LinkButton></td>
-                                <td>
-                                    <asp:LinkButton ID="lnkVoltar" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
-                            </tr>
-
-                        </table>
-
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <asp:LinkButton ID="lnkSenha" class="btn btn-success" OnClick="lnkSenha_Click" runat="server">Salvar</asp:LinkButton>
+                        <asp:LinkButton ID="lnkVoltar" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
                     </div>
                 </div>
             </div>
@@ -221,70 +251,94 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" visible="false" style="border-radius: 10px;">
                     <div class="modal-header">
+                        <h5 class="modal-title">Novo Cliente:</h5>
+                        <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </asp:LinkButton>
                     </div>
                     <div class="modal-body">
 
-                        <table>
-                            <tr>
-                                <td><span>Código da Reserva: </span></td>
-                                <td>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Código da Reserva: </span>
+                                </div>
+                                <div class="col-sm">
                                     <asp:TextBox runat="server" ID="txtCodReserva" Style="text-transform: uppercase;" ClientIDMode="Static"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span>Data de Início:</span>
-                                    <%--<asp:TextBox ID="txtInputDataIni" ClientIDMode="Static" runat="server"></asp:TextBox>--%>
-                                    <asp:Calendar ID="dtInicio" runat="server">
-                                    </asp:Calendar>
-                                </td>
-
-
-                                <td><span>Data Fim:</span>
-
-                                    <%--<asp:TextBox ID="txtInputDataFim" ClientIDMode="Static" runat="server"></asp:TextBox>--%>
-                                    <asp:Calendar ID="dtFim" runat="server"></asp:Calendar>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span>Hora Início: </span>
-                                    <asp:DropDownList ID="ddlHoraFim" runat="server">
-                                        <asp:ListItem>SELECIONE </asp:ListItem>
-                                        <asp:ListItem>12:00</asp:ListItem>
-                                        <asp:ListItem>13:00</asp:ListItem>
-                                        <asp:ListItem>14:00</asp:ListItem>
-                                    </asp:DropDownList>
-                                </td>
-                                <td><span>Hora Fim: </span>
-                                    <asp:DropDownList ID="ddlHoraIni" runat="server">
-                                        <asp:ListItem>SELECIONE </asp:ListItem>
-                                        <asp:ListItem>12:00</asp:ListItem>
-                                        <asp:ListItem>13:00</asp:ListItem>
-                                        <asp:ListItem>14:00</asp:ListItem>
-                                    </asp:DropDownList>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:LinkButton ID="salvarNovoCliente" class="btn btn-success" runat="server" OnClick="salvarNovoCliente_Click">Novo Cliente</asp:LinkButton></td>
-                                <td><span>Senha Gerada:</span>
-                                    <asp:TextBox ID="txtSenhaRand" runat="server" Enabled="false"></asp:TextBox></td>
-                            </tr>
-                            <tr>
-                                <td>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Data de Início:</span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox ID="txtInputDataIni" runat="server" onkeyup="formataDataeHora(this,event);" MaxLength="17"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Data Fim:</span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox ID="txtInputDataFim" runat="server" onkeyup="formataDataeHora(this,event);" MaxLength="17"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Senha Gerada:</span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox ID="txtSenhaRand" runat="server" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
                                     <span>Período de: </span>
+                                </div>
+                                <div class="col-sm">
                                     <asp:TextBox ID="txtDataIni" runat="server" Enabled="false"></asp:TextBox>
-                                </td>
-                                <td>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
                                     <span>Até: </span>
+                                </div>
+                                <div class="col-sm">
                                     <asp:TextBox ID="txtDataFim" runat="server" Enabled="false"></asp:TextBox>
-                                </td>
-                                <td>
-                                    <asp:LinkButton ID="LinkButton1" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
-                                </td>
-
-                            </tr>
-                        </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="modal-footer">
+                        <asp:LinkButton ID="salvarNovoCliente" class="btn btn-success" runat="server" OnClick="salvarNovoCliente_Click">Novo Cliente</asp:LinkButton>
+                        <asp:LinkButton ID="LinkButton1" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
+                    </div>
+
                 </div>
             </div>
 
@@ -293,9 +347,12 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" visible="false" style="border-radius: 10px;">
                     <div class="modal-header">
+                        <h5 class="modal-title">Editar Data Final do Cliente:</h5>
+                        <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </asp:LinkButton>
                     </div>
                     <div class="modal-body">
-
                         <table>
                             <tr>
                                 <td><span>Código da Reserva: </span></td>
@@ -304,24 +361,18 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <span>Nova Data de Saída:</span>
-                                    <%--<asp:TextBox ID="txtInputDataFimE" ClientIDMode="Static" runat="server"></asp:TextBox>--%>
-                                    <asp:Calendar ID="dtFimE" runat="server"></asp:Calendar>
-                                </td>
-                                <td>
-                                    <span>Hora: </span>
-                                    <asp:DropDownList ID="ddlHoraFimE" runat="server">
-                                        <asp:ListItem>SELECIONE </asp:ListItem>
-                                        <asp:ListItem>12:00</asp:ListItem>
-                                        <asp:ListItem>13:00</asp:ListItem>
-                                        <asp:ListItem>14:00</asp:ListItem>
-                                    </asp:DropDownList>
+                                <td>&nbsp;
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:LinkButton ID="alterarData" class="btn btn-success" runat="server" OnClick="alterarData_Click">Salvar Alterações</asp:LinkButton></td>
+                                    <span>Nova Data de Saída:</span>
+                                    <asp:TextBox ID="txtInputDataFimE" runat="server" onkeyup="formataDataeHora(this,event);" MaxLength="17"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -332,12 +383,16 @@
                                     <span>Até: </span>
                                     <asp:TextBox ID="txtDataFimE" runat="server" Enabled="false"></asp:TextBox>
                                 </td>
-                                <td>
-                                    <asp:LinkButton ID="lnkVoltarCliE" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;
                                 </td>
-
                             </tr>
                         </table>
+                    </div>
+                    <div class="modal-footer">
+                        <asp:LinkButton ID="alterarData" class="btn btn-success" runat="server" OnClick="alterarData_Click">Salvar Alterações</asp:LinkButton>
+                        <asp:LinkButton ID="lnkVoltarCliE" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
                     </div>
                 </div>
             </div>

@@ -31,7 +31,7 @@ namespace SistemaHotel.Controller
                         cmd.Connection.Open();
                         cmd.Parameters.AddWithValue("PERFIL", pUsu.Perfil);                        
                         cmd.Parameters.AddWithValue("ATIVO",'S');
-                        cmd.Parameters.AddWithValue("ID_USUARIO",pUsu.ID_USUARIO);
+                        cmd.Parameters.AddWithValue("ID_USUARIO",pUsu.IdUsuario);
                         cmd.ExecuteNonQuery();
                         cmd.Connection.Close();
                     }
@@ -67,7 +67,7 @@ namespace SistemaHotel.Controller
                             pUsu.Id = Convert.ToInt32(registro["ID"]);
                             pUsu.Perfil = Convert.ToInt32(registro["PERFIL"]);                            
                             pUsu.Ativo = Convert.ToChar(registro["ATIVO"]);
-                            pUsu.ID_USUARIO = Convert.ToInt32(registro["ID_USUARIO"]);
+                            pUsu.ID_USUARIO = Convert.ToInt32(registro["IdUsuario"]);
                             
 
                         }

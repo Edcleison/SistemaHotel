@@ -11,6 +11,7 @@ using System.Web.UI.WebControls;
 using SistemaHotel.Controller;
 using SistemaHotel.Utils;
 
+
 namespace SistemaHotel
 {
     public partial class ControleProduto : System.Web.UI.Page
@@ -105,11 +106,6 @@ namespace SistemaHotel
 
         }
 
-
-
-
-        #endregion
-
         protected void lnkSalvarProduto_Click(object sender, EventArgs e)
         {
             try
@@ -117,19 +113,19 @@ namespace SistemaHotel
                 string msg = "";
                 string caminho = Server.MapPath(@"IMAGENS\PRODUTOS\");
                 DALProduto dalProd = new DALProduto();
-               Produto prod = new Produto();
+                Produto prod = new Produto();
                 prod.Nome = txtNome.Text;
                 prod.Descricao = txtDescricao.Text;
                 prod.Preco = decimal.Parse(txtPreco.Text);
                 prod.Preco = decimal.Parse(txtPreco.Text);
                 //faz o upload da foto e salva o nome no obj
-                if (fuProduto.PostedFile.FileName != "")
+                if (!string.IsNullOrEmpty(fuProduto.PostedFile.FileName))
                 {
                     prod.Foto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
                     string img = caminho + prod.Foto;
                     fuProduto.PostedFile.SaveAs(img);
                 }
-                
+
                 {
                     dalProd.inserirProduto(prod);
                     msg = $"<script> alert('O código gerado foi: {prod.Id}'); </script>";
@@ -145,7 +141,15 @@ namespace SistemaHotel
                 string msg1 = $"<script> ShowMsg({erro.Message}'); </script>";
                 PlaceHolder1.Controls.Add(new LiteralControl(msg1));
             }
+
         }
+
+
+
+
+        #endregion
+
+
 
         private void limparCampos()
         {
@@ -182,7 +186,7 @@ namespace SistemaHotel
                 prod.Preco = decimal.Parse(txtPreco.Text);
                 prod.Preco = decimal.Parse(txtPreco.Text);
                 //faz o upload da foto e salva o nome no obj
-                if (fuProduto.PostedFile.FileName != "")
+                if (!string.IsNullOrEmpty(fuProduto.PostedFile.FileName))
                 {
                     prod.Foto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
                     string img = caminho + prod.Foto;
@@ -210,6 +214,7 @@ namespace SistemaHotel
         protected void novoProduto_Click(object sender, EventArgs e)
         {
             mdProd.Visible = true;
+           
         }
 
         protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
@@ -219,6 +224,10 @@ namespace SistemaHotel
                     carregarTabela(int.Parse(ddlTipo.SelectedValue));              
             }
         }
+
+       
+
+
     }
 }
 
