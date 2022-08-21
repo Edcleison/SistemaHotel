@@ -68,18 +68,8 @@
             });
         })
     </script>
-    
-    <script src="Scripts/jquery-2.1.1.min.js"></script>
-    <script src="Scripts/jquery.maskedinput.min.js"></script>
-    
-    <script type="text/javascript">
-        jQuery(function ($) {
 
-            $("#txtPreco").mask("9999,99");
-        });
-    </script>
-
-
+    <script src="Scripts/mascara.js"></script>
 
 
 
@@ -138,14 +128,26 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>&nbsp;
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><span>Descricao: </span></td>
                                 <td>
                                     <asp:TextBox runat="server" ID="txtDescricao" TextMode="MultiLine"></asp:TextBox></td>
                             </tr>
                             <tr>
+                                <td>&nbsp;
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><span>Preço: </span></td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtPreco" ClientIDMode="Static"></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="txtPreco" onkeyup="formataValor(this,event);"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;
                                 </td>
                             </tr>
                             <tr>
@@ -161,17 +163,30 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>&nbsp;
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><span>Foto: </span></td>
                                 <td>
                                     <asp:FileUpload ID="fuProduto" runat="server" />
                                 <td>
-                                    <asp:LinkButton ID="lnkSalvarProduto" runat="server" OnClick="lnkSalvarProduto_Click"></asp:LinkButton>
+                                    <asp:LinkButton ID="lnkSalvarProduto" autoPostBack="true" runat="server" OnClick="lnkSalvarProduto_Click"></asp:LinkButton>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;
                                 </td>
                             </tr>
                             <tr>
                                 <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
                             </tr>
+                            <tr>
+                                <td>&nbsp;
+                                </td>
+                            </tr>
                         </table>
+
 
                     </div>
                     <div class="modal-footer">
@@ -200,14 +215,26 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>&nbsp;
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><span>Descricao: </span></td>
                                 <td>
                                     <asp:TextBox runat="server" ID="txtDescricaoE" TextMode="MultiLine"></asp:TextBox></td>
                             </tr>
                             <tr>
+                                <td>&nbsp;
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><span>Preço: </span></td>
                                 <td>
                                     <asp:TextBox runat="server" ID="txtPrecoE" ClientIDMode="Static"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;
                                 </td>
                             </tr>
 
@@ -224,11 +251,19 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>&nbsp;
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><span>Foto: </span></td>
                                 <td>
                                     <asp:FileUpload ID="fuProdE" runat="server" />
                                 <td>
                                     <asp:LinkButton ID="lnkSalvarProdutoE" runat="server" OnClick="lnkSalvarProdutoE_Click"></asp:LinkButton>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;
                                 </td>
                             </tr>
                             <tr>
@@ -238,7 +273,15 @@
                                     <asp:LinkButton ID="LinkButton3" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
                             </tr>
                             <tr>
+                                <td>&nbsp;
+                                </td>
+                            </tr>
+                            <tr>
                                 <asp:PlaceHolder ID="PlaceHolder2" runat="server"></asp:PlaceHolder>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;
+                                </td>
                             </tr>
                         </table>
 
