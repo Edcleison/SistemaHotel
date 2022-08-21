@@ -14,7 +14,7 @@ namespace SistemaHotel
             if (Session["login"] != null)
             {
                 lbLogin.Text = Session["login"].ToString();
-                lbNome.Text = Session["nome"].ToString();
+                lbPerfil.Text = Session["perfil"].ToString();
             }
 
         }

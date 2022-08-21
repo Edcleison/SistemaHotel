@@ -21,16 +21,14 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [dbo].[USUARIO]
-                                                   ([NOME]
-                                                   ,[LOGIN]
+                                                   ([LOGIN]                                                                                               
                                                    ,[SENHA])                                                 
                                              VALUES(@NOME,@LOGIN,@SENHA)", connection))
                 {
 
                     try
                     {
-                        cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("NOME", usu.Nome);
+                        cmd.Connection.Open();                       
                         cmd.Parameters.AddWithValue("LOGIN", usu.Login);
                         cmd.Parameters.AddWithValue("SENHA", usu.Senha);
                         cmd.ExecuteNonQuery();
@@ -44,8 +42,7 @@ namespace SistemaHotel.Controller
                 }
             }
         }
-
-
+        
         //Read
         public DataTable buscarTodosUsuarios()
         {
@@ -56,7 +53,6 @@ namespace SistemaHotel.Controller
                 using (SqlConnection connection = new SqlConnection(cnn))
                 {
                     using (SqlCommand cmd = new SqlCommand(@"SELECT [ID]
-                                                      ,[NOME]
                                                       ,[LOGIN]
                                                       ,[SENHA]                                                     
                                                   FROM [DBO].[USUARIO]", connection))
@@ -86,7 +82,6 @@ namespace SistemaHotel.Controller
                 using (SqlConnection connection = new SqlConnection(cnn))
                 {
                     using (SqlCommand cmd = new SqlCommand($@"SELECT U.[ID]
-                                                            ,U.[NOME]
                                                             ,U.[LOGIN]
                                                             ,U.[SENHA]
                                                             ,P.Ativo
@@ -120,7 +115,6 @@ namespace SistemaHotel.Controller
                 using (SqlConnection connection = new SqlConnection(cnn))
                 {
                     using (SqlCommand cmd = new SqlCommand($@"SELECT U.[ID]
-                                                            ,U.[NOME]
                                                             ,U.[LOGIN]
                                                             ,U.[SENHA]
                                                             ,P.Ativo
@@ -152,8 +146,7 @@ namespace SistemaHotel.Controller
             {
                 using (SqlConnection connection = new SqlConnection(cnn))
                 {
-                    using (SqlCommand cmd = new SqlCommand($@"SELECT U.[ID]
-                                                            ,U.[NOME]
+                    using (SqlCommand cmd = new SqlCommand($@"SELECT U.[ID]  
                                                             ,U.[LOGIN]
                                                             ,U.[SENHA]
                                                             ,P.ATIVO
@@ -182,7 +175,6 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-
         public Usuario buscarUsuarioId(int Id)
         {
             Usuario usu = new Usuario();
@@ -192,8 +184,7 @@ namespace SistemaHotel.Controller
                 using (SqlConnection connection = new SqlConnection(cnn))
                 {
                     using (SqlCommand cmd = new SqlCommand(@"SELECT [ID]
-                                                                  ,[NOME]
-                                                                  ,[LOGIN]
+                                                                  ,[LOGIN]                                                                  
                                                                   ,[SENHA] FROM USUARIO WHERE ID = @ID", connection))
                     {
 
@@ -203,8 +194,7 @@ namespace SistemaHotel.Controller
                         if (registro.HasRows)
                         {
                             registro.Read();
-                            usu.Id = Convert.ToInt32(registro["ID"]);
-                            usu.Nome = Convert.ToString(registro["NOME"]);
+                            usu.Id = Convert.ToInt32(registro["ID"]);                           
                             usu.Login = Convert.ToString(registro["LOGIN"]);
                             usu.Senha = Convert.ToString(registro["SENHA"]);                           
 
@@ -228,8 +218,7 @@ namespace SistemaHotel.Controller
             {
                 using (SqlConnection connection = new SqlConnection(cnn))
                 {
-                    using (SqlCommand cmd = new SqlCommand(@"SELECT [ID]
-                                                      ,[NOME]
+                    using (SqlCommand cmd = new SqlCommand(@"SELECT [ID]                                                     
                                                       ,[LOGIN]
                                                       ,[SENHA]                                                     
                                                   FROM[DBO].[USUARIO] WHERE LOGIN = @LOGIN", connection))
@@ -240,8 +229,7 @@ namespace SistemaHotel.Controller
                         if (registro.HasRows)
                         {
                             registro.Read();
-                            usu.Id = Convert.ToInt32(registro["ID"]);
-                            usu.Nome = Convert.ToString(registro["NOME"]);
+                            usu.Id = Convert.ToInt32(registro["ID"]);                         
                             usu.Login = Convert.ToString(registro["LOGIN"]);
                             usu.Senha = Convert.ToString(registro["SENHA"]);
                         }
@@ -256,19 +244,16 @@ namespace SistemaHotel.Controller
 
         }
         
-
         //Update
         public void alterarUsuario(Usuario usu)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"UPDATE USUARIO SET NOME = @NOME, LOGIN = @LOGIN where  ID = @ID", connection))
+                using (SqlCommand cmd = new SqlCommand(@"UPDATE USUARIO SET LOGIN = @LOGIN WHERE  ID = @ID", connection))
                 {
-
                     try
                     {
-                        cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("NOME", usu.Nome);
+                        cmd.Connection.Open();                       
                         cmd.Parameters.AddWithValue("LOGIN", usu.Login);
                         cmd.Parameters.AddWithValue("ID", usu.Id);
                         cmd.ExecuteNonQuery();
@@ -284,7 +269,6 @@ namespace SistemaHotel.Controller
                 
             }
         }
-
 
         public void alterarSenha(Usuario usu)
         {

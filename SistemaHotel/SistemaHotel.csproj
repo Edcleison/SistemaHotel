@@ -78,8 +78,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="ControleProduto.aspx" />
     <Content Include="CSS\StyleSheet.css.exclude" />
-    <Content Include="imagens_cardapio\lasanha.png" />
     <Content Include="layout\assets\css\vssver.scc" />
     <Content Include="layout\assets\fonts\fontawesome-webfont.ttf" />
     <Content Include="layout\assets\fonts\fontawesome-webfont.woff" />
@@ -1085,9 +1085,13 @@
     <None Include="Properties\PublishProfiles\sistemahotel - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy.pubxml" />
-    <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy1.pubxml" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery.maskedinput.min.js" />
     <Content Include="Web.config" />
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -5864,15 +5868,18 @@
     <Content Include="PaginaMestre.Master" />
     <Content Include="Scripts\dataTables.bootstrap4.min.js.js" />
     <Content Include="Scripts\JavaScriptFunctions.js" />
-    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
-    <Content Include="Scripts\jquery-2.1.1.js" />
-    <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
-    <Content Include="Scripts\jquery.maskedinput.min.js" />
     <Content Include="Scripts\jquery.min.js" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControleProduto.aspx.cs">
+      <DependentUpon>ControleProduto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControleProduto.aspx.designer.cs">
+      <DependentUpon>ControleProduto.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ControleUsuario.aspx.cs">
       <DependentUpon>ControleUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5880,6 +5887,7 @@
     <Compile Include="ControleUsuario.aspx.designer.cs">
       <DependentUpon>ControleUsuario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controller\DALProduto.cs" />
     <Compile Include="Controller\DALUsuario.cs" />
     <Compile Include="Controller\DALCliente.cs" />
     <Compile Include="Controller\DALPerfilUsuario.cs" />
@@ -5898,11 +5906,9 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Model\Cliente.cs" />
-    <Compile Include="Model\ProdutoFrigobar.cs" />
-    <Compile Include="Model\ProdutoRestaurante.cs" />
+    <Compile Include="Model\Produto.cs" />
     <Compile Include="Model\PerfilUsuario.cs" />
-    <Compile Include="Model\PedidoFrigobar.cs" />
-    <Compile Include="Model\PedidoRestaurante.cs" />
+    <Compile Include="Model\Pedido.cs" />
     <Compile Include="Model\Usuario.cs" />
     <Compile Include="PaginaMestre.Master.cs">
       <DependentUpon>PaginaMestre.Master</DependentUpon>
@@ -5915,7 +5921,9 @@
     <Compile Include="Utils\Criptografia.cs" />
     <Compile Include="Utils\SenhaRandomica.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="IMAGENS\PRODUTOS\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>

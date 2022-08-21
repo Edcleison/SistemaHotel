@@ -9,17 +9,13 @@ namespace SistemaHotel.Model
     {
        
 
-        public int Id { get; set; }
-        public string Nome { get; set; }
+        public int Id { get; set; }    
         public string Login { get; set; }
         public string Senha { get; set; }
         
-
-
         public Usuario()
         {
-            this.Id = 0;
-            this.Nome = "";
+            this.Id = 0;          
             this.Login = "";
             this.Senha = "";
         }
