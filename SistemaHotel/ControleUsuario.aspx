@@ -77,10 +77,19 @@
 
             $("#txtCodReserva").mask("aaaa-9999");
 
+
+            $("#txtInputDataIni").mask("99/99/9999");
+            $("#txtInputDataFim").mask("99/99/9999");
+
+            $("#txtInputDataIniE").mask("99/99/9999");
+            $("#txtInputDataFimE").mask("99/99/9999");
+
+
+
         });
     </script>
 
-    
+
 
 
 </asp:Content>
@@ -124,16 +133,16 @@
                     <div class="modal-header">
                     </div>
                     <div class="modal-body">
-                        <table>
-                            <tr>
-                                <td><span>Digite seu Nome: </span></td>
-                                <td>
-                                    <asp:TextBox runat="server" ID="txtNome" Style="text-transform: uppercase;"></asp:TextBox></td>
-                            </tr>
+                        <table>                            
                             <tr>
                                 <td><span>Digite o Login: </span></td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtLogin" MaxLength="9" Style="text-transform: uppercase;"></asp:TextBox></td>
+                                    <asp:TextBox runat="server" ID="txtLogin" MaxLength="9" Style="text-transform: uppercase;"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <p> *Login até 9 caracteres</p>
+                                </td>
+                           
                             </tr>
                             <tr>
                                 <td><span>Perfil: </span></td>
@@ -143,11 +152,14 @@
                             <tr>
                                 <td><span>Digite a Senha: </span></td>
                                 <td>
-                                    <asp:TextBox type="password" runat="server" ID="txtNovaSenha" MaxLength="8"></asp:TextBox></td>
-                                <td>
-                                    <img id="olho" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
+                                    <asp:TextBox type="password" runat="server" ID="txtNovaSenha" MaxLength="8"></asp:TextBox><p> **Senha até 8 caracteres</p>
                                 </td>
-                            </tr>
+                                <td>
+                                    <img id="olho" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />            
+                                </td>
+                                </tr>              
+                                    <p> **Senha até 8 caracteres</p>
+
                             <tr>
                                 <td><span>Confirme a senha: </span></td>
                                 <td>
@@ -168,7 +180,7 @@
 
                     </div>
                 </div>
-            </div> 
+            </div>
             <script src="Scripts/jquery.min.js"></script>
             <script type="text/javascript">
                 var senha = $('#txtNovaSenha');
@@ -186,7 +198,7 @@
                 $("#olho").mouseout(function () {
                     $("#txtNovaSenha").attr("type", "password");
                 });
-            </script>        
+            </script>
             <script type="text/javascript">
                 var ConfirmaSenha = $('#txtConfirmaSenha');
                 var olhoDois = $("#olhoDois");
@@ -203,7 +215,7 @@
                 $("#olhoDois").mouseout(function () {
                     $("#txtConfimaSenha").attr("type", "password");
                 });
-            </script>           
+            </script>
         </div>
         <div class="modal fade show" id="mdCli" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
             <div class="modal-dialog modal-lg" role="document">
@@ -221,13 +233,34 @@
                             </tr>
                             <tr>
                                 <td><span>Data de Início:</span>
-                                    <br />
-                                    <asp:Calendar ID="dtInicio" runat="server"></asp:Calendar>
+                                    <%--<asp:TextBox ID="txtInputDataIni" ClientIDMode="Static" runat="server"></asp:TextBox>--%>
+                                    <asp:Calendar ID="dtInicio" runat="server">
+                                    </asp:Calendar>
                                 </td>
 
+
                                 <td><span>Data Fim:</span>
-                                    <br />
+
+                                    <%--<asp:TextBox ID="txtInputDataFim" ClientIDMode="Static" runat="server"></asp:TextBox>--%>
                                     <asp:Calendar ID="dtFim" runat="server"></asp:Calendar>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>Hora Início: </span>
+                                    <asp:DropDownList ID="ddlHoraFim" runat="server">
+                                        <asp:ListItem>SELECIONE </asp:ListItem>
+                                        <asp:ListItem>12:00</asp:ListItem>
+                                        <asp:ListItem>13:00</asp:ListItem>
+                                        <asp:ListItem>14:00</asp:ListItem>
+                                    </asp:DropDownList>
+                                </td>
+                                <td><span>Hora Fim: </span>
+                                    <asp:DropDownList ID="ddlHoraIni" runat="server">
+                                        <asp:ListItem>SELECIONE </asp:ListItem>
+                                        <asp:ListItem>12:00</asp:ListItem>
+                                        <asp:ListItem>13:00</asp:ListItem>
+                                        <asp:ListItem>14:00</asp:ListItem>
+                                    </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
@@ -239,11 +272,11 @@
                             <tr>
                                 <td>
                                     <span>Período de: </span>
-                                    <asp:TextBox ID="txtDataIni" runat="server" TextMode="DateTime" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtDataIni" runat="server" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
                                     <span>Até: </span>
-                                    <asp:TextBox ID="txtDataFim" runat="server" TextMode="DateTime" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtDataFim" runat="server" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
                                     <asp:LinkButton ID="LinkButton1" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
@@ -271,14 +304,19 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><span>Data de Início:</span>
-                                    <br />
-                                    <asp:Calendar ID="dtInicioE" runat="server" Enabled="false"></asp:Calendar>
-                                </td>
-
-                                <td><span>Data Fim:</span>
-                                    <br />
+                                <td>
+                                    <span>Nova Data de Saída:</span>
+                                    <%--<asp:TextBox ID="txtInputDataFimE" ClientIDMode="Static" runat="server"></asp:TextBox>--%>
                                     <asp:Calendar ID="dtFimE" runat="server"></asp:Calendar>
+                                </td>
+                                <td>
+                                    <span>Hora: </span>
+                                    <asp:DropDownList ID="ddlHoraFimE" runat="server">
+                                        <asp:ListItem>SELECIONE </asp:ListItem>
+                                        <asp:ListItem>12:00</asp:ListItem>
+                                        <asp:ListItem>13:00</asp:ListItem>
+                                        <asp:ListItem>14:00</asp:ListItem>
+                                    </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
@@ -288,11 +326,11 @@
                             <tr>
                                 <td>
                                     <span>Período de: </span>
-                                    <asp:TextBox ID="txtDataIniE" runat="server" TextMode="DateTime" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtDataIniE" runat="server" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
                                     <span>Até: </span>
-                                    <asp:TextBox ID="txtDataFimE" runat="server" TextMode="DateTime" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtDataFimE" runat="server" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
                                     <asp:LinkButton ID="lnkVoltarCliE" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
@@ -302,7 +340,7 @@
                         </table>
                     </div>
                 </div>
-            </div>            
+            </div>
         </div>
 
     </asp:Panel>
