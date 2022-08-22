@@ -24,13 +24,13 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// lbNome control.
+        /// lbPerfil control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbNome;
+        protected global::System.Web.UI.WebControls.Label lbPerfil;
 
         /// <summary>
         /// Label2 control.
@@ -42,12 +42,12 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// lbEmail control.
+        /// lbLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbEmail;
+        protected global::System.Web.UI.WebControls.Label lbLogin;
     }
 }

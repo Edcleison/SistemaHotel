@@ -31,7 +31,7 @@ namespace SistemaHotel.Controller
                         cmd.Connection.Open();
                         cmd.Parameters.AddWithValue("PERFIL", pUsu.Perfil);                        
                         cmd.Parameters.AddWithValue("ATIVO",'S');
-                        cmd.Parameters.AddWithValue("ID_USUARIO",pUsu.ID_USUARIO);
+                        cmd.Parameters.AddWithValue("ID_USUARIO",pUsu.IdUsuario);
                         cmd.ExecuteNonQuery();
                         cmd.Connection.Close();
                     }
@@ -67,7 +67,7 @@ namespace SistemaHotel.Controller
                             pUsu.Id = Convert.ToInt32(registro["ID"]);
                             pUsu.Perfil = Convert.ToInt32(registro["PERFIL"]);                            
                             pUsu.Ativo = Convert.ToChar(registro["ATIVO"]);
-                            pUsu.ID_USUARIO = Convert.ToInt32(registro["ID_USUARIO"]);
+                            pUsu.ID_USUARIO = Convert.ToInt32(registro["IdUsuario"]);
                             
 
                         }
@@ -82,13 +82,12 @@ namespace SistemaHotel.Controller
 
         }
 
-        public void inativarUsuario(int IdUsuario)
+        public void excluirUsuario(int IdUsuario)
         {
 
-            //usu.
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand("UPDATE PERFIL_USUARIO SET ATIVO = 'N' WHERE ID_USUARIO = @ID_USUARIO", connection))
+                using (SqlCommand cmd = new SqlCommand(@"DELETE FROM [dbo].[PERFIL_USUARIO] WHERE ID_USUARIO = @ID_USUARIO", connection))
                 {
 
                     try
@@ -106,28 +105,6 @@ namespace SistemaHotel.Controller
                 }
             }
         }
-
-        public void ativarUsuario(int IdUsuario)
-        {
-            using (SqlConnection connection = new SqlConnection(cnn))
-            {
-                using (SqlCommand cmd = new SqlCommand("UPDATE PERFIL_USUARIO SET ATIVO = 'S', NOME= @NOME, SENHA= @SENHA WHERE ID_USUARIO = @ID_USUARIO", connection))
-                {
-
-                    try
-                    {
-
-                        connection.Open();
-                        cmd.Parameters.AddWithValue("ID", IdUsuario);
-                        cmd.ExecuteNonQuery();
-                        cmd.Connection.Close();
-                    }
-                    catch (Exception erro)
-                    {
-                        throw new Exception(erro.Message);
-                    }
-                }
-            }
-        }
+        
     }
 }

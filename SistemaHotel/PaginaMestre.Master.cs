@@ -43,6 +43,8 @@ namespace SistemaHotel
 
                 //    h1Cliente.Visible = true;
                 //    h1Atendimento.Visible = true;
+                    //h1Cliente.Visible = true;
+                    //h1Atendimento.Visible = true;
 
                 //}
                 //else
@@ -52,6 +54,10 @@ namespace SistemaHotel
                 //    h1Frigobar.Visible = true;
                 //    h1ArCondicionado.Visible = true;
                 //    h1Banheira.Visible = true;
+                    //h1Restaurante.Visible = true;
+                    //h1Frigobar.Visible = true;
+                    //h1ArCondicionado.Visible = true;
+                    //h1Banheira.Visible = true;
 
                 //}
             }
