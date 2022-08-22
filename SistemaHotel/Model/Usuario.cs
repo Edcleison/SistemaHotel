@@ -18,8 +18,8 @@ namespace SistemaHotel.Model
         public Usuario()
         {
             this.Id = 0;          
-            this.NomeUsuario= null;          
-            this.CogidoReserva = null;
+            this.NomeUsuario= "";          
+            this.CogidoReserva = "";
             this.Login = "";
             this.Senha = "";
         }

@@ -15,13 +15,31 @@ namespace SistemaHotel
     {
 
         /// <summary>
-        /// Label1 control.
+        /// lbNomeUsuarioLegenda control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label lbNomeUsuarioLegenda;
+
+        /// <summary>
+        /// lbNomeUsuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbNomeUsuario;
+
+        /// <summary>
+        /// lbPerfilLegenda control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbPerfilLegenda;
 
         /// <summary>
         /// lbPerfil control.
@@ -33,21 +51,21 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.Label lbPerfil;
 
         /// <summary>
-        /// Label2 control.
+        /// lbCodigoReservaLegenda control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label lbCodigoReservaLegenda;
 
         /// <summary>
-        /// lbLogin control.
+        /// lbCodigoReserva control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbLogin;
+        protected global::System.Web.UI.WebControls.Label lbCodigoReserva;
     }
 }

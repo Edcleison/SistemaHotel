@@ -90,7 +90,7 @@ namespace SistemaHotel
 
                 sb.AppendLine("<tr>");
                 sb.AppendLine("<td><center>" + dtr["ID"] + "</td></center>");
-                sb.AppendLine("<td><center>" + dtr["NOME"] + "</td></center>");
+                sb.AppendLine("<td><center>" + dtr["NOME_USUARIO"] + "</td></center>");
                 sb.AppendLine("<td><center>" + dtr["LOGIN"] + "</td></center>");
                 sb.AppendLine("<td><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID"].ToString()) + "'><i class='fa fa-trash'></i></center></td>");
                 sb.AppendLine("</tr>");
@@ -208,7 +208,7 @@ namespace SistemaHotel
             sb.AppendLine("<th><center>CÓDIGO DA RESERVA</th></center>");
             sb.AppendLine("<th><center>DATA INICIO</th></center>");
             sb.AppendLine("<th><center>DATA FIM</th></center>");
-            sb.AppendLine("<th><center>EDITAR</th></center>");
+            sb.AppendLine("<th><center>EDITAR/DATA FIM</th></center>");
             sb.AppendLine("<th><center>EXCLUIR</th></center>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
@@ -254,16 +254,28 @@ namespace SistemaHotel
                     if (dataIni < dataFim)
                     {
                         string sCdReserva = txtCodReserva.Text.ToUpper();
-                        txtSenhaRand.Text = SenhaRandomica.RandLetras(5) + SenhaRandomica.RandNumeros(3);
+                        
+                        
+                        
+                        
+                        
                         DALCliente dalCli = new DALCliente();
                         Cliente cli = new Cliente();
                         cli.Cd_Reserva = sCdReserva;
                         cli.DataInicio = dataIni;
-                        cli.DataFim = dataFim;
+                        cli.DataFim = dataFim;                      
                         dalCli.inserirCliente(cli);
+
+
+
+
+
                         Usuario usu = new Usuario();
-                        usu.CogidoReserva = txtCodReserva.Text;
+                        usu.CogidoReserva = sCdReserva;
+
+
                         usu.Login = sCdReserva;
+                        txtSenhaRand.Text = SenhaRandomica.RandLetras(5) + SenhaRandomica.RandNumeros(3);
                         usu.Senha = Criptografia.Encrypt(txtSenhaRand.Text);
                         dalUsu.inserirUsuarioCliente(usu);
                         usu = dalUsu.buscaUsuarioLogin(sCdReserva);
@@ -271,8 +283,8 @@ namespace SistemaHotel
                         perfUsu.Perfil = 3;
                         perfUsu.IdUsuario = usu.Id;
                         dalPerfUsu.inserirPerfil(perfUsu);
-                        txtDataIni.Text = cli.DataInicio.ToString();
-                        txtDataFim.Text = cli.DataFim.ToString();
+                        txtDataIni.Text = cli.DataInicio.ToString("dd/MM/yyyy HH:mm");
+                        txtDataFim.Text = cli.DataFim.ToString("dd/MM/yyyy HH:mm");
                         string msg = "<script> alert('Cadastro realizado!'); </script>";
                         Response.Write(msg);
                     }
@@ -302,13 +314,26 @@ namespace SistemaHotel
         protected void alterarData_Click(object sender, EventArgs e)
         {
             DateTime dataFim = Convert.ToDateTime(txtDataFimE.Text);
-            DALCliente dalCliente = new DALCliente();
-            Cliente cli = dalCliente.buscarClienteReserva(txtCdReservaE.Text.ToUpper());
-            cli.DataFim = Convert.ToDateTime(dataFim);
-            dalCliente.alterarCliente(cli);
-            txtDataFimE.Text = dataFim.ToString();
-            string msg = "<script> alert('Data Alterada!'); </script>";
-            Response.Write(msg);
+            DateTime novaDataFim = Convert.ToDateTime(txtInputDataFimE.Text);
+            
+            if (novaDataFim > DateTime.Now && novaDataFim > dataFim)
+            {
+                DALCliente dalCliente = new DALCliente();
+                Cliente cli = dalCliente.buscarClienteReserva(txtCdReservaE.Text.ToUpper());
+                cli.DataFim = Convert.ToDateTime(novaDataFim);             
+                dalCliente.alterarCliente(cli);
+                txtDataFimE.Text = novaDataFim.ToString();
+                string msg = "<script> alert('Data Alterada!'); </script>";
+                Response.Write(msg);
+            }
+            else
+            {
+                string msg = "<script> alert('Data não permitida!!'); </script>";               
+                Response.Write(msg);
+
+            }
+
+           
 
 
         }

@@ -153,6 +153,8 @@ namespace SistemaHotel.Controller
                 using (SqlConnection connection = new SqlConnection(cnn))
                 {
                     using (SqlCommand cmd = new SqlCommand($@"SELECT U.[ID]
+                                                            ,U.NOME_USUARIO
+                                                            ,U.CODIGO_RESERVA_CLIENTE
                                                             ,U.[LOGIN]
                                                             ,U.[SENHA]
                                                             ,P.Ativo
@@ -228,7 +230,7 @@ namespace SistemaHotel.Controller
                                                           ,[CODIGO_RESERVA_CLIENTE]
                                                           ,[LOGIN]
                                                           ,[SENHA]
-                                                      FROM [dbo].[USUARIO] FROM USUARIO WHERE ID = @ID", connection))
+                                                          FROM [dbo].[USUARIO] WHERE ID = @ID", connection))
                     {
 
                         cmd.Parameters.AddWithValue("@ID", Id);

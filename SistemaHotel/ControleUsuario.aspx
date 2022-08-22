@@ -98,30 +98,28 @@
 <asp:Content ID="Content12" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <asp:Panel ID="Panel3" runat="server" GroupingText="Controle de Usuários">
-        <table>
-            <tr>
-                <td>
-                    <asp:LinkButton ID="novoUsuario" class="btn btn-primary" runat="server" OnClick="novoUsuario_Click">Novo Funcionário</asp:LinkButton></td>
-                <td>
-                    <b>&nbsp;</b>
-                </td>
-                <td>
-                    <asp:LinkButton ID="novoCliente" class="btn btn-success" runat="server" OnClick="novoCliente_Click">Novo Cliente</asp:LinkButton></td>
-            </tr>
-            <tr>
-                <td>
-                    <b>&nbsp;</b>
-                </td>
-            </tr>
-            <tr>
-                <td>Listar Por: </td>
-                <td>
-                    <b>&nbsp;</b>
-                </td>
-                <td>
-                    <asp:DropDownList ID="ddlPerfil" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlPerfil_SelectedIndexChanged"></asp:DropDownList></td>
-            </tr>
-        </table>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">                    
+                   <asp:LinkButton ID="novoUsuario" class="btn btn-primary" runat="server" OnClick="novoUsuario_Click">Novo Funcionário</asp:LinkButton>
+               <asp:LinkButton ID="LinkButton2" class="btn btn-success" runat="server" OnClick="novoCliente_Click">Novo Cliente</asp:LinkButton>
+                </div>
+                    </div>              
+            <div class="row">
+                <div class="col-sm">
+                    <span>&nbsp;</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <span>Listar Por: </span>
+                </div>
+                <div class="col-sm">
+                    <asp:DropDownList ID="ddlPerfil" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlPerfil_SelectedIndexChanged"></asp:DropDownList>
+                </div>
+                
+            </div>         
         <div class="col-12" align="center">
             <div id="Panel1" runat="server" visible="true">
             </div>
