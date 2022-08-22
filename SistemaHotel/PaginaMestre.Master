@@ -43,15 +43,12 @@
 <body>
     <form id="form1" runat="server" itemtype="~/CSS/Estilos.css">
         <header>
-            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.png" CssClass="linkhome" />         
             <nav>
-                <h1>100% Atualizado</h1>
-                <asp:TreeView ID="TreeView1" runat="server" CssClass="linkBotoes" ImageSet="Arrows" ExpandDepth="0">
-                    <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
+                <asp:TreeView ID="TreeView1" runat="server" CssClass="menu" ExpandImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png" CollapseImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png">
                     <Nodes>
-                        <asp:TreeNode Text="Menu" PopulateOnDemand="False">
-                            <asp:TreeNode Expanded="True" Text="Home" Value="Home" NavigateUrl="Default.aspx"></asp:TreeNode>
-                            <asp:TreeNode Expanded="True" Text="Usuarios" Value="Usuarios" NavigateUrl="ControleUsuario.aspx"></asp:TreeNode>
+                        <asp:TreeNode Checked="True" SelectAction="Expand" Selected="True">
+                            <asp:TreeNode Text="Home" Value="Home" NavigateUrl="Default.aspx"></asp:TreeNode>
+                            <asp:TreeNode Text="Usuarios" Value="Usuarios" NavigateUrl="ControleUsuario.aspx"></asp:TreeNode>
                             <asp:TreeNode Text="Clientes" Value="Novo Nó" NavigateUrl="ControleUsuario.aspx"></asp:TreeNode>
                             <asp:TreeNode Text="Atender Solicitações" Value="Novo Nó" NavigateUrl="ControleUsuario.aspx"></asp:TreeNode>
                             <asp:TreeNode Text="Restaurante" Value="Novo Nó"></asp:TreeNode>
@@ -61,11 +58,10 @@
                             <asp:TreeNode Text="Sair" Value="Novo Nó"></asp:TreeNode>
                         </asp:TreeNode>
                     </Nodes>
-                    <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
-                    <ParentNodeStyle Font-Bold="False" />
-                    <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
+                    <NodeStyle CssClass="menulink" />
                 </asp:TreeView>
             </nav>
+            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.png" CssClass="linkhome" />         
         </header>
         <main>
             <div>
