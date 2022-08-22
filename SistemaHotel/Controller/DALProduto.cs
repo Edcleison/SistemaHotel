@@ -36,7 +36,7 @@ namespace SistemaHotel.Controller
                         cmd.Parameters.AddWithValue("DESCRICAO", prod.Descricao);
                         cmd.Parameters.AddWithValue("PRECO", prod.Preco);
                         cmd.Parameters.AddWithValue("FOTO", prod.Foto);
-                        cmd.Parameters.AddWithValue("TIPO", Convert.ToChar(prod.Tipo));
+                        cmd.Parameters.AddWithValue("TIPO", prod.Tipo);
                         cmd.ExecuteNonQuery();
                         cmd.Connection.Close();
                     }

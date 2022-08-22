@@ -76,8 +76,7 @@ namespace SistemaHotel
             sb.AppendLine("<th><center>NOME</th></center>");
             sb.AppendLine("<th><center>DESCRICAO</th></center>");
             sb.AppendLine("<th><center>PRECO</th></center>");
-            sb.AppendLine("<th><center>FOTO</th></center>");
-            sb.AppendLine("<th><center>TIPO</th></center>");
+            sb.AppendLine("<th><center>FOTO</th></center>");     
             sb.AppendLine("<th><center>EDITAR</th></center>");
             sb.AppendLine("<th><center>EXCLUIR</th></center>");
             sb.AppendLine("</tr>");
@@ -92,7 +91,8 @@ namespace SistemaHotel
                 sb.AppendLine("<td><center>" + dtr["NOME"] + "</td></center>");
                 sb.AppendLine("<td><center>" + dtr["DESCRICAO"] + "</td></center>");
                 sb.AppendLine("<td><center>" + dtr["PRECO"] + "</td></center>");
-                sb.AppendLine("<td><center>" + dtr["FOTO"] + "</td></center>");
+                //sb.AppendLine("<td><center>" + dtr["FOTO"] + "</td></center>");
+                sb.AppendLine($@"<td><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO"]}'></td></center>");
                 sb.AppendLine("<td><center><a href='ControleUsuario.aspx?PRODUTO_E=" + Criptografia.Encrypt(dtr["ID"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
                 sb.AppendLine("<td><center><a href='ControleUsuario.aspx?PRODUTO_D=" + Criptografia.Encrypt(dtr["ID"].ToString()) + "'><i class='fa fa-trash'></i></center></td>");
                 sb.AppendLine("</tr>");
@@ -111,29 +111,32 @@ namespace SistemaHotel
             try
             {
                 string msg = "";
-                string caminho = Server.MapPath(@"IMAGENS\PRODUTOS\");
+                string caminho = Server.MapPath(@"IMAGENS_PRODUTOS\");
                 DALProduto dalProd = new DALProduto();
                 Produto prod = new Produto();
                 prod.Nome = txtNome.Text;
                 prod.Descricao = txtDescricao.Text;
                 prod.Preco = decimal.Parse(txtPreco.Text);
-                prod.Preco = decimal.Parse(txtPreco.Text);
+                prod.Tipo = Convert.ToInt32(ddlTipoProdS.SelectedValue);            
                 //faz o upload da foto e salva o nome no obj
-                if (!string.IsNullOrEmpty(fuProduto.PostedFile.FileName))
+                if (fuProduto.PostedFile.FileName!="" && txtNome.Text!="" && txtDescricao.Text!=""&& txtPreco.Text!="" &&ddlTipoProdS.SelectedValue!="0")
                 {
                     prod.Foto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
                     string img = caminho + prod.Foto;
                     fuProduto.PostedFile.SaveAs(img);
-                }
+                    dalProd.inserirProduto(prod);                  
+                    msg = $"<script> alert('Produto Inserido'); </script>";
+                    //Response.Write(msg);
+                    PlaceHolder1.Controls.Add(new LiteralControl(msg));
+                    limparCampos();
 
+                }
+                else
                 {
-                    dalProd.inserirProduto(prod);
-                    msg = $"<script> alert('O código gerado foi: {prod.Id}'); </script>";
-
+                    msg = "<script> alert('Preencha todos os campos!'); </script>";
+                    Response.Write(msg);
                 }
-                //Response.Write(msg);
-                PlaceHolder1.Controls.Add(new LiteralControl(msg));
-                limparCampos();
+                
             }
 
             catch (Exception erro)
@@ -178,7 +181,7 @@ namespace SistemaHotel
             try
             {
                 string msg = "";
-                string caminho = Server.MapPath(@"IMAGENS\PRODUTOS\");
+                string caminho = Server.MapPath(@"IMAGENS_PRODUTOS\");
                 DALProduto dalProd = new DALProduto();
                 Produto prod = new Produto();
                 prod.Nome = txtNome.Text;
@@ -186,7 +189,7 @@ namespace SistemaHotel
                 prod.Preco = decimal.Parse(txtPreco.Text);
                 prod.Preco = decimal.Parse(txtPreco.Text);
                 //faz o upload da foto e salva o nome no obj
-                if (!string.IsNullOrEmpty(fuProduto.PostedFile.FileName))
+                if (fuProduto.PostedFile.FileName!= "")
                 {
                     prod.Foto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
                     string img = caminho + prod.Foto;

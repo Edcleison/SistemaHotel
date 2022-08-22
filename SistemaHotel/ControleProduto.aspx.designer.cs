@@ -105,15 +105,6 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoProdS;
 
         /// <summary>
-        /// LinkButton4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton4;
-
-        /// <summary>
         /// fuProduto control.
         /// </summary>
         /// <remarks>
@@ -121,15 +112,6 @@ namespace SistemaHotel
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fuProduto;
-
-        /// <summary>
-        /// lnkSalvarProduto control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkSalvarProduto;
 
         /// <summary>
         /// PlaceHolder1 control.

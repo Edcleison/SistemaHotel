@@ -49,9 +49,10 @@ namespace SistemaHotel
                 else
                 {
 
-
+                                        
                     Session["id"] = u.Id;                  
-                    Session["login"] = u.Login;
+                    Session["codigoReserva"] = u.CogidoReserva;
+                    Session["nome"] = u.NomeUsuario;
                     switch (pu.Perfil)
                     {
                         case 1:

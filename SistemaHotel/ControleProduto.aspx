@@ -79,32 +79,33 @@
 <asp:Content ID="Content12" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <asp:Panel ID="Panel3" runat="server" GroupingText="Controle de Produtos">
-        <table>
-            <tr>
-                <td>
-                    <asp:LinkButton ID="novoProduto" class="btn btn-primary" runat="server" OnClick="novoProduto_Click">Novo Produto</asp:LinkButton></td>
-                <td>
-                    <b>&nbsp;</b>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>&nbsp;</b>
-                </td>
-            </tr>
-            <tr>
-                <td>Listar Por: </td>
-                <td>
-                    <b>&nbsp;</b>
-                </td>
-                <td>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <asp:LinkButton ID="novoProduto" class="btn btn-primary" runat="server" OnClick="novoProduto_Click">Novo Produto</asp:LinkButton>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <span>&nbsp;</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <span>Listar Por: </span>
+                </div>
+
+                <div class="col-sm">
                     <asp:DropDownList ID="ddlTipo" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged">
                         <asp:ListItem Value="0">SELECIONE</asp:ListItem>
                         <asp:ListItem Value="1">RESTAURANTE</asp:ListItem>
                         <asp:ListItem Value="2">FRIGOBAR</asp:ListItem>
-                    </asp:DropDownList></td>
-            </tr>
-        </table>
+                    </asp:DropDownList>
+
+                </div>
+            </div>
+        </div>
         <div class="col-12" align="center">
             <div id="Panel1" runat="server" visible="true">
             </div>
@@ -120,77 +121,96 @@
                         </asp:LinkButton>
                     </div>
                     <div class="modal-body">
-                        <table>
-                            <tr>
-                                <td><span>Nome: </span></td>
-                                <td>
+                        <div class="container">
+
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Nome: </span>
+                                </div>
+                                <div class="col-sm">
                                     <asp:TextBox runat="server" ID="txtNome"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span>Descricao: </span></td>
-                                <td>
-                                    <asp:TextBox runat="server" ID="txtDescricao" TextMode="MultiLine"></asp:TextBox></td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span>Preço: </span></td>
-                                <td>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Descricao: </span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox runat="server" ID="txtDescricao" TextMode="MultiLine"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Preço: </span>
+                                </div>
+                                <div class="col-sm">
                                     <asp:TextBox runat="server" ID="txtPreco" onkeyup="formataValor(this,event);"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span>Tipo: </span></td>
-                                <td>
-                                    <asp:DropDownList ID="ddlTipoProdS" runat="server">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Tipo: </span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:DropDownList ID="ddlTipoProdS"  runat="server">
                                         <asp:ListItem Value="0">SELECIONE</asp:ListItem>
                                         <asp:ListItem Value="1">RESTAURANTE</asp:ListItem>
                                         <asp:ListItem Value="2">FRIGOBAR</asp:ListItem>
                                     </asp:DropDownList>
-                                <td>
-                                    <asp:LinkButton ID="LinkButton4" runat="server" OnClick="lnkSalvarProdutoE_Click"></asp:LinkButton>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span>Foto: </span></td>
-                                <td>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Foto: </span>
+                                </div>
+                                <div class="col-sm">
                                     <asp:FileUpload ID="fuProduto" runat="server" />
-                                <td>
-                                    <asp:LinkButton ID="lnkSalvarProduto" autoPostBack="true" runat="server" OnClick="lnkSalvarProduto_Click"></asp:LinkButton>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;
-                                </td>
-                            </tr>
-                            <tr>
-                                <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;
-                                </td>
-                            </tr>
-                        </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
 
-
+                            <div class="row">
+                                <div class="col-sm">
+                                    <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <asp:LinkButton ID="lnkSenha" class="btn btn-success" OnClick="lnkSenha_Click" runat="server">Salvar</asp:LinkButton>
+                        <asp:LinkButton ID="lnkSenha" class="btn btn-success" OnClick="lnkSalvarProduto_Click" runat="server">Salvar</asp:LinkButton>
                         <asp:LinkButton ID="lnkVoltar" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
                     </div>
                 </div>
