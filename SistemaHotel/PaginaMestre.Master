@@ -44,7 +44,7 @@
     <form id="form1" runat="server" itemtype="~/CSS/Estilos.css">
         <header>
             <nav>
-                <asp:TreeView ID="TreeView1" runat="server" CssClass="menu" ExpandImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png" CollapseImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png">
+                <asp:TreeView ID="TreeView1" runat="server" CssClass="menu" ExpandImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png" CollapseImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png" ExpandDepth="0">
                     <Nodes>
                         <asp:TreeNode Checked="True" SelectAction="Expand" Selected="True">
                             <asp:TreeNode Text="Home" Value="Home" NavigateUrl="Default.aspx"></asp:TreeNode>
@@ -61,7 +61,7 @@
                     <NodeStyle CssClass="menulink" />
                 </asp:TreeView>
             </nav>
-            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.png" CssClass="linkhome" />         
+            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.png" CssClass="linkhome" ImageAlign="Middle" />         
         </header>
         <main>
             <div>
