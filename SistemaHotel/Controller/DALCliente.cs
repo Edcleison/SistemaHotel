@@ -25,8 +25,9 @@ namespace SistemaHotel.Controller
                     (@"INSERT INTO [dbo].[CLIENTE]
                        ([CD_RESERVA]
                        ,[DATA_INICIO]
-                       ,[DATA_FIM])
-                        VALUES(@CD_RESERVA,@DATA_INICIO,@DATA_FIM)", connection))
+                       ,[DATA_FIM]
+                        ,ATIVO)
+                        VALUES(@CD_RESERVA,@DATA_INICIO,@DATA_FIM,@ATIVO)", connection))
                 {
 
                     try
@@ -35,6 +36,7 @@ namespace SistemaHotel.Controller
                         cmd.Parameters.AddWithValue("CD_RESERVA", cli.Cd_Reserva);
                         cmd.Parameters.AddWithValue("DATA_INICIO", cli.DataInicio);
                         cmd.Parameters.AddWithValue("DATA_FIM", cli.DataFim);
+                        cmd.Parameters.AddWithValue("ATIVO", 'S');
                         cmd.ExecuteNonQuery();
                         cmd.Connection.Close();
                     }
@@ -59,7 +61,7 @@ namespace SistemaHotel.Controller
                                                             ,[DATA_INICIO]
                                                             ,[DATA_FIM]
                                                         FROM [dbo].[CLIENTE]
-                                                       WHERE ID = @ID", connection))
+                                                       WHERE ID = @ID AND ATIVO ='S'", connection))
                     {
                         cmd.Parameters.AddWithValue("ID", Id);
                         cmd.Connection.Open();
@@ -96,7 +98,7 @@ namespace SistemaHotel.Controller
                                                           ,[DATA_INICIO]
                                                           ,[DATA_FIM]                                                         
                                                         FROM [dbo].[CLIENTE]
-                                                         WHERE CD_RESERVA=@CD_RESERVA", connection))
+                                                         WHERE CD_RESERVA=@CD_RESERVA AND ATIVO ='S'", connection))
                     {
                         cmd.Parameters.AddWithValue("CD_RESERVA", Reserva);
                         cmd.Connection.Open();
