@@ -7,8 +7,7 @@ namespace SistemaHotel.Model
 {
     public class PerfilUsuario
     {
-        internal int ID_USUARIO;
-
+  
         public int Id { get; set; }
         public int Perfil { get; set; }
         public char Ativo { get; set; }

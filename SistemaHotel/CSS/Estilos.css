@@ -5,17 +5,16 @@
 */
 header {
     width: auto;
-    height: 20%;
+    height: 10em;
     margin: auto;
-    align-items:center;
     padding: 0em;
     background-color: #DFDFDF;
     box-shadow: -3px 2px 20px 0px #2E2E2E;
 }
 
 nav {
-    width: 14%;
-    margin-top: 0.4em;
+    width: 15%;
+    margin-top: 3.5em;
     margin-right: 1em;
     float: left;
 }
@@ -71,42 +70,19 @@ footer {
 .linkhome {
     width: 30%;
     margin-left: 2em;
-    margin-top: 2em;
- 
-    
 }
-
-
 /*
     Define a configuração dos botões (links) do menu
 */
-
-.menu {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width:contain;
-    background-color: #DFDFDF;
-    height: auto;
-    position: center;
-    object-fit:contain;
-}
-
-
-.menulink {
-    display: block;
-    color: black;
-    padding: 1px;
+.linkBotoes {
+    border: 1em;
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
     text-decoration: none;
-    object-fit:contain;
+    display: inline-block;
 }
-
-
-    .menulink:hover {
-        background-color: red;
-        color: white;
-    }
-
 /*
 .linkBotoes a:hover, a:active {
     background-color: red;
