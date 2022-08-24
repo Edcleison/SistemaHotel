@@ -107,9 +107,11 @@ namespace SistemaHotel
         protected void lnkSenha_Click(object sender, EventArgs e)
         {
             string login = txtLogin.Text.ToUpper();
-            DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
+            
             DALUsuario dalUsu = new DALUsuario();
             Usuario usu = dalUsu.buscaUsuarioLogin(login);
+
+            DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
             PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.Id);
             if (!string.IsNullOrEmpty(txtLogin.Text) && !string.IsNullOrEmpty(txtNovaSenha.Text) && !string.IsNullOrEmpty(txtConfirmaSenha.Text) && ddlPerfilNovoUsu.SelectedValue != "SELECIONE")
             {
@@ -278,7 +280,10 @@ namespace SistemaHotel
                         txtSenhaRand.Text = SenhaRandomica.RandLetras(5) + SenhaRandomica.RandNumeros(3);
                         usu.Senha = Criptografia.Encrypt(txtSenhaRand.Text);
                         dalUsu.inserirUsuarioCliente(usu);
+
                         usu = dalUsu.buscaUsuarioLogin(sCdReserva);
+
+
                         PerfilUsuario perfUsu = new PerfilUsuario();
                         perfUsu.Perfil = 3;
                         perfUsu.IdUsuario = usu.Id;

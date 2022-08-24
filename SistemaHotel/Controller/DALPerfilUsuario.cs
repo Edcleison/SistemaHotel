@@ -22,16 +22,16 @@ namespace SistemaHotel.Controller
                 using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [DBO].[PERFIL_USUARIO]
                                                    ([ID_PERFIL]                                                   
                                                     ,[ATIVO]
-                                                     ,[ID_USUARIO])
+                                                    ,[ID_USUARIO])
                                              VALUES(@ID_PERFIL,@ATIVO,@ID_USUARIO)", connection))
                 {
 
                     try
                     {
                         cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("ID_PERFIL", pUsu.Perfil);                        
-                        cmd.Parameters.AddWithValue("ATIVO",'S');
-                        cmd.Parameters.AddWithValue("ID_USUARIO",pUsu.IdUsuario);
+                        cmd.Parameters.AddWithValue("ID_PERFIL", pUsu.Perfil);
+                        cmd.Parameters.AddWithValue("ATIVO", 'S');
+                        cmd.Parameters.AddWithValue("ID_USUARIO", pUsu.IdUsuario);
                         cmd.ExecuteNonQuery();
                         cmd.Connection.Close();
                     }
@@ -47,7 +47,7 @@ namespace SistemaHotel.Controller
 
         public PerfilUsuario buscarUsuarioPerfil(int IdUsuario)
         {
-            PerfilUsuario pUsu = new PerfilUsuario();      
+            PerfilUsuario pUsu = new PerfilUsuario();
             try
             {
                 using (SqlConnection connection = new SqlConnection(cnn))
@@ -65,10 +65,10 @@ namespace SistemaHotel.Controller
                         {
                             registro.Read();
                             pUsu.Id = Convert.ToInt32(registro["ID"]);
-                            pUsu.Perfil = Convert.ToInt32(registro["ID_PERFIL"]);                            
+                            pUsu.Perfil = Convert.ToInt32(registro["ID_PERFIL"]);
                             pUsu.Ativo = Convert.ToChar(registro["ATIVO"]);
                             pUsu.IdUsuario = Convert.ToInt32(registro["ID_USUARIO"]);
-                            
+
 
                         }
                     }
@@ -105,6 +105,6 @@ namespace SistemaHotel.Controller
                 }
             }
         }
-        
+
     }
 }

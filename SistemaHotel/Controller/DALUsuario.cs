@@ -41,8 +41,7 @@ namespace SistemaHotel.Controller
                     catch (Exception erro)
                     {
                         throw new Exception(erro.Message);
-                    }
-
+                    }                   
                 }
             }
         }
