@@ -26,6 +26,8 @@ namespace SistemaHotel
 
             DALUsuario du = new DALUsuario();
             Usuario u = du.buscaUsuarioLogin(login);
+            DALPerfilUsuario dpu = new DALPerfilUsuario();
+            PerfilUsuario pu = dpu.buscarUsuarioPerfil(u.Id);
 
             if (login != "" && senha != "")
             {
@@ -47,10 +49,22 @@ namespace SistemaHotel
                 else
                 {
 
-
-                    Session["id"] = u.Id;
-                    Session["nome"] = u.Nome;
-                    Session["login"] = u.Login;
+                                        
+                    Session["id"] = u.Id;                  
+                    Session["codigoReserva"] = u.CogidoReserva;
+                    Session["nome"] = u.NomeUsuario;
+                    switch (pu.Perfil)
+                    {
+                        case 1:
+                            Session["perfil"] = "ADMINISTRADOR";
+                            break;
+                        case 2:
+                            Session["perfil"] = "FUNCIONÁRIO";
+                            break;
+                        case 3:
+                            Session["perfil"] = "CLIENTE";
+                            break;
+                    }
                     Response.Redirect("~/Default.aspx");
                 }
             }

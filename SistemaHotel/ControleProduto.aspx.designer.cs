@@ -11,7 +11,7 @@ namespace SistemaHotel
 {
 
 
-    public partial class ControleUsuario
+    public partial class ControleProduto
     {
 
         /// <summary>
@@ -24,31 +24,22 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.Panel Panel3;
 
         /// <summary>
-        /// novoUsuario control.
+        /// novoProduto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton novoUsuario;
+        protected global::System.Web.UI.WebControls.LinkButton novoProduto;
 
         /// <summary>
-        /// LinkButton2 control.
+        /// ddlTipo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
-
-        /// <summary>
-        /// ddlPerfil control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPerfil;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipo;
 
         /// <summary>
         /// Panel1 control.
@@ -69,13 +60,13 @@ namespace SistemaHotel
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl mdBack;
 
         /// <summary>
-        /// mdUsu control.
+        /// mdProd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mdUsu;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mdProd;
 
         /// <summary>
         /// txtNome control.
@@ -87,40 +78,49 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.TextBox txtNome;
 
         /// <summary>
-        /// txtLogin control.
+        /// txtDescricao control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLogin;
+        protected global::System.Web.UI.WebControls.TextBox txtDescricao;
 
         /// <summary>
-        /// ddlPerfilNovoUsu control.
+        /// txtPreco control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPerfilNovoUsu;
+        protected global::System.Web.UI.WebControls.TextBox txtPreco;
 
         /// <summary>
-        /// txtNovaSenha control.
+        /// ddlTipoProdS control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNovaSenha;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoProdS;
 
         /// <summary>
-        /// txtConfirmaSenha control.
+        /// fuProduto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtConfirmaSenha;
+        protected global::System.Web.UI.WebControls.FileUpload fuProduto;
+
+        /// <summary>
+        /// PlaceHolder1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder1;
 
         /// <summary>
         /// lnkSenha control.
@@ -141,76 +141,49 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.LinkButton lnkVoltar;
 
         /// <summary>
-        /// mdCli control.
+        /// mdProdE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mdCli;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mdProdE;
 
         /// <summary>
-        /// txtCodReserva control.
+        /// txtNomeE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodReserva;
+        protected global::System.Web.UI.WebControls.TextBox txtNomeE;
 
         /// <summary>
-        /// txtInputDataIni control.
+        /// txtDescricaoE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInputDataIni;
+        protected global::System.Web.UI.WebControls.TextBox txtDescricaoE;
 
         /// <summary>
-        /// txtInputDataFim control.
+        /// txtPrecoE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInputDataFim;
+        protected global::System.Web.UI.WebControls.TextBox txtPrecoE;
 
         /// <summary>
-        /// txtSenhaRand control.
+        /// ddlTipoProdE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSenhaRand;
-
-        /// <summary>
-        /// txtDataIni control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDataIni;
-
-        /// <summary>
-        /// txtDataFim control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDataFim;
-
-        /// <summary>
-        /// salvarNovoCliente control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton salvarNovoCliente;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoProdE;
 
         /// <summary>
         /// LinkButton1 control.
@@ -222,66 +195,48 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
 
         /// <summary>
-        /// modEditCli control.
+        /// fuProdE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl modEditCli;
+        protected global::System.Web.UI.WebControls.FileUpload fuProdE;
 
         /// <summary>
-        /// txtCdReservaE control.
+        /// lnkSalvarProdutoE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCdReservaE;
+        protected global::System.Web.UI.WebControls.LinkButton lnkSalvarProdutoE;
 
         /// <summary>
-        /// txtInputDataFimE control.
+        /// LinkButton2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInputDataFimE;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
 
         /// <summary>
-        /// txtDataIniE control.
+        /// LinkButton3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDataIniE;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
 
         /// <summary>
-        /// txtDataFimE control.
+        /// PlaceHolder2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDataFimE;
-
-        /// <summary>
-        /// alterarData control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton alterarData;
-
-        /// <summary>
-        /// lnkVoltarCliE control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkVoltarCliE;
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder2;
     }
 }
