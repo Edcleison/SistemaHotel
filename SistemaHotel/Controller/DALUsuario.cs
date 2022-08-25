@@ -123,7 +123,7 @@ namespace SistemaHotel.Controller
                                                             ,U.[LOGIN]
                                                             ,U.[SENHA]
                                                             ,P.Ativo
-                                                            ,P.PERFIL
+                                                            ,P.ID_PERFIL
                                                             FROM [DBO].[USUARIO] U
                                                             INNER JOIN PERFIL_USUARIO P
                                                             ON (P.ID_USUARIO = U.ID) WHERE P.ATIVO ='S'", connection))
@@ -158,10 +158,10 @@ namespace SistemaHotel.Controller
                                                             ,U.[LOGIN]
                                                             ,U.[SENHA]
                                                             ,P.Ativo
-                                                            ,P.PERFIL
+                                                            ,P.ID_PERFIL
                                                             FROM [DBO].[USUARIO] U
                                                             INNER JOIN PERFIL_USUARIO P
-                                                            ON (P.ID_USUARIO = U.ID) WHERE P.ATIVO ='S' AND P.PERFIL = '{perfil}'", connection))
+                                                            ON (P.ID_USUARIO = U.ID) WHERE P.ATIVO ='S' AND P.ID_PERFIL = '{perfil}'", connection))
                     {
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
@@ -192,14 +192,14 @@ namespace SistemaHotel.Controller
                                                             ,U.[LOGIN]
                                                             ,U.[SENHA]
                                                             ,P.ATIVO
-                                                            ,P.PERFIL
+                                                            ,P.ID_PERFIL
                                                             ,C.DATA_INICIO
                                                             ,C.DATA_FIM
                                                             FROM [DBO].[USUARIO] U
                                                             INNER JOIN CLIENTE C ON(C.CD_RESERVA = U.LOGIN)
                                                             INNER JOIN PERFIL_USUARIO P
                                                             ON (P.ID_USUARIO = U.ID)
-                                                            WHERE P.ATIVO ='S' AND P.PERFIL = '{perfil}'", connection))
+                                                            WHERE P.ATIVO ='S' AND P.ID_PERFIL = '{perfil}'", connection))
                     {
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
