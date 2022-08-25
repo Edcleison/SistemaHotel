@@ -79,7 +79,6 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="CSS\StyleSheet.css.exclude" />
     <Content Include="IMAGENS\SISTEMA\menu-icon-19353.png" />
-    <Content Include="imagens_cardapio\lasanha.png" />
     <Content Include="layout\assets\css\vssver.scc" />
     <Content Include="layout\assets\fonts\fontawesome-webfont.ttf" />
     <Content Include="layout\assets\fonts\fontawesome-webfont.woff" />
