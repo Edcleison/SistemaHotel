@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\bin\SistemaHotel.dll.config
 C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\bin\SistemaHotel.dll
 C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\bin\SistemaHotel.pdb
@@ -5,3 +6,12 @@ C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Debug\SistemaHotel.cspro
 C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Debug\SistemaHotel.csproj.CoreCompileInputs.cache
 C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Debug\SistemaHotel.dll
 C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Debug\SistemaHotel.pdb
+=======
+C:\Curso\Projetos WebSite\AlteracoesLayout\SistemaHotel\bin\SistemaHotel.dll.config
+C:\Curso\Projetos WebSite\AlteracoesLayout\SistemaHotel\bin\SistemaHotel.dll
+C:\Curso\Projetos WebSite\AlteracoesLayout\SistemaHotel\bin\SistemaHotel.pdb
+C:\Curso\Projetos WebSite\AlteracoesLayout\SistemaHotel\obj\Debug\SistemaHotel.csproj.AssemblyReference.cache
+C:\Curso\Projetos WebSite\AlteracoesLayout\SistemaHotel\obj\Debug\SistemaHotel.csproj.CoreCompileInputs.cache
+C:\Curso\Projetos WebSite\AlteracoesLayout\SistemaHotel\obj\Debug\SistemaHotel.dll
+C:\Curso\Projetos WebSite\AlteracoesLayout\SistemaHotel\obj\Debug\SistemaHotel.pdb
+>>>>>>> 9599c5fb52efe79acdf5a29ad0e459685dbdddf3
