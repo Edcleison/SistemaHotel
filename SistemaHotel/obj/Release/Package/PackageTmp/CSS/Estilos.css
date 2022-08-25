@@ -1,0 +1,147 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/*
+    Cria a configuração de estilo da estrutura do site (topo, menu,conteúdo e radapé)
+*/
+header {
+    width: auto;
+    height: 20%;
+    margin: auto;
+    align-items:center;
+    padding: 0em;
+    background-color: #DFDFDF;
+    box-shadow: -3px 2px 20px 0px #2E2E2E;
+}
+
+nav {
+    width: 14%;
+    margin-top: 0.4em;
+    margin-right: 1em;
+    float: left;
+}
+
+main {
+    width: 80%;
+    min-height: 30em;
+    margin: 2em auto;
+    padding: 0.6em;
+    background-color: none;
+    box-shadow: -3px 2px 20px 0px #2E2E2E;
+}
+
+article {
+    width: auto;
+    min-height: 28em;
+    padding: 0.6em
+}
+/*
+h1 {
+    font-family: Arial;
+    font-size: 2em;
+    color: #272727;
+}
+
+*/
+header nav h1 {
+    font-family: Arial;
+    font-size: 1em;
+    color: #FFFFFF;
+}
+
+footer {
+    width: auto;
+    height: 5em;
+    margin: 2em auto 0em;
+    padding: 0.6em;
+    background-color: #222222;
+}
+
+    footer p {
+        font-family: Arial;
+        font-size: 1em;
+        line-height: 150%;
+        text-align: center;
+        padding: 0.2em;
+        color: #737373;
+    }
+
+/*
+    Define a configuração da imagem do menu
+*/
+.linkhome {
+    width: 30%;
+    margin-left: 2em;
+    margin-top: 2em;
+ 
+    
+}
+
+
+/*
+    Define a configuração dos botões (links) do menu
+*/
+
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width:contain;
+    background-color: #DFDFDF;
+    height: auto;
+    position: center;
+    object-fit:contain;
+}
+
+
+.menulink {
+    display: block;
+    color: black;
+    padding: 1px;
+    text-decoration: none;
+    object-fit:contain;
+}
+
+
+    .menulink:hover {
+        background-color: red;
+        color: white;
+    }
+
+/*
+.linkBotoes a:hover, a:active {
+    background-color: red;
+}
+    */
+
+.login {
+    width: 50%;
+    height: 80%;
+    margin: auto;
+    margin-top: 20%;
+    padding: 0.6em;
+    background-color: #DFDFDF;
+    box-shadow: -3px 2px 20px 0px #2E2E2E;
+}
+
+.gridView {
+    width: 80%;
+    margin: 2em auto;
+    padding: 0.6em;
+    box-shadow: -3px 2px 20px 0px #2E2E2E;
+}
+
+.cxFloatMsg {
+    width: 30%;
+    height: 15em;
+    border: 1px solid #737373;
+    background-color: RGBA( 220, 220, 220, 1);
+    box-shadow: 1px 1px 3px 1px #DFDFDF;
+    position: absolute;
+    top: 40%;
+    left: 25%;
+    padding: 2em;
+    z-index: 1000;
+    display: none;
+}
+
+
