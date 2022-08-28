@@ -80,10 +80,9 @@
     <Content Include="ControleProduto.aspx" />
     <Content Include="CSS\StyleSheet.css.exclude" />
     <Content Include="IMAGENS\SISTEMA\menu-icon-19353.png" />
-    <Content Include="IMAGENS_PRODUTOS\30hawaiian-pizza.jpg" />
-    <Content Include="IMAGENS_PRODUTOS\805kit_fitness.jpg" />
-    <Content Include="IMAGENS_PRODUTOS\845hawaiian-pizza.jpg" />
-    <Content Include="IMAGENS_PRODUTOS\969hawaiian-pizza.jpg" />
+    <Content Include="IMAGENS_PRODUTOS\431hawaiian-pizza.jpg" />
+    <Content Include="IMAGENS_PRODUTOS\835hawaiian-pizza.jpg" />
+    <Content Include="IMAGENS_PRODUTOS\950kit_fitness.jpg" />
     <Content Include="layout\assets\css\vssver.scc" />
     <Content Include="layout\assets\fonts\fontawesome-webfont.ttf" />
     <Content Include="layout\assets\fonts\fontawesome-webfont.woff" />
