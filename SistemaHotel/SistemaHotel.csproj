@@ -77,9 +77,13 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="ControleProduto.aspx" />
     <Content Include="CSS\StyleSheet.css.exclude" />
     <Content Include="IMAGENS\SISTEMA\menu-icon-19353.png" />
-    <Content Include="imagens_cardapio\lasanha.png" />
+    <Content Include="IMAGENS_PRODUTOS\30hawaiian-pizza.jpg" />
+    <Content Include="IMAGENS_PRODUTOS\805kit_fitness.jpg" />
+    <Content Include="IMAGENS_PRODUTOS\845hawaiian-pizza.jpg" />
+    <Content Include="IMAGENS_PRODUTOS\969hawaiian-pizza.jpg" />
     <Content Include="layout\assets\css\vssver.scc" />
     <Content Include="layout\assets\fonts\fontawesome-webfont.ttf" />
     <Content Include="layout\assets\fonts\fontawesome-webfont.woff" />
@@ -1082,8 +1086,12 @@
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\hotelservicos - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\hotelservicos - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\sistemahotel - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy1.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -5866,6 +5874,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControleProduto.aspx.cs">
+      <DependentUpon>ControleProduto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControleProduto.aspx.designer.cs">
+      <DependentUpon>ControleProduto.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ControleUsuario.aspx.cs">
       <DependentUpon>ControleUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5873,6 +5888,10 @@
     <Compile Include="ControleUsuario.aspx.designer.cs">
       <DependentUpon>ControleUsuario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controller\DALEsquipeAtendimento.cs" />
+    <Compile Include="Controller\DALItemPedido.cs" />
+    <Compile Include="Controller\DALPedido.cs" />
+    <Compile Include="Controller\DALProduto.cs" />
     <Compile Include="Controller\DALUsuario.cs" />
     <Compile Include="Controller\DALCliente.cs" />
     <Compile Include="Controller\DALPerfilUsuario.cs" />
@@ -5891,7 +5910,11 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Model\Cliente.cs" />
+    <Compile Include="Model\ItemPedido.cs" />
+    <Compile Include="Model\EquipeAtendimento.cs" />
+    <Compile Include="Model\Pedido.cs" />
     <Compile Include="Model\PerfilUsuario.cs" />
+    <Compile Include="Model\Produto.cs" />
     <Compile Include="Model\Usuario.cs" />
     <Compile Include="PaginaMestre.Master.cs">
       <DependentUpon>PaginaMestre.Master</DependentUpon>
@@ -5904,9 +5927,7 @@
     <Compile Include="Utils\Criptografia.cs" />
     <Compile Include="Utils\SenhaRandomica.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="IMAGENS_PRODUTOS\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>

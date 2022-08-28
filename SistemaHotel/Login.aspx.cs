@@ -21,59 +21,138 @@ namespace SistemaHotel
 
         protected void btlogar_Click(object sender, EventArgs e)
         {
-            string login = txtLogin.Text.ToUpper();
-            string senha = Criptografia.Encrypt(txtSenha.Text.ToUpper());
+            string login = txtLogin.Text;
+            string senha = Criptografia.Encrypt(txtSenha.Text);
 
             DALUsuario du = new DALUsuario();
             Usuario u = du.buscaUsuarioLogin(login);
             DALPerfilUsuario dpu = new DALPerfilUsuario();
-            PerfilUsuario pu = dpu.buscarUsuarioPerfil(u.Id);
+            PerfilUsuario pu = dpu.buscarUsuarioPerfil(u.IdUsuario);
 
-            if (login != "" && senha != "")
+            if (pu.IdPerfil != 3)
             {
-                if (login != u.Login && senha == u.Senha)
+                if (login != "" && senha != "")
                 {
-                    String msg = "<script> alert('Login incorreto!'); </script>";
-                    Response.Write(msg);
-                }
-                else if (login == u.Login && senha != u.Senha)
-                {
-                    String msg = "<script> alert('Senha incorreta!'); </script>";
-                    Response.Write(msg);
-                }
-                else if (login != u.Login && senha != u.Senha)
-                {
-                    String msg = "<script> alert('Login e senha incorretos'); </script>";
-                    Response.Write(msg);
+
+                    if (pu.StatusPerfilUsuario == 'S')
+                    {
+
+                        if (login != u.Login && senha == u.Senha)
+                        {
+                            String msg = "<script> alert('Login incorreto!'); </script>";
+                            Response.Write(msg);
+                        }
+                        else if (login == u.Login && senha != u.Senha)
+                        {
+                            String msg = "<script> alert('Senha incorreta!'); </script>";
+                            Response.Write(msg);
+                        }
+                        else if (login != u.Login && senha != u.Senha)
+                        {
+                            String msg = "<script> alert('Login e senha incorretos'); </script>";
+                            Response.Write(msg);
+                        }
+                        else
+                        {
+
+
+                            Session["id"] = u.IdUsuario;
+                            Session["nome"] = u.NomeUsuario;
+                            switch (pu.IdPerfil)
+                            {
+                                case 1:
+                                    Session["perfil"] = "ADMINISTRADOR";
+                                    break;
+                                case 2:
+                                    Session["perfil"] = "FUNCIONÁRIO";
+                                    break;
+                                case 3:
+                                    Session["perfil"] = "CLIENTE";
+                                    break;
+                            }
+                            Response.Redirect("~/Default.aspx");
+                        }
+
+                    }
+
                 }
                 else
                 {
-
-                                        
-                    Session["id"] = u.Id;                  
-                    Session["codigoReserva"] = u.CogidoReserva;
-                    Session["nome"] = u.NomeUsuario;
-                    switch (pu.Perfil)
-                    {
-                        case 1:
-                            Session["perfil"] = "ADMINISTRADOR";
-                            break;
-                        case 2:
-                            Session["perfil"] = "FUNCIONÁRIO";
-                            break;
-                        case 3:
-                            Session["perfil"] = "CLIENTE";
-                            break;
-                    }
-                    Response.Redirect("~/Default.aspx");
+                    string msg = "<script> alert('Login não permitido!); </script>";
+                    Response.Write(msg);
                 }
+
             }
             else
             {
-                String msg = "<script> alert('Preencha corretamente!); </script>";
-                Response.Write(msg);
+                DALCliente dcli = new DALCliente();
+                Cliente cli = dcli.buscarClienteReserva(login);
+                if (cli.DataSaida < DateTime.Now)
+                {
+                    if (login != "" && senha != "")
+                    {
+
+                        if (pu.StatusPerfilUsuario == 'S')
+                        {
+
+                            if (login != u.Login && senha == u.Senha)
+                            {
+                                String msg = "<script> alert('Login incorreto!'); </script>";
+                                Response.Write(msg);
+                            }
+                            else if (login == u.Login && senha != u.Senha)
+                            {
+                                String msg = "<script> alert('Senha incorreta!'); </script>";
+                                Response.Write(msg);
+                            }
+                            else if (login != u.Login && senha != u.Senha)
+                            {
+                                String msg = "<script> alert('Login e senha incorretos'); </script>";
+                                Response.Write(msg);
+                            }
+                            else
+                            {
+
+
+                                Session["id"] = u.IdUsuario;
+                                Session["nome"] = u.NomeUsuario;
+                                switch (pu.IdPerfil)
+                                {
+                                    case 1:
+                                        Session["perfil"] = "ADMINISTRADOR";
+                                        break;
+                                    case 2:
+                                        Session["perfil"] = "FUNCIONÁRIO";
+                                        break;
+                                    case 3:
+                                        Session["perfil"] = "CLIENTE";
+                                        break;
+                                }
+                                Response.Redirect("~/Default.aspx");
+                            }
+
+                        }
+
+                    }
+                    else
+                    {
+                        string msg = "<script> alert('Login não permitido!); </script>";
+                        Response.Write(msg);
+                    }
+
+                }
+                else
+                {
+                    dpu.excluirUsuario(u.IdUsuario);
+                    string msg = "<script> alert('Login não permitido!); </script>";
+                    Response.Write(msg);
+
+                }
             }
+
         }
+
+
 
         protected void lnkRecadastrarSenha_Click(object sender, EventArgs e)
         {
@@ -93,22 +172,22 @@ namespace SistemaHotel
         protected void lnkSenha_Click(object sender, EventArgs e)
         {
             DALUsuario dalUsu = new DALUsuario();
-            string login = txtLoginR.Text.ToUpper();
+            string login = txtLoginR.Text;
             Usuario usu = dalUsu.buscaUsuarioLogin(login);
             DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
-            PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.Id);
+            PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.IdUsuario);
 
-            if (perfUsu.Ativo == 'S')
+            if (perfUsu.StatusPerfilUsuario == 'S')
             {
                 if (txtNovaSenha.Text == txtConfirmaSenha.Text)
                 {
 
-                    usu.Id = perfUsu.Id;
+                    usu.IdUsuario = perfUsu.IdUsuario;
                     usu.Senha = Criptografia.Encrypt(txtConfirmaSenha.Text);
                     dalUsu.alterarSenha(usu);
                     string msg = "<script> alert('Senha Atualizada!'); </script>";
                     Response.Write(msg);
-                    limparCampos(); 
+                    limparCampos();
                 }
                 else
                 {

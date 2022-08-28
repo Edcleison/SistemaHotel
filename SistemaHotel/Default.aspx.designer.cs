@@ -33,6 +33,24 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.Label lbNomeUsuario;
 
         /// <summary>
+        /// lbLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbLogin;
+
+        /// <summary>
+        /// lbCodigoReserva control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCodigoReserva;
+
+        /// <summary>
         /// lbPerfilLegenda control.
         /// </summary>
         /// <remarks>
@@ -49,23 +67,5 @@ namespace SistemaHotel
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbPerfil;
-
-        /// <summary>
-        /// lbCodigoReservaLegenda control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCodigoReservaLegenda;
-
-        /// <summary>
-        /// lbCodigoReserva control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCodigoReserva;
     }
 }

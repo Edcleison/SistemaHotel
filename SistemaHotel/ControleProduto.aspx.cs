@@ -16,9 +16,9 @@ namespace SistemaHotel
 {
     public partial class ControleProduto : System.Web.UI.Page
     {
-        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=hotelservicos;Persist Security Info=True;User ID=hotelservicos;Password=Sc3f_r4_104t";
+        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
 
-        
+
         DALProduto dalProd = new DALProduto();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -34,10 +34,12 @@ namespace SistemaHotel
 
                     Produto prod = dalProd.buscarProdutoId(rParametro);
 
-                    if (prod.Id != 0)
+                    if (prod.IdProduto != 0)
                     {
-                        dalProd.excluirProduto(prod.Id);
+                        dalProd.excluirProduto(prod.IdProduto);
                         string msg = "<script> alert('Produto Excluído!'); </script>";
+
+
                         Response.Write(msg);
 
                     }
@@ -45,17 +47,19 @@ namespace SistemaHotel
                 if (Request.QueryString["PRODUTO_E"] != null)
                 {
 
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["CLIENTE_E"]));
+                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_E"]));
 
                     Produto prod = dalProd.buscarProdutoId(rParametro);
-                   
-                   
-                    txtNomeE.Text = prod.Nome;
-                    txtDescricaoE.Text = prod.Descricao;
-                    txtPrecoE.Text = prod.Preco.ToString();
-                    ddlTipoProdE.SelectedValue = prod.Tipo.ToString();
+
+
+                    txtNomeE.Text = prod.NomeProduto;
+                    txtDescricaoE.Text = prod.DescricaoProduto;
+                    txtPrecoE.Text = prod.PrecoUnitario.ToString();
+                    ddlTipoProdE.SelectedValue = prod.TipoProduto.ToString();
+                    carregaDdlEditarTipoProduto();
                     mdProdE.Visible = true;
-                }             
+                }
+                carregaDdl();
             }
 
         }
@@ -76,7 +80,7 @@ namespace SistemaHotel
             sb.AppendLine("<th><center>NOME</th></center>");
             sb.AppendLine("<th><center>DESCRICAO</th></center>");
             sb.AppendLine("<th><center>PRECO</th></center>");
-            sb.AppendLine("<th><center>FOTO</th></center>");     
+            sb.AppendLine("<th><center>FOTO</th></center>");
             sb.AppendLine("<th><center>EDITAR</th></center>");
             sb.AppendLine("<th><center>EXCLUIR</th></center>");
             sb.AppendLine("</tr>");
@@ -87,14 +91,13 @@ namespace SistemaHotel
             {
 
                 sb.AppendLine("<tr>");
-                sb.AppendLine("<td><center>" + dtr["ID"] + "</td></center>");
-                sb.AppendLine("<td><center>" + dtr["NOME"] + "</td></center>");
-                sb.AppendLine("<td><center>" + dtr["DESCRICAO"] + "</td></center>");
-                sb.AppendLine("<td><center>" + dtr["PRECO"] + "</td></center>");
-                //sb.AppendLine("<td><center>" + dtr["FOTO"] + "</td></center>");
-                sb.AppendLine($@"<td><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO"]}'></td></center>");
-                sb.AppendLine("<td><center><a href='ControleUsuario.aspx?PRODUTO_E=" + Criptografia.Encrypt(dtr["ID"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
-                sb.AppendLine("<td><center><a href='ControleUsuario.aspx?PRODUTO_D=" + Criptografia.Encrypt(dtr["ID"].ToString()) + "'><i class='fa fa-trash'></i></center></td>");
+                sb.AppendLine("<td><center>" + dtr["ID_Produto"] + "</td></center>");
+                sb.AppendLine("<td><center>" + dtr["NOME_Prod"] + "</td></center>");
+                sb.AppendLine("<td><center>" + dtr["DESCRICAO_Prod"] + "</td></center>");
+                sb.AppendLine("<td><center>" + dtr["PRECO_Uni"] + "</td></center>");
+                sb.AppendLine($@"<td><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></td></center>");
+                sb.AppendLine("<td><center><a href='ControleProduto.aspx?PRODUTO_E=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
+                sb.AppendLine("<td><center><a href='ControleProduto.aspx?PRODUTO_D=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-trash'></i></center></td>");
                 sb.AppendLine("</tr>");
 
             }
@@ -112,22 +115,20 @@ namespace SistemaHotel
             {
                 string msg = "";
                 string caminho = Server.MapPath(@"IMAGENS_PRODUTOS\");
-                DALProduto dalProd = new DALProduto();
                 Produto prod = new Produto();
-                prod.Nome = txtNome.Text;
-                prod.Descricao = txtDescricao.Text;
-                prod.Preco = decimal.Parse(txtPreco.Text);
-                prod.Tipo = Convert.ToInt32(ddlTipoProdS.SelectedValue);            
+                prod.NomeProduto = txtNome.Text;
+                prod.DescricaoProduto = txtDescricao.Text;
+                prod.PrecoUnitario = decimal.Parse(txtPreco.Text);
+                prod.TipoProduto = Convert.ToInt32(ddlTipoProdS.SelectedValue);
                 //faz o upload da foto e salva o nome no obj
-                if (fuProduto.PostedFile.FileName!="" && txtNome.Text!="" && txtDescricao.Text!=""&& txtPreco.Text!="" &&ddlTipoProdS.SelectedValue!="0")
+                if (fuProduto.PostedFile.FileName != "" && txtNome.Text != "" && txtDescricao.Text != "" && txtPreco.Text != "" && ddlTipoProdS.SelectedValue != "0")
                 {
-                    prod.Foto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
-                    string img = caminho + prod.Foto;
+                    prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
+                    string img = caminho + prod.FotoProduto;
                     fuProduto.PostedFile.SaveAs(img);
-                    dalProd.inserirProduto(prod);                  
+                    dalProd.inserirProduto(prod);
                     msg = $"<script> alert('Produto Inserido'); </script>";
-                    //Response.Write(msg);
-                    PlaceHolder1.Controls.Add(new LiteralControl(msg));
+                    Response.Write(msg);
                     limparCampos();
 
                 }
@@ -136,13 +137,12 @@ namespace SistemaHotel
                     msg = "<script> alert('Preencha todos os campos!'); </script>";
                     Response.Write(msg);
                 }
-                
+
             }
 
             catch (Exception erro)
             {
-                string msg1 = $"<script> ShowMsg({erro.Message}'); </script>";
-                PlaceHolder1.Controls.Add(new LiteralControl(msg1));
+                string msg1 = $"<script> alert({erro.Message}'); </script>";
             }
 
         }
@@ -158,8 +158,8 @@ namespace SistemaHotel
         {
             txtNome.Text = "";
             txtDescricao.Text = "";
-            txtPreco.Text ="";
-            ddlTipo.SelectedIndex = -1;    
+            txtPreco.Text = "";
+            ddlTipo.SelectedIndex = -1;
         }
 
         protected void lnkSenha_Click(object sender, EventArgs e)
@@ -182,54 +182,155 @@ namespace SistemaHotel
             {
                 string msg = "";
                 string caminho = Server.MapPath(@"IMAGENS_PRODUTOS\");
-                DALProduto dalProd = new DALProduto();
                 Produto prod = new Produto();
-                prod.Nome = txtNome.Text;
-                prod.Descricao = txtDescricao.Text;
-                prod.Preco = decimal.Parse(txtPreco.Text);
-                prod.Preco = decimal.Parse(txtPreco.Text);
+                prod.NomeProduto = txtNome.Text;
+                prod.DescricaoProduto = txtDescricao.Text;
+                prod.PrecoUnitario = decimal.Parse(txtPreco.Text);
                 //faz o upload da foto e salva o nome no obj
-                if (fuProduto.PostedFile.FileName!= "")
+                if (fuProduto.PostedFile.FileName != "")
                 {
-                    prod.Foto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
-                    string img = caminho + prod.Foto;
+                    prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
+                    string img = caminho + prod.FotoProduto;
                     fuProduto.PostedFile.SaveAs(img);
-                }
-
-                {
                     dalProd.alterarProduto(prod);
-                    msg = $"<script> alert('O Produto Alterado: {prod.Id}'); </script>";
-
+                    msg = $"<script> alert('O Produto Alterado: {prod.IdProduto}'); </script>";
+                    Response.Write(msg);
+                    limparCampos();
                 }
-                //Response.Write(msg);
-                PlaceHolder1.Controls.Add(new LiteralControl(msg));
-                limparCampos();
+
             }
 
             catch (Exception erro)
             {
-                string msg1 = $"<script> ShowMsg({erro.Message}'); </script>";
-                PlaceHolder1.Controls.Add(new LiteralControl(msg1));
-            }
+                string msg1 = $"<script> alert({erro.Message}'); </script>";
 
+            }
+        }
+        private void carregaDdl()
+        {
+            DataTable dta = new DataTable();
+            SqlDataAdapter adp;
+
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Tipo_Prod]
+                                                          ,[Descricao_Tipo_Prod]
+                                                            FROM [dbo].[TIPO_PRODUTO] ORDER BY Descricao_Tipo_Prod", connection))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                        adp = new SqlDataAdapter(cmd);
+                        adp.Fill(dta);
+                        cmd.Connection.Close();
+                        ddlTipo.DataTextField = "Descricao_Tipo_Prod";
+                        ddlTipo.DataValueField = "Id_Tipo_Prod";
+                        ddlTipo.DataSource = dta.Copy();
+                        ddlTipo.DataBind();
+                        ddlTipo.Items.Insert(0, "SELECIONE");
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        cmd.Connection.Close();
+                    }
+
+                }
+            }
+        }
+
+        private void carregaDdlEditarTipoProduto()
+        {
+            DataTable dta = new DataTable();
+            SqlDataAdapter adp;
+
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Tipo_Prod]
+                                                          ,[Descricao_Tipo_Prod]
+                                                            FROM [dbo].[TIPO_PRODUTO] ORDER BY Descricao_Tipo_Prod", connection))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                        adp = new SqlDataAdapter(cmd);
+                        adp.Fill(dta);
+                        cmd.Connection.Close();
+                        ddlTipoProdE.DataTextField = "Descricao_Tipo_Prod";
+                        ddlTipoProdE.DataValueField = "Id_Tipo_Prod";
+                        ddlTipoProdE.DataSource = dta.Copy();
+                        ddlTipoProdE.DataBind();
+                        ddlTipoProdE.Items.Insert(0, "SELECIONE");
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        cmd.Connection.Close();
+                    }
+
+                }
+            }
+        }
+        private void carregaDdlSalvarTipoProduto()
+        {
+            DataTable dta = new DataTable();
+            SqlDataAdapter adp;
+
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Tipo_Prod]
+                                                          ,[Descricao_Tipo_Prod]
+                                                            FROM [dbo].[TIPO_PRODUTO] ORDER BY Descricao_Tipo_Prod", connection))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                        adp = new SqlDataAdapter(cmd);
+                        adp.Fill(dta);
+                        cmd.Connection.Close();
+                        ddlTipoProdS.DataTextField = "Descricao_Tipo_Prod";
+                        ddlTipoProdS.DataValueField = "Id_Tipo_Prod";
+                        ddlTipoProdS.DataSource = dta.Copy();
+                        ddlTipoProdS.DataBind();
+                        ddlTipoProdS.Items.Insert(0, "SELECIONE");
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        cmd.Connection.Close();
+                    }
+
+                }
+            }
         }
 
         protected void novoProduto_Click(object sender, EventArgs e)
         {
             mdProd.Visible = true;
-           
+            carregaDdlSalvarTipoProduto();
+
+
         }
 
         protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlTipo.Text != "SELECIONE")
+            if (ddlTipo.SelectedValue != "0")
             {
-                    carregarTabela(int.Parse(ddlTipo.SelectedValue));              
+                carregarTabela(int.Parse(ddlTipo.SelectedValue));
             }
         }
-
-       
-
 
     }
 }

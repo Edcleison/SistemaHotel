@@ -5,11 +5,9 @@
 <html>
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Sitema de Serviços de Hotel</title>
+    <title>Sistema de Serviços de Hotel</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-    <%--<link rel="stylesheet" href="CSS/Estilos.css" />   
-    <script src="Scripts/JavaScriptFunctions.js"></script>--%>
 
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/bower_components/bootstrap/css/bootstrap.min.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/bower_components/sweetalert/css/sweetalert.css") %>" />
@@ -41,7 +39,7 @@
 
     <link rel="stylesheet" href="CSS/Estilos.css" />   
     <script src="Scripts/JavaScriptFunctions.js"></script>
-
+    
 </head>
 
 <body>
@@ -52,14 +50,9 @@
                     <Nodes>
                         <asp:TreeNode Checked="True" SelectAction="Expand" Selected="True">
                             <asp:TreeNode Text="Home" Value="Home" NavigateUrl="Default.aspx"></asp:TreeNode>
-                            <asp:TreeNode Text="Usuarios" Value="Usuarios" NavigateUrl="ControleUsuario.aspx"></asp:TreeNode>
-                            <asp:TreeNode Text="Clientes" Value="Novo Nó" NavigateUrl="ControleUsuario.aspx"></asp:TreeNode>
-                            <asp:TreeNode Text="Atender Solicitações" Value="Novo Nó" NavigateUrl="ControleUsuario.aspx"></asp:TreeNode>
-                            <asp:TreeNode Text="Restaurante" Value="Novo Nó"></asp:TreeNode>
-                            <asp:TreeNode Text="Frigobar" Value="Novo Nó"></asp:TreeNode>
-                            <asp:TreeNode Text="Ar-condicionado" Value="Novo Nó"></asp:TreeNode>
-                            <asp:TreeNode Text="Banheira" Value="Novo Nó"></asp:TreeNode>
-                            <asp:TreeNode Text="Sair" Value="Novo Nó"></asp:TreeNode>
+                            <asp:TreeNode Text="Controle de Usuários" Value="Usuarios" NavigateUrl="ControleUsuario.aspx"></asp:TreeNode>
+                            <asp:TreeNode Text=" Controle de Produtos" Value="Novo Nó" NavigateUrl="ControleProduto.aspx"></asp:TreeNode>                           
+                            <asp:TreeNode Text="Sair" Value="Novo Nó" NavigateUrl="~/Login.aspx"></asp:TreeNode>
                         </asp:TreeNode>
                     </Nodes>
                     <NodeStyle CssClass="menulink" />

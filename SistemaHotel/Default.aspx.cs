@@ -15,28 +15,10 @@ namespace SistemaHotel
         {
             if (Session["login"] != null)
             {
-                DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
-                DALUsuario dalUsu = new DALUsuario();
-                Usuario usu = dalUsu.buscaUsuarioLogin(Session["login"].ToString());
-                PerfilUsuario usuPerfil = dalPerfUsu.buscarUsuarioPerfil(usu.Id);
 
-
-
-                if (usuPerfil.Perfil == 1 || usuPerfil.Perfil == 2)
-                {
-                    lbNomeUsuario.Visible = true;
-                    lbNomeUsuarioLegenda.Visible = true;
-                    lbNomeUsuario.Text = Session["nomeUsuario"].ToString();
-                    lbPerfil.Text = Session["perfil"].ToString();
-                }
-                
-                else
-                {
-                    lbCodigoReserva.Visible = true;
-                    lbCodigoReservaLegenda.Visible = true;
-                    lbCodigoReserva.Text = Session["codigoReserva"].ToString();
-                    lbPerfil.Text = Session["perfil"].ToString();
-                }
+                lbNomeUsuario.Text = Session["nomeUsuario"].ToString();
+                lbCodigoReserva.Text = Session["login"].ToString();
+                lbPerfil.Text = Session["perfil"].ToString();
 
             }
 

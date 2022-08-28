@@ -8,21 +8,23 @@ namespace SistemaHotel.Model
 {
     public class Produto
     {
-        public int Id { get; set; }
-        public string Nome { get; set; }
-        public string Descricao { get; set; }
-        public decimal Preco { get; set; }
-        public string Foto { get; set; }
-        public int Tipo { get; set; }
+        public int IdProduto { get; set; }
+        public int TipoProduto { get; set; }
+        public decimal PrecoUnitario { get; set; }
+        public string DescricaoProduto { get; set; }
+        public string NomeProduto { get; set; }     
+        public string FotoProduto { get; set; }
+        
 
         public Produto()
         {
-            Id = 0;
-            Nome = "";
-            Descricao = "";
-            Preco = 0;
-            Foto = "";
-            Tipo = 0;
+            IdProduto = 0;
+            TipoProduto = 0;
+            PrecoUnitario = 0;
+            DescricaoProduto = "";
+            NomeProduto = "";
+            FotoProduto = "";
+            
         }
     }
 }
