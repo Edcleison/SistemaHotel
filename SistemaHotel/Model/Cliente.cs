@@ -7,19 +7,23 @@ namespace SistemaHotel.Model
 {
     public class Cliente
     {
-        public int Id { get; set; }
-        public string Cd_Reserva { get; set; }
-        public DateTime  DataInicio { get; set; }
-        public DateTime  DataFim { get; set; }
-        public char Ativo { get; set; }
+       
+        public int IdCliente { get; set; }
+        public string CodReserva { get; set; }
+        public string NomeCliente { get; set; }
+        public string Quarto { get; set; }
+        public DateTime  DataEntrada { get; set; }
+        public DateTime  DataSaida { get; set; }
 
         public Cliente()
         {
-            this.Id = 0;
-            this.Cd_Reserva = "";
-            this.DataInicio = DateTime.Now;
-            this.DataFim = DateTime.Now;
-            this.Ativo = 'P';
+            this.IdCliente = 0;
+            this.CodReserva = "";
+            this.NomeCliente = "";
+            this.Quarto = "";
+            this.DataEntrada = DateTime.Now;
+            this.DataSaida = DateTime.Now;
         }
+
     }
 }

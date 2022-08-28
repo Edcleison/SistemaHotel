@@ -114,22 +114,13 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.FileUpload fuProduto;
 
         /// <summary>
-        /// PlaceHolder1 control.
+        /// lnkSalvarProduto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder1;
-
-        /// <summary>
-        /// lnkSenha control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkSenha;
+        protected global::System.Web.UI.WebControls.LinkButton lnkSalvarProduto;
 
         /// <summary>
         /// lnkVoltar control.
@@ -186,15 +177,6 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoProdE;
 
         /// <summary>
-        /// LinkButton1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
-
-        /// <summary>
         /// fuProdE control.
         /// </summary>
         /// <remarks>
@@ -213,15 +195,6 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.LinkButton lnkSalvarProdutoE;
 
         /// <summary>
-        /// LinkButton2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
-
-        /// <summary>
         /// LinkButton3 control.
         /// </summary>
         /// <remarks>
@@ -229,14 +202,5 @@ namespace SistemaHotel
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
-
-        /// <summary>
-        /// PlaceHolder2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder2;
     }
 }

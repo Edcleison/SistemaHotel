@@ -10,21 +10,30 @@ namespace SistemaHotel.Model
     {
        
 
-        public int Id { get; set; }
-        public int Id_Cliente { get; set; }
-        public DateTime Data { get; set; }
-        public float Valor { get; set; }
+        public int IdPedido { get; set; }
         public int Status { get; set; }
-        public int Tipo { get; set; }
+        public int TipoPedido { get; set; }
+        public int IdEquipe { get; set; }
+        public int IdCliente { get; set; }
+        public string DescricaoProduto { get; set; }
+        public string Quarto { get; set; }
+        public string NomeProduto { get; set; }
+        public decimal ValorTotal { get; set; }
+        public DateTime DataAbertura { get; set; }
+        public DateTime DataFinalizacao { get; set; }
 
         public Pedido()
         {
-            Id = 0;
-            Id_Cliente = 0;
-            Data = DateTime.Now;
-            Valor = 0;
+            IdPedido = 0;
             Status = 0;
-            Tipo = 0;
+            TipoPedido = 0;          
+            IdCliente = 0;
+            Quarto = "";
+            DescricaoProduto ="";
+            NomeProduto = "";
+            ValorTotal = 0;
+            DataAbertura = DateTime.Now;
+            DataFinalizacao = DateTime.Now;
         }
     }
 

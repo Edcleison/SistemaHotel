@@ -5876,6 +5876,7 @@
   <ItemGroup>
     <Compile Include="ControleProduto.aspx.cs">
       <DependentUpon>ControleProduto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ControleProduto.aspx.designer.cs">
       <DependentUpon>ControleProduto.aspx</DependentUpon>
@@ -5887,6 +5888,9 @@
     <Compile Include="ControleUsuario.aspx.designer.cs">
       <DependentUpon>ControleUsuario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controller\DALEsquipeAtendimento.cs" />
+    <Compile Include="Controller\DALItemPedido.cs" />
+    <Compile Include="Controller\DALPedido.cs" />
     <Compile Include="Controller\DALProduto.cs" />
     <Compile Include="Controller\DALUsuario.cs" />
     <Compile Include="Controller\DALCliente.cs" />
@@ -5906,6 +5910,9 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Model\Cliente.cs" />
+    <Compile Include="Model\ItemPedido.cs" />
+    <Compile Include="Model\EquipeAtendimento.cs" />
+    <Compile Include="Model\Pedido.cs" />
     <Compile Include="Model\PerfilUsuario.cs" />
     <Compile Include="Model\Produto.cs" />
     <Compile Include="Model\Usuario.cs" />

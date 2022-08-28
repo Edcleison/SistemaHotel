@@ -159,6 +159,24 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.TextBox txtCodReserva;
 
         /// <summary>
+        /// txtQuarto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtQuarto;
+
+        /// <summary>
+        /// txtNomeCliente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNomeCliente;
+
+        /// <summary>
         /// txtInputDataIni control.
         /// </summary>
         /// <remarks>
@@ -238,6 +256,24 @@ namespace SistemaHotel
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCdReservaE;
+
+        /// <summary>
+        /// txtQuartoE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtQuartoE;
+
+        /// <summary>
+        /// txtNomeClienteE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNomeClienteE;
 
         /// <summary>
         /// txtInputDataFimE control.
