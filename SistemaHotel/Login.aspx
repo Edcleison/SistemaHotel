@@ -35,15 +35,13 @@
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/plugins/bootstrap-notify/bootstrap-notify.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/js/script.js") %>"></script>
 </head>
-<body color="blue">
+<body>
     <form id="form1" runat="server">
         <div>
             <div class="modal-backdrop fade show" id="mdBack" runat="server" style="opacity: 0.2; display: block; filter: (alpha(opacity= 20))" visible="true"></div>
-            <div class="modal fade show" id="mdLog" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100)); background-color: #FFFFFF; background-image: none;" visible="true">
+            <div class="modal fade show" id="mdLog" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100)); background-color: #FFFFFF; background-image: url('https://localhost:44338/IMAGENS/SISTEMA/logo_hotel.png');" visible="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content" visible="true" style="border-radius: 10px;">
-                        <div class="modal-header">
-                        </div>
                         <div class="modal-body">
                             <table>
                                 <tr>
@@ -98,9 +96,7 @@
             </div>
             <div class="modal fade show" id="mdRedPass" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
                 <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content" visible="false" style="border-radius: 10px;">
-                        <div class="modal-header">
-                        </div>
+                    <div class="modal-content" visible="false" style="border-radius: 10px;">           
                         <div class="modal-body">
                             <table>
                                 <tr>
