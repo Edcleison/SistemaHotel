@@ -15,12 +15,13 @@ namespace SistemaHotel
 {
     public partial class ControleUsuario : System.Web.UI.Page
     {
-        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=hotelservicos;Persist Security Info=True;User ID=hotelservicos;Password=Sc3f_r4_104t";
+        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
         // classes de persistência com o banco de dados
         DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
         DALUsuario dalUsu = new DALUsuario();
         DALCliente dalCli = new DALCliente();
-        DALEquipeAtendimento dalEqui = new DALEquipeAtendimento();
+        DALAdministracao dalAdm = new DALAdministracao();
+        DALFuncionario dalFun = new DALFuncionario();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,7 +38,7 @@ namespace SistemaHotel
 
                     if (usu.IdUsuario != 0)
                     {
-                        dalPerfUsu.excluirUsuario(usu.IdUsuario);
+                        dalPerfUsu.inativarUsuario(usu.IdUsuario);
                         string msg = "<script> alert('Usuário Excluído!'); </script>";
                         Response.Write(msg);
 
@@ -45,19 +46,18 @@ namespace SistemaHotel
                 }
                 if (Request.QueryString["CLIENTE_E"] != null)
                 {
-
+                    carregaDdlQuartoE();
                     rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["CLIENTE_E"]));
-
                     Usuario usu = dalUsu.buscarUsuarioId(rParametro);
-                   
                     Cliente cli = dalCli.buscarClienteReserva(usu.Login);
                     txtCdReservaE.Text = cli.CodReserva;
-                    txtQuartoE.Text = cli.Quarto;
-                    txtNomeClienteE.Text = cli.NomeCliente;
+                    ddlQuartoE.SelectedValue = cli.IdQuarto.ToString();
+                    txtNomeClienteE.Text = cli.NomeCliente + " " + cli.SobreNomeCliente;
                     txtDataIni.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
                     txtDataIni.Text = cli.DataSaida.ToString("dd/MM/yyyy HH:mm");
                     txtDataIniE.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
                     txtDataFimE.Text = cli.DataSaida.ToString("dd/MM/yyyy HH:mm");
+                    mdBack.Visible = true;
                     modEditCli.Visible = true;
                 }
                 carregaDdl();
@@ -80,7 +80,7 @@ namespace SistemaHotel
             sb.AppendLine("<th><center>ID</th></center>");
             sb.AppendLine("<th><center>NOME</th></center>");
             sb.AppendLine("<th><center>LOGIN</th></center>");
-            sb.AppendLine("<th><center>EXCLUIR</th></center>");
+            sb.AppendLine("<th><center>INATIVAR</th></center>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -90,9 +90,9 @@ namespace SistemaHotel
 
                 sb.AppendLine("<tr>");
                 sb.AppendLine("<td><center>" + dtr["ID_Usuario"] + "</td></center>");
-                sb.AppendLine("<td><center>" + dtr["NOME_USUARIO"] + "</td></center>");
+                sb.AppendLine("<td><center>" + dtr["NOME"] + " " + dtr["SOBRENOME"] + "</td></center>");
                 sb.AppendLine("<td><center>" + dtr["LOGIN"] + "</td></center>");
-                sb.AppendLine("<td><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-trash'></i></center></td>");
+                sb.AppendLine("<td><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
                 sb.AppendLine("</tr>");
 
             }
@@ -128,6 +128,7 @@ namespace SistemaHotel
                     {
                         //campos relacionados passagem devalores dos textbox para os atributos do objeto Usuário
                         usu.NomeUsuario = txtNome.Text;
+                        usu.SobrenomeUsuario = txtSobreNome.Text;
                         usu.Login = txtLogin.Text;
                         usu.Senha = Criptografia.Encrypt(txtNovaSenha.Text);
                         //insere o objeto Usuário
@@ -142,12 +143,24 @@ namespace SistemaHotel
                         perfUsu.StatusPerfilUsuario = 'S';
                         //insere o objeto PerfilUsuário
                         dalPerfUsu.inserirPerfilUsuario(perfUsu);
-                        //campos relacionados a criação do Usuário na EquipeAtendimento
-                        EquipeAtendimento equi = new EquipeAtendimento();
-                        equi.NomeUsuario = usu.NomeUsuario;
-                        equi.IdUsuario= usu.IdUsuario;
-                        equi.IdPerfil = perfUsu.IdPerfil;
-                        dalEqui.InserirEquipeAtendimento(equi);
+                        //campos relacionados a criação do Usuário na Administracao
+                        if (ddlPerfilNovoUsu.SelectedValue == "1")
+                        {
+                            Administracao adm = new Administracao();
+                            adm.IdUsuario = usu.IdUsuario;
+                            adm.IdPerfil = perfUsu.IdPerfil;
+                            dalAdm.inserirAdministracao(adm);
+                        }
+                        //campos relacionados a criação do Usuário na Funcionario
+                        else
+                        {
+                            Funcionario fun = new Funcionario();
+                            fun.IdUsuario = usu.IdUsuario;
+                            fun.IdPerfil = perfUsu.IdPerfil;
+                            dalFun.inserirFuncionario(fun);
+
+                        }
+
                         string msg = "<script> alert('Cadastro realizado!'); </script>";
                         Response.Write(msg);
                         limparCampos();
@@ -175,7 +188,7 @@ namespace SistemaHotel
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT ID, UPPER(PERFIL) AS PERFIL FROM PERFIL WHERE ID <> 3 ORDER BY PERFIL", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_PERFIL, UPPER(DESCRICAO_PERFIL) AS PERFIL FROM PERFIL WHERE ID_PERFIL <> 3 ORDER BY PERFIL", connection))
                 {
                     try
                     {
@@ -185,7 +198,7 @@ namespace SistemaHotel
                         adp.Fill(dta);
                         cmd.Connection.Close();
                         ddlPerfilNovoUsu.DataTextField = "PERFIL";
-                        ddlPerfilNovoUsu.DataValueField = "ID";
+                        ddlPerfilNovoUsu.DataValueField = "ID_PERFIL";
                         ddlPerfilNovoUsu.DataSource = dta.Copy();
                         ddlPerfilNovoUsu.DataBind();
                         ddlPerfilNovoUsu.Items.Insert(0, "SELECIONE");
@@ -231,8 +244,8 @@ namespace SistemaHotel
             sb.AppendLine("<th><center>NOME</th></center>");
             sb.AppendLine("<th><center>DATA INICIO</th></center>");
             sb.AppendLine("<th><center>DATA FIM</th></center>");
-            sb.AppendLine("<th><center>EDITAR/DATA FIM</th></center>");
-            sb.AppendLine("<th><center>EXCLUIR</th></center>");
+            sb.AppendLine("<th><center>EDITAR</th></center>");
+            sb.AppendLine("<th><center>INATIVAR</th></center>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -241,14 +254,14 @@ namespace SistemaHotel
             {
 
                 sb.AppendLine("<tr>");
-                sb.AppendLine("<td><center>" + dtr["ID_Usuario"] + "</td></center>");
+                sb.AppendLine("<td><center>" + dtr["ID_USUARIO"] + "</td></center>");
                 sb.AppendLine("<td><center>" + dtr["LOGIN"] + "</td></center>");
-                sb.AppendLine("<td><center>" + dtr["Quarto"] + "</td></center>");
-                sb.AppendLine("<td><center>" + dtr["Nome_Usuario"] + "</td></center>");
+                sb.AppendLine("<td><center>" + dtr["DESCRICAO_QUARTO"] + "</td></center>");
+                sb.AppendLine("<td><center>" + dtr["NOME"] + " " + dtr["SOBRENOME"] + "</td></center>");
                 sb.AppendLine("<td><center>" + Convert.ToDateTime(dtr["DATA_Entrada"]).ToString("dd/MM/yyyy") + "</td></center>");
                 sb.AppendLine("<td><center>" + Convert.ToDateTime(dtr["DATA_Saida"]).ToString("dd/MM/yyyy") + "</td></center>");
                 sb.AppendLine("<td><center><a href='ControleUsuario.aspx?CLIENTE_E=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
-                sb.AppendLine("<td><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-trash'></i></center></td>");
+                sb.AppendLine("<td><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
                 sb.AppendLine("</tr>");
 
             }
@@ -264,15 +277,16 @@ namespace SistemaHotel
         {
             mdBack.Visible = true;
             mdCli.Visible = true;
+            carregaDdlQuarto();
+
         }
 
         protected void salvarNovoCliente_Click(object sender, EventArgs e)
         {
 
 
-            if (!string.IsNullOrEmpty(txtCodReserva.Text) && !string.IsNullOrEmpty(txtInputDataIni.Text) && !string.IsNullOrEmpty(txtInputDataFim.Text))
+            if (!string.IsNullOrEmpty(txtCodReserva.Text) && !string.IsNullOrEmpty(txtInputDataIni.Text) && !string.IsNullOrEmpty(txtInputDataFim.Text) && ddlQuarto.SelectedValue != "SELECIONE")
             {
-
                 string sCdReserva = txtCodReserva.Text;
                 Usuario usu = new Usuario();
                 //busca o usuário para ver se já está cadastrado no banco
@@ -290,49 +304,98 @@ namespace SistemaHotel
                             //campos relacionados ao cadastro de cliente                           
                             Cliente cli = new Cliente();
                             cli.CodReserva = sCdReserva;
-                            cli.Quarto = txtQuarto.Text;
+                            cli.IdQuarto = int.Parse(ddlQuarto.SelectedValue);
                             cli.NomeCliente = txtNomeCliente.Text;
+                            cli.SobreNomeCliente = txtSobrenomeCliente.Text;
                             cli.DataEntrada = dataIni;
                             cli.DataSaida = dataFim;
-                            dalCli.inserirCliente(cli);
+                            //verifica se tem algum cliente ocupando o quarto com o id selecionado no DropDownList                           
+                            DataTable dta = dalCli.verificarOcupacaoQuarto(ddlQuarto.SelectedValue);
+                            if (dta.Rows.Count > 0)
+                            {
+                                DateTime dataOcupa;
+                                dataOcupa = Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]);
+                                if (dataOcupa < DateTime.Now)
+                                {
+                                    dalCli.inserirCliente(cli);
+                                    //campos relacionados ao cadastro de usuário
+                                    usu.Login = sCdReserva;
+                                    usu.NomeUsuario = txtNomeCliente.Text;
+                                    usu.SobrenomeUsuario = txtSobrenomeCliente.Text;
+                                    txtSenhaRand.Text = SenhaRandomica.RandLetras(5) + SenhaRandomica.RandNumeros(3);
+                                    usu.Senha = Criptografia.Encrypt(txtSenhaRand.Text);
+                                    dalUsu.inserirUsuario(usu);
 
+                                    //busca o usuário que cadastrou no banco
+                                    usu = dalUsu.buscaUsuarioLogin(sCdReserva);
 
-                            //campos relacionados ao cadastro de usuário
-                            usu.Login = sCdReserva;
-                            usu.NomeUsuario = txtNomeCliente.Text;
-                            txtSenhaRand.Text = SenhaRandomica.RandLetras(5) + SenhaRandomica.RandNumeros(3);
-                            usu.Senha = Criptografia.Encrypt(txtSenhaRand.Text);
-                            dalUsu.inserirUsuario(usu);
+                                    //campos relacionados ao cadastro do perfil do usuário
+                                    PerfilUsuario perfUsu = new PerfilUsuario();
+                                    perfUsu.IdPerfil = 3;
+                                    perfUsu.IdUsuario = usu.IdUsuario;
+                                    perfUsu.StatusPerfilUsuario = 'S';
+                                    dalPerfUsu.inserirPerfilUsuario(perfUsu);
 
-                            //busca o usuário que cadastrou no banco
-                            usu = dalUsu.buscaUsuarioLogin(sCdReserva);
+                                    //campos de retorno das datas cadastradas
+                                    txtDataIni.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
+                                    txtDataFim.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
 
-                            //campos relacionados ao cadastro do perfil do usuário
-                            PerfilUsuario perfUsu = new PerfilUsuario();
-                            perfUsu.IdPerfil = 3;
-                            perfUsu.IdUsuario = usu.IdUsuario;
-                            perfUsu.StatusPerfilUsuario = 'S';
-                            dalPerfUsu.inserirPerfilUsuario(perfUsu);
+                                    string msg = "<script> alert('Cadastro realizado!'); </script>";
+                                    Response.Write(msg);
+                                }
+                                else
+                                {
+                                    string msg = $"<script> alert('Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {dataOcupa.ToString("dd/MM/yyyy HH:ss")}!'); </script>";
+                                    Response.Write(msg);
 
-                            //campos de retorno das datas cadastradas
-                            txtDataIni.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
-                            txtDataFim.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
+                                }
 
-                            string msg = "<script> alert('Cadastro realizado!'); </script>";
-                            Response.Write(msg);
+                            }
+                            else
+                            {
+                                dalCli.inserirCliente(cli);
+                                //campos relacionados ao cadastro de usuário
+                                usu.Login = sCdReserva;
+                                usu.NomeUsuario = txtNomeCliente.Text;
+                                usu.SobrenomeUsuario = txtSobrenomeCliente.Text;
+                                txtSenhaRand.Text = SenhaRandomica.RandLetras(5) + SenhaRandomica.RandNumeros(3);
+                                usu.Senha = Criptografia.Encrypt(txtSenhaRand.Text);
+                                dalUsu.inserirUsuario(usu);
+
+                                //busca o usuário que cadastrou no banco
+                                usu = dalUsu.buscaUsuarioLogin(sCdReserva);
+
+                                //campos relacionados ao cadastro do perfil do usuário
+                                PerfilUsuario perfUsu = new PerfilUsuario();
+                                perfUsu.IdPerfil = 3;
+                                perfUsu.IdUsuario = usu.IdUsuario;
+                                perfUsu.StatusPerfilUsuario = 'S';
+                                dalPerfUsu.inserirPerfilUsuario(perfUsu);
+
+                                //campos de retorno das datas cadastradas
+                                txtDataIni.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
+                                txtDataFim.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
+
+                                string msg = "<script> alert('Cadastro realizado!'); </script>";
+                                Response.Write(msg);
+
+                            }
+                            
                         }
                         else
                         {
                             string msg = "<script> alert('Datas não permitidas!'); </script>";
                             Response.Write(msg);
-
                         }
+
                     }
                     else
                     {
                         string msg = "<script> alert('Datas não permitidas!'); </script>";
                         Response.Write(msg);
+
                     }
+                    
 
                 }
                 else
@@ -340,15 +403,12 @@ namespace SistemaHotel
                     string msg = "<script> alert('Cliente já cadastrado!'); </script>";
                     Response.Write(msg);
                 }
-
             }
             else
             {
                 string msg = "<script> alert('Preencha Todos os campos!'); </script>";
                 Response.Write(msg);
             }
-
-
         }
 
         protected void alterarData_Click(object sender, EventArgs e)
@@ -365,10 +425,33 @@ namespace SistemaHotel
                 Cliente cli = dalCliente.buscarClienteReserva(txtCdReservaE.Text.ToUpper());
                 //alteração da data de saída
                 cli.DataSaida = Convert.ToDateTime(novaDataFim);
-                dalCliente.alterarCliente(cli);
-                txtDataFimE.Text = novaDataFim.ToString();
-                string msg = "<script> alert('Data Alterada!'); </script>";
-                Response.Write(msg);
+
+                DataTable dta = dalCli.verificarOcupacaoQuarto(ddlQuartoE.SelectedValue);
+                if (dta.Rows.Count > 0)
+                {
+                    DateTime dataOcupa;
+                    dataOcupa = Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]);
+                    if (dataOcupa < DateTime.Now)
+                    {
+                        dalCliente.alterarCliente(cli);
+                        txtDataFimE.Text = novaDataFim.ToString();
+                        string msg = "<script> alert('Data Alterada!'); </script>";
+                        Response.Write(msg);
+                    }
+                    else
+                    {
+                        string msg = $"<script> alert('Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {dataOcupa.ToString("dd/MM/yyyy HH:mm")} !'); </script>";
+                        Response.Write(msg);
+                    }
+
+                }
+                else
+                {
+                    dalCliente.alterarCliente(cli);
+                    txtDataFimE.Text = novaDataFim.ToString();
+                    string msg = "<script> alert('Data Alterada!'); </script>";
+                    Response.Write(msg);
+                }
             }
             else
             {
@@ -379,20 +462,91 @@ namespace SistemaHotel
 
         }
 
+        private void carregaDdlQuarto()
+        {
+            DataTable dta = new DataTable();
+            SqlDataAdapter adp;
+
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_QUARTO, DESCRICAO_QUARTO AS QUARTO FROM QUARTO ORDER BY DESCRICAO_QUARTO", connection))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                        adp = new SqlDataAdapter(cmd);
+                        adp.Fill(dta);
+                        cmd.Connection.Close();
+                        ddlQuarto.DataTextField = "QUARTO";
+                        ddlQuarto.DataValueField = "ID_QUARTO";
+                        ddlQuarto.DataSource = dta.Copy();
+                        ddlQuarto.DataBind();
+                        ddlQuarto.Items.Insert(0, "SELECIONE");
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        cmd.Connection.Close();
+                    }
+
+                }
+            }
+
+
+        }
+        private void carregaDdlQuartoE()
+        {
+            DataTable dta = new DataTable();
+            SqlDataAdapter adp;
+
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_QUARTO, DESCRICAO_QUARTO AS QUARTO FROM QUARTO ORDER BY DESCRICAO_QUARTO", connection))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                        adp = new SqlDataAdapter(cmd);
+                        adp.Fill(dta);
+                        cmd.Connection.Close();
+                        ddlQuartoE.DataTextField = "QUARTO";
+                        ddlQuartoE.DataValueField = "ID_QUARTO";
+                        ddlQuartoE.DataSource = dta.Copy();
+                        ddlQuartoE.DataBind();
+                        ddlQuartoE.Items.Insert(0, "SELECIONE");
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        cmd.Connection.Close();
+                    }
+
+                }
+            }
+        }
         #endregion
 
         #region Geral
         private void limparCampos()
         {
             txtNome.Text = "";
+            txtSobreNome.Text = "";
             txtLogin.Text = "";
             txtNovaSenha.Text = "";
             txtConfirmaSenha.Text = "";
             ddlPerfil.SelectedIndex = -1;
             txtCdReservaE.Text = "";
             txtCodReserva.Text = "";
-            txtQuarto.Text = "";
-            txtQuartoE.Text = "";
+            ddlQuarto.SelectedIndex = -1;
+            ddlQuartoE.SelectedIndex = -1;
             txtNomeCliente.Text = "";
             txtNomeClienteE.Text = "";
             txtDataFim.Text = "";
@@ -410,7 +564,7 @@ namespace SistemaHotel
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT ID, UPPER(PERFIL) AS PERFIL FROM PERFIL  ORDER BY PERFIL ", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_PERFIL, UPPER(DESCRICAO_PERFIL) AS PERFIL FROM PERFIL  ORDER BY PERFIL ", connection))
                 {
                     try
                     {
@@ -420,7 +574,7 @@ namespace SistemaHotel
                         adp.Fill(dta);
                         cmd.Connection.Close();
                         ddlPerfil.DataTextField = "PERFIL";
-                        ddlPerfil.DataValueField = "ID";
+                        ddlPerfil.DataValueField = "ID_PERFIL";
                         ddlPerfil.DataSource = dta.Copy();
                         ddlPerfil.DataBind();
                         ddlPerfil.Items.Insert(0, "SELECIONE");
@@ -446,7 +600,7 @@ namespace SistemaHotel
 
         protected void ddlPerfil_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlPerfil.SelectedValue != "0")
+            if (ddlPerfil.SelectedValue != "SELECIONE")
             {
                 if (ddlPerfil.SelectedValue != "3")
                 {
@@ -462,6 +616,7 @@ namespace SistemaHotel
         }
 
         #endregion
+
 
     }
 }

@@ -57,6 +57,7 @@ namespace SistemaHotel
                     txtPrecoE.Text = prod.PrecoUnitario.ToString();
                     ddlTipoProdE.SelectedValue = prod.TipoProduto.ToString();
                     carregaDdlEditarTipoProduto();
+                    mdBack.Visible = true;
                     mdProdE.Visible = true;
                 }
                 carregaDdl();
@@ -121,7 +122,7 @@ namespace SistemaHotel
                 prod.PrecoUnitario = decimal.Parse(txtPreco.Text);
                 prod.TipoProduto = Convert.ToInt32(ddlTipoProdS.SelectedValue);
                 //faz o upload da foto e salva o nome no obj
-                if (fuProduto.PostedFile.FileName != "" && txtNome.Text != "" && txtDescricao.Text != "" && txtPreco.Text != "" && ddlTipoProdS.SelectedValue != "0")
+                if (fuProduto.PostedFile.FileName != "" && txtNome.Text != "" && txtDescricao.Text != "" && txtPreco.Text != "" && ddlTipoProdS.SelectedValue != "SELECIONE")
                 {
                     prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
                     string img = caminho + prod.FotoProduto;
@@ -213,9 +214,9 @@ namespace SistemaHotel
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Tipo_Prod]
-                                                          ,[Descricao_Tipo_Prod]
-                                                            FROM [dbo].[TIPO_PRODUTO] ORDER BY Descricao_Tipo_Prod", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_TIPO_PROD]
+                                                          ,[DESCRICAO_TIPO_PROD]
+                                                            FROM [DBO].[TIPO_PRODUTO] ORDER BY DESCRICAO_TIPO_PROD", connection))
                 {
                     try
                     {
@@ -224,8 +225,8 @@ namespace SistemaHotel
                         adp = new SqlDataAdapter(cmd);
                         adp.Fill(dta);
                         cmd.Connection.Close();
-                        ddlTipo.DataTextField = "Descricao_Tipo_Prod";
-                        ddlTipo.DataValueField = "Id_Tipo_Prod";
+                        ddlTipo.DataTextField = "DESCRICAO_TIPO_PROD";
+                        ddlTipo.DataValueField = "ID_TIPO_PROD";
                         ddlTipo.DataSource = dta.Copy();
                         ddlTipo.DataBind();
                         ddlTipo.Items.Insert(0, "SELECIONE");
@@ -250,9 +251,9 @@ namespace SistemaHotel
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Tipo_Prod]
-                                                          ,[Descricao_Tipo_Prod]
-                                                            FROM [dbo].[TIPO_PRODUTO] ORDER BY Descricao_Tipo_Prod", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_TIPO_PROD]
+                                                          ,[DESCRICAO_TIPO_PROD]
+                                                            FROM [DBO].[TIPO_PRODUTO] ORDER BY DESCRICAO_TIPO_PROD", connection))
                 {
                     try
                     {
@@ -261,8 +262,8 @@ namespace SistemaHotel
                         adp = new SqlDataAdapter(cmd);
                         adp.Fill(dta);
                         cmd.Connection.Close();
-                        ddlTipoProdE.DataTextField = "Descricao_Tipo_Prod";
-                        ddlTipoProdE.DataValueField = "Id_Tipo_Prod";
+                        ddlTipoProdE.DataTextField = "DESCRICAO_TIPO_PROD";
+                        ddlTipoProdE.DataValueField = "ID_TIPO_PROD";
                         ddlTipoProdE.DataSource = dta.Copy();
                         ddlTipoProdE.DataBind();
                         ddlTipoProdE.Items.Insert(0, "SELECIONE");
@@ -286,9 +287,9 @@ namespace SistemaHotel
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Tipo_Prod]
-                                                          ,[Descricao_Tipo_Prod]
-                                                            FROM [dbo].[TIPO_PRODUTO] ORDER BY Descricao_Tipo_Prod", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_TIPO_PROD]
+                                                          ,[DESCRICAO_TIPO_PROD]
+                                                            FROM [DBO].[TIPO_PRODUTO] ORDER BY DESCRICAO_TIPO_PROD", connection))
                 {
                     try
                     {
@@ -297,11 +298,11 @@ namespace SistemaHotel
                         adp = new SqlDataAdapter(cmd);
                         adp.Fill(dta);
                         cmd.Connection.Close();
-                        ddlTipoProdS.DataTextField = "Descricao_Tipo_Prod";
-                        ddlTipoProdS.DataValueField = "Id_Tipo_Prod";
+                        ddlTipoProdS.DataTextField = "DESCRICAO_TIPO_PROD";
+                        ddlTipoProdS.DataValueField = "ID_TIPO_PROD";
                         ddlTipoProdS.DataSource = dta.Copy();
                         ddlTipoProdS.DataBind();
-                        ddlTipoProdS.Items.Insert(0, "SELECIONE");
+                        ddlTipoProdS.Items.Insert(0,"SELECIONE");
                     }
                     catch (Exception erro)
                     {
@@ -326,7 +327,7 @@ namespace SistemaHotel
 
         protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlTipo.SelectedValue != "0")
+            if (ddlTipo.SelectedValue != "SELECIONE")
             {
                 carregarTabela(int.Parse(ddlTipo.SelectedValue));
             }

@@ -76,18 +76,12 @@ namespace SistemaHotel
                     }
 
                 }
-                else
-                {
-                    string msg = "<script> alert('Login não permitido!); </script>";
-                    Response.Write(msg);
-                }
-
             }
             else
             {
                 DALCliente dcli = new DALCliente();
                 Cliente cli = dcli.buscarClienteReserva(login);
-                if (cli.DataSaida < DateTime.Now)
+                if (cli.DataSaida > DateTime.Now)
                 {
                     if (login != "" && senha != "")
                     {
@@ -116,6 +110,7 @@ namespace SistemaHotel
 
                                 Session["id"] = u.IdUsuario;
                                 Session["nome"] = u.NomeUsuario;
+                                Session["login"] = u.Login;
                                 switch (pu.IdPerfil)
                                 {
                                     case 1:
@@ -140,14 +135,7 @@ namespace SistemaHotel
                         Response.Write(msg);
                     }
 
-                }
-                else
-                {
-                    dpu.excluirUsuario(u.IdUsuario);
-                    string msg = "<script> alert('Login não permitido!); </script>";
-                    Response.Write(msg);
-
-                }
+                } 
             }
 
         }

@@ -77,6 +77,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="ControleQuarto.aspx" />
     <Content Include="ControleProduto.aspx" />
     <Content Include="CSS\StyleSheet.css.exclude" />
     <Content Include="IMAGENS\SISTEMA\menu-icon-19353.png" />
@@ -1072,6 +1073,7 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
     <Content Include="layout\website.publishproj" />
+    <Content Include="NovoPedido.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -1091,11 +1093,12 @@
     <None Include="Properties\PublishProfiles\sistemahotel - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy1.pubxml" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <Content Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
     </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -5870,9 +5873,15 @@
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.min.js" />
-    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControleQuarto.aspx.cs">
+      <DependentUpon>ControleQuarto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControleQuarto.aspx.designer.cs">
+      <DependentUpon>ControleQuarto.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ControleProduto.aspx.cs">
       <DependentUpon>ControleProduto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5887,7 +5896,9 @@
     <Compile Include="ControleUsuario.aspx.designer.cs">
       <DependentUpon>ControleUsuario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Controller\DALEsquipeAtendimento.cs" />
+    <Compile Include="Controller\DALQuarto.cs" />
+    <Compile Include="Controller\DALFuncionario.cs" />
+    <Compile Include="Controller\DALAdministracao.cs" />
     <Compile Include="Controller\DALItemPedido.cs" />
     <Compile Include="Controller\DALPedido.cs" />
     <Compile Include="Controller\DALProduto.cs" />
@@ -5908,9 +5919,11 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Quarto.cs" />
+    <Compile Include="Model\Funcionario.cs" />
     <Compile Include="Model\Cliente.cs" />
+    <Compile Include="Model\Administracao.cs" />
     <Compile Include="Model\ItemPedido.cs" />
-    <Compile Include="Model\EquipeAtendimento.cs" />
     <Compile Include="Model\Pedido.cs" />
     <Compile Include="Model\PerfilUsuario.cs" />
     <Compile Include="Model\Produto.cs" />
@@ -5921,6 +5934,13 @@
     </Compile>
     <Compile Include="PaginaMestre.Master.designer.cs">
       <DependentUpon>PaginaMestre.Master</DependentUpon>
+    </Compile>
+    <Compile Include="NovoPedido.aspx.cs">
+      <DependentUpon>NovoPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NovoPedido.aspx.designer.cs">
+      <DependentUpon>NovoPedido.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Criptografia.cs" />

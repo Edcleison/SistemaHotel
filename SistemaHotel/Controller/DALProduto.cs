@@ -222,23 +222,23 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [dbo].[PRODUTO]
-                                                       ([FK_TIPO_PRODUTO_Id_Tipo_Prod]
-                                                       ,[Preco_Uni]
-                                                       ,[Descricao_Prod]
-                                                       ,[Nome_Prod]
-                                                       ,[Foto_Prod])
+                                                       ([ID_TIPO_PROD]
+                                                       ,[PRECO_UNI]
+                                                       ,[DESCRICAO_PROD]
+                                                       ,[NOME_PROD]
+                                                       ,[FOTO_PROD])
                                                  VALUES
-                                            (@FK_TIPO_PRODUTO_Id_Tipo_Prod,@Preco_Uni,@Descricao_Prod,@Nome_Prod,@Foto_Prod)", connection))
+                                            (@ID_TIPO_PROD,@PRECO_UNI,@DESCRICAO_PROD,@NOME_PROD,@FOTO_PROD)", connection))
                 {
 
                     try
                     {
                         cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("FK_TIPO_PRODUTO_Id_Tipo_Prod", prod.TipoProduto);
-                        cmd.Parameters.AddWithValue("Preco_Uni", prod.PrecoUnitario);
-                        cmd.Parameters.AddWithValue("Descricao_Prod", prod.DescricaoProduto);
-                        cmd.Parameters.AddWithValue("Nome_Prod", prod.NomeProduto);
-                        cmd.Parameters.AddWithValue("Foto_Prod", prod.FotoProduto);
+                        cmd.Parameters.AddWithValue("ID_TIPO_PROD", prod.TipoProduto);
+                        cmd.Parameters.AddWithValue("PRECO_UNI", prod.PrecoUnitario);
+                        cmd.Parameters.AddWithValue("DESCRICAO_PROD", prod.DescricaoProduto);
+                        cmd.Parameters.AddWithValue("NOME_PROD", prod.NomeProduto);
+                        cmd.Parameters.AddWithValue("FOTO_PROD", prod.FotoProduto);
                         cmd.ExecuteNonQuery();
                     }
                     catch (Exception erro)
@@ -262,13 +262,13 @@ namespace SistemaHotel.Controller
             {
 
 
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Produto]
-                                                          ,[FK_TIPO_PRODUTO_Id_Tipo_Prod]
-                                                          ,[Preco_Uni]
-                                                          ,[Descricao_Prod]
-                                                          ,[Nome_Prod]
-                                                          ,[Foto_Prod]
-                                                      FROM [dbo].[PRODUTO]", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_PRODUTO]
+                                                          ,[ID_TIPO_PROD]
+                                                          ,[PRECO_UNI]
+                                                          ,[DESCRICAO_PROD]
+                                                          ,[NOME_PROD]
+                                                          ,[FOTO_PROD]
+                                                      FROM [DBO].[PRODUTO]", connection))
                 {
                     try
                     {
@@ -299,14 +299,14 @@ namespace SistemaHotel.Controller
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand($@"SELECT [Id_Produto]
-                                                            ,[FK_TIPO_PRODUTO_Id_Tipo_Prod]
-                                                            ,[Preco_Uni]
-                                                            ,[Descricao_Prod]
-                                                            ,[Nome_Prod]
-                                                            ,[Foto_Prod]
-                                                        FROM [dbo].[PRODUTO]
-                                                        WHERE FK_TIPO_PRODUTO_Id_Tipo_Prod = {Tipo}", connection))
+                using (SqlCommand cmd = new SqlCommand($@"SELECT [ID_PRODUTO]
+                                                            ,[ID_TIPO_PROD]
+                                                            ,[PRECO_UNI]
+                                                            ,[DESCRICAO_PROD]
+                                                            ,[NOME_PROD]
+                                                            ,[FOTO_PROD]
+                                                        FROM [DBO].[PRODUTO]
+                                                        WHERE ID_TIPO_PROD = {Tipo}", connection))
                 {
                     try
                     {
@@ -339,28 +339,28 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
 
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Produto]
-                                                            ,[FK_TIPO_PRODUTO_Id_Tipo_Prod]
-                                                            ,[Preco_Uni]
-                                                            ,[Descricao_Prod]
-                                                            ,[Nome_Prod]
-                                                            ,[Foto_Prod]
-                                                        FROM [dbo].[PRODUTO] WHERE Id_Produto = @Id_Produto", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_PRODUTO]
+                                                            ,[ID_TIPO_PROD]
+                                                            ,[PRECO_UNI]
+                                                            ,[DESCRICAO_PROD]
+                                                            ,[NOME_PROD]
+                                                            ,[FOTO_PROD]
+                                                        FROM [DBO].[PRODUTO] WHERE ID_PRODUTO = @ID_PRODUTO", connection))
                 {
                     try
                     {
-                        cmd.Parameters.AddWithValue("@Id_Produto", IdProduto);
+                        cmd.Parameters.AddWithValue("@ID_PRODUTO", IdProduto);
                         cmd.Connection.Open();
                         SqlDataReader registro = cmd.ExecuteReader();
                         if (registro.HasRows)
                         {
                             registro.Read();
-                            prod.IdProduto = Convert.ToInt32(registro["Id_Produto"]);
-                            prod.TipoProduto = Convert.ToInt32(registro["FK_TIPO_PRODUTO_Id_Tipo_Prod"]);
-                            prod.PrecoUnitario = Convert.ToDecimal(registro["Preco_Uni"]);
-                            prod.DescricaoProduto = Convert.ToString(registro["Descricao_Prod"]);
-                            prod.NomeProduto = Convert.ToString(registro["Nome_Prod"]);
-                            prod.FotoProduto = Convert.ToString(registro["Foto_Prod"]);
+                            prod.IdProduto = Convert.ToInt32(registro["ID_PRODUTO"]);
+                            prod.TipoProduto = Convert.ToInt32(registro["ID_TIPO_PROD"]);
+                            prod.PrecoUnitario = Convert.ToDecimal(registro["PRECO_UNI"]);
+                            prod.DescricaoProduto = Convert.ToString(registro["DESCRICAO_PROD"]);
+                            prod.NomeProduto = Convert.ToString(registro["NOME_PROD"]);
+                            prod.FotoProduto = Convert.ToString(registro["FOTO_PROD"]);
                         }
                     }
 
@@ -381,21 +381,21 @@ namespace SistemaHotel.Controller
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"UPDATE [dbo].[PRODUTO]
-                                                       SET [Preco_Uni] =@Preco_Uni
-                                                          ,[Descricao_Prod] = @[Descricao_Prod]
-                                                          ,[Nome_Prod] = @Nome_Prod
-                                                          ,[Foto_Prod] = @Foto_Prod                                                         
-                                                          WHERE  ID_Produto = @ID_Produto", connection))
+                using (SqlCommand cmd = new SqlCommand(@"UPDATE [DBO].[PRODUTO]
+                                                       SET [PRECO_UNI] =@PRECO_UNI
+                                                          ,[DESCRICAO_PROD] = @[DESCRICAO_PROD]
+                                                          ,[NOME_PROD] = @NOME_PROD
+                                                          ,[FOTO_PROD] = @FOTO_PROD                                                         
+                                                          WHERE  ID_PRODUTO = @ID_PRODUTO", connection))
                 {
                     try
                     {
                         cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("Preco_Uni", prod.PrecoUnitario);
-                        cmd.Parameters.AddWithValue("Descricao_Prod", prod.DescricaoProduto);
-                        cmd.Parameters.AddWithValue("Nome_Prod", prod.NomeProduto);
-                        cmd.Parameters.AddWithValue("Foto_Prod", prod.FotoProduto);
-                        cmd.Parameters.AddWithValue("ID_Produto", prod.IdProduto);
+                        cmd.Parameters.AddWithValue("PRECO_UNI", prod.PrecoUnitario);
+                        cmd.Parameters.AddWithValue("DESCRICAO_PROD", prod.DescricaoProduto);
+                        cmd.Parameters.AddWithValue("NOME_PROD", prod.NomeProduto);
+                        cmd.Parameters.AddWithValue("FOTO_PROD", prod.FotoProduto);
+                        cmd.Parameters.AddWithValue("ID_PRODUTO", prod.IdProduto);
                         cmd.ExecuteNonQuery();
                     }
                     catch (Exception erro)
@@ -417,13 +417,13 @@ namespace SistemaHotel.Controller
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"DELETE FROM [dbo].[PRODUTO] WHERE ID_Produto = @ID_Produto", connection))
+                using (SqlCommand cmd = new SqlCommand(@"DELETE FROM [DBO].[PRODUTO] WHERE ID_PRODUTO = @ID_PRODUTO", connection))
                 {
 
                     try
                     {
                         connection.Open();
-                        cmd.Parameters.AddWithValue("ID_Produto", IdProduto);
+                        cmd.Parameters.AddWithValue("ID_PRODUTO", IdProduto);
                         cmd.ExecuteNonQuery();
                         cmd.Connection.Close();
                     }

@@ -159,15 +159,16 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand
-                    (@"INSERT INTO CLIENTE (COD_RESERVA,NOME_CLIENTE,QUARTO,DATA_ENTRADA,DATA_SAIDA) 
-                      VALUES (@COD_RESERVA,@NOME_CLIENTE,@QUARTO,@DATA_ENTRADA,@DATA_SAIDA)", connection))
+                    (@"INSERT INTO CLIENTE (COD_RESERVA,ID_QUARTO,NOME_CLIENTE,SOBRENOME_CLIENTE,DATA_ENTRADA,DATA_SAIDA) 
+                      VALUES (@COD_RESERVA,@ID_QUARTO,@NOME_CLIENTE,@SOBRENOME_CLIENTE,@DATA_ENTRADA,@DATA_SAIDA)", connection))
                 {
                     try
                     {
                         cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("ID_QUARTO", cli.IdQuarto);
                         cmd.Parameters.AddWithValue("COD_RESERVA", cli.CodReserva);
                         cmd.Parameters.AddWithValue("NOME_CLIENTE", cli.NomeCliente);
-                        cmd.Parameters.AddWithValue("QUARTO", cli.Quarto);
+                        cmd.Parameters.AddWithValue("SOBRENOME_CLIENTE", cli.SobreNomeCliente);                 
                         cmd.Parameters.AddWithValue("DATA_ENTRADA", cli.DataEntrada);
                         cmd.Parameters.AddWithValue("DATA_SAIDA", cli.DataSaida);
                         cmd.ExecuteNonQuery();
@@ -190,19 +191,19 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand
-                    (@"UPDATE CLIENTE SET COD_RESERVA=@COD_RESERVA, NOME_CLIENTE=@NOME_CLIENTE, QUARTO=@QUARTO, 
+                    (@"UPDATE CLIENTE SET ID_QUARTO=@ID_QUARTO,COD_RESERVA=@COD_RESERVA, NOME_CLIENTE=@NOME_CLIENTE, SOBRENOME_CLIENTE=@SOBRENOME_CLIENTE, 
                        DATA_ENTRADA=@DATA_ENTRADA,DATA_SAIDA=@DATA_SAIDA WHERE ID_CLIENTE = @ID_CLIENTE", connection))
                 {
 
                     try
                     {
                         cmd.Connection = connection;
-                        cmd.Parameters.AddWithValue("cod_reserva", cli.CodReserva);
-                        cmd.Parameters.AddWithValue("nome_cliente", cli.NomeCliente);
-                        cmd.Parameters.AddWithValue("quarto", cli.Quarto);
-                        cmd.Parameters.AddWithValue("data_entrada", cli.DataEntrada);
-
-                        cmd.Parameters.AddWithValue("data_saida", cli.DataSaida);
+                        cmd.Parameters.AddWithValue("ID_QUARTO", cli.IdQuarto);
+                        cmd.Parameters.AddWithValue("COD_RESERVA", cli.CodReserva);
+                        cmd.Parameters.AddWithValue("NOME_CLIENTE", cli.NomeCliente);                      
+                        cmd.Parameters.AddWithValue("SOBRENOME_CLIENTE", cli.SobreNomeCliente);                      
+                        cmd.Parameters.AddWithValue("DATA_ENTRADA", cli.DataEntrada);
+                        cmd.Parameters.AddWithValue("DATA_SAIDA", cli.DataSaida);
                         connection.Open();
                     }
                     catch (Exception erro)
@@ -222,11 +223,11 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand
-                    ($"delete from cliente where id_cliente = @id_cliente", connection))
+                    ($"DELETE FROM CLIENTE WHERE ID_CLIENTE = @ID_CLIENTE", connection))
                     try
                     {
                         cmd.Connection = connection;
-                        cmd.Parameters.AddWithValue("id_cliente", idCliente);
+                        cmd.Parameters.AddWithValue("ID_CLIENTE", idCliente);
                         connection.Open();
                         cmd.ExecuteNonQuery();
                     }
@@ -249,9 +250,10 @@ namespace SistemaHotel.Controller
                 {
 
                     using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_CLIENTE]
+                                                          ,[ID_QUARTO]
                                                           ,[COD_RESERVA]
                                                           ,[NOME_CLIENTE]
-                                                          ,[QUARTO]
+                                                          ,[SOBRENOME_CLIENTE]
                                                           ,[DATA_ENTRADA]
                                                           ,[DATA_SAIDA]
                                                       FROM [DBO].[CLIENTE]
@@ -266,9 +268,11 @@ namespace SistemaHotel.Controller
                             {
                                 registro.Read();
                                 cli.IdCliente = Convert.ToInt32(registro["ID_CLIENTE"]);
+                                cli.IdCliente = Convert.ToInt32(registro["ID_QUARTO"]);
                                 cli.CodReserva = Convert.ToString(registro["COD_RESERVA"]);
                                 cli.NomeCliente = Convert.ToString(registro["NOME_CLIENTE"]);
-                                cli.Quarto = Convert.ToString(registro["DATA_ENTRADA"]);
+                                cli.SobreNomeCliente = Convert.ToString(registro["SOBRENOME_CLIENTE"]);
+                                cli.DataEntrada = Convert.ToDateTime(registro["DATA_ENTRADA"]);
                                 cli.DataEntrada = Convert.ToDateTime(registro["DATA_SAIDA"]);
                             }
                         }
@@ -292,12 +296,13 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_CLIENTE]
+                                                          ,[ID_QUARTO]
                                                           ,[COD_RESERVA]
                                                           ,[NOME_CLIENTE]
-                                                          ,[QUARTO]
+                                                          ,[SOBRENOME_CLIENTE]
                                                           ,[DATA_ENTRADA]
                                                           ,[DATA_SAIDA]
-                                                      FROM [dbo].[CLIENTE]
+                                                        FROM [dbo].[CLIENTE]
                                                          WHERE COD_RESERVA=@COD_RESERVA", connection))
                 {
                     try
@@ -310,9 +315,10 @@ namespace SistemaHotel.Controller
                         {
                             registro.Read();
                             cli.IdCliente = Convert.ToInt32(registro["ID_Cliente"]);
+                            cli.IdQuarto = Convert.ToInt32(registro["ID_QUARTO"]);
                             cli.CodReserva = Convert.ToString(registro["COD_RESERVA"]);
                             cli.NomeCliente = Convert.ToString(registro["NOME_CLIENTE"]);
-                            cli.Quarto = Convert.ToString(registro["QUARTO"]);
+                            cli.SobreNomeCliente = Convert.ToString(registro["SOBRENOME_CLIENTE"]);
                             cli.DataEntrada = Convert.ToDateTime(registro["DATA_ENTRADA"]);
                             cli.DataSaida = Convert.ToDateTime(registro["DATA_SAIDA"]);
                         }
@@ -329,6 +335,45 @@ namespace SistemaHotel.Controller
                 }
             }
         }
+
+        public DataTable verificarOcupacaoQuarto(string idQuarto)
+        {
+            DataTable dta = new DataTable();
+            SqlDataAdapter adp;            
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand($@"SELECT TOP 1 C.[ID_CLIENTE]
+                                                        ,C.[ID_QUARTO]
+                                                        ,C.[DATA_SAIDA]
+                                                        ,Q.DESCRICAO_QUARTO
+                                                        FROM [DBO].[CLIENTE] C
+                                                        INNER JOIN QUARTO Q ON (Q.ID_QUARTO = C.ID_QUARTO)
+                                                        WHERE C.ID_QUARTO = {idQuarto}
+                                                        ORDER BY [DATA_SAIDA] DESC ", connection))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                        adp = new SqlDataAdapter(cmd);
+                        adp.Fill(dta);
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                    
+                    return dta;
+                    
+                    
+                }
+            }
+        }
+
     }
 }
 

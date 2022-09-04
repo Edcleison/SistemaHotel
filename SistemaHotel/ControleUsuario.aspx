@@ -55,7 +55,7 @@
 
                 },
                 "paging": true,
-                "pageLength": 3,
+                "pageLength": 10,
                 "ordering": false,
                 "info": false,
                 dom: 'Bfrtip',
@@ -152,10 +152,23 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm">
+                                        <span>Sobrenome: </span>
+                                    </div>
+                                    <div class="col-sm">
+                                        <asp:TextBox runat="server" ID="txtSobreNome"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>&nbsp;</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
                                         <span>Digite o Login: </span>
                                     </div>
                                     <div class="col-sm">
-                                        <asp:TextBox runat="server" ID="txtLogin"></asp:TextBox><p>*Login até 9 caracteres</p>
+                                        <asp:TextBox runat="server" ID="txtLogin"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -259,10 +272,12 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-sm">
-                                        <span>Código da Reserva: </span>
-                                    </div>
-                                    <div class="col-sm">
+                                        <span>Cód. Reserva: </span>
                                         <asp:TextBox runat="server" ID="txtCodReserva"></asp:TextBox>
+                                    </div>                                                                         
+                                    <div class="col-sm">
+                                        <span>Quarto: </span>                                   
+                                        <asp:DropDownList ID="ddlQuarto" runat="server"></asp:DropDownList>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -272,23 +287,16 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm">
-                                        <span>Quarto: </span>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:TextBox runat="server" ID="txtQuarto"></asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Nome Cliente: </span>
+                                        <span>Nome: </span>
                                     </div>
                                     <div class="col-sm">
                                         <asp:TextBox runat="server" ID="txtNomeCliente"></asp:TextBox>
+                                    </div>                             
+                                    <div class="col-sm">
+                                        <span>Sobrenome: </span>
+                                    </div>
+                                    <div class="col-sm">
+                                        <asp:TextBox runat="server" ID="txtSobrenomeCliente"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -302,14 +310,7 @@
                                     </div>
                                     <div class="col-sm">
                                         <asp:TextBox ID="txtInputDataIni" runat="server" onkeyup="formataDataeHora(this,event);" MaxLength="17"></asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
-                                    </div>
-                                </div>
-                                <div class="row">
+                                    </div>                             
                                     <div class="col-sm">
                                         <span>Data Fim:</span>
                                     </div>
@@ -324,9 +325,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm">
-                                        <span>Senha Gerada:</span>
-                                    </div>
-                                    <div class="col-sm">
+                                        <span>Senha Gerada:</span>                                   
                                         <asp:TextBox ID="txtSenhaRand" runat="server" Enabled="false"></asp:TextBox>
                                     </div>
                                 </div>
@@ -337,22 +336,11 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm">
-                                        <span>Período de: </span>
-                                    </div>
-                                    <div class="col-sm">
+                                        <span>Período de: </span>                                   
                                         <asp:TextBox ID="txtDataIni" runat="server" Enabled="false"></asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="row">
+                                    </div>                             
                                     <div class="col-sm">
-                                        <span>&nbsp;</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Até: </span>
-                                    </div>
-                                    <div class="col-sm">
+                                        <span>Até: </span>                                   
                                         <asp:TextBox ID="txtDataFim" runat="server" Enabled="false"></asp:TextBox>
                                     </div>
                                 </div>
@@ -391,12 +379,12 @@
                                         <span>&nbsp;</span>
                                     </div>
                                 </div>
-                                <div class="row">
+                                 <div class="row">
                                     <div class="col-sm">
                                         <span>Quarto: </span>
                                     </div>
                                     <div class="col-sm">
-                                        <asp:TextBox runat="server" ID="txtQuartoE" Enabled="false"></asp:TextBox>
+                                        <asp:DropDownList ID="ddlQuartoE" runat="server"></asp:DropDownList>
                                     </div>
                                 </div>
                                 <div class="row">

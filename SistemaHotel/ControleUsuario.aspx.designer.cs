@@ -87,6 +87,15 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.TextBox txtNome;
 
         /// <summary>
+        /// txtSobreNome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSobreNome;
+
+        /// <summary>
         /// txtLogin control.
         /// </summary>
         /// <remarks>
@@ -159,13 +168,13 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.TextBox txtCodReserva;
 
         /// <summary>
-        /// txtQuarto control.
+        /// ddlQuarto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQuarto;
+        protected global::System.Web.UI.WebControls.DropDownList ddlQuarto;
 
         /// <summary>
         /// txtNomeCliente control.
@@ -175,6 +184,15 @@ namespace SistemaHotel
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNomeCliente;
+
+        /// <summary>
+        /// txtSobrenomeCliente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSobrenomeCliente;
 
         /// <summary>
         /// txtInputDataIni control.
@@ -258,13 +276,13 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.TextBox txtCdReservaE;
 
         /// <summary>
-        /// txtQuartoE control.
+        /// ddlQuartoE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQuartoE;
+        protected global::System.Web.UI.WebControls.DropDownList ddlQuartoE;
 
         /// <summary>
         /// txtNomeClienteE control.

@@ -5,20 +5,20 @@ using System.Web;
 
 namespace SistemaHotel.Model
 {
-    public class EquipeAtendimento
+    public class ItemPedido
     {
        
-        public int IdEquipe { get; set; }
-        public int IdUsuario { get; set; }
-        public int IdPerfil { get; set; }
-        public string NomeUsuario { get; set; }
-
-        public EquipeAtendimento()
+        public int IdPedido { get; set; }
+        public int IdProduto { get; set; }
+        public int IdCliente { get; set; }
+        public int Quantidade { get; set; }
+      
+        public ItemPedido()
         {
-            this.IdEquipe = 0;
-            this.IdUsuario = 0;
-            this.IdPerfil = 0;
-            this.NomeUsuario = "";
+            this.IdPedido = 0;
+            this.IdProduto = 0;
+            this.IdCliente = 0;
+            this.Quantidade = 0;
         }
 
     }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="ControleProduto.aspx.cs" Inherits="SistemaHotel.ControleProduto" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="ControleQuarto.aspx.cs" Inherits="SistemaHotel.ControleQuarto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -78,41 +78,30 @@
 
 <asp:Content ID="Content12" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <asp:Panel ID="Panel3" runat="server" GroupingText="Controle de Produtos">
+    <asp:Panel ID="Panel3" runat="server" GroupingText="Controle de Quartos">
 
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    <asp:LinkButton ID="novoProduto" class="btn btn-primary" runat="server" OnClick="novoProduto_Click">Novo Produto</asp:LinkButton>
+                    <asp:LinkButton ID="novoQuarto" class="btn btn-primary" runat="server" OnClick="novoQuarto_Click">Novo Quarto</asp:LinkButton>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm">
                     <span>&nbsp;</span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm">
-                    <span>Listar Por: </span>
-                </div>
-
-                <div class="col-sm">
-                    <asp:DropDownList ID="ddlTipo" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged">
-                    </asp:DropDownList>
-
-                </div>
-            </div>
+            </div>          
         </div>
         <div class="col-12" align="center">
             <div id="Panel1" runat="server" visible="true">
             </div>
         </div>
         <div class="modal-backdrop fade show" id="mdBack" runat="server" style="opacity: 0.2; display: block; filter: (alpha(opacity= 20))" visible="false"></div>
-        <div class="modal fade show" id="mdProd" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
+        <div class="modal fade show" id="mdQuar" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" visible="false" style="border-radius: 10px;">
                     <div class="modal-header">
-                        <h5 class="modal-title">Novo Produto:</h5>
+                        <h5 class="modal-title">Novo Quarto:</h5>
                         <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </asp:LinkButton>
@@ -121,67 +110,10 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm">
-                                    <span>Nome: </span>
+                                    <span>Quarto: </span>
                                 </div>
                                 <div class="col-sm">
-                                    <asp:TextBox runat="server" ID="txtNome"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span>&nbsp;</span>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span>Descricao: </span>
-                                </div>
-                                <div class="col-sm">
-                                    <asp:TextBox runat="server" ID="txtDescricao" Rows="5" Columns="40" TextMode="MultiLine"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span>&nbsp;</span>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span>Preço: </span>
-                                </div>
-                                <div class="col-sm">
-                                    <asp:TextBox runat="server" ID="txtPreco" onkeyup="formataValor(this,event);"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span>&nbsp;</span>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span>Tipo: </span>
-                                </div>
-                                <div class="col-sm">
-                                    <asp:DropDownList ID="ddlTipoProdS" runat="server">
-                                    </asp:DropDownList>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span>&nbsp;</span>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span>Foto: </span>
-                                </div>
-                                <div class="col-sm">
-                                    <asp:FileUpload ID="fuProduto" runat="server" />
+                                    <asp:TextBox runat="server" ID="txtQuarto"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">
@@ -192,17 +124,18 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <asp:LinkButton ID="lnkSalvarProduto" class="btn btn-success" OnClick="lnkSalvarProduto_Click" runat="server">Salvar</asp:LinkButton>
+                        <asp:LinkButton ID="lnkSalvarQuarto" class="btn btn-success" OnClick="lnkSalvarQuarto_Click" runat="server">Salvar</asp:LinkButton>
                         <asp:LinkButton ID="lnkVoltar" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="modal fade show" id="mdProdE" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
+
+        <div class="modal fade show" id="mdQuarE" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" visible="false" style="border-radius: 10px;">
                     <div class="modal-header">
-                        <h5 class="modal-title">Editar Produto:</h5>
+                        <h5 class="modal-title">Editar Quarto:</h5>
                         <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </asp:LinkButton>
@@ -211,70 +144,20 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm">
-                                    <span>Nome: </span>
+                                    <span>Quarto: </span>
                                 </div>
                                 <div class="col-sm">
-                                    <asp:TextBox runat="server" ID="txtNomeE"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span>&nbsp;</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span>Descricao: </span>
-                                </div>
-                                <div class="col-sm">
-                                    <asp:TextBox runat="server" ID="txtDescricaoE" Rows="5" Columns="40" TextMode="MultiLine"></asp:TextBox></td>
+                                    <asp:TextBox runat="server" ID="txtQuartoE"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm">
                                     <span>&nbsp;</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span>Preço: </span>
-                                </div>
-                                <div class="col-sm">
-                                    <asp:TextBox runat="server" ID="txtPrecoE"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span>&nbsp;</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span>Tipo: </span>
-                                </div>
-                                <div class="col-sm">
-                                    <asp:DropDownList ID="ddlTipoProdE" runat="server">
-                                    </asp:DropDownList>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span>&nbsp;</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span>Foto: </span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <asp:FileUpload ID="fuProdE" runat="server" />
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <asp:LinkButton ID="lnkSalvarProdutoE" runat="server" class="btn btn-success" OnClick="lnkSalvarProdutoE_Click">Alterar</asp:LinkButton>
+                            <asp:LinkButton ID="lnkSalvarQuartoE" runat="server" class="btn btn-success" OnClick="lnkSalvarQuartoE_Click">Alterar</asp:LinkButton>
                             <asp:LinkButton ID="LinkButton3" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
                         </div>
                     </div>

@@ -21,16 +21,13 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [dbo].[ITEM_PEDIDO]
-                                                       ([Id_Pedido]
-                                                       ,[Id_Produto]
-                                                       ,[FK_PEDIDO_Id_Cliente]
-                                                       ,[Quantidade]
-                                                       ,[PRODUTO_Descricao_Prod]
-                                                       ,[PRODUTO_Nome_Prod])
+                                                       ([ID_PEDIDO]
+                                                       ,[ID_PRODUTO]
+                                                       ,[ID_CLIENTE]
+                                                       ,[QUANTIDADE]
                                                  VALUES
-
-                                                        (@Id_Pedido,@Id_Produto,@FK_PEDIDO_Id_Cliente,
-                                                        @Quantidade,@PRODUTO_Descricao_Prod,@PRODUTO_Nome_Prod)", connection))
+                                                        (@ID_PEDIDO,@ID_PRODUTO,@ID_CLIENTE,
+                                                        @QUANTIDADE)", connection))
                 {
 
                     try
@@ -38,10 +35,8 @@ namespace SistemaHotel.Controller
                         cmd.Connection.Open();
                         cmd.Parameters.AddWithValue("Id_Pedido", ItemPed.IdPedido);
                         cmd.Parameters.AddWithValue("Id_Produto", ItemPed.IdProduto);
-                        cmd.Parameters.AddWithValue("FK_PEDIDO_Id_Cliente", ItemPed.IdCliente);
+                        cmd.Parameters.AddWithValue("ID_CLIENTE", ItemPed.IdCliente);
                         cmd.Parameters.AddWithValue("Quantidade", ItemPed.Quantidade);
-                        cmd.Parameters.AddWithValue("PRODUTO_Descricao_Prod", ItemPed.DescricaoProduto);
-                        cmd.Parameters.AddWithValue("PRODUTO_Nome_Prod", ItemPed.NomeProduto);
                         cmd.ExecuteNonQuery();
                     }
                     catch (Exception erro)
@@ -65,13 +60,11 @@ namespace SistemaHotel.Controller
             {
 
 
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Pedido]
-                                                          ,[Id_Produto]
-                                                          ,[FK_PEDIDO_Id_Cliente]
-                                                          ,[Quantidade]
-                                                          ,[PRODUTO_Descricao_Prod]
-                                                          ,[PRODUTO_Nome_Prod]
-                                                      FROM [dbo].[ITEM_PEDIDO]", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_PEDIDO]
+                                                          ,[ID_PRODUTO]
+                                                          ,[ID_CLIENTE]
+                                                          ,[QUANTIDADE]
+                                                      FROM [DBO].[ITEM_PEDIDO]", connection))
                 {
                     try
                     {
@@ -104,18 +97,20 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
 
-                using (SqlCommand cmd = new SqlCommand($@"SELECT [Id_Pedido]
-                                                              ,[FK_STATUS_Id_Status]
-                                                              ,[FK_TIPO_PEDIDO_Id_Tipo_Ped]
-                                                              ,[FK_EQUIPE_ATENDIMENTO_Id_Equipe]
-                                                              ,[FK_CLIENTE_Id_Cliente]
-                                                              ,[ITEM_PRODUTO_Descricao_Prod]
-                                                              ,[CLIENTE_Quarto]
-                                                              ,[ITEM_PEDIDO_Nome_Prod]
-                                                              ,[Valor_Total]
-                                                              ,[Data_Abertura]
-                                                          FROM [dbo].[PEDIDO]
-                                                        WHERE FK_TIPO_PEDIDO_Id_Tipo_Ped = {Tipo}", connection))
+                using (SqlCommand cmd = new SqlCommand($@"SELECT P.[ID_PEDIDO]
+                                                            ,P.[ID_STATUS]
+                                                            ,P.[ID_USUARIO]
+                                                            ,P.[ID_CLIENTE]
+                                                            ,P.[VALOR_TOTAL]
+                                                            ,P.[DATA_ABERTURA]
+                                                            ,P.[DATA_FINALIZACAO]
+                                                            ,IP.ID_PRODUTO
+                                                            ,IP.QUANTIDADE
+                                                            ,PR.ID_TIPO_PROD
+                                                            FROM [DBO].[PEDIDO] P
+                                                            INNER JOIN ITEM_PEDIDO IP ON(P.ID_PEDIDO =P.ID_PEDIDO)
+                                                            INNER JOIN PRODUTO PR ON (PR.ID_PRODUTO =IP.ID_PRODUTO)
+                                                            WHERE pr.ID_TIPO_PROD = {Tipo}", connection))
                 {
                     try
                     {
@@ -148,31 +143,26 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
 
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Pedido]
-                                                            ,[Id_Produto]
-                                                            ,[FK_PEDIDO_Id_Cliente]
-                                                            ,[Quantidade]
-                                                            ,[PRODUTO_Descricao_Prod]
-                                                            ,[PRODUTO_Nome_Prod]
-                                                        FROM [dbo].[ITEM_PEDIDO] WHERE Id_Pedido = @Id_Pedido", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_PEDIDO]
+                                                            ,[ID_PRODUTO]
+                                                            ,[ID_CLIENTE]
+                                                            ,[QUANTIDADE]
+                                                        FROM [DBO].[ITEM_PEDIDO] WHERE ID_PEDIDO = @ID_PEDIDO", connection))
                 {
                     try
                     {
 
 
-                        cmd.Parameters.AddWithValue("@Id_Pedido", IdPedido);
+                        cmd.Parameters.AddWithValue("@ID_PEDIDO", IdPedido);
                         cmd.Connection.Open();
                         SqlDataReader registro = cmd.ExecuteReader();
                         if (registro.HasRows)
                         {
                             registro.Read();
-                            ItemPed.IdPedido = Convert.ToInt32(registro["Id_Pedido"]);
-                            ItemPed.IdProduto = Convert.ToInt32(registro["Id_Produto"]);
-                            ItemPed.IdCliente = Convert.ToInt32(registro["FK_PEDIDO_Id_Cliente"]);
-                            ItemPed.Quantidade = Convert.ToInt32(registro["Quantidade"]);
-                            ItemPed.IdCliente = Convert.ToInt32(registro["FK_CLIENTE_Id_Cliente"]);
-                            ItemPed.DescricaoProduto = Convert.ToString(registro["ITEM_PRODUTO_Descricao_Prod"]);
-                            ItemPed.NomeProduto = Convert.ToString(registro["ITEM_PEDIDO_Nome_Prod"]);
+                            ItemPed.IdPedido = Convert.ToInt32(registro["ID_PEDIDO"]);
+                            ItemPed.IdProduto = Convert.ToInt32(registro["ID_PRODUTO"]);
+                            ItemPed.IdCliente = Convert.ToInt32(registro["ID_CLIENTE"]);
+                            ItemPed.Quantidade = Convert.ToInt32(registro["QUANTIDADE"]);
                         }
                     }
                     catch (Exception erro)
@@ -198,13 +188,11 @@ namespace SistemaHotel.Controller
             {
 
 
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Pedido]
-                                                            ,[Id_Produto]
-                                                            ,[FK_PEDIDO_Id_Cliente]
-                                                            ,[Quantidade]
-                                                            ,[PRODUTO_Descricao_Prod]
-                                                            ,[PRODUTO_Nome_Prod]
-                                                        FROM [dbo].[ITEM_PEDIDO] WHERE Id_Produto = @Id_Produto", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_PEDIDO]
+                                                            ,[ID_PRODUTO]
+                                                            ,[ID_CLIENTE]
+                                                            ,[QUANTIDADE]
+                                                        FROM [DBO].[ITEM_PEDIDO] WHERE ID_PRODUTO = @ID_PRODUTO", connection))
                 {
                     try
                     {
@@ -215,13 +203,11 @@ namespace SistemaHotel.Controller
                         if (registro.HasRows)
                         {
                             registro.Read();
-                            ItemPed.IdPedido = Convert.ToInt32(registro["Id_Pedido"]);
-                            ItemPed.IdProduto = Convert.ToInt32(registro["Id_Produto"]);
-                            ItemPed.IdCliente = Convert.ToInt32(registro["FK_PEDIDO_Id_Cliente"]);
-                            ItemPed.Quantidade = Convert.ToInt32(registro["Quantidade"]);
-                            ItemPed.IdCliente = Convert.ToInt32(registro["FK_CLIENTE_Id_Cliente"]);
-                            ItemPed.DescricaoProduto = Convert.ToString(registro["ITEM_PRODUTO_Descricao_Prod"]);
-                            ItemPed.NomeProduto = Convert.ToString(registro["ITEM_PEDIDO_Nome_Prod"]);
+                            ItemPed.IdPedido = Convert.ToInt32(registro["ID_PEDIDO"]);
+                            ItemPed.IdProduto = Convert.ToInt32(registro["ID_PRODUTO"]);
+                            ItemPed.IdCliente = Convert.ToInt32(registro["ID_CLIENTE"]);
+                            ItemPed.Quantidade = Convert.ToInt32(registro["QUANTIDADE"]);
+                            ItemPed.IdCliente = Convert.ToInt32(registro["ID_CLIENTE"]);
                         }
                     }
                     catch (Exception erro)
@@ -247,27 +233,23 @@ namespace SistemaHotel.Controller
             {
                 using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Pedido]
                                                             ,[Id_Produto]
-                                                            ,[FK_PEDIDO_Id_Cliente]
+                                                            ,[Id_Cliente]
                                                             ,[Quantidade]
-                                                            ,[PRODUTO_Descricao_Prod]
-                                                            ,[PRODUTO_Nome_Prod]
-                                                        FROM [dbo].[ITEM_PEDIDO] WHERE FK_PEDIDO_Id_Cliente = @FK_PEDIDO_Id_Cliente", connection))
+                                                        FROM [dbo].[ITEM_PEDIDO] WHERE Id_Cliente = @Id_Cliente", connection))
                 {
                     try
                     {
-                        cmd.Parameters.AddWithValue("@FK_PEDIDO_Id_Cliente", IdCliente);
+                        cmd.Parameters.AddWithValue("@ID_CLIENTE", IdCliente);
                         cmd.Connection.Open();
                         SqlDataReader registro = cmd.ExecuteReader();
                         if (registro.HasRows)
                         {
                             registro.Read();
-                            ItemPed.IdPedido = Convert.ToInt32(registro["Id_Pedido"]);
-                            ItemPed.IdProduto = Convert.ToInt32(registro["Id_Produto"]);
-                            ItemPed.IdCliente = Convert.ToInt32(registro["FK_PEDIDO_Id_Cliente"]);
-                            ItemPed.Quantidade = Convert.ToInt32(registro["Quantidade"]);
-                            ItemPed.IdCliente = Convert.ToInt32(registro["FK_CLIENTE_Id_Cliente"]);
-                            ItemPed.DescricaoProduto = Convert.ToString(registro["ITEM_PRODUTO_Descricao_Prod"]);
-                            ItemPed.NomeProduto = Convert.ToString(registro["ITEM_PEDIDO_Nome_Prod"]);
+                            ItemPed.IdPedido = Convert.ToInt32(registro["ID_PEDIDO"]);
+                            ItemPed.IdProduto = Convert.ToInt32(registro["ID_PRODUTO"]);
+                            ItemPed.IdCliente = Convert.ToInt32(registro["ID_CLIENTE"]);
+                            ItemPed.Quantidade = Convert.ToInt32(registro["QUANTIDADE"]);
+                            ItemPed.IdCliente = Convert.ToInt32(registro["ID_CLIENTE"]);
                         }
                     }
                     catch (Exception erro)

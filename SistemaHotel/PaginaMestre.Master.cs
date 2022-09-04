@@ -17,7 +17,7 @@ namespace SistemaHotel
         {
             if (Session["login"] == null)
             {
-               //Response.Redirect("~/login.aspx");
+               Response.Redirect("~/login.aspx");
 
             }
             else
@@ -25,41 +25,23 @@ namespace SistemaHotel
                 DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
                 DALUsuario dalUsu = new DALUsuario();
                 Usuario usu =dalUsu.buscaUsuarioLogin(Session["login"].ToString());
-                PerfilUsuario usuPerfil = dalPerfUsu.buscarUsuarioPerfil(usu.IdUsuario);
+                PerfilUsuario usuPerfil = dalPerfUsu.buscarUsuarioPerfil(usu.IdUsuario);               
+              
 
-                //if (usuPerfil.Perfil == 1)
-                //{
-                //    h1Usuario.Visible = true;
-                //    h1Cliente.Visible = true;
-                //    h1Atendimento.Visible = true;
-                //    h1Restaurante.Visible = true;
-                //    h1Frigobar.Visible = true;
-                //    h1ArCondicionado.Visible = true;
-                //    h1Banheira.Visible = true;
+                if (usuPerfil.IdPerfil == 1)
+                {
+                    
+                }
+                else if (usuPerfil.IdPerfil == 2)
+                {
 
-                //}
-                //else if (usuPerfil.Perfil == 2)
-                //{
+                   
 
-                //    h1Cliente.Visible = true;
-                //    h1Atendimento.Visible = true;
-                    //h1Cliente.Visible = true;
-                    //h1Atendimento.Visible = true;
+                }
+                else
+                {
 
-                //}
-                //else
-                //{
-
-                //    h1Restaurante.Visible = true;
-                //    h1Frigobar.Visible = true;
-                //    h1ArCondicionado.Visible = true;
-                //    h1Banheira.Visible = true;
-                    //h1Restaurante.Visible = true;
-                    //h1Frigobar.Visible = true;
-                    //h1ArCondicionado.Visible = true;
-                    //h1Banheira.Visible = true;
-
-                //}
+                }
             }
         }
 

@@ -347,18 +347,20 @@ namespace SistemaHotel.Controller
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [dbo].[USUARIO]
-                                                    ([Login]
-                                                    ,[Senha]
-                                                    ,[Nome_Usuario])VALUES(@Login,@Senha,@Nome_Usuario)", connection))
+                using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [DBO].[USUARIO]
+                                                    ([LOGIN]
+                                                    ,[SENHA]
+                                                    ,[NOME]
+                                                    ,[SOBRENOME])VALUES(@LOGIN,@SENHA,@NOME,@SOBRENOME)", connection))
                 {
 
                     try
                     {
                         cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("Login", usu.Login);
-                        cmd.Parameters.AddWithValue("Senha", usu.Senha);
-                        cmd.Parameters.AddWithValue("Nome_Usuario", usu.NomeUsuario);
+                        cmd.Parameters.AddWithValue("LOGIN", usu.Login);
+                        cmd.Parameters.AddWithValue("SENHA", usu.Senha);
+                        cmd.Parameters.AddWithValue("NOME", usu.NomeUsuario);
+                        cmd.Parameters.AddWithValue("SOBRENOME", usu.SobrenomeUsuario);
                         cmd.ExecuteNonQuery();                       
                     }
                     catch (Exception erro)
@@ -382,11 +384,12 @@ namespace SistemaHotel.Controller
             SqlDataAdapter adp;
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Usuario]
-                                                          ,[Login]
-                                                          ,[Senha]
-                                                          ,[Nome_Usuario]
-                                                      FROM [servicohotelaria].[dbo].[USUARIO]", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_USUARIO]
+                                                          ,[LOGIN]
+                                                          ,[SENHA]
+                                                          ,[NOME]
+                                                          ,[SOBRENOME]
+                                                      FROM [SERVICOHOTELARIA].[DBO].[USUARIO]", connection))
                 {
                     try
                     {
@@ -416,14 +419,15 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand($@"SELECT U.[ID_USUARIO]
-                                                            ,U.NOME_USUARIO                                                           
+                                                            ,U.NOME                                                          
+                                                            ,U.SOBRENOME                                                          
                                                             ,U.[LOGIN]
                                                             ,U.[SENHA]
-                                                            ,P.Status_Perfil_Usuario
-                                                            ,P.FK_PERFIL_Id_Perfil
+                                                            ,P.STATUS_USUARIO
+                                                            ,P.ID_PERFIL
                                                             FROM [DBO].[USUARIO] U
                                                             INNER JOIN PERFIL_USUARIO P
-                                                            ON (P.FK_USUARIO_Id_Usuario = U.ID_USUARIO) WHERE P.ATIVO ='S'", connection))
+                                                            ON (P.ID_USUARIO = U.ID_USUARIO) WHERE P.ATIVO ='S'", connection))
                 {
                     try
                     {
@@ -453,14 +457,15 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand($@"SELECT U.[ID_USUARIO]
-                                                            ,U.NOME_USUARIO                                                           
+                                                            ,U.NOME                                                         
+                                                            ,U.SOBRENOME                                                          
                                                             ,U.[LOGIN]
                                                             ,U.[SENHA]
-                                                            ,P.Status_Perfil_Usuario
-                                                            ,P.FK_PERFIL_Id_Perfil
+                                                            ,P.STATUS_USUARIO
+                                                            ,P.ID_PERFIL
                                                             FROM [DBO].[USUARIO] U
                                                             INNER JOIN PERFIL_USUARIO P
-                                                            ON (P.FK_USUARIO_Id_Usuario = U.ID_USUARIO) WHERE P.Status_Perfil_Usuario ='S' AND P.FK_PERFIL_Id_Perfil = '{perfil}'", connection))
+                                                            ON (P.ID_USUARIO = U.ID_USUARIO) WHERE P.STATUS_USUARIO ='S' AND P.ID_PERFIL = '{perfil}'", connection))
                 {
                     try
                     {
@@ -491,21 +496,24 @@ namespace SistemaHotel.Controller
             {
                 using (SqlConnection connection = new SqlConnection(cnn))
                 {
-                    using (SqlCommand cmd = new SqlCommand($@"SELECT U.[ID_Usuario]  
-                                                            ,U.NOME_USUARIO
+                    using (SqlCommand cmd = new SqlCommand($@"SELECT U.[ID_USUARIO]  
+                                                            ,U.NOME
+                                                            ,U.SOBRENOME
                                                             ,U.[LOGIN]
                                                             ,U.[SENHA]
-                                                            ,U.Nome_Usuario
-                                                            ,P.Status_Perfil_Usuario
-                                                            ,P.FK_PERFIL_Id_Perfil
-                                                            ,C.DATA_Entrada
-                                                            ,C.DATA_Saida
-                                                            ,C.Quarto
+                                                            ,U.NOME
+                                                            ,U.SOBRENOME
+                                                            ,P.STATUS_USUARIO
+                                                            ,P.ID_PERFIL
+                                                            ,C.DATA_ENTRADA
+                                                            ,C.DATA_SAIDA
+                                                            ,C.ID_QUARTO
+                                                            ,Q.DESCRICAO_QUARTO
                                                             FROM [DBO].[USUARIO] U
                                                             INNER JOIN CLIENTE C ON(C.COD_RESERVA = U.LOGIN)
-                                                            INNER JOIN PERFIL_USUARIO P
-                                                            ON (P.FK_USUARIO_Id_Usuario = U.ID_Usuario)
-                                                            WHERE P.Status_Perfil_Usuario ='S' AND P.FK_PERFIL_Id_Perfil = '{perfil}'", connection))
+                                                            INNER JOIN QUARTO Q ON (Q.ID_QUARTO = C.ID_QUARTO)
+                                                            INNER JOIN PERFIL_USUARIO P ON (P.ID_USUARIO = U.ID_USUARIO)
+                                                            WHERE P.STATUS_USUARIO ='S' AND P.ID_PERFIL = '{perfil}'", connection))
                     {
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
@@ -529,24 +537,26 @@ namespace SistemaHotel.Controller
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Usuario]
-                                                                      ,[Login]
-                                                                      ,[Senha]
-                                                                      ,[Nome_Usuario]
-                                                                  FROM [dbo].[USUARIO] WHERE ID_Usuario = @Id_Usuario", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_USUARIO]
+                                                                      ,[LOGIN]
+                                                                      ,[SENHA]
+                                                                      ,[NOME]
+                                                                      ,[SOBRENOME]
+                                                                  FROM [DBO].[USUARIO] WHERE ID_USUARIO = @ID_USUARIO", connection))
                 {
                     try
                     {
-                        cmd.Parameters.AddWithValue("@Id_Usuario", IdUsuario);
+                        cmd.Parameters.AddWithValue("@ID_USUARIO", IdUsuario);
                         cmd.Connection.Open();
                         SqlDataReader registro = cmd.ExecuteReader();
                         if (registro.HasRows)
                         {
                             registro.Read();
-                            usu.IdUsuario = Convert.ToInt32(registro["Id_Usuario"]);
-                            usu.Login = Convert.ToString(registro["Login"]);
-                            usu.Senha = Convert.ToString(registro["Senha"]);
-                            usu.NomeUsuario = Convert.ToString(registro["Nome_Usuario"]);
+                            usu.IdUsuario = Convert.ToInt32(registro["ID_USUARIO"]);
+                            usu.Login = Convert.ToString(registro["LOGIN"]);
+                            usu.Senha = Convert.ToString(registro["SENHA"]);
+                            usu.NomeUsuario = Convert.ToString(registro["NOME"]);
+                            usu.SobrenomeUsuario = Convert.ToString(registro["SOBRENOME"]);
 
                         }
                     }
@@ -572,23 +582,25 @@ namespace SistemaHotel.Controller
             {
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Usuario]
-                                                                      ,[Login]
-                                                                      ,[Senha]
-                                                                      ,[Nome_Usuario]
-                                                                  FROM [dbo].[USUARIO] WHERE Login = @Login", connection))
+                    using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_USUARIO]
+                                                                      ,[LOGIN]
+                                                                      ,[SENHA]
+                                                                      ,[NOME]
+                                                                      ,[SOBRENOME]
+                                                                  FROM [DBO].[USUARIO] WHERE LOGIN = @LOGIN", connection))
                     {
 
-                        cmd.Parameters.AddWithValue("@Login", Login);
+                        cmd.Parameters.AddWithValue("@LOGIN", Login);
                         cmd.Connection.Open();
                         SqlDataReader registro = cmd.ExecuteReader();
                         if (registro.HasRows)
                         {
                             registro.Read();
-                            usu.IdUsuario = Convert.ToInt32(registro["Id_Usuario"]);
-                            usu.Login = Convert.ToString(registro["Login"]);
-                            usu.Senha = Convert.ToString(registro["Senha"]);
-                            usu.NomeUsuario = Convert.ToString(registro["Nome_Usuario"]);
+                            usu.IdUsuario = Convert.ToInt32(registro["ID_USUARIO"]);
+                            usu.Login = Convert.ToString(registro["LOGIN"]);
+                            usu.Senha = Convert.ToString(registro["SENHA"]);
+                            usu.NomeUsuario = Convert.ToString(registro["NOME"]);
+                            usu.SobrenomeUsuario = Convert.ToString(registro["SOBRENOME"]);
 
                         }
                     }
@@ -611,7 +623,7 @@ namespace SistemaHotel.Controller
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"UPDATE USUARIO SET LOGIN = @LOGIN WHERE  ID_Usuario = @Id_Usuario", connection))
+                using (SqlCommand cmd = new SqlCommand(@"UPDATE USUARIO SET LOGIN = @LOGIN WHERE  ID_Usuario = @ID_USUARIO", connection))
                 {
                     try
                     {
@@ -639,14 +651,14 @@ namespace SistemaHotel.Controller
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"UPDATE USUARIO SET SENHA =@SENHA where  ID_Usuario = @ID_Usuario", connection))
+                using (SqlCommand cmd = new SqlCommand(@"UPDATE USUARIO SET SENHA =@SENHA WHERE  ID_USUARIO = @ID_USUARIO", connection))
                 {
 
                     try
                     {
                         cmd.Connection.Open();
                         cmd.Parameters.AddWithValue("SENHA", usu.Senha);
-                        cmd.Parameters.AddWithValue("ID_Usuario", usu.IdUsuario);
+                        cmd.Parameters.AddWithValue("ID_USUARIO", usu.IdUsuario);
                         cmd.ExecuteNonQuery();           
                     }
                     catch (Exception erro)

@@ -8,6 +8,7 @@
         public string Login { get; set; }
         public string Senha { get; set; }
         public string NomeUsuario { get; set; }
+        public string SobrenomeUsuario { get; set; }
        
         public Usuario()
         {
@@ -15,6 +16,7 @@
             this.Login = "";          
             this.Senha = "";
             this.NomeUsuario = "";
+            this.SobrenomeUsuario = "";
         }
 
 

@@ -21,30 +21,25 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [dbo].[PEDIDO]
-                                                       ([FK_STATUS_Id_Status]
-                                                       ,[FK_TIPO_PEDIDO_Id_Tipo_Ped]                                                      
-                                                       ,[FK_CLIENTE_Id_Cliente]
-                                                       ,[ITEM_PRODUTO_Descricao_Prod]
-                                                       ,[CLIENTE_Quarto]
-                                                       ,[ITEM_PEDIDO_Nome_Prod]
-                                                       ,[Valor_Total]
-                                                       ,[Data_Abertura])
+                                                       ([ID_STATUS]
+                                                       ,[ID_CLIENTE]
+                                                       ,[ID_ADM]
+                                                       ,[ID_FUNCIONARIO]
+                                                       ,[VALOR_TOTAL]
+                                                       ,[DATA_ABERTURA])
                                                         VALUES
-                                                        (@FK_STATUS_Id_Status,@FK_TIPO_PEDIDO_Id_Tipo_Ped,@FK_CLIENTE_Id_Cliente,
-                                                        @ITEM_PRODUTO_Descricao_Prod,@CLIENTE_Quarto,@ITEM_PEDIDO_Nome_Prod,@Valor_Total,@Data_Abertura)", connection))
+                                                        (@ID_STATUS,@ID_CLIENTE,NULLIF(@ID_ADM,''),NULLIF(@ID_FUNCIONARIO,''),@VALOR_TOTAL,@DATA_ABERTURA)", connection))
                 {
 
                     try
                     {
                         cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("FK_STATUS_Id_Status", ped.Status);
-                        cmd.Parameters.AddWithValue("FK_TIPO_PEDIDO_Id_Tipo_Ped", ped.TipoPedido);
-                        cmd.Parameters.AddWithValue("FK_CLIENTE_Id_Cliente", ped.IdCliente);
-                        cmd.Parameters.AddWithValue("ITEM_PRODUTO_Descricao_Prod", ped.DescricaoProduto);
-                        cmd.Parameters.AddWithValue("CLIENTE_Quarto", ped.Quarto);
-                        cmd.Parameters.AddWithValue("ITEM_PEDIDO_Nome_Prod", ped.NomeProduto);
-                        cmd.Parameters.AddWithValue("Valor_Total", ped.ValorTotal);
-                        cmd.Parameters.AddWithValue("Data_Abertura", ped.DataAbertura);
+                        cmd.Parameters.AddWithValue("ID_STATUS", ped.IdStatus);
+                        cmd.Parameters.AddWithValue("ID_CLIENTE", ped.IdCliente);
+                        cmd.Parameters.AddWithValue("ID_ADM", ped.IdAdm);
+                        cmd.Parameters.AddWithValue("ID_FUNCIONARIO", ped.IdFuncionario);
+                        cmd.Parameters.AddWithValue("VALOR_TOTAL", ped.ValorTotal);
+                        cmd.Parameters.AddWithValue("DATA_ABERTURA", ped.DataAbertura);
                         cmd.ExecuteNonQuery();
                     }
                     catch (Exception erro)
@@ -66,18 +61,15 @@ namespace SistemaHotel.Controller
             SqlDataAdapter adp;
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Pedido]
-                                                          ,[FK_STATUS_Id_Status]
-                                                          ,[FK_TIPO_PEDIDO_Id_Tipo_Ped]
-                                                          ,[FK_EQUIPE_ATENDIMENTO_Id_Equipe]
-                                                          ,[FK_CLIENTE_Id_Cliente]
-                                                          ,[ITEM_PRODUTO_Descricao_Prod]
-                                                          ,[CLIENTE_Quarto]
-                                                          ,[ITEM_PEDIDO_Nome_Prod]
-                                                          ,[Valor_Total]
-                                                          ,[Data_Abertura]
-                                                          ,[Data_Finalizacao]
-                                                      FROM [dbo].[PEDIDO]", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_PEDIDO]
+                                                               ,[ID_STATUS]
+                                                               ,[ID_CLIENTE]
+                                                               ,[ID_ADM]
+                                                               ,[ID_FUNCIONARIO]
+                                                               ,[VALOR_TOTAL]
+                                                               ,[DATA_ABERTURA]
+                                                              ,[DATA_FINALIZACAO]
+                                                          FROM [dbo].[PEDIDO]", connection))
                 {
                     try
                     {
@@ -107,18 +99,19 @@ namespace SistemaHotel.Controller
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand($@"SELECT [Id_Pedido]
-                                                              ,[FK_STATUS_Id_Status]
-                                                              ,[FK_TIPO_PEDIDO_Id_Tipo_Ped]
-                                                              ,[FK_EQUIPE_ATENDIMENTO_Id_Equipe]
-                                                              ,[FK_CLIENTE_Id_Cliente]
-                                                              ,[ITEM_PRODUTO_Descricao_Prod]
-                                                              ,[CLIENTE_Quarto]
-                                                              ,[ITEM_PEDIDO_Nome_Prod]
-                                                              ,[Valor_Total]
-                                                              ,[Data_Abertura]
-                                                          FROM [dbo].[PEDIDO]
-                                                        WHERE FK_TIPO_PEDIDO_Id_Tipo_Ped = {Tipo}", connection))
+                using (SqlCommand cmd = new SqlCommand($@"SELECT P.[ID_PEDIDO]
+                                                                ,P.[ID_STATUS]
+                                                                ,P.[ID_CLIENTE]
+                                                                ,P.[ID_ADM]
+                                                                ,P.[ID_FUNCIONARIO]
+                                                                ,P.[VALOR_TOTAL]
+                                                                ,P.[DATA_ABERTURA]
+                                                                ,P.[DATA_FINALIZACAO]
+                                                                ,PR.ID_TIPO_PROD
+                                                                FROM [dbo].[PEDIDO] P
+                                                                INNER JOIN ITEM_PEDIDO IP ON (P.ID_PEDIDO=IP.ID_PEDIDO)
+                                                                INNER JOIN PRODUTO PR ON(PR.ID_PRODUTO = IP.ID_PRODUTO)
+                                                                WHERE PR.TIPO_PROD = {Tipo}", connection))
                 {
                     try
                     {
@@ -151,18 +144,16 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
 
-                using (SqlCommand cmd = new SqlCommand($@"SELECT [Id_Pedido]
-                                                              ,[FK_STATUS_Id_Status]
-                                                              ,[FK_TIPO_PEDIDO_Id_Tipo_Ped]
-                                                              ,[FK_EQUIPE_ATENDIMENTO_Id_Equipe]
-                                                              ,[FK_CLIENTE_Id_Cliente]
-                                                              ,[ITEM_PRODUTO_Descricao_Prod]
-                                                              ,[CLIENTE_Quarto]
-                                                              ,[ITEM_PEDIDO_Nome_Prod]
-                                                              ,[Valor_Total]
-                                                              ,[Data_Abertura]
-                                                          FROM [dbo].[PEDIDO]
-                                                        WHERE FK_TIPO_PEDIDO_Id_Tipo_Ped = {Tipo} and FK_STATUS_Id_Status= {Status} ", connection))
+                using (SqlCommand cmd = new SqlCommand($@"SELECT [ID_PEDIDO]
+                                                                ,[ID_STATUS]
+                                                                ,[ID_CLIENTE]
+                                                                ,[ID_ADM]
+                                                                ,[ID_FUNCIONARIO]
+                                                                ,[VALOR_TOTAL]
+                                                                ,[DATA_ABERTURA]
+                                                                ,[DATA_FINALIZACAO]                                                              
+                                                                FROM [dbo].[PEDIDO]
+                                                                WHERE ID_STATUS= {Status} ", connection))
                 {
                     try
                     {
@@ -195,18 +186,15 @@ namespace SistemaHotel.Controller
             {
 
 
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Pedido]
-                                                              ,[FK_STATUS_Id_Status]
-                                                              ,[FK_TIPO_PEDIDO_Id_Tipo_Ped]
-                                                              ,[FK_EQUIPE_ATENDIMENTO_Id_Equipe]
-                                                              ,[FK_CLIENTE_Id_Cliente]
-                                                              ,[ITEM_PRODUTO_Descricao_Prod]
-                                                              ,[CLIENTE_Quarto]
-                                                              ,[ITEM_PEDIDO_Nome_Prod]
-                                                              ,[Valor_Total]
-                                                              ,[Data_Abertura]
-                                                              ,[Data_Finalizacao]
-                                                          FROM [dbo].[PEDIDO] WHERE Id_Pedido = @Id_Pedido", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_PEDIDO]
+                                                                ,[ID_STATUS]
+                                                                ,[ID_CLIENTE]
+                                                                ,[ID_ADM]
+                                                                ,[ID_FUNCIONARIO]
+                                                                ,[VALOR_TOTAL]
+                                                                ,[DATA_ABERTURA]
+                                                                ,[DATA_FINALIZACAO] 
+                                                          FROM [dbo].[PEDIDO] WHERE ID_PEDIDO = @ID_PEDIDO", connection))
                 {
                     try
                     {
@@ -217,18 +205,62 @@ namespace SistemaHotel.Controller
                         if (registro.HasRows)
                         {
                             registro.Read();
-                            ped.IdPedido = Convert.ToInt32(registro["Id_Pedido"]);
-                            ped.TipoPedido = Convert.ToInt32(registro["FK_TIPO_PRODUTO_Id_Tipo_Prod"]);
-                            ped.IdEquipe = Convert.ToInt32(registro["FK_EQUIPE_ATENDIMENTO_Id_Equipe"]);
-                            ped.IdCliente = Convert.ToInt32(registro["FK_CLIENTE_Id_Cliente"]);
-                            ped.DescricaoProduto = Convert.ToString(registro["ITEM_PRODUTO_Descricao_Prod"]);
-                            ped.Quarto = Convert.ToString(registro["CLIENTE_Quarto"]);
-                            ped.NomeProduto = Convert.ToString(registro["ITEM_PEDIDO_Nome_Prod"]);
-                            ped.ValorTotal = Convert.ToDecimal(registro["Valor_Total"]);
-                            ped.DataAbertura = Convert.ToDateTime(registro["Data_Ped"]);
-                            ped.DataFinalizacao = Convert.ToDateTime(registro["Data_Ped"]);
+                            ped.IdPedido = Convert.ToInt32(registro["ID_PEDIDO"]);
+                            ped.IdStatus = Convert.ToInt32(registro["ID_STATUS"]);
+                            ped.IdCliente = Convert.ToInt32(registro["ID_CLIENTE"]);
+                            ped.IdAdm = Convert.ToInt32(registro["ID_ADM"]);
+                            ped.IdFuncionario = Convert.ToInt32(registro["ID_FUNCIONARIO"]);
+                            ped.ValorTotal = Convert.ToDecimal(registro["VALOR_TOTAL"]);
+                            ped.DataAbertura = Convert.ToDateTime(registro["DATA_ABERTURA"]);
+                            ped.DataFinalizacao = Convert.ToDateTime(registro["DATA_FINALIZACAO"]);
 
 
+                        }
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                }
+
+            }
+            return ped;
+        }
+
+        public Pedido buscarPedidoIdClienteData(int IdCliente, DateTime DataAbertura)
+        {
+            Pedido ped = new Pedido();
+
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+
+
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_PEDIDO]
+                                                                ,[ID_STATUS]
+                                                                ,[ID_CLIENTE]                                                                
+                                                                ,[VALOR_TOTAL]
+                                                                ,[DATA_ABERTURA]                                                          
+                                                          FROM [dbo].[PEDIDO] WHERE ID_CLIENTE = @ID_CLIENTE and DATA_ABERTURA = @DATA_ABERTURA", connection))
+                {
+                    try
+                    {
+
+                        cmd.Parameters.AddWithValue("@ID_CLIENTE", IdCliente);
+                        cmd.Parameters.AddWithValue("@DATA_ABERTURA", DataAbertura);
+                        cmd.Connection.Open();
+                        SqlDataReader registro = cmd.ExecuteReader();
+                        if (registro.HasRows)
+                        {
+                            registro.Read();
+                            ped.IdPedido = Convert.ToInt32(registro["ID_PEDIDO"]);
+                            ped.IdStatus = Convert.ToInt32(registro["ID_STATUS"]);
+                            ped.IdCliente = Convert.ToInt32(registro["ID_CLIENTE"]);
+                            ped.ValorTotal = Convert.ToDecimal(registro["VALOR_TOTAL"]);
+                            ped.DataAbertura = Convert.ToDateTime(registro["DATA_ABERTURA"]);
                         }
                     }
                     catch (Exception erro)
@@ -249,20 +281,21 @@ namespace SistemaHotel.Controller
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"UPDATE [dbo].[PEDIDO]
-                                                       SET [FK_STATUS_Id_Status] = @FK_STATUS_Id_Status
-                                                          ,[FK_EQUIPE_ATENDIMENTO_Id_Equipe] = @FK_EQUIPE_ATENDIMENTO_Id_Equipe                                                         
-                                                          ,[Data_Finalizacao] = @Data_Finalizacao
-                                                     WHERE Id_Pedido = @Id_Pedido", connection))
+                using (SqlCommand cmd = new SqlCommand(@"UPDATE [DBO].[PEDIDO]
+                                                       SET [ID_STATUS] = ID_STATUS
+                                                          ,[ID_ADM] = NULLIF(@ID_ADM,'')                                                         
+                                                          ,[ID_FUNCIONARIO] = NULLIF(@ID_FUNCIONARIO,'')                                                         
+                                                          ,[DATA_FINALIZACAO] = @DATA_FINALIZACAO
+                                                     WHERE ID_PEDIDO = @ID_PEDIDO", connection))
                 {
                     try
                     {
                         cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("FK_STATUS_Id_Status", ped.Status);
-                        cmd.Parameters.AddWithValue("FK_EQUIPE_ATENDIMENTO_Id_Equipe", ped.IdEquipe);
-                        cmd.Parameters.AddWithValue("ITEM_PRODUTO_Descricao_Prod", ped.DataFinalizacao);
-                        cmd.Parameters.AddWithValue("Data_Finalizacao", ped.DataFinalizacao);
-                        cmd.Parameters.AddWithValue("ID_Pedido", ped.IdPedido);
+                        cmd.Parameters.AddWithValue("ID_STATUS", ped.IdStatus);
+                        cmd.Parameters.AddWithValue("ID_ADM", ped.IdAdm);
+                        cmd.Parameters.AddWithValue("ID_FUNCIONARIO", ped.IdFuncionario);
+                        cmd.Parameters.AddWithValue("DATA_FINALIZACAO", ped.DataFinalizacao);
+                        cmd.Parameters.AddWithValue("ID_PEDIDO", ped.IdPedido);
                         cmd.ExecuteNonQuery();
                     }
                     catch (Exception erro)

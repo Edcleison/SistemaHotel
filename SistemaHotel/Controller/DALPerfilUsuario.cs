@@ -111,19 +111,19 @@ namespace SistemaHotel.Controller
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [dbo].[PERFIL_USUARIO]
-                                                       ([FK_USUARIO_Id_Usuario]
-                                                       ,[FK_PERFIL_Id_Perfil]
-                                                       ,[Status_Perfil_Usuario])
-                                                 VALUES(@FK_USUARIO_Id_Usuario,@FK_PERFIL_Id_Perfil,@Status_Perfil_Usuario)", connection))
+                using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [DBO].[PERFIL_USUARIO]
+                                                       ([ID_USUARIO]
+                                                       ,[ID_PERFIL]
+                                                       ,[STATUS_USUARIO])
+                                                 VALUES(@ID_USUARIO,@ID_PERFIL,@STATUS_USUARIO)", connection))
                 {
 
                     try
                     {
                         cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("FK_USUARIO_Id_Usuario", pUsu.IdUsuario);
-                        cmd.Parameters.AddWithValue("FK_PERFIL_Id_Perfil", pUsu.IdPerfil);
-                        cmd.Parameters.AddWithValue("Status_Perfil_Usuario", pUsu.StatusPerfilUsuario);
+                        cmd.Parameters.AddWithValue("ID_USUARIO", pUsu.IdUsuario);
+                        cmd.Parameters.AddWithValue("ID_PERFIL", pUsu.IdPerfil);
+                        cmd.Parameters.AddWithValue("STATUS_USUARIO", pUsu.StatusPerfilUsuario);
                         cmd.ExecuteNonQuery();
                     }
                     catch (Exception erro)
@@ -145,25 +145,25 @@ namespace SistemaHotel.Controller
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [Id_Perfil_Usuario]
-                                                          ,[FK_USUARIO_Id_Usuario]
-                                                          ,[FK_PERFIL_Id_Perfil]
-                                                          ,[Status_Perfil_Usuario]
-                                                      FROM [dbo].[PERFIL_USUARIO] where FK_USUARIO_Id_Usuario = @FK_USUARIO_Id_Usuario", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_PERFIL_USUARIO]
+                                                          ,[ID_USUARIO]
+                                                          ,[ID_PERFIL]
+                                                          ,[STATUS_USUARIO]
+                                                      FROM [DBO].[PERFIL_USUARIO] WHERE ID_USUARIO = @ID_USUARIO", connection))
                 {
                     try
                     {
 
-                        cmd.Parameters.AddWithValue("@FK_USUARIO_Id_Usuario", IdUsuario);
+                        cmd.Parameters.AddWithValue("@ID_USUARIO", IdUsuario);
                         connection.Open();
                         SqlDataReader registro = cmd.ExecuteReader();
                         if (registro.HasRows)
                         {
                             registro.Read();
-                            pUsu.IdPerfilUsuario = Convert.ToInt32(registro["Id_Perfil_Usuario"]);
-                            pUsu.IdUsuario = Convert.ToInt32(registro["FK_USUARIO_Id_Usuario"]);
-                            pUsu.IdPerfil = Convert.ToInt32(registro["FK_PERFIL_Id_Perfil"]);
-                            pUsu.StatusPerfilUsuario = Convert.ToChar(registro["Status_Perfil_Usuario"]);
+                            pUsu.IdPerfilUsuario = Convert.ToInt32(registro["ID_PERFIL_USUARIO"]);
+                            pUsu.IdUsuario = Convert.ToInt32(registro["ID_USUARIO"]);
+                            pUsu.IdPerfil = Convert.ToInt32(registro["ID_PERFIL"]);
+                            pUsu.StatusPerfilUsuario = Convert.ToChar(registro["STATUS_USUARIO"]);
 
 
 
@@ -183,19 +183,19 @@ namespace SistemaHotel.Controller
             return pUsu;
         }
 
-        public void excluirUsuario(int IdUsuario)
+        public void inativarUsuario(int IdUsuario)
         {
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"DELETE FROM [dbo].[PERFIL_USUARIO] WHERE FK_USUARIO_Id_Usuario = @FK_USUARIO_Id_Usuario", connection))
+                using (SqlCommand cmd = new SqlCommand(@"UPDATE [dbo].[PERFIL_USUARIO] set STATUS_USUARIO = 'N' where ID_USUARIO=@ID_USUARIO", connection))
                 {
 
                     try
                     {
 
                         connection.Open();
-                        cmd.Parameters.AddWithValue("FK_USUARIO_Id_Usuario", IdUsuario);
+                        cmd.Parameters.AddWithValue("ID_USUARIO", IdUsuario);
                         cmd.ExecuteNonQuery();
                     }
                     catch (Exception erro)
