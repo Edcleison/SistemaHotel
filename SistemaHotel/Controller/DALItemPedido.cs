@@ -24,7 +24,7 @@ namespace SistemaHotel.Controller
                                                        ([ID_PEDIDO]
                                                        ,[ID_PRODUTO]
                                                        ,[ID_CLIENTE]
-                                                       ,[QUANTIDADE]
+                                                       ,[QUANTIDADE])
                                                  VALUES
                                                         (@ID_PEDIDO,@ID_PRODUTO,@ID_CLIENTE,
                                                         @QUANTIDADE)", connection))
@@ -33,10 +33,10 @@ namespace SistemaHotel.Controller
                     try
                     {
                         cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("Id_Pedido", ItemPed.IdPedido);
-                        cmd.Parameters.AddWithValue("Id_Produto", ItemPed.IdProduto);
+                        cmd.Parameters.AddWithValue("ID_PEDIDO", ItemPed.IdPedido);
+                        cmd.Parameters.AddWithValue("ID_PRODUTO", ItemPed.IdProduto);
                         cmd.Parameters.AddWithValue("ID_CLIENTE", ItemPed.IdCliente);
-                        cmd.Parameters.AddWithValue("Quantidade", ItemPed.Quantidade);
+                        cmd.Parameters.AddWithValue("QUANTIDADE", ItemPed.Quantidade);
                         cmd.ExecuteNonQuery();
                     }
                     catch (Exception erro)

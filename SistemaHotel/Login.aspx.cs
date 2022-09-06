@@ -4,6 +4,7 @@ using SistemaHotel.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -122,7 +123,7 @@ namespace SistemaHotel
                                     case 3:
                                         Session["perfil"] = "CLIENTE";
                                         break;
-                                }
+                                }                                
                                 Response.Redirect("~/Default.aspx");
                             }
 
