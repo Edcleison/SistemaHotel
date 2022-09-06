@@ -81,6 +81,7 @@
     <Content Include="ControleProduto.aspx" />
     <Content Include="CSS\jquery.dataTables.min.css" />
     <Content Include="CSS\StyleSheet.css.exclude" />
+    <Content Include="IMAGENS\SISTEMA\logo_hotel.jpeg" />
     <Content Include="IMAGENS\SISTEMA\menu-icon-19353.png" />
     <Content Include="IMAGENS_PRODUTOS\431hawaiian-pizza.jpg" />
     <Content Include="IMAGENS_PRODUTOS\835hawaiian-pizza.jpg" />
@@ -1111,7 +1112,6 @@
     <Content Include="CSS\jquery.dataTables.min.css.css" />
     <Content Include="Default.aspx" />
     <Content Include="IMAGENS\SISTEMA\logo-normal.png" />
-    <Content Include="IMAGENS\SISTEMA\logo_hotel.png" />
     <Content Include="IMAGENS\SISTEMA\topocurso.png" />
     <Content Include="layout\assets\css\component.css" />
     <Content Include="layout\assets\css\font-awesome.min.css" />
