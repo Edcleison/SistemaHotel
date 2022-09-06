@@ -42,35 +42,44 @@
             <div class="modal fade show" id="mdLog" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100)); background-color: #FFFFFF; background-image: url('https://localhost:44338/IMAGENS/SISTEMA/logo_hotel.png');" visible="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content" visible="true" style="border-radius: 10px;">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Login: </h5>
+                        </div>
                         <div class="modal-body">
-                            <table>
-                                <tr>
-                                    <td>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm">
                                         <span>Digite seu Login: </span>
-                                    </td>
-                                    <td>
+                                    </div>
+                                    <div class="col-sm">
                                         <asp:TextBox ID="txtLogin" runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
+                                    </div>
+                                    <div class="col-sm">
+                                        <span>&nbsp;</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>&nbsp;</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
                                         <span>Digite sua Senha: </span>
-                                    </td>
-                                    <td>
+                                    </div>
+                                    <div class="col-sm">
                                         <asp:TextBox type="password" runat="server" ID="txtSenha" MaxLength="8"></asp:TextBox>
+                                    </div>
+                                    <div class="col-sm">
                                         <img id="olho" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
+                                    </div>
+                                </div>
 
-                                        <asp:LinkButton ID="btlogar" runat="server" class="btn btn-primary" OnClick="btlogar_Click">Logar</asp:LinkButton>
-
-                                        <asp:LinkButton ID="lnkRecadastrarSenha" runat="server" class="btn btn-primary" OnClick="lnkRecadastrarSenha_Click">Redefinir Senha</asp:LinkButton>
-                                    </td>
-
-                                </tr>
-                            </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <asp:LinkButton ID="btlogar" runat="server" class="btn btn-primary btn-lg" OnClick="btlogar_Click">Logar</asp:LinkButton>
+                            <asp:LinkButton ID="lnkRecadastrarSenha" runat="server" class="btn btn-primary btn-lg" OnClick="lnkRecadastrarSenha_Click">Redefinir Senha</asp:LinkButton>
                         </div>
                     </div>
                 </div>
@@ -96,88 +105,103 @@
             </div>
             <div class="modal fade show" id="mdRedPass" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
                 <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content" visible="false" style="border-radius: 10px;">           
+                    <div class="modal-content" visible="false" style="border-radius: 10px;">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Redefinir Senha:</h5>
+                            <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </asp:LinkButton>
+                        </div>
                         <div class="modal-body">
-                            <table>
-                                <tr>
-                                    <td>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm">
                                         <span>Digite seu Login: </span>
-                                    </td>
-                                    <td>
+                                    </div>
+
+                                    <div class="col-sm">
                                         <asp:TextBox type="text" runat="server" ID="txtLoginR"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
+                                    </div>
+                                    <div class="col-sm">
+                                        <span>&nbsp;</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>&nbsp;</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
                                         <span>Digite a Nova Senha: </span>
-                                    </td>
-                                    <td>
+                                    </div>
+                                    <div class="col-sm">
                                         <asp:TextBox type="password" runat="server" ID="txtNovaSenha" MaxLength="8"></asp:TextBox>
+                                    </div>
+                                    <div class="col-sm">
                                         <img id="olhoR" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>&nbsp;</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
                                         <span>Confirme a senha: </span>
-                                    </td>
-                                    <td>
+                                    </div>
+                                    <div class="col-sm">
                                         <asp:TextBox type="password" runat="server" ID="txtConfirmaSenha" MaxLength="8"></asp:TextBox>
+                                    </div>
+                                    <div class="col-sm">
                                         <img id="olhoDois" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:LinkButton ID="lnkSenha" class="btn btn-primary" OnClick="lnkSenha_Click" runat="server">Salvar</asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:LinkButton ID="lnkVoltar" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
-                                    </td>
-                                </tr>
-
-                            </table>
-
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <asp:LinkButton ID="lnkSenha" class="btn btn-primary btn-lg" OnClick="lnkSenha_Click" runat="server">Salvar</asp:LinkButton>
+                            </div>
                         </div>
                     </div>
+                    <script src="Scripts/jquery.min.js"></script>
+                    <script type="text/javascript">
+                        var senha = $('#txtNovaSenha');
+                        var olho = $("#olhoR");
+
+                        olho.mousedown(function () {
+                            senha.attr("type", "text");
+                        });
+
+                        olho.mouseup(function () {
+                            senha.attr("type", "password");
+
+                        });
+                        // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
+                        //citada pelo nosso amigo nos comentários
+                        $("#olhoR").mouseout(function () {
+                            $("#txtNovaSenha").attr("type", "password");
+                        });
+                    </script>
+                    <script type="text/javascript">
+                        var ConfirmaSenha = $('#txtConfirmaSenha');
+                        var olhoDois = $("#olhoDois");
+
+                        olhoDois.mousedown(function () {
+                            ConfirmaSenha.attr("type", "text");
+                        });
+
+                        olhoDois.mouseup(function () {
+                            ConfirmaSenha.attr("type", "password");
+                        });
+                        // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
+                        //citada pelo nosso amigo nos comentários
+                        $("#olhoDois").mouseout(function () {
+                            $("#txtConfimaSenha").attr("type", "password");
+                        });
+                    </script>
                 </div>
-                <script src="Scripts/jquery.min.js"></script>
-                <script type="text/javascript">
-                    var senha = $('#txtNovaSenha');
-                    var olho = $("#olhoR");
-
-                    olho.mousedown(function () {
-                        senha.attr("type", "text");
-                    });
-
-                    olho.mouseup(function () {
-                        senha.attr("type", "password");
-
-                    });
-                    // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-                    //citada pelo nosso amigo nos comentários
-                    $("#olhoR").mouseout(function () {
-                        $("#txtNovaSenha").attr("type", "password");
-                    });
-                </script>
-                <script type="text/javascript">
-                    var ConfirmaSenha = $('#txtConfirmaSenha');
-                    var olhoDois = $("#olhoDois");
-
-                    olhoDois.mousedown(function () {
-                        ConfirmaSenha.attr("type", "text");
-                    });
-
-                    olhoDois.mouseup(function () {
-                        ConfirmaSenha.attr("type", "password");
-                    });
-                    // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-                    //citada pelo nosso amigo nos comentários
-                    $("#olhoDois").mouseout(function () {
-                        $("#txtConfimaSenha").attr("type", "password");
-                    });
-                </script>
             </div>
-
         </div>
     </form>
 </body>
