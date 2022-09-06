@@ -235,8 +235,11 @@ namespace SistemaHotel
             }
             else
             {
-                string msg = $"<script> alert('Carrinho Vazio!); </script>";
+                string msg = $"<script> alert('Carrinho Vazio!'); </script>";
                 Response.Write(msg);
+                mdCarr.Visible = false;
+                mdBack.Visible = false;
+                carregarTabela();
             }
 
 
