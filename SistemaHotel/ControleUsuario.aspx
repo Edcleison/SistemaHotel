@@ -136,7 +136,6 @@
                         </div>
                         <div class="modal-body">
                             <div class="container">
-
                                 <div class="row">
                                     <div class="col-sm">
                                         <span>Nome: </span>
@@ -217,8 +216,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <asp:LinkButton ID="lnkSenha" class="btn btn-success" OnClick="lnkSenha_Click" runat="server">Salvar</asp:LinkButton>
-                            <asp:LinkButton ID="lnkVoltar" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
+                            <asp:LinkButton ID="lnkSenha" class="btn btn-success" OnClick="lnkSenha_Click" runat="server">Salvar</asp:LinkButton>                          
                         </div>
                     </div>
                 </div>

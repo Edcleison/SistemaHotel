@@ -50,7 +50,7 @@ namespace SistemaHotel
                 }
                 if (Request.QueryString["CARRINHO_C"] != null)
                 {
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_C"]));
+                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["CARRINHO_C"]));
 
                     Carrinho car = dalCar.buscarCarrinhoId(rParametro);
 
@@ -98,7 +98,7 @@ namespace SistemaHotel
                 sb.AppendLine("<td><center>" + dtr["DESCRICAO_PROD"] + "</td></center>");
                 sb.AppendLine("<td><center>" + dtr["PRECO_UNI"] + "</td></center>");
                 sb.AppendLine($@"<td><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></td></center>");
-                sb.AppendLine("<td><center><a href='NovoPedido.aspx?PRODUTO_N=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-plus'></i></center></td>");
+                sb.AppendLine("<td><center><a href='NovoPedidoFrigobar.aspx?PRODUTO_N=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-plus'></i></center></td>");
                 sb.AppendLine("</tr>");
 
             }
@@ -136,7 +136,7 @@ namespace SistemaHotel
                 sb.AppendLine($"<td><center> {dtr["NOME_PROD"]}</td></center>");
                 sb.AppendLine($"<td><center>{dtr["DESCRICAO_PROD"]}</td></center>");
                 sb.AppendLine($"<td><center>{dtr["PRECO_UNI"]}</td></center>");
-                sb.AppendLine($"<td><center><a href='NovoPedido.aspx?CARRINHO_C={Criptografia.Encrypt(dtr["ID_CARRINHO"].ToString())}'><i class='fa fa-minus'></i></center></td>");
+                sb.AppendLine($"<td><center><a href='NovoPedidoFrigobar.aspx?CARRINHO_C={Criptografia.Encrypt(dtr["ID_CARRINHO"].ToString())}'><i class='fa fa-minus'></i></center></td>");
                 sb.AppendLine("</tr>");
                 total += decimal.Parse(dtr["PRECO_UNI"].ToString());
 
