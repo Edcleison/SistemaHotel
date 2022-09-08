@@ -33,6 +33,15 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.LinkButton lnkCarrinho;
 
         /// <summary>
+        /// lblQtdeCarrinho control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblQtdeCarrinho;
+
+        /// <summary>
         /// Panel1 control.
         /// </summary>
         /// <remarks>
@@ -78,15 +87,6 @@ namespace SistemaHotel
         protected global::System.Web.UI.HtmlControls.HtmlImage imgProd;
 
         /// <summary>
-        /// LinkButton1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
-
-        /// <summary>
         /// txtNomeProd control.
         /// </summary>
         /// <remarks>
@@ -123,6 +123,15 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.TextBox txtQuantidade;
 
         /// <summary>
+        /// LinkButton1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+
+        /// <summary>
         /// lnkPedido control.
         /// </summary>
         /// <remarks>
@@ -157,6 +166,15 @@ namespace SistemaHotel
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTotal;
+
+        /// <summary>
+        /// lnkLimparCarrinho control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkLimparCarrinho;
 
         /// <summary>
         /// lnkFechaPedido control.

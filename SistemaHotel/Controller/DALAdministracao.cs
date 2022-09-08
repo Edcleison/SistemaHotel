@@ -50,7 +50,7 @@ namespace SistemaHotel.Controller
 
   
 
-        public Administracao buscarAdmId(int Id)
+        public Administracao buscarAdmIdUsuario(int IdUsuario)
         {
             Administracao adm = new Administracao();
             using (SqlConnection connection = new SqlConnection(cnn))
@@ -63,7 +63,7 @@ namespace SistemaHotel.Controller
                                                       FROM [DBO].[EQUIPE_ATENDIMENTO]
                                                        WHERE ID_USUARIO = @ID_USUARIO", connection))
                     {
-                        cmd.Parameters.AddWithValue("ID_USUARIO", Id);
+                        cmd.Parameters.AddWithValue("ID_USUARIO", IdUsuario);
                         cmd.Connection.Open();
                         SqlDataReader registro = cmd.ExecuteReader();
                         if (registro.HasRows)

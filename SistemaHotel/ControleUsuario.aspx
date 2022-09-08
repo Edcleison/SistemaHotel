@@ -54,6 +54,8 @@
                     "search": "Pesquisar:",
 
                 },
+                "scrollY": '300px',
+                "scrollCollapse": true,
                 "paging": true,
                 "pageLength": 10,
                 "ordering": false,
@@ -69,31 +71,25 @@
         })
     </script>
 
-    <script src="Scripts/jquery-2.1.1.min.js"></script>
-    <script src="Scripts/jquery.maskedinput.min.js"></script>
-    <title>jQuery - Formatando campos em formulários WebForms</title>
-    <script type="text/javascript">
-        jQuery(function ($) {
+    <style>
+        .modal-personalizado {
+            min-width: 95%;
+            margin-left: 70px;
+        }
 
-            $("#txtCodReserva").mask("aaaa-9999");
+            .modal-personalizado.modal-content {
+                min-height: 50vh;
+            }
 
-
-            $("#txtInputDataIni").mask("99/99/9999");
-            $("#txtInputDataFim").mask("99/99/9999");
-
-            $("#txtInputDataIniE").mask("99/99/9999");
-            $("#txtInputDataFimE").mask("99/99/9999");
-
-
-
-        });
-    </script>
-
-
+        .modal-body {
+            max-height: calc(120vh - 210px);
+            overflow-y: auto;
+            overflow-x: auto;
+        }
+    </style>
     <script src="Scripts/mascara.js"></script>
 
 </asp:Content>
-
 
 <asp:Content ID="Content12" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
@@ -126,7 +122,8 @@
             </div>
             <div class="modal-backdrop fade show" id="mdBack" runat="server" style="opacity: 0.2; display: block; filter: (alpha(opacity= 20))" visible="false"></div>
             <div class="modal fade show" id="mdUsu" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
-                <div class="modal-dialog modal-lg" role="document">
+                <%--<div class="modal-dialog modal-lg" role="document">--%>
+                <div class="modal-dialog modal-personalizado" role="document">
                     <div class="modal-content" visible="false" style="border-radius: 10px;">
                         <div class="modal-header">
                             <h5 class="modal-title">Novo Usuário:</h5>
@@ -222,237 +219,238 @@
                         </div>
                     </div>
                 </div>
-                <script src="Scripts/jquery.min.js"></script>
-                <script type="text/javascript">
-                    var senha = $('#txtNovaSenha');
-                    var olho = $("#olho");
-                    olho.mousedown(function () {
-                        senha.attr("type", "text");
-                    });
+            <script src="Scripts/jquery.min.js"></script>
+            <script type="text/javascript">
+                var senha = $('#txtNovaSenha');
+                var olho = $("#olho");
+                olho.mousedown(function () {
+                    senha.attr("type", "text");
+                });
 
-                    olho.mouseup(function () {
-                        senha.attr("type", "password");
+                olho.mouseup(function () {
+                    senha.attr("type", "password");
 
-                    });
-                    // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-                    //citada pelo nosso amigo nos comentários
-                    $("#olho").mouseout(function () {
-                        $("#txtNovaSenha").attr("type", "password");
-                    });
-                </script>
-                <script type="text/javascript">
-                    var ConfirmaSenha = $('#txtConfirmaSenha');
-                    var olhoDois = $("#olhoDois");
+                });
+                // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
+                //citada pelo nosso amigo nos comentários
+                $("#olho").mouseout(function () {
+                    $("#txtNovaSenha").attr("type", "password");
+                });
+            </script>
+            <script type="text/javascript">
+                var ConfirmaSenha = $('#txtConfirmaSenha');
+                var olhoDois = $("#olhoDois");
 
-                    olhoDois.mousedown(function () {
-                        ConfirmaSenha.attr("type", "text");
-                    });
+                olhoDois.mousedown(function () {
+                    ConfirmaSenha.attr("type", "text");
+                });
 
-                    olhoDois.mouseup(function () {
-                        ConfirmaSenha.attr("type", "password");
-                    });
-                    // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-                    //citada pelo nosso amigo nos comentários
-                    $("#olhoDois").mouseout(function () {
-                        $("#txtConfimaSenha").attr("type", "password");
-                    });
-                </script>
-            </div>
-            <div class="modal fade show" id="mdCli" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content" visible="false" style="border-radius: 10px;">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Novo Cliente:</h5>
-                            <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
+                olhoDois.mouseup(function () {
+                    ConfirmaSenha.attr("type", "password");
+                });
+                // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
+                //citada pelo nosso amigo nos comentários
+                $("#olhoDois").mouseout(function () {
+                    $("#txtConfimaSenha").attr("type", "password");
+                });
+            </script>
+        </div>
+        <div class="modal fade show" id="mdCli" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
+            <%--<div class="modal-dialog modal-lg" role="document">--%>
+            <div class="modal-dialog modal-personalizado" role="document">
+                <div class="modal-content" visible="false" style="border-radius: 10px;">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Novo Cliente:</h5>
+                        <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
-                            </asp:LinkButton>
-                        </div>
-                        <div class="modal-body">
+                        </asp:LinkButton>
+                    </div>
+                    <div class="modal-body">
 
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Cód. Reserva: </span>
-                                        <asp:TextBox runat="server" ID="txtCodReserva"></asp:TextBox>
-                                    </div>                                                                         
-                                    <div class="col-sm">
-                                        <span>Quarto: </span>                                   
-                                        <asp:DropDownList ID="ddlQuarto" runat="server"></asp:DropDownList>
-                                    </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Cód. Reserva: </span>
+                                    <asp:TextBox runat="server" ID="txtCodReserva"></asp:TextBox>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
-                                    </div>
+                                <div class="col-sm">
+                                    <span>Quarto: </span>
+                                    <asp:DropDownList ID="ddlQuarto" runat="server"></asp:DropDownList>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Nome: </span>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:TextBox runat="server" ID="txtNomeCliente"></asp:TextBox>
-                                    </div>                             
-                                    <div class="col-sm">
-                                        <span>Sobrenome: </span>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:TextBox runat="server" ID="txtSobrenomeCliente"></asp:TextBox>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Nome: </span>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Data de Início:</span>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:TextBox ID="txtInputDataIni" runat="server" onkeyup="formataDataeHora(this,event);" MaxLength="17"></asp:TextBox>
-                                    </div>                             
-                                    <div class="col-sm">
-                                        <span>Data Fim:</span>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:TextBox ID="txtInputDataFim" runat="server" onkeyup="formataDataeHora(this,event);" MaxLength="17"></asp:TextBox>
-                                    </div>
+                                <div class="col-sm">
+                                    <asp:TextBox runat="server" ID="txtNomeCliente"></asp:TextBox>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
-                                    </div>
+                                <div class="col-sm">
+                                    <span>Sobrenome: </span>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Senha Gerada:</span>                                   
-                                        <asp:TextBox ID="txtSenhaRand" runat="server" Enabled="false"></asp:TextBox>
-                                    </div>
+                                <div class="col-sm">
+                                    <asp:TextBox runat="server" ID="txtSobrenomeCliente"></asp:TextBox>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Período de: </span>                                   
-                                        <asp:TextBox ID="txtDataIni" runat="server" Enabled="false"></asp:TextBox>
-                                    </div>                             
-                                    <div class="col-sm">
-                                        <span>Até: </span>                                   
-                                        <asp:TextBox ID="txtDataFim" runat="server" Enabled="false"></asp:TextBox>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Data de Início:</span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox ID="txtInputDataIni" runat="server" onkeyup="formataDataeHora(this,event);" MaxLength="17"></asp:TextBox>
+                                </div>
+                                <div class="col-sm">
+                                    <span>Data Fim:</span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox ID="txtInputDataFim" runat="server" onkeyup="formataDataeHora(this,event);" MaxLength="17"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Senha Gerada:</span>
+                                    <asp:TextBox ID="txtSenhaRand" runat="server" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Período de: </span>
+                                    <asp:TextBox ID="txtDataIni" runat="server" Enabled="false"></asp:TextBox>
+                                </div>
+                                <div class="col-sm">
+                                    <span>Até: </span>
+                                    <asp:TextBox ID="txtDataFim" runat="server" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <asp:LinkButton ID="salvarNovoCliente" class="btn btn-success" runat="server" OnClick="salvarNovoCliente_Click">Novo Cliente</asp:LinkButton>
+                        <asp:LinkButton ID="LinkButton1" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="modal fade show" id="modEditCli" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content" visible="false" style="border-radius: 10px;">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar Data Final do Cliente:</h5>
+                        <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </asp:LinkButton>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm">
+                                    Código da Reserva: 
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox runat="server" ID="txtCdReservaE" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Quarto: </span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:DropDownList ID="ddlQuartoE" runat="server"></asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Nome Cliente: </span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox runat="server" ID="txtNomeClienteE" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Nova Data de Saída:</span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox ID="txtInputDataFimE" runat="server" onkeyup="formataDataeHora(this,event);" MaxLength="17"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Período de: </span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox ID="txtDataIniE" runat="server" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>Até: </span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox ID="txtDataFimE" runat="server" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <asp:LinkButton ID="salvarNovoCliente" class="btn btn-success" runat="server" OnClick="salvarNovoCliente_Click">Novo Cliente</asp:LinkButton>
-                            <asp:LinkButton ID="LinkButton1" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="modal fade show" id="modEditCli" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content" visible="false" style="border-radius: 10px;">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Editar Data Final do Cliente:</h5>
-                            <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </asp:LinkButton>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm">
-                                        Código da Reserva: 
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:TextBox runat="server" ID="txtCdReservaE" Enabled="false"></asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
-                                    </div>
-                                </div>
-                                 <div class="row">
-                                    <div class="col-sm">
-                                        <span>Quarto: </span>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:DropDownList ID="ddlQuartoE" runat="server"></asp:DropDownList>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Nome Cliente: </span>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:TextBox runat="server" ID="txtNomeClienteE" Enabled="false"></asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Nova Data de Saída:</span>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:TextBox ID="txtInputDataFimE" runat="server" onkeyup="formataDataeHora(this,event);" MaxLength="17"></asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Período de: </span>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:TextBox ID="txtDataIniE" runat="server" Enabled="false"></asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Até: </span>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:TextBox ID="txtDataFimE" runat="server" Enabled="false"></asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <asp:LinkButton ID="alterarData" class="btn btn-success" runat="server" OnClick="alterarData_Click">Salvar Alterações</asp:LinkButton>
-                                <asp:LinkButton ID="lnkVoltarCliE" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
-                            </div>
+                            <asp:LinkButton ID="alterarData" class="btn btn-success" runat="server" OnClick="alterarData_Click">Salvar Alterações</asp:LinkButton>
+                            <asp:LinkButton ID="lnkVoltarCliE" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </asp:Panel>
 </asp:Content>

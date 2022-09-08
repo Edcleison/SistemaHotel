@@ -61,7 +61,7 @@
                     <NodeStyle CssClass="menulink" />
                 </asp:TreeView>
             </nav>
-            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.png" CssClass="linkhome" ImageAlign="Middle" />         
+            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.jpeg" CssClass="linkhome" ImageAlign="Middle" />         
         </header>
         <main>
             <div>

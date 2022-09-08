@@ -79,6 +79,9 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="ControleQuarto.aspx" />
     <Content Include="ControleProduto.aspx" />
+    <Content Include="CSS\jquery.dataTables.css" />
+    <Content Include="NovoPedidoFrigobar.aspx" />
+    <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="CSS\jquery.dataTables.min.css" />
     <Content Include="CSS\StyleSheet.css.exclude" />
     <Content Include="IMAGENS\SISTEMA\logo_hotel.jpeg" />
@@ -1075,7 +1078,7 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
     <Content Include="layout\website.publishproj" />
-    <Content Include="NovoPedidoFrigobar.aspx" />
+    <Content Include="Atendimento.aspx" />
     <Content Include="NovoPedidoCozinha.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -1091,11 +1094,14 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\hotelservicos - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\hotelservicos - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\hotelservicos - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\hotelservicos - Web Deploy1.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy1.pubxml" />
+    <Content Include="Scripts\jquery-1.11.3.min.js" />
     <Content Include="web.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
@@ -5932,6 +5938,13 @@
     <Compile Include="Model\PerfilUsuario.cs" />
     <Compile Include="Model\Produto.cs" />
     <Compile Include="Model\Usuario.cs" />
+    <Compile Include="Atendimento.aspx.cs">
+      <DependentUpon>Atendimento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Atendimento.aspx.designer.cs">
+      <DependentUpon>Atendimento.aspx</DependentUpon>
+    </Compile>
     <Compile Include="NovoPedidoFrigobar.aspx.cs">
       <DependentUpon>NovoPedidoFrigobar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

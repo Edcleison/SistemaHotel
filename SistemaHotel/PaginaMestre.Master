@@ -38,8 +38,7 @@
     <!-- fim layout padrao  -->
 
     <link rel="stylesheet" href="CSS/Estilos.css" />   
-    <script src="Scripts/JavaScriptFunctions.js"></script>
-    
+    <script src="Scripts/JavaScriptFunctions.js"></script> 
 </head>
 
 <body>
@@ -51,8 +50,9 @@
                         <asp:TreeNode Checked="True" SelectAction="Expand" Selected="True">
                             <asp:TreeNode Text="Home" Value="Home" NavigateUrl="Default.aspx"></asp:TreeNode>
                             <asp:TreeNode Text="Controle de Usuários" Value="Usuarios" NavigateUrl="ControleUsuario.aspx"></asp:TreeNode>
-                            <asp:TreeNode Text=" Controle de Quartos" Value="Quarto" NavigateUrl="ControleQuarto.aspx"></asp:TreeNode> 
-                            <asp:TreeNode Text=" Controle de Produtos" Value="Produto" NavigateUrl="ControleProduto.aspx"></asp:TreeNode>                              
+                            <asp:TreeNode Text="Controle de Quartos" Value="Quarto" NavigateUrl="ControleQuarto.aspx"></asp:TreeNode> 
+                            <asp:TreeNode Text="Controle de Produtos" Value="Produto" NavigateUrl="ControleProduto.aspx"></asp:TreeNode>                              
+                            <asp:TreeNode Text="Atendimento" Value="Produto" NavigateUrl="Atendimento.aspx"></asp:TreeNode>                              
                             <asp:TreeNode Text="Pedido Cozinha" Value="NovoPedidoCozinha" NavigateUrl="NovoPedidoCozinha.aspx"></asp:TreeNode>                              
                             <asp:TreeNode Text="Pedido Frigobar" Value="NovoPedidoFrigobar" NavigateUrl="NovoPedidoFrigobar.aspx"></asp:TreeNode>                              
                             <asp:TreeNode Text="Sair" Value="Novo Nó" NavigateUrl="~/Login.aspx"></asp:TreeNode>

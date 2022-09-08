@@ -73,10 +73,10 @@ namespace SistemaHotel
             sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:15px;'>");
             sb.AppendLine("<thead>");
             sb.AppendLine("<tr>");
-            sb.AppendLine("<th><center>ID</th></center>");
-            sb.AppendLine("<th><center>DESCRICAO</th></center>");
-            sb.AppendLine("<th><center>EDITAR</th></center>");
-            sb.AppendLine("<th><center>EXCLUIR</th></center>");
+            sb.AppendLine("<th><center>ID</center></th>");
+            sb.AppendLine("<th><center>DESCRICAO</center></th>");
+            sb.AppendLine("<th><center>EDITAR</center></th>");
+            sb.AppendLine("<th><center>EXCLUIR</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -85,8 +85,8 @@ namespace SistemaHotel
             {
 
                 sb.AppendLine("<tr>");
-                sb.AppendLine("<td><center>" + dtr["ID_QUARTO"] + "</td></center>");
-                sb.AppendLine("<td><center>" + dtr["DESCRICAO_QUARTO"] + "</td></center>");
+                sb.AppendLine("<td><center>" + dtr["ID_QUARTO"] + "</center></td>");
+                sb.AppendLine("<td><center>" + dtr["DESCRICAO_QUARTO"] + "</center></td>");
                 sb.AppendLine("<td><center><a href='ControleQuarto.aspx?QUARTO_E=" + Criptografia.Encrypt(dtr["ID_QUARTO"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
                 sb.AppendLine("<td><center><a href='ControleQuarto.aspx?QUARTO_D=" + Criptografia.Encrypt(dtr["ID_QUARTO"].ToString()) + "'><i class='fa fa-trash'></i></center></td>");
                 sb.AppendLine("</tr>");

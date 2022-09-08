@@ -21,7 +21,7 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [dbo].[PEDIDO]
-                                                       ([ID_STATUS]
+                                                       ([ID_STATUS_PED]
                                                        ,[ID_CLIENTE]
                                                        ,[ID_ADM]
                                                        ,[ID_FUNCIONARIO]
@@ -62,7 +62,7 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_PEDIDO]
-                                                               ,[ID_STATUS]
+                                                               ,[ID_STATUS_PED]
                                                                ,[ID_CLIENTE]
                                                                ,[ID_ADM]
                                                                ,[ID_FUNCIONARIO]
@@ -92,29 +92,27 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-        public DataTable buscarTodosPedidosTipo(int Tipo)
+        public DataTable buscarTodosPedidosTipo(int IdTipoProd)
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand($@"SELECT P.[ID_PEDIDO]
-                                                                ,P.[ID_STATUS]
-                                                                ,P.[ID_CLIENTE]
-                                                                ,P.[ID_ADM]
-                                                                ,P.[ID_FUNCIONARIO]
-                                                                ,P.[VALOR_TOTAL]
-                                                                ,P.[DATA_ABERTURA]
-                                                                ,P.[DATA_FINALIZACAO]
-                                                                ,PR.ID_TIPO_PROD
-                                                                FROM [dbo].[PEDIDO] P
-                                                                INNER JOIN ITEM_PEDIDO IP ON (P.ID_PEDIDO=IP.ID_PEDIDO)
-                                                                INNER JOIN PRODUTO PR ON(PR.ID_PRODUTO = IP.ID_PRODUTO)
-                                                                WHERE PR.TIPO_PROD = {Tipo}", connection))
-                {
+                using (SqlCommand cmd = new SqlCommand($@"SELECT P.ID_PEDIDO,P.DATA_ABERTURA,Q.DESCRICAO_QUARTO,C.NOME_CLIENTE,C.SOBRENOME_CLIENTE,
+                                                        PR.NOME_PROD,PR.DESCRICAO_PROD,IP.QUANTIDADE,S.DESCRICAO_STATUS_PED
+                                                        FROM PEDIDO P
+                                                        INNER JOIN CLIENTE C ON (C.ID_CLIENTE = P. ID_CLIENTE)
+                                                        INNER JOIN ITEM_PEDIDO IP ON (IP.ID_PEDIDO = P.ID_PEDIDO)
+                                                        INNER JOIN PRODUTO PR ON (PR.ID_PRODUTO = IP.ID_PRODUTO)
+                                                        INNER JOIN QUARTO Q ON (Q.ID_QUARTO = C.ID_QUARTO)
+                                                        INNER JOIN STATUS_PEDIDO S ON (S.ID_STATUS_PED = P.ID_STATUS_PED)
+                                                        INNER JOIN TIPO_PRODUTO TP ON (TP.ID_TIPO_PROD = PR.ID_TIPO_PROD)
+                                                        WHERE PR.ID_TIPO_PROD =@ID_TIPO_PROD", connection))
+                                                                    {
                     try
                     {
+                        cmd.Parameters.AddWithValue("@ID_TIPO_PROD", IdTipoProd);
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
                         adp = new SqlDataAdapter(cmd);
@@ -136,7 +134,7 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-        public DataTable buscarTodosPedidosTipoStatus(int Tipo, int Status)
+        public DataTable buscarTodosPedidosTipoStatus(int IdTipoProd,int IdStatus)
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
@@ -144,19 +142,21 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
 
-                using (SqlCommand cmd = new SqlCommand($@"SELECT [ID_PEDIDO]
-                                                                ,[ID_STATUS]
-                                                                ,[ID_CLIENTE]
-                                                                ,[ID_ADM]
-                                                                ,[ID_FUNCIONARIO]
-                                                                ,[VALOR_TOTAL]
-                                                                ,[DATA_ABERTURA]
-                                                                ,[DATA_FINALIZACAO]                                                              
-                                                                FROM [dbo].[PEDIDO]
-                                                                WHERE ID_STATUS= {Status} ", connection))
+                using (SqlCommand cmd = new SqlCommand($@"SELECT P.ID_PEDIDO,P.DATA_ABERTURA,Q.DESCRICAO_QUARTO,C.NOME_CLIENTE,C.SOBRENOME_CLIENTE,
+                                                        PR.NOME_PROD,PR.DESCRICAO_PROD,IP.QUANTIDADE,S.DESCRICAO_STATUS_PED
+                                                        FROM PEDIDO P
+                                                        INNER JOIN CLIENTE C ON (C.ID_CLIENTE = P. ID_CLIENTE)
+                                                        INNER JOIN ITEM_PEDIDO IP ON (IP.ID_PEDIDO = P.ID_PEDIDO)
+                                                        INNER JOIN PRODUTO PR ON (PR.ID_PRODUTO = IP.ID_PRODUTO)
+                                                        INNER JOIN QUARTO Q ON (Q.ID_QUARTO = C.ID_QUARTO)
+                                                        INNER JOIN STATUS_PEDIDO S ON (S.ID_STATUS_PED = P.ID_STATUS_PED)
+                                                        INNER JOIN TIPO_PRODUTO TP ON (TP.ID_TIPO_PROD = PR.ID_TIPO_PROD)
+                                                        WHERE P.ID_STATUS_PED = @ID_STATUS_PED AND PR.ID_TIPO_PROD =@ID_TIPO_PROD", connection))
                 {
                     try
                     {
+                        cmd.Parameters.AddWithValue("@ID_STATUS_PED", IdStatus);
+                        cmd.Parameters.AddWithValue("@ID_TIPO_PROD", IdTipoProd);
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
                         adp = new SqlDataAdapter(cmd);
@@ -187,13 +187,10 @@ namespace SistemaHotel.Controller
 
 
                 using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_PEDIDO]
-                                                                ,[ID_STATUS]
+                                                                ,[ID_STATUS_PED]
                                                                 ,[ID_CLIENTE]
-                                                                ,[ID_ADM]
-                                                                ,[ID_FUNCIONARIO]
                                                                 ,[VALOR_TOTAL]
                                                                 ,[DATA_ABERTURA]
-                                                                ,[DATA_FINALIZACAO] 
                                                           FROM [dbo].[PEDIDO] WHERE ID_PEDIDO = @ID_PEDIDO", connection))
                 {
                     try
@@ -206,15 +203,11 @@ namespace SistemaHotel.Controller
                         {
                             registro.Read();
                             ped.IdPedido = Convert.ToInt32(registro["ID_PEDIDO"]);
-                            ped.IdStatus = Convert.ToInt32(registro["ID_STATUS"]);
+                            ped.IdStatus = Convert.ToInt32(registro["ID_STATUS_PED"]);
                             ped.IdCliente = Convert.ToInt32(registro["ID_CLIENTE"]);
-                            ped.IdAdm = Convert.ToInt32(registro["ID_ADM"]);
-                            ped.IdFuncionario = Convert.ToInt32(registro["ID_FUNCIONARIO"]);
                             ped.ValorTotal = Convert.ToDecimal(registro["VALOR_TOTAL"]);
                             ped.DataAbertura = Convert.ToDateTime(registro["DATA_ABERTURA"]);
-                            ped.DataFinalizacao = Convert.ToDateTime(registro["DATA_FINALIZACAO"]);
-
-
+                          
                         }
                     }
                     catch (Exception erro)
@@ -240,7 +233,7 @@ namespace SistemaHotel.Controller
 
 
                 using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_PEDIDO]
-                                                                ,[ID_STATUS]
+                                                                ,[ID_STATUS_PED]
                                                                 ,[ID_CLIENTE]                                                                
                                                                 ,[VALOR_TOTAL]
                                                                 ,[DATA_ABERTURA]                                                          
@@ -277,22 +270,54 @@ namespace SistemaHotel.Controller
             return ped;
         }
 
-        public void alterarStatusAtendimentoPedido(Pedido ped)
+        public void alterarStatusAtendimentoAdm(Pedido ped)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand(@"UPDATE [DBO].[PEDIDO]
-                                                       SET [ID_STATUS] = ID_STATUS
-                                                          ,[ID_ADM] = NULLIF(@ID_ADM,'')                                                         
-                                                          ,[ID_FUNCIONARIO] = NULLIF(@ID_FUNCIONARIO,'')                                                         
+                                                       SET [ID_STATUS_PED] = @ID_STATUS_PED
+                                                          ,[ID_ADM] = @ID_ADM)                                                        
                                                           ,[DATA_FINALIZACAO] = @DATA_FINALIZACAO
                                                      WHERE ID_PEDIDO = @ID_PEDIDO", connection))
                 {
                     try
                     {
                         cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("ID_STATUS", ped.IdStatus);
+                        cmd.Parameters.AddWithValue("ID_STATUS_PED", ped.IdStatus);
                         cmd.Parameters.AddWithValue("ID_ADM", ped.IdAdm);
+                        cmd.Parameters.AddWithValue("DATA_FINALIZACAO", ped.DataFinalizacao);
+                        cmd.Parameters.AddWithValue("ID_PEDIDO", ped.IdPedido);
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        cmd.Connection.Close();
+                    }
+
+
+                }
+
+            }
+        }
+
+        public void alterarStatusAtendimentoFuncionario(Pedido ped)
+        {
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"UPDATE [DBO].[PEDIDO]
+                                                       SET [ID_STATUS_PED] = @ID_STATUS_PED
+                                                          ,[ID_FUNCIONARIO] = @ID_FUNCIONARIO                                                        
+                                                          ,[DATA_FINALIZACAO] = @DATA_FINALIZACAO
+                                                     WHERE ID_PEDIDO = @ID_PEDIDO", connection))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("ID_STATUS_PED", ped.IdStatus);         
                         cmd.Parameters.AddWithValue("ID_FUNCIONARIO", ped.IdFuncionario);
                         cmd.Parameters.AddWithValue("DATA_FINALIZACAO", ped.DataFinalizacao);
                         cmd.Parameters.AddWithValue("ID_PEDIDO", ped.IdPedido);
@@ -312,6 +337,8 @@ namespace SistemaHotel.Controller
 
             }
         }
+
+      
 
 
 

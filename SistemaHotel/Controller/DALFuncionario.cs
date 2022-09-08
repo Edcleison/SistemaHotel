@@ -50,20 +50,20 @@ namespace SistemaHotel.Controller
 
   
 
-        public Funcionario buscarFuncionarioId(int Id)
+        public Funcionario buscarFuncionarioIdUsuario(int IdUsuario)
         {
             Funcionario fun = new Funcionario();
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_ADM]
+                    using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_FUNCIONARIO]
                                                           ,[ID_USUARIO]
                                                           ,[ID_PERFIL]
-                                                      FROM [DBO].[EQUIPE_ATENDIMENTO]
+                                                      FROM [DBO].[FUNCIONARIO]
                                                        WHERE ID_USUARIO = @ID_USUARIO", connection))
                     {
-                        cmd.Parameters.AddWithValue("ID_USUARIO", Id);
+                        cmd.Parameters.AddWithValue("ID_USUARIO", IdUsuario);
                         cmd.Connection.Open();
                         SqlDataReader registro = cmd.ExecuteReader();
                         if (registro.HasRows)

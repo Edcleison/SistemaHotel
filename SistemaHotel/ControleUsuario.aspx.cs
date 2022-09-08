@@ -77,10 +77,10 @@ namespace SistemaHotel
             sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:15px;'>");
             sb.AppendLine("<thead>");
             sb.AppendLine("<tr>");
-            sb.AppendLine("<th><center>ID</th></center>");
-            sb.AppendLine("<th><center>NOME</th></center>");
-            sb.AppendLine("<th><center>LOGIN</th></center>");
-            sb.AppendLine("<th><center>INATIVAR</th></center>");
+            sb.AppendLine("<th><center>ID</center></th>");
+            sb.AppendLine("<th><center>NOME</center></th>");
+            sb.AppendLine("<th><center>LOGIN</center></th>");
+            sb.AppendLine("<th><center>INATIVAR</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -89,9 +89,9 @@ namespace SistemaHotel
             {
 
                 sb.AppendLine("<tr>");
-                sb.AppendLine("<td><center>" + dtr["ID_Usuario"] + "</td></center>");
-                sb.AppendLine("<td><center>" + dtr["NOME"] + " " + dtr["SOBRENOME"] + "</td></center>");
-                sb.AppendLine("<td><center>" + dtr["LOGIN"] + "</td></center>");
+                sb.AppendLine("<td><center>" + dtr["ID_Usuario"] + "</center></td>");
+                sb.AppendLine("<td><center>" + dtr["NOME"] + " " + dtr["SOBRENOME"] + "</center></td>");
+                sb.AppendLine("<td><center>" + dtr["LOGIN"] + "</center></td>");
                 sb.AppendLine("<td><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
                 sb.AppendLine("</tr>");
 
@@ -238,14 +238,14 @@ namespace SistemaHotel
             sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:15px;'>");
             sb.AppendLine("<thead>");
             sb.AppendLine("<tr>");
-            sb.AppendLine("<th><center>ID</th></center>");
-            sb.AppendLine("<th><center>CÓDIGO DA RESERVA</th></center>");
+            sb.AppendLine("<th><center>ID</center></th>");
+            sb.AppendLine("<th><center>CÓDIGO DA RESERVA</center></th>");
             sb.AppendLine("<th><center>QUARTO</th></center>");
             sb.AppendLine("<th><center>NOME</th></center>");
-            sb.AppendLine("<th><center>DATA INICIO</th></center>");
-            sb.AppendLine("<th><center>DATA FIM</th></center>");
-            sb.AppendLine("<th><center>EDITAR</th></center>");
-            sb.AppendLine("<th><center>INATIVAR</th></center>");
+            sb.AppendLine("<th><center>DATA INICIO</center></th>");
+            sb.AppendLine("<th><center>DATA FIM</center></th>");
+            sb.AppendLine("<th><center>EDITAR</center></th>");
+            sb.AppendLine("<th><center>INATIVAR</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -254,12 +254,12 @@ namespace SistemaHotel
             {
 
                 sb.AppendLine("<tr>");
-                sb.AppendLine("<td><center>" + dtr["ID_USUARIO"] + "</td></center>");
-                sb.AppendLine("<td><center>" + dtr["LOGIN"] + "</td></center>");
-                sb.AppendLine("<td><center>" + dtr["DESCRICAO_QUARTO"] + "</td></center>");
-                sb.AppendLine("<td><center>" + dtr["NOME"] + " " + dtr["SOBRENOME"] + "</td></center>");
-                sb.AppendLine("<td><center>" + Convert.ToDateTime(dtr["DATA_Entrada"]).ToString("dd/MM/yyyy") + "</td></center>");
-                sb.AppendLine("<td><center>" + Convert.ToDateTime(dtr["DATA_Saida"]).ToString("dd/MM/yyyy") + "</td></center>");
+                sb.AppendLine("<td><center>" + dtr["ID_USUARIO"] + "</center></td>");
+                sb.AppendLine("<td><center>" + dtr["LOGIN"] + "</center></td>");
+                sb.AppendLine("<td><center>" + dtr["DESCRICAO_QUARTO"] + "</center></td>");
+                sb.AppendLine("<td><center>" + dtr["NOME"] + " " + dtr["SOBRENOME"] + "</center></td>");
+                sb.AppendLine("<td><center>" + Convert.ToDateTime(dtr["DATA_Entrada"]).ToString("dd/MM/yyyy") + "</center></td>");
+                sb.AppendLine("<td><center>" + Convert.ToDateTime(dtr["DATA_Saida"]).ToString("dd/MM/yyyy") + "</center></td>");
                 sb.AppendLine("<td><center><a href='ControleUsuario.aspx?CLIENTE_E=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
                 sb.AppendLine("<td><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
                 sb.AppendLine("</tr>");

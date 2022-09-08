@@ -50,6 +50,8 @@
                     "search": "Pesquisar:",
 
                 },
+                "scrollY": '300px',
+                "scrollCollapse": true,
                 "paging": true,
                 "pageLength": 10,
                 "ordering": false,
@@ -67,12 +69,12 @@
 
 
     <style>
-        .modal-personalizado {
-            min-width: 95%;
+        .modal-dialog modal-lg {
+            min-width: 90%;
             margin-left: 70px;
         }
 
-            .modal-personalizado.modal-content {
+            .modal-dialog modal-lg.modal-content {
                 min-height: 50vh;
             }
 
@@ -99,7 +101,7 @@
             <span>&nbsp;</span>
         </div>
         <div class="col-sm">
-            <asp:LinkButton ID="lnkCarrinho" class="btn btn-info btn-lg" OnClick="lnkCarrinho_Click" runat="server"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Carrinho de Compras</asp:LinkButton><i class="bi bi-cart"></i>
+            <asp:LinkButton ID="lnkCarrinho" class="btn btn-info btn-lg" OnClick="lnkCarrinho_Click" runat="server"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Carrinho de Compras <asp:Label runat="server" ID="lblQtdeCarrinho" class="badge badge-danger"></asp:Label></asp:LinkButton>
         </div>
     </div>
     <div class="row">
@@ -113,8 +115,7 @@
     </div>
     <div class="modal-backdrop fade show" id="mdBack" runat="server" style="opacity: 0.2; display: block; filter: (alpha(opacity= 20))" visible="false"></div>
     <div class="modal fade show" id="mdPed" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
-        <%--<div class="modal-dialog modal-xl" role="document">--%>
-        <div class="modal-dialog modal-personalizado" role="document">
+        <div class="modal-dialog modal-lg" role="document">      
             <div class="modal-content" visible="false" style="border-radius: 10px;">
                 <div class="modal-header">
                     <h5 class="modal-title">Novo Pedido:</h5>
@@ -133,9 +134,6 @@
                             </div>
                             <div class="col-sm">
                                 <img id="imgProd" alt="" src="" runat="server" />
-                            </div>
-                            <div class="col-sm">
-                                <asp:LinkButton ID="LinkButton1" class="btn btn-info btn-lg" OnClick="lnkCarrinho_Click" runat="server"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Ir para o Carrinho</asp:LinkButton><i class="bi bi-cart"></i>
                             </div>
                         </div>
                         <div class="row">
@@ -200,50 +198,50 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <asp:LinkButton ID="LinkButton1" class="btn btn-info btn-lg" OnClick="lnkCarrinho_Click" runat="server"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Ver Carrinho</asp:LinkButton><i class="bi bi-cart"></i>
                         <asp:LinkButton ID="lnkPedido" class="btn btn-success btn-lg" OnClick="lnkPedido_Click" runat="server"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Adicionar ao Carrinho</asp:LinkButton>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
     <div class="modal fade show" id="mdCarr" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
-        <div class="modal-dialog modal-lg" role="document">
-            <%--<div class="modal-dialog modal-personalizado" role="document">--%>
-            <div class="modal-content" visible="false" style="border-radius: 10px;">
-                <div class="modal-header">
-                    <h5 class="modal-title">Resumo Carrinho:</h5>
-                    <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
+        <div class="modal-dialog modal-lg" role="document">          
+                <div class="modal-content" visible="false" style="border-radius: 10px;">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Resumo Carrinho:</h5>
+                        <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
-                    </asp:LinkButton>
-                </div>
-                <div class="modal-body">
-                    <div class="col-12" align="center">
-                        <div id="Panel2" runat="server" visible="true">
-                        </div>
+                        </asp:LinkButton>
                     </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-sm">
-                            <span>&nbsp;</span>
-                        </div>
-                        <div class="col-sm">
-                            <span>&nbsp;</span>
-                        </div>
-                        <div class="col-sm">
-                            <span>&nbsp;</span>
+                    <div class="modal-body">
+                        <div class="col-12" align="center">
+                            <div id="Panel2" runat="server" visible="true">
+                            </div>
                         </div>
                         <hr />
-                        <div class="col-sm">
-                            <span>Sub Total:<asp:Label ID="lblTotal" runat="server" Text=""></asp:Label></span>
+                        <div class="row">
+                            <div class="col-sm">
+                                <span>&nbsp;</span>
+                            </div>
+                            <div class="col-sm">
+                                <span>&nbsp;</span>
+                            </div>
+                            <div class="col-sm">
+                                <span>&nbsp;</span>
+                            </div>
+                            <hr />
+                            <div class="col-sm">
+                                <span>Sub Total:<asp:Label ID="lblTotal" runat="server" autoPostback="true"></asp:Label></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <asp:LinkButton ID="lnkFechaPedido" class="btn btn-success" OnClick="lnkFechaPedido_Click" runat="server"><i class="fa fa-check" aria-hidden="true"></i> Fechar Pedido</asp:LinkButton>
+                    <div class="modal-footer">
+                        <asp:LinkButton ID="lnkLimparCarrinho" class="btn btn-danger btn-lg" OnClick="lnkLimparCarrinho_Click" runat="server"><i class="fa fa-trash" aria-hidden="true"></i> Excluir Carrinho</asp:LinkButton><i class="bi bi-cart"></i>
+                        <asp:LinkButton ID="lnkFechaPedido" class="btn btn-success" OnClick="lnkFechaPedido_Click" runat="server"><i class="fa fa-check" aria-hidden="true"></i> Fechar Pedido</asp:LinkButton>
+                         
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
 </asp:Content>

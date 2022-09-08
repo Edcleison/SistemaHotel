@@ -131,6 +131,47 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
+        public string buscarCarrinhoQtde(string codReserva)
+        {
+            DataTable dta = new DataTable();
+            SqlDataAdapter adp;
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+
+
+                using (SqlCommand cmd = new SqlCommand(@"SELECT COUNT(ID_PRODUTO) AS QTDE FROM CARRINHO", connection))
+                {
+                    try
+                    {
+                        cmd.Parameters.AddWithValue("@COD_RESERVA", codReserva);
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                        adp = new SqlDataAdapter(cmd);
+                        adp.Fill(dta);
+
+                    }
+
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+            if (dta.Rows.Count > 0)
+            {
+                return dta.Rows[0]["QTDE"].ToString();
+            }
+            else
+            {
+                return "0";
+            }
+            
+        }
+
         public Carrinho buscarCarrinhoId(int IdCarrinho)
         {
             Carrinho car = new Carrinho();

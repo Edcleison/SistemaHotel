@@ -22,7 +22,7 @@ namespace SistemaHotel.Model
         public Pedido()
         {
             IdPedido = 0;
-            IdStatus = 0;
+            IdStatus = 0;         
             IdCliente = 0;           
             ValorTotal = 0;
             DataAbertura = DateTime.Now;

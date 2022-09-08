@@ -54,6 +54,8 @@
                     "search": "Pesquisar:",
 
                 },
+                "scrollY": '300px',
+                "scrollCollapse": true,
                 "paging": true,
                 "pageLength": 10,
                 "ordering": false,
@@ -70,6 +72,23 @@
     </script>
 
     <script src="Scripts/mascara.js"></script>
+
+    <style>
+        .modal-personalizado {
+            min-width: 95%;
+            margin-left: 70px;
+        }
+
+            .modal-personalizado.modal-content {
+                min-height: 50vh;
+            }
+
+        .modal-body {
+            max-height: calc(120vh - 210px);
+            overflow-y: auto;
+            overflow-x: auto;
+        }
+    </style>
 
 
 
@@ -91,7 +110,7 @@
                     <span>&nbsp;</span>
                 </div>
             </div>
-            <div class="row">
+            <div id="divAdm" runat="server" class="row">
                 <div class="col-sm">
                     <span>Listar Por: </span>
                 </div>
@@ -109,7 +128,8 @@
         </div>
         <div class="modal-backdrop fade show" id="mdBack" runat="server" style="opacity: 0.2; display: block; filter: (alpha(opacity= 20))" visible="false"></div>
         <div class="modal fade show" id="mdProd" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
-            <div class="modal-dialog modal-lg" role="document">
+            <%--<div class="modal-dialog modal-lg" role="document">--%>
+                 <div class="modal-dialog modal-personalizado" role="document">
                 <div class="modal-content" visible="false" style="border-radius: 10px;">
                     <div class="modal-header">
                         <h5 class="modal-title">Novo Produto:</h5>
@@ -199,7 +219,8 @@
             </div>
         </div>
         <div class="modal fade show" id="mdProdE" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
-            <div class="modal-dialog modal-lg" role="document">
+            <%--<div class="modal-dialog modal-lg" role="document">--%>
+                 <div class="modal-dialog modal-personalizado" role="document">
                 <div class="modal-content" visible="false" style="border-radius: 10px;">
                     <div class="modal-header">
                         <h5 class="modal-title">Editar Produto:</h5>

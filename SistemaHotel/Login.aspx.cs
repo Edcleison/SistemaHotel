@@ -59,13 +59,14 @@ namespace SistemaHotel
 
                             Session["id"] = u.IdUsuario;
                             Session["nome"] = u.NomeUsuario;
+                            Session["login"] = u.Login;
                             switch (pu.IdPerfil)
                             {
                                 case 1:
                                     Session["perfil"] = "ADMINISTRADOR";
                                     break;
                                 case 2:
-                                    Session["perfil"] = "FUNCIONÁRIO";
+                                    Session["perfil"] = "FUNCIONARIO";
                                     break;
                                 case 3:
                                     Session["perfil"] = "CLIENTE";

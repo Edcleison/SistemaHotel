@@ -37,7 +37,7 @@ namespace SistemaHotel
                     if (prod.IdProduto != 0)
                     {
                         dalProd.excluirProduto(prod.IdProduto);
-                        string msg = "<script> alert('Produto Excluído!'); </script>";
+                        string msg = $"<script> alert('Produto Excluído código:{prod.IdProduto}!'); </script>";
 
 
                         Response.Write(msg);
@@ -77,13 +77,13 @@ namespace SistemaHotel
             sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:15px;'>");
             sb.AppendLine("<thead>");
             sb.AppendLine("<tr>");
-            sb.AppendLine("<th><center>ID</th></center>");
-            sb.AppendLine("<th><center>NOME</th></center>");
-            sb.AppendLine("<th><center>DESCRICAO</th></center>");
-            sb.AppendLine("<th><center>PRECO</th></center>");
-            sb.AppendLine("<th><center>FOTO</th></center>");
-            sb.AppendLine("<th><center>EDITAR</th></center>");
-            sb.AppendLine("<th><center>EXCLUIR</th></center>");
+            sb.AppendLine("<th><center>ID</center></th>");
+            sb.AppendLine("<th><center>NOME</center></th>");
+            sb.AppendLine("<th><center>DESCRICAO</center></th>");
+            sb.AppendLine("<th><center>PRECO</center></th>");
+            sb.AppendLine("<th><center>FOTO</center></th>");
+            sb.AppendLine("<th><center>EDITAR</center></th>");
+            sb.AppendLine("<th><center>EXCLUIR</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -92,11 +92,11 @@ namespace SistemaHotel
             {
 
                 sb.AppendLine("<tr>");
-                sb.AppendLine("<td><center>" + dtr["ID_Produto"] + "</td></center>");
-                sb.AppendLine("<td><center>" + dtr["NOME_Prod"] + "</td></center>");
-                sb.AppendLine("<td><center>" + dtr["DESCRICAO_Prod"] + "</td></center>");
+                sb.AppendLine("<td><center>" + dtr["ID_Produto"] + "</center></td>");
+                sb.AppendLine("<td><center>" + dtr["NOME_Prod"] + "</center></td>");
+                sb.AppendLine("<td><center>" + dtr["DESCRICAO_Prod"] + "</center></td>");
                 sb.AppendLine("<td><center>" + dtr["PRECO_Uni"] + "</td></center>");
-                sb.AppendLine($@"<td><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></td></center>");
+                sb.AppendLine($@"<td><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></center></td>");
                 sb.AppendLine("<td><center><a href='ControleProduto.aspx?PRODUTO_E=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
                 sb.AppendLine("<td><center><a href='ControleProduto.aspx?PRODUTO_D=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-trash'></i></center></td>");
                 sb.AppendLine("</tr>");
