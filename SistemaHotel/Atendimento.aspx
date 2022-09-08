@@ -107,23 +107,22 @@
             <div class="row">
                 <div class="col-sm">
                     <h3>Atendimento: </h3>
-                </div>            
-                <div id="divTipo" runat="server" visible="false" class="col-sm">
-                   <p>Listar por: </p> <asp:DropDownList ID="ddlTipo" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged">
-                    </asp:DropDownList>
+                </div>
 
+                <div id="divTipo" runat="server" visible="false" class="col-sm">
+                    <p>
+                        Listar por: 
+                    <asp:DropDownList ID="ddlTipo" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged">
+                    </asp:DropDownList>
+                    </p>
                 </div>
             </div>
-            </div>
-            <div class="row">
-                <div class="col-sm">
-                    <div id="Panel1" runat="server" visible="true">
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <div id="Panel1" runat="server" visible="true">
                 </div>
             </div>
         </div>
     </asp:Panel>
-
-
-
 </asp:Content>
