@@ -212,8 +212,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <asp:LinkButton ID="lnkSalvarProduto" class="btn btn-success" OnClick="lnkSalvarProduto_Click" runat="server">Salvar</asp:LinkButton>
-                        <asp:LinkButton ID="lnkVoltar" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
+                        <asp:LinkButton ID="lnkSalvarProduto" class="btn btn-success" OnClick="lnkSalvarProduto_Click" runat="server">Salvar</asp:LinkButton>                      
                     </div>
                 </div>
             </div>
@@ -295,8 +294,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <asp:LinkButton ID="lnkSalvarProdutoE" runat="server" class="btn btn-success" OnClick="lnkSalvarProdutoE_Click">Alterar</asp:LinkButton>
-                            <asp:LinkButton ID="LinkButton3" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
+                            <asp:LinkButton ID="lnkSalvarProdutoE" runat="server" class="btn btn-success" OnClick="lnkSalvarProdutoE_Click">Alterar</asp:LinkButton>                          
                         </div>
                     </div>
                 </div>

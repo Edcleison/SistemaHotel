@@ -45,10 +45,10 @@
     <form id="form1" runat="server" itemtype="~/CSS/Estilos.css">
         <header>
             <nav>
-                <asp:TreeView ID="TreeView1" runat="server" CssClass="menu" ExpandImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png" CollapseImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png" ExpandDepth="0">
+                <asp:TreeView ID="TreeView1" runat="server" CssClass="menu" ExpandImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png" CollapseImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png" ExpandDepth="10">
                     <Nodes>
                         <asp:TreeNode Checked="True" SelectAction="Expand" Selected="True">
-                            <asp:TreeNode Text="Home" Value="Home" NavigateUrl="Default.aspx"></asp:TreeNode>
+                            <asp:TreeNode Text="Home" Value="Home" NavigateUrl="Default.aspx"></asp:TreeNode>                            
                             <asp:TreeNode Text="Controle de Usuários" Value="Usuarios" NavigateUrl="ControleUsuario.aspx"></asp:TreeNode>
                             <asp:TreeNode Text="Controle de Quartos" Value="Quarto" NavigateUrl="ControleQuarto.aspx"></asp:TreeNode> 
                             <asp:TreeNode Text="Controle de Produtos" Value="Produto" NavigateUrl="ControleProduto.aspx"></asp:TreeNode>                              

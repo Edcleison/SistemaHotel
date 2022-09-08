@@ -18,7 +18,7 @@ namespace SistemaHotel
         {
             if (Session["login"] == null)
             {
-                Response.Redirect("~/login.aspx");
+               Response.Redirect("~/login.aspx");
 
             }
             else
@@ -31,12 +31,13 @@ namespace SistemaHotel
 
                 if (usuPerfil.IdPerfil == 1)
                 {
-
+                   
                 }
+
                 else if (usuPerfil.IdPerfil == 2)
                 {
 
-
+                   // home.Enabled = false;
 
                 }
                 else
