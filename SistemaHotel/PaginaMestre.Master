@@ -45,21 +45,21 @@
     <form id="form1" runat="server" itemtype="~/CSS/Estilos.css">
         <header>
             <nav>
-                <asp:TreeView ID="TreeView1" runat="server" CssClass="menu" ExpandImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png" CollapseImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png" ExpandDepth="10">
-                    <Nodes>
-                        <asp:TreeNode Checked="True" SelectAction="Expand" Selected="True">
-                            <asp:TreeNode Text="Home" Value="Home" NavigateUrl="Default.aspx"></asp:TreeNode>                            
-                            <asp:TreeNode Text="Controle de Usuários" Value="Usuarios" NavigateUrl="ControleUsuario.aspx"></asp:TreeNode>
-                            <asp:TreeNode Text="Controle de Quartos" Value="Quarto" NavigateUrl="ControleQuarto.aspx"></asp:TreeNode> 
-                            <asp:TreeNode Text="Controle de Produtos" Value="Produto" NavigateUrl="ControleProduto.aspx"></asp:TreeNode>                              
-                            <asp:TreeNode Text="Atendimento" Value="Produto" NavigateUrl="Atendimento.aspx"></asp:TreeNode>                              
-                            <asp:TreeNode Text="Pedido Cozinha" Value="NovoPedidoCozinha" NavigateUrl="NovoPedidoCozinha.aspx"></asp:TreeNode>                              
-                            <asp:TreeNode Text="Pedido Frigobar" Value="NovoPedidoFrigobar" NavigateUrl="NovoPedidoFrigobar.aspx"></asp:TreeNode>                              
-                            <asp:TreeNode Text="Sair" Value="Novo Nó" NavigateUrl="~/Login.aspx"></asp:TreeNode>
-                        </asp:TreeNode>
-                    </Nodes>
-                    <NodeStyle CssClass="menulink" />
-                </asp:TreeView>
+                <ul>
+                    <li>
+                        <asp:Image ID="Image1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png"/>
+                        <ul class="menu" aria-expanded="true">
+                            <li class="menulink"><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="Default.aspx">Home</asp:HyperLink></li>
+                            <li class="menulink"><asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="ControleUsuario.aspx">Controle de Usuários</asp:HyperLink></li>
+                            <li class="menulink"><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="ControleQuarto.aspx">Controle de Quartos</asp:HyperLink></li>
+                            <li class="menulink"><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="ControleProduto.aspx">Controle de Produtos</asp:HyperLink></li>
+                            <li class="menulink"><asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="Atendimento.aspx">Atendimento</asp:HyperLink></li>
+                            <li class="menulink"><asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="NovoPedidoCozinha.aspx">Pedido Cozinha</asp:HyperLink></li>
+                            <li class="menulink"><asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="NovoPedidoFrigobar.aspx">Pedido Frigobar</asp:HyperLink></li>
+                            <li class="menulink"><asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Login.aspx">Sair</asp:HyperLink></li>
+                        </ul>
+                    </li>
+                </ul>
             </nav>
             <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.jpeg" CssClass="linkhome" ImageAlign="Middle" />         
         </header>
