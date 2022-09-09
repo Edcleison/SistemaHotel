@@ -85,7 +85,6 @@
     <Content Include="NovoPedidoFrigobar.aspx" />
     <Content Include="Scripts\a076d05399.js" />
     <Content Include="Scripts\jquery.dataTables.js" />
-    <Content Include="CSS\jquery.dataTables.min.css" />
     <Content Include="CSS\StyleSheet.css.exclude" />
     <Content Include="IMAGENS\SISTEMA\logo_hotel.jpeg" />
     <Content Include="IMAGENS\SISTEMA\menu-icon-19353.png" />
@@ -1115,7 +1114,7 @@
     <Content Include="CSS\bootstrap.css" />
     <Content Include="CSS\dataTables.bootstrap4.min.css" />
     <Content Include="CSS\Estilos.css" />
-    <Content Include="CSS\jquery.dataTables.min.css.css" />
+    <Content Include="CSS\jquery.dataTables.min.css" />
     <Content Include="Default.aspx" />
     <Content Include="layout\assets\css\component.css" />
     <Content Include="layout\assets\css\font-awesome.min.css" />

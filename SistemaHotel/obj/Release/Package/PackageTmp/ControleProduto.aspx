@@ -45,15 +45,15 @@
         $(document).ready(function () {
             $('#example').DataTable({
                 "language": {
-                    "paginate": {
-                        "previous": "Anterior:",
-                        "next": "Próxima:",
-                        "first": "Primeira:",
-                        "last": "Última:",
-                    },
-                    "search": "Pesquisar:",
-
+                    "emptyTable": "Não foram encontrados registros",
+                
+                "paginate": {
+                    "previous": "Anterior:",
+                    "next": "Próxima:",
+                    "first": "Primeira:",
+                    "last": "Última:",
                 },
+                "search": "Pesquisar:",
                 "scrollY": '500px',
                 "scrollCollapse": true,
                 "paging": true,
@@ -129,7 +129,7 @@
         <div class="modal-backdrop fade show" id="mdBack" runat="server" style="opacity: 0.2; display: block; filter: (alpha(opacity= 20))" visible="false"></div>
         <div class="modal fade show" id="mdProd" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
             <%--<div class="modal-dialog modal-lg" role="document">--%>
-                 <div class="modal-dialog modal-personalizado" role="document">
+            <div class="modal-dialog modal-personalizado" role="document">
                 <div class="modal-content" visible="false" style="border-radius: 10px;">
                     <div class="modal-header">
                         <h5 class="modal-title">Novo Produto:</h5>
@@ -212,14 +212,14 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <asp:LinkButton ID="lnkSalvarProduto" class="btn btn-success" OnClick="lnkSalvarProduto_Click" runat="server">Salvar</asp:LinkButton>                      
+                        <asp:LinkButton ID="lnkSalvarProduto" class="btn btn-success" OnClick="lnkSalvarProduto_Click" runat="server">Salvar</asp:LinkButton>
                     </div>
                 </div>
             </div>
         </div>
         <div class="modal fade show" id="mdProdE" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
             <%--<div class="modal-dialog modal-lg" role="document">--%>
-                 <div class="modal-dialog modal-personalizado" role="document">
+            <div class="modal-dialog modal-personalizado" role="document">
                 <div class="modal-content" visible="false" style="border-radius: 10px;">
                     <div class="modal-header">
                         <h5 class="modal-title">Editar Produto:</h5>
@@ -294,7 +294,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <asp:LinkButton ID="lnkSalvarProdutoE" runat="server" class="btn btn-success" OnClick="lnkSalvarProdutoE_Click">Alterar</asp:LinkButton>                          
+                            <asp:LinkButton ID="lnkSalvarProdutoE" runat="server" class="btn btn-success" OnClick="lnkSalvarProdutoE_Click">Alterar</asp:LinkButton>
                         </div>
                     </div>
                 </div>
