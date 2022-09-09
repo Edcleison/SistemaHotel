@@ -72,7 +72,7 @@
                 },
                 "scrollY": '500px',
                 "scrollCollapse": true,
-                "paging": false,
+                "paging": true,
                 "pageLength": 10,
                 "ordering": false,
                 "info": false,

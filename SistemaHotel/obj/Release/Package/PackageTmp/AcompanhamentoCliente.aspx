@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="Atendimento.aspx.cs" Inherits="SistemaHotel.Atendimento" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="AcompanhamentoCliente.aspx.cs" Inherits="SistemaHotel.AcompanhamentoCliente" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -29,18 +29,17 @@
     <!-- layout padrao  -->
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/plugins/bootstrap-notify/bootstrap-notify.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/js/script.js") %>"></script>
-    
     <link href="CSS/bootstrap.css" rel="stylesheet" />
     <link href="CSS/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="CSS/jquery.dataTables.min.css.css" rel="stylesheet" />
 
-    <script src="Scripts/jquery-1.11.3.min.js"></script>
+    <%--<script src="Scripts/jquery-1.11.3.min.js"></script>
     <link href="CSS/jquery.dataTables.css" rel="stylesheet" />
-    <script src="Scripts/jquery.dataTables.js"></script>
+    <script src="Scripts/jquery.dataTables.js"></script>--%>
 
-    <%--<script src="Scripts/jquery-3.5.1.js"></script>
+    <script src="Scripts/jquery-3.5.1.js"></script>
     <script src="Scripts/jquery.dataTables.min.js"></script>
-    <script src="Scripts/dataTables.bootstrap4.min.js.js"></script>--%>
+    <script src="Scripts/dataTables.bootstrap4.min.js.js"></script>
     <style>
         .green {
             background-color: lightseagreen !important;
@@ -71,19 +70,6 @@
                     "search": "Pesquisar:",
 
                 },
-                "createdRow": function (row, data, dataIndex) {
-                    if (data[6] == "<center>Em Aberto</center>") {
-                        $(row).addClass('green');
-
-                    }
-                    else if (data[6] == "<center>Finalizado</center>") {
-                        $(row).addClass('blue');
-
-                    }
-                    else {
-                        $(row).addClass('red');
-                    }
-                },
                 "scrollY": '500px',
                 "scrollCollapse": true,
                 "paging": true,
@@ -91,10 +77,22 @@
                 "ordering": false,
                 "info": false,
                 dom: 'Bfrtip',
-                buttons: [
+                buttons: ['excel',
 
                 ],
-                
+                "createdRow": function (row, data, dataIndex) {
+                    if (data[8] == "<center>Em Aberto</center>") {
+                        $(row).addClass('green');
+
+                    }
+                    else if (data[8] == "<center>Finalizado</center>") {
+                        $(row).addClass('blue');
+
+                    }
+                    else {
+                        $(row).addClass('red');
+                    }
+                },
 
 
 
@@ -104,19 +102,31 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <asp:Panel ID="PnlAtendimento" runat="server" GroupingText="Atendimento">
+    <asp:Panel ID="PnlAtendimento" runat="server" GroupingText="Controle de Atendimentos">
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    <h3>Atendimento: </h3>
+                    <h5>Controle de Atendimentos: </h5>
                 </div>
-
-                <div id="divTipo" runat="server" visible="false" class="col-sm">
+                <div runat="server" class="col-sm">
                     <p>
-                        Listar por: 
-                    <asp:DropDownList ID="ddlTipo" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged">
+                        Filtrar por Tipo: 
+                    <asp:DropDownList ID="ddlTipo" runat="server">
                     </asp:DropDownList>
                     </p>
+                </div>
+                <div class="col-sm">
+                    <span>&nbsp;</span>
+                </div>
+                <div runat="server" class="col-sm">
+                    <p>
+                        Filtrar por Status: 
+                    <asp:DropDownList ID="ddlStatus" runat="server">
+                    </asp:DropDownList>
+                    </p>
+                </div>
+                <div class="col-sm">
+                    <asp:LinkButton ID="lnkPesquisar" class="btn btn-primary btn-lg" OnClick="lnkPesquisar_Click" runat="server">Pesquisar</asp:LinkButton>
                 </div>
             </div>
         </div>
@@ -124,6 +134,22 @@
             <div class="col-sm">
                 <div id="Panel1" runat="server" visible="true">
                 </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm">
+                <span>&nbsp;</span>
+            </div>
+            <div class="col-sm">
+                <span>&nbsp;</span>
+            </div>
+            <div class="col-sm">
+                <span>&nbsp;</span>
+            </div>
+            <hr />
+            <div class="col-sm">
+                <h3>Total: <asp:Label ID="lblTotal" runat="server" Font-Size="Large"></asp:Label></h3>
             </div>
         </div>
     </asp:Panel>

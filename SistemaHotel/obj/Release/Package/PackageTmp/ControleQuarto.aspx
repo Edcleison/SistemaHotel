@@ -54,7 +54,7 @@
                     "search": "Pesquisar:",
 
                 },
-                "scrollY": '300px',
+                "scrollY": '500px',
                 "scrollCollapse": true,
                 "paging": true,
                 "pageLength": 10,
@@ -145,7 +145,6 @@
                     </div>
                     <div class="modal-footer">
                         <asp:LinkButton ID="lnkSalvarQuarto" class="btn btn-success" OnClick="lnkSalvarQuarto_Click" runat="server">Salvar</asp:LinkButton>
-                        <asp:LinkButton ID="lnkVoltar" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
                     </div>
                 </div>
             </div>
@@ -178,7 +177,6 @@
                         </div>
                         <div class="modal-footer">
                             <asp:LinkButton ID="lnkSalvarQuartoE" runat="server" class="btn btn-success" OnClick="lnkSalvarQuartoE_Click">Alterar</asp:LinkButton>
-                            <asp:LinkButton ID="LinkButton3" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
                         </div>
                     </div>
                 </div>

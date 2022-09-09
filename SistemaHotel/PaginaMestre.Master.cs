@@ -18,7 +18,7 @@ namespace SistemaHotel
         {
             if (Session["login"] == null)
             {
-               // Response.Redirect("~/login.aspx");
+                Response.Redirect("~/login.aspx");
 
             }
             else if (Session["perfil"].ToString() == "ADMINISTRADOR")

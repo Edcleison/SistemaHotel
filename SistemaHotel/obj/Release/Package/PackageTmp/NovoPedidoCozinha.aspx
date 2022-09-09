@@ -50,7 +50,7 @@
                     "search": "Pesquisar:",
 
                 },
-                "scrollY": '300px',
+                "scrollY": '500px',
                 "scrollCollapse": true,
                 "paging": true,
                 "pageLength": 10,
@@ -198,7 +198,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <asp:LinkButton ID="LinkButton1" class="btn btn-info btn-lg" OnClick="lnkCarrinho_Click" runat="server"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Ver Carrinho</asp:LinkButton><i class="bi bi-cart"></i>
+                        <asp:LinkButton ID="LinkButton1" class="btn btn-info btn-lg" OnClick="lnkCarrinho_Click" runat="server"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Ver Carrinho</asp:LinkButton>
                         <asp:LinkButton ID="lnkPedido" class="btn btn-success btn-lg" OnClick="lnkPedido_Click" runat="server"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Adicionar ao Carrinho</asp:LinkButton>
                     </div>
                 </div>
@@ -213,7 +213,7 @@
                         <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </asp:LinkButton>
-                    </div>
+                    </div>                   
                     <div class="modal-body">
                         <div class="col-12" align="center">
                             <div id="Panel2" runat="server" visible="true">

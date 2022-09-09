@@ -54,7 +54,7 @@
                     "search": "Pesquisar:",
 
                 },
-                "scrollY": '300px',
+                "scrollY": '500px',
                 "scrollCollapse": true,
                 "paging": true,
                 "pageLength": 10,
@@ -98,8 +98,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    <asp:LinkButton ID="novoUsuario" class="btn btn-primary" runat="server" OnClick="novoUsuario_Click">Novo Funcionário</asp:LinkButton>
-                    <asp:LinkButton ID="LinkButton2" class="btn btn-success" runat="server" OnClick="novoCliente_Click">Novo Cliente</asp:LinkButton>
+                    <asp:LinkButton ID="novoUsuario" class="btn btn-primary" runat="server" OnClick="novoUsuario_Click">Novo Usuário</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton2" class="btn btn-primary" runat="server" OnClick="novoCliente_Click">Novo Cliente</asp:LinkButton>
                 </div>
             </div>
             <div class="row">
@@ -344,7 +344,6 @@
                     </div>
                     <div class="modal-footer">
                         <asp:LinkButton ID="salvarNovoCliente" class="btn btn-success" runat="server" OnClick="salvarNovoCliente_Click">Novo Cliente</asp:LinkButton>
-                        <asp:LinkButton ID="LinkButton1" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
                     </div>
 
                 </div>
@@ -443,7 +442,6 @@
                         </div>
                         <div class="modal-footer">
                             <asp:LinkButton ID="alterarData" class="btn btn-success" runat="server" OnClick="alterarData_Click">Salvar Alterações</asp:LinkButton>
-                            <asp:LinkButton ID="lnkVoltarCliE" class="btn btn-primary" runat="server" OnClick="lnkVoltar_Click">Voltar</asp:LinkButton>
                         </div>
                     </div>
                 </div>

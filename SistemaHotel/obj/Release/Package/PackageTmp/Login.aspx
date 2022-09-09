@@ -34,13 +34,22 @@
     <!-- layout padrao  -->
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/plugins/bootstrap-notify/bootstrap-notify.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/js/script.js") %>"></script>
+    <style>
+        .modal-backdrop {
+            background-image: url('https://cdn.tapetender70er.de/media/image/07/6f/e5/Papel-de-Parede-para-Hoteleira_944x944@2x.webp');
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: auto;
+        }
+    </style>
+
 
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
             <div class="modal-backdrop fade show" id="mdBack" runat="server" style="opacity: 0.2; display: block; filter: (alpha(opacity= 20))" visible="true"></div>
-            <div class="modal fade show" id="mdLog" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100)); background-color: #FFFFFF; background-image: url('https://localhost:44338/IMAGENS/SISTEMA/logo_hotel.jpeg');" visible="true">
+            <div class="modal fade show" id="mdLog" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100));">
                 <%--<div class="modal-dialog modal-lg" role="document">--%>
                 <div class="modal-dialog modal-personalizado" role="document">
                     <div class="modal-content" visible="true" style="border-radius: 10px;">
@@ -108,7 +117,7 @@
                 </script>
             </div>
             <div class="modal fade show" id="mdRedPass" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
-                 <%--<div class="modal-dialog modal-lg" role="document">--%>
+                <%--<div class="modal-dialog modal-lg" role="document">--%>
                 <div class="modal-dialog modal-personalizado" role="document">
                     <div class="modal-content" visible="false" style="border-radius: 10px;">
                         <div class="modal-header">
