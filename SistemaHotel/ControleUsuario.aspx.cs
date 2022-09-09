@@ -449,7 +449,7 @@ namespace SistemaHotel
                 {
                     dalCliente.alterarCliente(cli);
                     txtDataFimE.Text = novaDataFim.ToString();
-                    string msg = "<script> alert('Data Alterada!'); </script>";
+                    string msg = $"<script> alert('Data Alterada: Código Cliente:{cli.IdCliente} Data:{novaDataFim}!'); </script>";
                     Response.Write(msg);
                 }
             }
@@ -469,7 +469,7 @@ namespace SistemaHotel
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_QUARTO, DESCRICAO_QUARTO AS QUARTO FROM QUARTO ORDER BY DESCRICAO_QUARTO", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_QUARTO, UPPER(DESCRICAO_QUARTO) AS QUARTO FROM QUARTO ORDER BY DESCRICAO_QUARTO", connection))
                 {
                     try
                     {
@@ -505,7 +505,7 @@ namespace SistemaHotel
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_QUARTO, DESCRICAO_QUARTO AS QUARTO FROM QUARTO ORDER BY DESCRICAO_QUARTO", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_QUARTO, UPPER(DESCRICAO_QUARTO) AS QUARTO FROM QUARTO ORDER BY DESCRICAO_QUARTO", connection))
                 {
                     try
                     {

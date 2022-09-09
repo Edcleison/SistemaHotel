@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="Atendimento.aspx.cs" Inherits="SistemaHotel.Atendimento" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="ControleAtendimento.aspx.cs" Inherits="SistemaHotel.ControleAtendimento" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -77,15 +77,15 @@
                 "ordering": false,
                 "info": false,
                 dom: 'Bfrtip',
-                buttons: [
+                buttons: ['excel',
 
                 ],
                 "createdRow": function (row, data, dataIndex) {
-                    if (data[5] == "<center>Em Aberto</center>") {
+                    if (data[6] == "<center>Em Aberto</center>") {
                         $(row).addClass('green');
 
                     }
-                    else if (data[5] == "<center>Finalizado</center>") {
+                    else if (data[6] == "<center>Finalizado</center>") {
                         $(row).addClass('blue');
 
                     }
@@ -102,19 +102,31 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <asp:Panel ID="PnlAtendimento" runat="server" GroupingText="Atendimento">
+    <asp:Panel ID="PnlAtendimento" runat="server" GroupingText="Controle de Atendimentos">
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    <h3>Atendimento: </h3>
+                    <h5>Controle de Atendimentos: </h5>
                 </div>
-
-                <div id="divTipo" runat="server" visible="false" class="col-sm">
+                <div runat="server" class="col-sm">
                     <p>
-                        Listar por: 
-                    <asp:DropDownList ID="ddlTipo" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged">
+                        Filtrar por Tipo: 
+                    <asp:DropDownList ID="ddlTipo"   runat="server">
                     </asp:DropDownList>
                     </p>
+                </div>
+                <div class="col-sm">
+                    <span>&nbsp;</span>
+                </div>
+                <div runat="server" class="col-sm">
+                    <p>
+                        Filtrar por Status: 
+                    <asp:DropDownList ID="ddlStatus" runat="server">
+                    </asp:DropDownList>
+                    </p>
+                </div>
+                <div class="col-sm">
+                    <asp:LinkButton ID="lnkPesquisar" class="btn btn-primary btn-lg" OnClick="lnkPesquisar_Click" runat="server">Pesquisar</asp:LinkButton>
                 </div>
             </div>
         </div>

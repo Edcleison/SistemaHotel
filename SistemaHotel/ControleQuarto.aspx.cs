@@ -160,7 +160,7 @@ namespace SistemaHotel
                 Quarto qua = new Quarto();
                 qua.DescricaoQuarto = txtQuartoE.Text;
                 dalQua.alterarQuarto(qua);
-                string msg = "<script> alert('Quarto alterado!'); </script>";
+                string msg = $"<script> alert('Quarto alterado: Código{qua.IdQuarto}'); </script>";
                 Response.Write(msg);
 
             }

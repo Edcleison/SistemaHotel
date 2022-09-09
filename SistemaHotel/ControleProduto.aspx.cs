@@ -215,7 +215,7 @@ namespace SistemaHotel
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_TIPO_PROD]
-                                                          ,[DESCRICAO_TIPO_PROD]
+                                                          ,UPPER([DESCRICAO_TIPO_PROD]) AS DESCRICAO_TIPO_PROD
                                                             FROM [DBO].[TIPO_PRODUTO] ORDER BY DESCRICAO_TIPO_PROD", connection))
                 {
                     try
@@ -252,7 +252,7 @@ namespace SistemaHotel
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_TIPO_PROD]
-                                                          ,[DESCRICAO_TIPO_PROD]
+                                                          ,UPPER([DESCRICAO_TIPO_PROD]) AS DESCRICAO_TIPO_PROD
                                                             FROM [DBO].[TIPO_PRODUTO] ORDER BY DESCRICAO_TIPO_PROD", connection))
                 {
                     try
@@ -288,7 +288,7 @@ namespace SistemaHotel
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_TIPO_PROD]
-                                                          ,[DESCRICAO_TIPO_PROD]
+                                                          ,UPPER([DESCRICAO_TIPO_PROD]) AS DESCRICAO_TIPO_PROD
                                                             FROM [DBO].[TIPO_PRODUTO] ORDER BY DESCRICAO_TIPO_PROD", connection))
                 {
                     try

@@ -86,7 +86,7 @@ namespace SistemaHotel
                     }
                     if (Session["perfil"].ToString() == "FUNCIONARIO")
                     {
-                        carregarTabela(1);
+                        carregarTabela("1");
                     }
                     else
                     {
@@ -104,27 +104,28 @@ namespace SistemaHotel
         }
 
 
-        private void carregarTabela(int tipoProd)
+        private void carregarTabela(string tipoProd)
         {
 
             DataTable rDta = new DataTable();
-            rDta = dalPed.buscarTodosPedidosTipoStatus(tipoProd, 1);
+            rDta = dalPed.buscarTodosPedidosTipoStatus(tipoProd, "1");
             StringBuilder sb = new StringBuilder();
 
 
-            sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:10px;'>");
+            sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:12px;'>");
             sb.AppendLine("<thead>");
             sb.AppendLine("<tr>");
-            sb.AppendLine("<th><center>DATA ABERTURA</center></th>");
-            sb.AppendLine("<th><center>QUARTO</center></th>");
-            sb.AppendLine("<th><center>NOME</center></th>");
-            sb.AppendLine("<th><center>NOME PRODUTO</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID PEDIDO</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DATA ABERTURA</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>QUARTO</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME PRODUTO</center></th>");
             //sb.AppendLine("<th style='font-size:10px; letter-spacing: 1px;><center>DESCRICAO PRODUTO</center></th>");
             //sb.AppendLine("<th style='font-size:10px; letter-spacing: 1px;><center>FOTO PRODUTO</center></th>");
-            sb.AppendLine("<th><center>QUANTIDADE</center></th>");
-            sb.AppendLine("<th><center>STATUS</center></th>");
-            sb.AppendLine("<th><center>ATENDER</center></th>");
-            sb.AppendLine("<th><center>RECUSAR</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>QUANTIDADE</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ATENDER</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>RECUSAR</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -133,16 +134,17 @@ namespace SistemaHotel
             {
 
                 sb.AppendLine("<tr>");
-                sb.AppendLine("<td><center>" + dtr["DATA_ABERTURA"] + "</center></td>");
-                sb.AppendLine("<td><center>" + dtr["DESCRICAO_QUARTO"] + "</center></td>");
-                sb.AppendLine($"<td><center>{dtr["NOME_CLIENTE"] + " " + dtr["SOBRENOME_CLIENTE"]}</center></td>");
-                sb.AppendLine("<td><center>" + dtr["NOME_PROD"] + "</td></center>");
-                // sb.AppendLine("<td><center>" + dtr["DESCRICAO_PROD"] + "</center></td>");
-                //sb.AppendLine($@"<td><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_PROD"]}'></center></td>");
-                sb.AppendLine("<td><center>" + dtr["QUANTIDADE"] + "</center></td>");
-                sb.AppendLine("<td><center>" + dtr["DESCRICAO_STATUS_PED"] + "</td></center>");
-                sb.AppendLine("<td><center><a href=Atendimento.aspx?ATENDIMENTO_S=" + Criptografia.Encrypt(dtr["ID_PEDIDO"].ToString()) + "><i class='fa fa-check-square'></i></center></td>");
-                sb.AppendLine("<td><center><a href=Atendimento.aspx?ATENDIMENTO_N=" + Criptografia.Encrypt(dtr["ID_PEDIDO"].ToString()) + "><i class='fa fa-minus-square'></i></center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_PEDIDO"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + Convert.ToDateTime(dtr["DATA_ABERTURA"]).ToString("dd/MM/yyyy HH:mm") + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_QUARTO"] + "</center></td>");
+                sb.AppendLine($"<td style='font-size:12px; letter-spacing: 1px;'><center>{dtr["NOME_CLIENTE"] + " " + dtr["SOBRENOME_CLIENTE"]}</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME_PROD"] + "</td></center>");
+                // sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_PROD"] + "</center></td>");
+                //sb.AppendLine($@"<td style='font-size:12px; letter-spacing: 1px;'><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_PROD"]}'></center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["QUANTIDADE"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_STATUS_PED"] + "</td></center>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href=Atendimento.aspx?ATENDIMENTO_S=" + Criptografia.Encrypt(dtr["ID_PEDIDO"].ToString()) + "><i class='fa fa-check-square'></i></center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href=Atendimento.aspx?ATENDIMENTO_N=" + Criptografia.Encrypt(dtr["ID_PEDIDO"].ToString()) + "><i class='fa fa-minus-square'></i></center></td>");
                 sb.AppendLine("</tr>");
 
             }
@@ -156,7 +158,7 @@ namespace SistemaHotel
 
         protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            carregarTabela(int.Parse(ddlTipo.SelectedValue));
+            carregarTabela(ddlTipo.SelectedValue.ToString());
         }
 
         private void carregaDdl()
@@ -167,7 +169,7 @@ namespace SistemaHotel
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_TIPO_PROD]
-                                                          ,[DESCRICAO_TIPO_PROD]
+                                                          ,UPPER([DESCRICAO_TIPO_PROD])
                                                             FROM [DBO].[TIPO_PRODUTO] ORDER BY DESCRICAO_TIPO_PROD", connection))
                 {
                     try

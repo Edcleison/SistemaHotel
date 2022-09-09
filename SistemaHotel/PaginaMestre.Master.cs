@@ -31,17 +31,24 @@ namespace SistemaHotel
 
                 if (usuPerfil.IdPerfil == 1)
                 {
-                   
+                    ControleProduto.Visible = true;
+                    ControleAtendimento.Visible = true;
+                    ControleUsuario.Visible = true;
+                    ControleQuarto.Visible = true;
+                    Atendimento.Visible = true;
+                    
                 }
 
                 else if (usuPerfil.IdPerfil == 2)
                 {
 
-                   // home.Enabled = false;
+                    Atendimento.Visible = true;
 
                 }
                 else
                 {
+                    NovoPedidoCozinha.Visible = true;
+                    NovoPedidoFrigobar.Visible = true;
 
                 }
             } 

@@ -30,15 +30,15 @@
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-buttons/js/buttons.html5.min.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js") %>"></script> 
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/js/bootstrap-growl.min.js") %>"></script>
     <!-- layout padrao  -->
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/plugins/bootstrap-notify/bootstrap-notify.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/js/script.js") %>"></script>
     <!-- fim layout padrao  -->
 
-    <link rel="stylesheet" href="CSS/Estilos.css" />   
-    <script src="Scripts/JavaScriptFunctions.js"></script> 
+    <link rel="stylesheet" href="CSS/Estilos.css" />
+    <script src="Scripts/JavaScriptFunctions.js"></script>
 </head>
 
 <body>
@@ -47,26 +47,36 @@
             <nav>
                 <ul>
                     <li>
-                        <asp:Image ID="Image1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png"/>
+                        <asp:Image ID="Image1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png" />
                         <ul class="menu" aria-expanded="true">
-                            <li class="menulink"><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="Default.aspx">Home</asp:HyperLink></li>
-                            <li class="menulink"><asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="ControleUsuario.aspx">Controle de Usuários</asp:HyperLink></li>
-                            <li class="menulink"><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="ControleQuarto.aspx">Controle de Quartos</asp:HyperLink></li>
-                            <li class="menulink"><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="ControleProduto.aspx">Controle de Produtos</asp:HyperLink></li>
-                            <li class="menulink"><asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="Atendimento.aspx">Atendimento</asp:HyperLink></li>
-                            <li class="menulink"><asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="NovoPedidoCozinha.aspx">Pedido Cozinha</asp:HyperLink></li>
-                            <li class="menulink"><asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="NovoPedidoFrigobar.aspx">Pedido Frigobar</asp:HyperLink></li>
-                            <li class="menulink"><asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Login.aspx">Sair</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="Home" runat="server" NavigateUrl="Default.aspx">Home</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="Atendimento" runat="server" Visible="false" NavigateUrl="Atendimento.aspx">Atendimento</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="ControleAtendimento" runat="server" Visible="false" NavigateUrl="ControleAtendimento.aspx">Controle Atendimento</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="ControleProduto" runat="server" Visible="false" NavigateUrl="ControleProduto.aspx">Controle de Produtos</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="ControleQuarto" runat="server" Visible="false" NavigateUrl="ControleQuarto.aspx">Controle de Quartos</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="ControleUsuario" runat="server" Visible="false" NavigateUrl="ControleUsuario.aspx">Controle de Usuários</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="NovoPedidoCozinha" runat="server" Visible="false" NavigateUrl="NovoPedidoCozinha.aspx">Pedido Cozinha</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="NovoPedidoFrigobar" runat="server" Visible="false" NavigateUrl="NovoPedidoFrigobar.aspx">Pedido Frigobar</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="Sair" runat="server" NavigateUrl="~/Login.aspx">Sair</asp:HyperLink></li>
                         </ul>
                     </li>
                 </ul>
             </nav>
-            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.jpeg" CssClass="linkhome" ImageAlign="Middle" />         
+            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.jpeg" CssClass="linkhome" ImageAlign="Middle" />
         </header>
         <main>
             <div>
                 <div>
-                    <div id="cxFloatMsg" class ="cxFloatMsg" onclick="HideMsg()">
+                    <div id="cxFloatMsg" class="cxFloatMsg" onclick="HideMsg()">
                         <h2 id="msgTitulo">A mensagem irá aparecer aqui</h2>
                         <p id="msgTexto">A mensagem irá aparecer aqui</p>
 
@@ -80,7 +90,7 @@
             <p>Serviços de Hotel</p>
             <p>Site desenvolvido por: </p>
         </footer>
-    
+
     </form>
 </body>
 </html>

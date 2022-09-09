@@ -61,6 +61,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ControleAtendimento.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -5883,6 +5884,13 @@
     <Content Include="Scripts\jquery.min.js" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControleAtendimento.aspx.cs">
+      <DependentUpon>ControleAtendimento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControleAtendimento.aspx.designer.cs">
+      <DependentUpon>ControleAtendimento.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ControleQuarto.aspx.cs">
       <DependentUpon>ControleQuarto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
