@@ -45,6 +45,7 @@
         $(document).ready(function () {
             $('#example').DataTable({
                 "language": {
+                    "emptyTable": "Não foram encontrados registros",
                     "paginate": {
                         "previous": "Anterior:",
                         "next": "Próxima:",

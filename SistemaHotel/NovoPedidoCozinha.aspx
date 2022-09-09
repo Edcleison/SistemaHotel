@@ -40,6 +40,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#example').DataTable({
+                "emptyTable": "Não foram encontrados registros",
                 "language": {
                     "paginate": {
                         "previous": "Anterior:",
