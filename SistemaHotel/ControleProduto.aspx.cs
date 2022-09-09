@@ -30,7 +30,7 @@ namespace SistemaHotel
 
                 if (Request.QueryString["PRODUTO_D"] != null)
                 {
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_D"]));
+                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_D"]));
 
                     Produto prod = dalProd.buscarProdutoId(rParametro);
 

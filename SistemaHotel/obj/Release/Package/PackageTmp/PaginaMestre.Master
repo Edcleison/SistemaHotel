@@ -1,0 +1,96 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PaginaMestre.master.cs" Inherits="SistemaHotel.PaginaMestre" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Sistema de Serviços de Hotel</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/bower_components/bootstrap/css/bootstrap.min.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/bower_components/sweetalert/css/sweetalert.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/icon/themify-icons/themify-icons.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/icon/icofont/css/icofont.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/icon/feather/css/feather.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/css/component.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/css/jquery.mCustomScrollbar.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/icon/icofont/css/icofont.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/icon/font-awesome/css/font-awesome.min.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/css/style.css") %>" />
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/bootstrap/js/bootstrap.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net/js/jquery.dataTables.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/pages/data-table/js/jszip.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/pages/data-table/js/pdfmake.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/pages/data-table/js/vfs_fonts.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/pages/data-table/extensions/key-table/js/dataTables.keyTable.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-buttons/js/buttons.print.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-buttons/js/buttons.html5.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/js/bootstrap-growl.min.js") %>"></script>
+    <!-- layout padrao  -->
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/plugins/bootstrap-notify/bootstrap-notify.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/layout/js/script.js") %>"></script>
+    <!-- fim layout padrao  -->
+
+    <link rel="stylesheet" href="CSS/Estilos.css" />
+    <script src="Scripts/JavaScriptFunctions.js"></script>
+</head>
+
+<body>
+    <form id="form1" runat="server" itemtype="~/CSS/Estilos.css">
+        <header>
+            <nav>
+                <ul>
+                    <li>
+                        <asp:Image ID="Image1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png" />
+                        <ul class="menu" aria-expanded="true">
+                            <li class="menulink">
+                                <asp:HyperLink ID="Home" runat="server" NavigateUrl="Default.aspx">Home</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="Atendimento" runat="server" Visible="false" NavigateUrl="Atendimento.aspx">Atendimento</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="ControleAtendimento" runat="server" Visible="false" NavigateUrl="ControleAtendimento.aspx">Controle Atendimento</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="ControleProduto" runat="server" Visible="false" NavigateUrl="ControleProduto.aspx">Controle de Produtos</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="ControleQuarto" runat="server" Visible="false" NavigateUrl="ControleQuarto.aspx">Controle de Quartos</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="ControleUsuario" runat="server" Visible="false" NavigateUrl="ControleUsuario.aspx">Controle de Usuários</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="NovoPedidoCozinha" runat="server" Visible="false" NavigateUrl="NovoPedidoCozinha.aspx">Pedido Cozinha</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="NovoPedidoFrigobar" runat="server" Visible="false" NavigateUrl="NovoPedidoFrigobar.aspx">Pedido Frigobar</asp:HyperLink></li>
+                            <li class="menulink">
+                                <asp:HyperLink ID="Sair" runat="server" NavigateUrl="~/Login.aspx">Sair</asp:HyperLink></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.jpeg" CssClass="linkhome" ImageAlign="Middle" />
+        </header>
+        <main>
+            <div>
+                <div>
+                    <div id="cxFloatMsg" class="cxFloatMsg" onclick="HideMsg()">
+                        <h2 id="msgTitulo">A mensagem irá aparecer aqui</h2>
+                        <p id="msgTexto">A mensagem irá aparecer aqui</p>
+
+                    </div>
+                </div>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </main>
+        <footer>
+            <p>Serviços de Hotel</p>
+            <p>Site desenvolvido por: </p>
+        </footer>
+
+    </form>
+</body>
+</html>
