@@ -18,45 +18,31 @@ namespace SistemaHotel
         {
             if (Session["login"] == null)
             {
-               Response.Redirect("~/login.aspx");
+               // Response.Redirect("~/login.aspx");
+
+            }
+            else if (Session["perfil"].ToString() == "ADMINISTRADOR")
+            {
+                ControleProduto.Visible = true;
+                ControleAtendimento.Visible = true;
+                ControleUsuario.Visible = true;
+                ControleQuarto.Visible = true;
+                Atendimento.Visible = true;
+
+            }
+
+            else if (Session["perfil"].ToString() == "FUNCIONARIO")
+            {
+
+                Atendimento.Visible = true;
 
             }
             else
             {
-                DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
-                DALUsuario dalUsu = new DALUsuario();
-                Usuario usu = dalUsu.buscaUsuarioLogin(Session["login"].ToString());
-                PerfilUsuario usuPerfil = dalPerfUsu.buscarUsuarioPerfil(usu.IdUsuario);
+                NovoPedidoCozinha.Visible = true;
+                NovoPedidoFrigobar.Visible = true;
 
-
-                if (usuPerfil.IdPerfil == 1)
-                {
-                    ControleProduto.Visible = true;
-                    ControleAtendimento.Visible = true;
-                    ControleUsuario.Visible = true;
-                    ControleQuarto.Visible = true;
-                    Atendimento.Visible = true;
-                    
-                }
-
-                else if (usuPerfil.IdPerfil == 2)
-                {
-
-                    Atendimento.Visible = true;
-
-                }
-                else
-                {
-                    NovoPedidoCozinha.Visible = true;
-                    NovoPedidoFrigobar.Visible = true;
-
-                }
-            } 
+            }
         }
-
-        protected void TreeView1_SelectedNodeChanged(object sender, EventArgs e)
-        {
-
-        }
-    }
+    } 
 }

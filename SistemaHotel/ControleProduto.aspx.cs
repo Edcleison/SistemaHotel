@@ -23,46 +23,54 @@ namespace SistemaHotel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            int rParametro = 0;
 
-            if (!IsPostBack)
+            try
             {
-
-                if (Request.QueryString["PRODUTO_D"] != null)
+                if (Session["perfil"].ToString() == "ADMINISTRADOR")
                 {
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_D"]));
-
-                    Produto prod = dalProd.buscarProdutoId(rParametro);
-
-                    if (prod.IdProduto != 0)
+                    int rParametro = 0;
+                    if (!IsPostBack)
                     {
-                        dalProd.excluirProduto(prod.IdProduto);
-                        string msg = $"<script> alert('Produto Excluído código:{prod.IdProduto}!'); </script>";
+
+                        if (Request.QueryString["PRODUTO_D"] != null)
+                        {
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_D"]));
+
+                            Produto prod = dalProd.buscarProdutoId(rParametro);
+
+                            if (prod.IdProduto != 0)
+                            {
+                                dalProd.inativarProduto(prod.IdProduto);
+                                string msg = $"<script> alert('Produto Inativado! Código:{prod.IdProduto}'); </script>";
+                                Response.Write(msg);
+                                Response.Redirect("~/ControleProduto.aspx");
+
+                            }
+                        }
+                        if (Request.QueryString["PRODUTO_E"] != null)
+                        {
+
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_E"]));
+
+                            Produto prod = dalProd.buscarProdutoId(rParametro);
 
 
-                        Response.Write(msg);
-
+                            txtNomeE.Text = prod.NomeProduto;
+                            txtDescricaoE.Text = prod.DescricaoProduto;
+                            txtPrecoE.Text = prod.PrecoUnitario.ToString();
+                            ddlTipoProdE.SelectedValue = prod.TipoProduto.ToString();
+                            carregaDdlEditarTipoProduto();
+                            mdBack.Visible = true;
+                            mdProdE.Visible = true;
+                        }
+                        carregaDdl();
                     }
                 }
-                if (Request.QueryString["PRODUTO_E"] != null)
-                {
-
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_E"]));
-
-                    Produto prod = dalProd.buscarProdutoId(rParametro);
-
-
-                    txtNomeE.Text = prod.NomeProduto;
-                    txtDescricaoE.Text = prod.DescricaoProduto;
-                    txtPrecoE.Text = prod.PrecoUnitario.ToString();
-                    ddlTipoProdE.SelectedValue = prod.TipoProduto.ToString();
-                    carregaDdlEditarTipoProduto();
-                    mdBack.Visible = true;
-                    mdProdE.Visible = true;
-                }
-                carregaDdl();
             }
-
+            catch (Exception)
+            {
+                Response.Redirect("~/Default.aspx");
+            }
         }
 
         #region Controle Produto
@@ -74,16 +82,16 @@ namespace SistemaHotel
             StringBuilder sb = new StringBuilder();
 
 
-            sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:15px;'>");
+            sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:12px;'>");
             sb.AppendLine("<thead>");
             sb.AppendLine("<tr>");
-            sb.AppendLine("<th><center>ID</center></th>");
-            sb.AppendLine("<th><center>NOME</center></th>");
-            sb.AppendLine("<th><center>DESCRICAO</center></th>");
-            sb.AppendLine("<th><center>PRECO</center></th>");
-            sb.AppendLine("<th><center>FOTO</center></th>");
-            sb.AppendLine("<th><center>EDITAR</center></th>");
-            sb.AppendLine("<th><center>EXCLUIR</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DESCRICAO</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>PRECO</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>FOTO</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>EDITAR</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>INATIVAR</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -92,13 +100,13 @@ namespace SistemaHotel
             {
 
                 sb.AppendLine("<tr>");
-                sb.AppendLine("<td><center>" + dtr["ID_Produto"] + "</center></td>");
-                sb.AppendLine("<td><center>" + dtr["NOME_Prod"] + "</center></td>");
-                sb.AppendLine("<td><center>" + dtr["DESCRICAO_Prod"] + "</center></td>");
-                sb.AppendLine("<td><center>" + dtr["PRECO_Uni"] + "</td></center>");
-                sb.AppendLine($@"<td><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></center></td>");
-                sb.AppendLine("<td><center><a href='ControleProduto.aspx?PRODUTO_E=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
-                sb.AppendLine("<td><center><a href='ControleProduto.aspx?PRODUTO_D=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-trash'></i></center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_Produto"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME_Prod"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_Prod"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["PRECO_Uni"] + "</td></center>");
+                sb.AppendLine($@"<td style='font-size:12px; letter-spacing: 1px;'><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleProduto.aspx?PRODUTO_E=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");      
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleProduto.aspx?PRODUTO_D=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
                 sb.AppendLine("</tr>");
 
             }
@@ -121,6 +129,7 @@ namespace SistemaHotel
                 prod.DescricaoProduto = txtDescricao.Text;
                 prod.PrecoUnitario = decimal.Parse(txtPreco.Text);
                 prod.TipoProduto = Convert.ToInt32(ddlTipoProdS.SelectedValue);
+                prod.StatusProd = 'S';
                 //faz o upload da foto e salva o nome no obj
                 if (fuProduto.PostedFile.FileName != "" && txtNome.Text != "" && txtDescricao.Text != "" && txtPreco.Text != "" && ddlTipoProdS.SelectedValue != "SELECIONE")
                 {
@@ -128,6 +137,7 @@ namespace SistemaHotel
                     string img = caminho + prod.FotoProduto;
                     fuProduto.PostedFile.SaveAs(img);
                     dalProd.inserirProduto(prod);
+
                     msg = $"<script> alert('Produto Inserido'); </script>";
                     Response.Write(msg);
                     limparCampos();
@@ -302,7 +312,7 @@ namespace SistemaHotel
                         ddlTipoProdS.DataValueField = "ID_TIPO_PROD";
                         ddlTipoProdS.DataSource = dta.Copy();
                         ddlTipoProdS.DataBind();
-                        ddlTipoProdS.Items.Insert(0,"SELECIONE");
+                        ddlTipoProdS.Items.Insert(0, "SELECIONE");
                     }
                     catch (Exception erro)
                     {

@@ -10,11 +10,13 @@ namespace SistemaHotel.Model
        
         public int IdQuarto { get; set; }
         public string DescricaoQuarto { get; set; }
+        public char StatusQuar { get; set; }
 
         public Quarto()
         {
             this.IdQuarto = 0;
             this.DescricaoQuarto = "";
+            this.StatusQuar = 'P';
         }
 
     }

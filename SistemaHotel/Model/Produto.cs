@@ -14,6 +14,7 @@ namespace SistemaHotel.Model
         public string DescricaoProduto { get; set; }
         public string NomeProduto { get; set; }     
         public string FotoProduto { get; set; }
+        public char StatusProd { get; set; }
         
 
         public Produto()
@@ -24,6 +25,7 @@ namespace SistemaHotel.Model
             DescricaoProduto = "";
             NomeProduto = "";
             FotoProduto = "";
+            StatusProd = 'P';
             
         }
     }

@@ -24,83 +24,87 @@ namespace SistemaHotel
         DALUsuario dalUsu = new DALUsuario();
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (Session["perfil"].ToString() != "CLIENTE")
+            try
             {
-                int rParametro = 0;
-                if (!IsPostBack)
+                if (Session["perfil"].ToString() != "CLIENTE")
                 {
-                    if (Request.QueryString["ATENDIMENTO_S"] != null)
+                    int rParametro = 0;
+                    if (!IsPostBack)
                     {
-                        rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["ATENDIMENTO_S"]));
-                        Usuario usu = dalUsu.buscaUsuarioLogin(Session["login"].ToString());
-                        Pedido ped = dalPed.buscarPedidoId(rParametro);
-                        if (Session["perfil"].ToString() == "ADMINISTRADOR")
+                        if (Request.QueryString["ATENDIMENTO_S"] != null)
                         {
-                            DALAdministracao dalAdm = new DALAdministracao();
-                            Administracao adm = dalAdm.buscarAdmIdUsuario(usu.IdUsuario);
-                            ped.IdStatus = 2;
-                            ped.DataFinalizacao = DateTime.Now;
-                            ped.IdAdm = adm.IdAdm;
-                            dalPed.alterarStatusAtendimentoAdm(ped);
-                            Response.Redirect("~/Atendimento.aspx");
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["ATENDIMENTO_S"]));
+                            Usuario usu = dalUsu.buscaUsuarioLogin(Session["login"].ToString());
+                            Pedido ped = dalPed.buscarPedidoId(rParametro);
+                            if (Session["perfil"].ToString() == "ADMINISTRADOR")
+                            {
+                                DALAdministracao dalAdm = new DALAdministracao();
+                                Administracao adm = dalAdm.buscarAdmIdUsuario(usu.IdUsuario);
+                                ped.IdStatus = 2;
+                                ped.DataFinalizacao = DateTime.Now;
+                                ped.IdAdm = adm.IdAdm;
+                                dalPed.alterarStatusAtendimentoAdm(ped);
+                                Response.Redirect("~/Atendimento.aspx");
 
+                            }
+                            if (Session["perfil"].ToString() == "FUNCIONARIO")
+                            {
+                                DALFuncionario dalFun = new DALFuncionario();
+                                Funcionario fun = dalFun.buscarFuncionarioIdUsuario(usu.IdUsuario);
+                                ped.IdStatus = 2;
+                                ped.DataFinalizacao = DateTime.Now;
+                                ped.IdFuncionario = fun.IdFuncionario;
+                                dalPed.alterarStatusAtendimentoFuncionario(ped);
+                                Response.Redirect("~/Atendimento.aspx");
+                            }
+                        }
+                        if (Request.QueryString["ATENDIMENTO_N"] != null)
+                        {
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["ATENDIMENTO_N"]));
+                            Usuario usu = dalUsu.buscaUsuarioLogin(Session["login"].ToString());
+                            Pedido ped = dalPed.buscarPedidoId(rParametro);
+                            if (Session["perfil"].ToString() == "ADMINISTRADOR")
+                            {
+                                DALAdministracao dalAdm = new DALAdministracao();
+                                Administracao adm = dalAdm.buscarAdmIdUsuario(usu.IdUsuario);
+                                ped.IdStatus = 3;
+                                ped.DataFinalizacao = DateTime.Now;
+                                ped.IdAdm = adm.IdAdm;
+                                dalPed.alterarStatusAtendimentoAdm(ped);
+                                Response.Redirect("~/Atendimento.aspx");
+                            }
+                            if (Session["perfil"].ToString() == "FUNCIONARIO")
+                            {
+                                DALFuncionario dalFun = new DALFuncionario();
+                                Funcionario fun = dalFun.buscarFuncionarioIdUsuario(usu.IdUsuario);
+                                ped.IdStatus = 3;
+                                ped.DataFinalizacao = DateTime.Now;
+                                ped.IdFuncionario = fun.IdFuncionario;
+                                dalPed.alterarStatusAtendimentoFuncionario(ped);
+                                Response.Redirect("~/Atendimento.aspx");
+
+                            }
                         }
                         if (Session["perfil"].ToString() == "FUNCIONARIO")
                         {
-                            DALFuncionario dalFun = new DALFuncionario();
-                            Funcionario fun = dalFun.buscarFuncionarioIdUsuario(usu.IdUsuario);
-                            ped.IdStatus = 2;
-                            ped.DataFinalizacao = DateTime.Now;
-                            ped.IdFuncionario = fun.IdFuncionario;
-                            dalPed.alterarStatusAtendimentoFuncionario(ped);
-                            Response.Redirect("~/Atendimento.aspx");
+                            carregarTabela("1");
                         }
-                    }
-                    if (Request.QueryString["ATENDIMENTO_N"] != null)
-                    {
-                        rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["ATENDIMENTO_N"]));
-                        Usuario usu = dalUsu.buscaUsuarioLogin(Session["login"].ToString());
-                        Pedido ped = dalPed.buscarPedidoId(rParametro);
-                        if (Session["perfil"].ToString() == "ADMINISTRADOR")
+                        else
                         {
-                            DALAdministracao dalAdm = new DALAdministracao();
-                            Administracao adm = dalAdm.buscarAdmIdUsuario(usu.IdUsuario);
-                            ped.IdStatus = 3;
-                            ped.DataFinalizacao = DateTime.Now;
-                            ped.IdAdm = adm.IdAdm;
-                            dalPed.alterarStatusAtendimentoAdm(ped);
-                            Response.Redirect("~/Atendimento.aspx");
+                            divTipo.Visible = true;
+                            carregaDdl();
                         }
-                        if (Session["perfil"].ToString() == "FUNCIONARIO")
-                        {
-                            DALFuncionario dalFun = new DALFuncionario();
-                            Funcionario fun = dalFun.buscarFuncionarioIdUsuario(usu.IdUsuario);
-                            ped.IdStatus = 3;
-                            ped.DataFinalizacao = DateTime.Now;
-                            ped.IdFuncionario = fun.IdFuncionario;
-                            dalPed.alterarStatusAtendimentoFuncionario(ped);
-                            Response.Redirect("~/Atendimento.aspx");
 
-                        }
                     }
-                    if (Session["perfil"].ToString() == "FUNCIONARIO")
-                    {
-                        carregarTabela("1");
-                    }
-                    else
-                    {
-                        divTipo.Visible = true;
-                        carregaDdl();
-                    }
-
                 }
+
+
             }
-            else
+            catch (Exception)
             {
+
                 Response.Redirect("~/Default.aspx");
             }
-
         }
 
 
@@ -169,7 +173,7 @@ namespace SistemaHotel
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_TIPO_PROD]
-                                                          ,UPPER([DESCRICAO_TIPO_PROD])
+                                                          ,UPPER([DESCRICAO_TIPO_PROD]) AS DESCRICAO_TIPO_PROD
                                                             FROM [DBO].[TIPO_PRODUTO] ORDER BY DESCRICAO_TIPO_PROD", connection))
                 {
                     try

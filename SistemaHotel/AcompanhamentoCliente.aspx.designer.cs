@@ -11,80 +11,53 @@ namespace SistemaHotel
 {
 
 
-    public partial class Default
+    public partial class AcompanhamentoCliente
     {
 
         /// <summary>
-        /// lbNomeUsuarioLegenda control.
+        /// PnlAtendimento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbNomeUsuarioLegenda;
+        protected global::System.Web.UI.WebControls.Panel PnlAtendimento;
 
         /// <summary>
-        /// lbNomeUsuario control.
+        /// ddlTipo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbNomeUsuario;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipo;
 
         /// <summary>
-        /// lbLoginLegenda control.
+        /// ddlStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbLoginLegenda;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
 
         /// <summary>
-        /// lbLogin control.
+        /// lnkPesquisar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbLogin;
+        protected global::System.Web.UI.WebControls.LinkButton lnkPesquisar;
 
         /// <summary>
-        /// lbPerfilLegenda control.
+        /// Panel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbPerfilLegenda;
-
-        /// <summary>
-        /// lbPerfil control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbPerfil;
-
-        /// <summary>
-        /// divTotal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTotal;
-
-        /// <summary>
-        /// lnkConsumo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkConsumo;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Panel1;
 
         /// <summary>
         /// lblTotal control.

@@ -22,39 +22,43 @@ namespace SistemaHotel
         DALItemPedido dalItemPed = new DALItemPedido();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["perfil"].ToString() == "CLIENTE")
+            try
             {
-                int rParametro = 0;
-                if (!IsPostBack)
+                if (Session["perfil"].ToString() == "CLIENTE")
                 {
-                    if (Request.QueryString["PRODUTO_N"] != null)
+                    int rParametro = 0;
+                    if (!IsPostBack)
                     {
+                        if (Request.QueryString["PRODUTO_N"] != null)
+                        {
 
-                        rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_N"]));
-                        Produto prod = dalProd.buscarProdutoId(rParametro);
-                        txtIdProd.Text = prod.IdProduto.ToString();
-                        txtNomeProd.Text = prod.NomeProduto;
-                        txtDescricao.Text = prod.DescricaoProduto;
-                        txtPreco.Text = prod.PrecoUnitario.ToString();
-                        imgProd.Src = $@"IMAGENS_PRODUTOS\{prod.FotoProduto}";
-                        if (prod.TipoProduto == 1)
-                        {
-                            txtQuantidade.Enabled = true;
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_N"]));
+                            Produto prod = dalProd.buscarProdutoId(rParametro);
+                            txtIdProd.Text = prod.IdProduto.ToString();
+                            txtNomeProd.Text = prod.NomeProduto;
+                            txtDescricao.Text = prod.DescricaoProduto;
+                            txtPreco.Text = prod.PrecoUnitario.ToString();
+                            imgProd.Src = $@"IMAGENS_PRODUTOS\{prod.FotoProduto}";
+                            if (prod.TipoProduto == 1)
+                            {
+                                txtQuantidade.Enabled = true;
+                            }
+                            else
+                            {
+                                txtQuantidade.Text = "1";
+                            }
+                            mdBack.Visible = true;
+                            mdPed.Visible = true;
                         }
-                        else
-                        {
-                            txtQuantidade.Text = "1";
-                        }
-                        mdBack.Visible = true;
-                        mdPed.Visible = true;
+
+                        carregarTabela();
+
                     }
-
                     carregarTabela();
-
                 }
-                carregarTabela();
+
             }
-            else
+            catch (Exception)
             {
                 Response.Redirect("~/Default.aspx");
             }
@@ -125,14 +129,14 @@ namespace SistemaHotel
 
         }
 
-      
+
 
         protected void lnkVoltar_Click(object sender, EventArgs e)
         {
 
             mdBack.Visible = false;
             mdPed.Visible = false;
-            Response.Redirect("~/NovoPedidoCozinha.aspx");
+            Response.Redirect("~/NovoPedidoFrigobar.aspx");
             limparCampos();
 
         }

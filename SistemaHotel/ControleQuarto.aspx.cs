@@ -23,42 +23,47 @@ namespace SistemaHotel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            int rParametro = 0;
-
-            if (!IsPostBack)
+            try
             {
-
-                if (Request.QueryString["QUARTO_D"] != null)
+                if (Session["perfil"].ToString() == "ADMINISTRADOR")
                 {
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_D"]));
-
-                    Quarto qua = dalQua.buscarQuartoId(rParametro);
-
-                    if (qua.IdQuarto != 0)
+                    int rParametro = 0;
+                    if (!IsPostBack)
                     {
-                        dalQua.excluirQuarto(qua.IdQuarto);
-                        string msg = "<script> alert('Quarto Excluído!'); </script>";
+                        if (Request.QueryString["QUARTO_D"] != null)
+                        {
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_D"]));
+
+                            Quarto qua = dalQua.buscarQuartoId(rParametro);
+
+                            if (qua.IdQuarto != 0)
+                            {
+                                dalQua.inativarQuarto(qua.IdQuarto);
+                                string msg = $"<script> alert('Quarto Inativado! Código{qua.IdQuarto}'); </script>";
+                                Response.Write(msg);
+                                Response.Redirect("~/ControleQuarto.aspx");
+                            }
+                        }
+                        if (Request.QueryString["QUARTO_E"] != null)
+                        {
+
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_E"]));
+
+                            Quarto qua = dalQua.buscarQuartoId(rParametro);
 
 
-                        Response.Write(msg);
-
+                            txtQuartoE.Text = qua.DescricaoQuarto;
+                            mdBack.Visible = true;
+                            mdQuarE.Visible = true;
+                        }
                     }
+                    carregarTabela();
                 }
-                if (Request.QueryString["QUARTO_E"] != null)
-                {
-
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_E"]));
-
-                    Quarto qua = dalQua.buscarQuartoId(rParametro);
-
-
-                    txtQuartoE.Text = qua.DescricaoQuarto;
-                    mdBack.Visible = true;
-                    mdQuarE.Visible = true;
-                }                
             }
-            carregarTabela();
-
+            catch (Exception)
+            {
+                Response.Redirect("~/Default.aspx");
+            }
         }
 
         #region Controle Quarto
@@ -70,13 +75,13 @@ namespace SistemaHotel
             StringBuilder sb = new StringBuilder();
 
 
-            sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:15px;'>");
+            sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:12px;'>");
             sb.AppendLine("<thead>");
             sb.AppendLine("<tr>");
-            sb.AppendLine("<th><center>ID</center></th>");
-            sb.AppendLine("<th><center>DESCRICAO</center></th>");
-            sb.AppendLine("<th><center>EDITAR</center></th>");
-            sb.AppendLine("<th><center>EXCLUIR</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DESCRIÇÃO</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>EDITAR</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>INATIVAR</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -85,10 +90,10 @@ namespace SistemaHotel
             {
 
                 sb.AppendLine("<tr>");
-                sb.AppendLine("<td><center>" + dtr["ID_QUARTO"] + "</center></td>");
-                sb.AppendLine("<td><center>" + dtr["DESCRICAO_QUARTO"] + "</center></td>");
-                sb.AppendLine("<td><center><a href='ControleQuarto.aspx?QUARTO_E=" + Criptografia.Encrypt(dtr["ID_QUARTO"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
-                sb.AppendLine("<td><center><a href='ControleQuarto.aspx?QUARTO_D=" + Criptografia.Encrypt(dtr["ID_QUARTO"].ToString()) + "'><i class='fa fa-trash'></i></center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_QUARTO"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_QUARTO"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleQuarto.aspx?QUARTO_E=" + Criptografia.Encrypt(dtr["ID_QUARTO"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleQuarto.aspx?QUARTO_D=" + Criptografia.Encrypt(dtr["ID_QUARTO"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
                 sb.AppendLine("</tr>");
 
             }
@@ -100,7 +105,7 @@ namespace SistemaHotel
 
         }
 
-      
+
 
 
 
@@ -111,11 +116,11 @@ namespace SistemaHotel
 
         private void limparCampos()
         {
-         
+
             txtQuarto.Text = "";
 
         }
-   
+
 
         protected void lnkVoltar_Click(object sender, EventArgs e)
         {
@@ -140,6 +145,7 @@ namespace SistemaHotel
             {
                 Quarto qua = new Quarto();
                 qua.DescricaoQuarto = txtQuarto.Text;
+                qua.StatusQuar = 'S';
                 dalQua.inserirQuarto(qua);
                 string msg = "<script> alert('Quarto inserido!'); </script>";
                 Response.Write(msg);

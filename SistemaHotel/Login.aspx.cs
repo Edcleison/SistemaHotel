@@ -119,7 +119,7 @@ namespace SistemaHotel
                                         Session["perfil"] = "ADMINISTRADOR";
                                         break;
                                     case 2:
-                                        Session["perfil"] = "FUNCIONÁRIO";
+                                        Session["perfil"] = "FUNCIONARIO";
                                         break;
                                     case 3:
                                         Session["perfil"] = "CLIENTE";

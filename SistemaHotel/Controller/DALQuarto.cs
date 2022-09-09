@@ -24,13 +24,15 @@ namespace SistemaHotel.Controller
             {
                 using (SqlCommand cmd = new SqlCommand
                     (@"INSERT INTO [DBO].[QUARTO]
-                                       ([DESCRICAO_QUARTO])
-                                 VALUES (@DESCRICAO_QUARTO)", connection))
+                                       ([DESCRICAO_QUARTO]
+                                       ,[STATUS_QUAR])
+                                 VALUES (@DESCRICAO_QUARTO,@STATUS_QUAR)", connection))
                 {
                     try
                     {
                         cmd.Connection.Open();
                         cmd.Parameters.AddWithValue("DESCRICAO_QUARTO", qua.DescricaoQuarto);
+                        cmd.Parameters.AddWithValue("STATUS_QUAR", qua.StatusQuar);
                         cmd.ExecuteNonQuery();
                     }
                     catch (Exception erro)
@@ -56,7 +58,7 @@ namespace SistemaHotel.Controller
 
                 using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_QUARTO]
                                                           ,[DESCRICAO_QUARTO]
-                                                      FROM [DBO].[QUARTO]", connection))
+                                                      FROM [DBO].[QUARTO] WHERE STATUS_QUAR='S'", connection))
                 {
                     try
                     {
@@ -92,7 +94,7 @@ namespace SistemaHotel.Controller
                     using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_QUARTO]
                                                           ,[DESCRICAO_QUARTO]
                                                       FROM [DBO].[QUARTO]
-                                                       WHERE ID_QUARTO = @ID_QUARTO", connection))
+                                                       WHERE ID_QUARTO = @ID_QUARTO AND STATUS_QUAR = 'S'", connection))
                     {
                         cmd.Parameters.AddWithValue("ID_QUARTO", Id);
                         cmd.Connection.Open();
@@ -146,18 +148,18 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public void excluirQuarto(int IdQuarto)
+        public void inativarQuarto(int IdQuarto)
         {
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"DELETE FROM [DBO].[quarto] WHERE id_quarto = @id_quarto", connection))
+                using (SqlCommand cmd = new SqlCommand(@"UPDATE [DBO].[quarto] SET STATUS_QUAR = 'N' WHERE ID_QUARTO = @ID_QUARTO", connection))
                 {
 
                     try
                     {
                         connection.Open();
-                        cmd.Parameters.AddWithValue("id_quarto", IdQuarto);
+                        cmd.Parameters.AddWithValue("ID_QUARTO", IdQuarto);
                         cmd.ExecuteNonQuery();
                         cmd.Connection.Close();
                     }

@@ -25,43 +25,59 @@ namespace SistemaHotel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            int rParametro = 0;
 
-            if (!IsPostBack)
+            try
             {
-
-                if (Request.QueryString["USUARIO_D"] != null)
+                if (Session["perfil"].ToString() == "ADMINISTRADOR")
                 {
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_D"]));
+                    int rParametro = 0;
 
-                    Usuario usu = dalUsu.buscarUsuarioId(rParametro);
-
-                    if (usu.IdUsuario != 0)
+                    if (!IsPostBack)
                     {
-                        dalPerfUsu.inativarUsuario(usu.IdUsuario);
-                        string msg = "<script> alert('Usuário Excluído!'); </script>";
-                        Response.Write(msg);
 
+                        if (Request.QueryString["USUARIO_D"] != null)
+                        {
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_D"]));
+
+                            Usuario usu = dalUsu.buscarUsuarioId(rParametro);
+
+                            if (usu.IdUsuario != 0)
+                            {
+                                dalPerfUsu.inativarUsuario(usu.IdUsuario);
+                                string msg = $"<script> alert('Usuário Inativado: Código {usu.IdUsuario}'); </script>";
+                                Response.Write(msg);
+                                Response.Redirect("~/ControleUsuario.aspx");
+
+
+
+                            }
+                        }
+                        if (Request.QueryString["CLIENTE_E"] != null)
+                        {
+                            carregaDdlQuartoE();
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["CLIENTE_E"]));
+                            Usuario usu = dalUsu.buscarUsuarioId(rParametro);
+                            Cliente cli = dalCli.buscarClienteReserva(usu.Login);
+                            txtCdReservaE.Text = cli.CodReserva;
+                            ddlQuartoE.SelectedValue = cli.IdQuarto.ToString();
+                            txtNomeClienteE.Text = cli.NomeCliente + " " + cli.SobreNomeCliente;
+                            txtDataIni.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
+                            txtDataIni.Text = cli.DataSaida.ToString("dd/MM/yyyy HH:mm");
+                            txtDataIniE.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
+                            txtDataFimE.Text = cli.DataSaida.ToString("dd/MM/yyyy HH:mm");
+                            mdBack.Visible = true;
+                            modEditCli.Visible = true;
+                        }
+                        carregaDdl();
                     }
                 }
-                if (Request.QueryString["CLIENTE_E"] != null)
-                {
-                    carregaDdlQuartoE();
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["CLIENTE_E"]));
-                    Usuario usu = dalUsu.buscarUsuarioId(rParametro);
-                    Cliente cli = dalCli.buscarClienteReserva(usu.Login);
-                    txtCdReservaE.Text = cli.CodReserva;
-                    ddlQuartoE.SelectedValue = cli.IdQuarto.ToString();
-                    txtNomeClienteE.Text = cli.NomeCliente + " " + cli.SobreNomeCliente;
-                    txtDataIni.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
-                    txtDataIni.Text = cli.DataSaida.ToString("dd/MM/yyyy HH:mm");
-                    txtDataIniE.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
-                    txtDataFimE.Text = cli.DataSaida.ToString("dd/MM/yyyy HH:mm");
-                    mdBack.Visible = true;
-                    modEditCli.Visible = true;
-                }
-                carregaDdl();
+
             }
+            catch (Exception)
+            {
+                Response.Redirect("~/Default.aspx");
+            }
+
 
         }
 
@@ -74,13 +90,13 @@ namespace SistemaHotel
             StringBuilder sb = new StringBuilder();
 
 
-            sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:15px;'>");
+            sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:12px;'>");
             sb.AppendLine("<thead>");
             sb.AppendLine("<tr>");
-            sb.AppendLine("<th><center>ID</center></th>");
-            sb.AppendLine("<th><center>NOME</center></th>");
-            sb.AppendLine("<th><center>LOGIN</center></th>");
-            sb.AppendLine("<th><center>INATIVAR</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>LOGIN</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>INATIVAR</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -89,10 +105,10 @@ namespace SistemaHotel
             {
 
                 sb.AppendLine("<tr>");
-                sb.AppendLine("<td><center>" + dtr["ID_Usuario"] + "</center></td>");
-                sb.AppendLine("<td><center>" + dtr["NOME"] + " " + dtr["SOBRENOME"] + "</center></td>");
-                sb.AppendLine("<td><center>" + dtr["LOGIN"] + "</center></td>");
-                sb.AppendLine("<td><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_Usuario"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME"] + " " + dtr["SOBRENOME"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["LOGIN"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
                 sb.AppendLine("</tr>");
 
             }
@@ -235,17 +251,17 @@ namespace SistemaHotel
             StringBuilder sb = new StringBuilder();
 
 
-            sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:15px;'>");
+            sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:12px;'>");
             sb.AppendLine("<thead>");
             sb.AppendLine("<tr>");
-            sb.AppendLine("<th><center>ID</center></th>");
-            sb.AppendLine("<th><center>CÓDIGO DA RESERVA</center></th>");
-            sb.AppendLine("<th><center>QUARTO</th></center>");
-            sb.AppendLine("<th><center>NOME</th></center>");
-            sb.AppendLine("<th><center>DATA INICIO</center></th>");
-            sb.AppendLine("<th><center>DATA FIM</center></th>");
-            sb.AppendLine("<th><center>EDITAR</center></th>");
-            sb.AppendLine("<th><center>INATIVAR</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>CÓDIGO DA RESERVA</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>QUARTO</th></center>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME</th></center>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DATA INICIO</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DATA FIM</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>EDITAR</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>INATIVAR</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -254,14 +270,14 @@ namespace SistemaHotel
             {
 
                 sb.AppendLine("<tr>");
-                sb.AppendLine("<td><center>" + dtr["ID_USUARIO"] + "</center></td>");
-                sb.AppendLine("<td><center>" + dtr["LOGIN"] + "</center></td>");
-                sb.AppendLine("<td><center>" + dtr["DESCRICAO_QUARTO"] + "</center></td>");
-                sb.AppendLine("<td><center>" + dtr["NOME"] + " " + dtr["SOBRENOME"] + "</center></td>");
-                sb.AppendLine("<td><center>" + Convert.ToDateTime(dtr["DATA_Entrada"]).ToString("dd/MM/yyyy") + "</center></td>");
-                sb.AppendLine("<td><center>" + Convert.ToDateTime(dtr["DATA_Saida"]).ToString("dd/MM/yyyy") + "</center></td>");
-                sb.AppendLine("<td><center><a href='ControleUsuario.aspx?CLIENTE_E=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
-                sb.AppendLine("<td><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_USUARIO"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["LOGIN"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_QUARTO"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME"] + " " + dtr["SOBRENOME"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + Convert.ToDateTime(dtr["DATA_Entrada"]).ToString("dd/MM/yyyy") + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + Convert.ToDateTime(dtr["DATA_Saida"]).ToString("dd/MM/yyyy") + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?CLIENTE_E=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
                 sb.AppendLine("</tr>");
 
             }
@@ -380,7 +396,7 @@ namespace SistemaHotel
                                 Response.Write(msg);
 
                             }
-                            
+
                         }
                         else
                         {
@@ -395,7 +411,7 @@ namespace SistemaHotel
                         Response.Write(msg);
 
                     }
-                    
+
 
                 }
                 else

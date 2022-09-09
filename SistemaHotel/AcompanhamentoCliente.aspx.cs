@@ -14,16 +14,19 @@ using System.Web.UI.WebControls;
 
 namespace SistemaHotel
 {
-    public partial class ControleAtendimento : System.Web.UI.Page
+    public partial class AcompanhamentoCliente : System.Web.UI.Page
     {
 
         string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
+
+
         DALPedido dalPed = new DALPedido();
+        DALCliente dalCli = new DALCliente();
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-                if (Session["perfil"].ToString() == "ADMINISTRADOR")
+                if (Session["perfil"].ToString() == "CLIENTE")
                 {
 
                     if (!IsPostBack)
@@ -42,11 +45,11 @@ namespace SistemaHotel
         }
 
 
-        private void carregarTabela(string Tipo, string Status)
+        private void carregarTabela(string IdCliente,string Tipo, string Status)
         {
-
+            decimal total = 0;
             DataTable rDta = new DataTable();
-            rDta = dalPed.buscarTodosPedidosTipoStatus(Tipo, Status);
+            rDta = dalPed.buscarTodosPedidosCliente(IdCliente,Tipo, Status);
             StringBuilder sb = new StringBuilder();
 
 
@@ -58,12 +61,11 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>QUARTO</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME CLI.</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME PROD.</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DESC PROD.</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>PREÇO UNI.</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>QTDE</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DT. FIM</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID ADM/FUN</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME ADM/FUN</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>PERFIL</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DT. FIM</center></th>");    
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -77,37 +79,26 @@ namespace SistemaHotel
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_QUARTO"] + "</center></td>");
                 sb.AppendLine($"<td style='font-size:12px; letter-spacing: 1px;'><center>{dtr["NOME_CLIENTE"] + " " + dtr["SOBRENOME_CLIENTE"]}</center></td>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME_PROD"] + "</td></center>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_PROD"] + "</td></center>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["PRECO_UNI"] + "</td></center>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["QUANTIDADE"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_STATUS_PED"] + "</td></center>");
-                if (dtr["ID_ADM"].ToString() != "")
+                if (dtr["DATA_FINALIZACAO"].ToString() != "")
                 {
                     sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + Convert.ToDateTime(dtr["DATA_FINALIZACAO"]).ToString("dd/MM/yyyy HH:mm") + "</center></td>");
-                    sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_ADM"] + "</center></th>");
-                    sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME_ADM"] + " " + dtr["SOBRENOME_ADM"] + "</center></th>");
-                    sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["PERFIL_ADM"] + "</center></th>");
-                }
-                else if (dtr["ID_FUNCIONARIO"].ToString() != "")
-                {
-                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + Convert.ToDateTime(dtr["DATA_FINALIZACAO"]).ToString("dd/MM/yyyy HH:mm") + "</center></td>");
-                    sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_FUNCIONARIO"] + "</center></th>");
-                    sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME_FUNC"] + " " + dtr["SOBRENOME_FUNC"] + "</center></th>");
-                    sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["PERFIL_FUNC"] + "</center></th>");
-
+                   
                 }
                 else
                 {
                     sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + " " + "</center></th>");
-                    sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + " " + "</center></th>");
-                    sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + " " + "</center></th>");
-                    sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + " " + "</center></th>");
-
                 }
                 sb.AppendLine("</tr>");
+                total += decimal.Parse(dtr["PRECO_UNI"].ToString());
 
             }
             sb.AppendLine("</tbody>");
             sb.AppendLine("</table>");
-
+            lblTotal.Text = total.ToString();
             Panel1.Controls.Clear();
             Panel1.Controls.Add(new LiteralControl(sb.ToString()));
 
@@ -191,21 +182,22 @@ namespace SistemaHotel
 
         protected void lnkPesquisar_Click(object sender, EventArgs e)
         {
+            Cliente cli = dalCli.buscarClienteReserva(Session["login"].ToString());
             if (ddlTipo.SelectedValue != "TODOS" && ddlStatus.SelectedValue != "TODOS")
             {
-                carregarTabela(ddlStatus.SelectedValue.ToString(), ddlTipo.SelectedValue.ToString());
+                carregarTabela(cli.IdCliente.ToString(),ddlStatus.SelectedValue.ToString(), ddlTipo.SelectedValue.ToString());
             }
             else if (ddlTipo.SelectedValue != "TODOS" && ddlStatus.SelectedValue == "TODOS")
             {
-                carregarTabela("", ddlTipo.SelectedValue.ToString());
+                carregarTabela(cli.IdCliente.ToString(), "", ddlTipo.SelectedValue.ToString());
             }
             else if (ddlTipo.SelectedValue == "TODOS" && ddlStatus.SelectedValue != "TODOS")
             {
-                carregarTabela(ddlStatus.SelectedValue.ToString(), "");
+                carregarTabela(cli.IdCliente.ToString(),ddlStatus.SelectedValue.ToString(), "");
             }
             else
             {
-                carregarTabela("", "");
+                carregarTabela(cli.IdCliente.ToString(), "", "");
             }
 
         }

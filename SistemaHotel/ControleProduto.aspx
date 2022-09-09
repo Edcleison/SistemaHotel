@@ -54,7 +54,7 @@
                     "search": "Pesquisar:",
 
                 },
-                "scrollY": '300px',
+                "scrollY": '500px',
                 "scrollCollapse": true,
                 "paging": true,
                 "pageLength": 10,
