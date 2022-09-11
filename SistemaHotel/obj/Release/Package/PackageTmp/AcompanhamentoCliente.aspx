@@ -29,7 +29,7 @@
     <!-- layout padrao  -->
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/plugins/bootstrap-notify/bootstrap-notify.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/js/script.js") %>"></script>
-    
+
     <link href="CSS/bootstrap.css" rel="stylesheet" />
     <link href="CSS/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="CSS/jquery.dataTables.min.css" rel="stylesheet" />
@@ -96,8 +96,6 @@
                     }
                 },
 
-
-
             });
         })
     </script>
@@ -151,7 +149,8 @@
             </div>
             <hr />
             <div class="col-sm">
-                <h3>Total: <asp:Label ID="lblTotal" runat="server" Font-Size="Large"></asp:Label></h3>
+                <h3>Total:
+                    <asp:Label ID="lblTotal" runat="server" Font-Size="Large"></asp:Label></h3>
             </div>
         </div>
     </asp:Panel>

@@ -48,7 +48,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public DataTable buscarTodosQuartos()
+        public DataTable buscarTodosQuartos(string Status)
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
@@ -58,10 +58,12 @@ namespace SistemaHotel.Controller
 
                 using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_QUARTO]
                                                           ,[DESCRICAO_QUARTO]
-                                                      FROM [DBO].[QUARTO] WHERE STATUS_QUAR='S'", connection))
+                                                          ,[STATUS_QUAR]
+                                                      FROM [DBO].[QUARTO] WHERE STATUS_QUAR=@STATUS_QUAR", connection))
                 {
                     try
                     {
+                        cmd.Parameters.AddWithValue("STATUS_QUAR", Status);
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
                         adp = new SqlDataAdapter(cmd);
@@ -94,7 +96,7 @@ namespace SistemaHotel.Controller
                     using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_QUARTO]
                                                           ,[DESCRICAO_QUARTO]
                                                       FROM [DBO].[QUARTO]
-                                                       WHERE ID_QUARTO = @ID_QUARTO AND STATUS_QUAR = 'S'", connection))
+                                                       WHERE ID_QUARTO = @ID_QUARTO", connection))
                     {
                         cmd.Parameters.AddWithValue("ID_QUARTO", Id);
                         cmd.Connection.Open();
@@ -174,7 +176,34 @@ namespace SistemaHotel.Controller
                 }
             }
         }
+        public void ativarQuarto(int IdQuarto)
+        {
+
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"UPDATE [DBO].[quarto] SET STATUS_QUAR = 'S' WHERE ID_QUARTO = @ID_QUARTO", connection))
+                {
+
+                    try
+                    {
+                        connection.Open();
+                        cmd.Parameters.AddWithValue("ID_QUARTO", IdQuarto);
+                        cmd.ExecuteNonQuery();
+                        cmd.Connection.Close();
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        cmd.Connection.Close();
+                    }
+                }
+            }
+        }
     }
+
 }
 
 

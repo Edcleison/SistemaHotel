@@ -24,62 +24,55 @@ namespace SistemaHotel
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            try
+
+            int rParametro = 0;
+            if (!IsPostBack)
             {
-                if (Session["perfil"].ToString() == "ADMINISTRADOR")
+
+                if (Request.QueryString["PRODUTO_D"] != null)
                 {
-                    int rParametro = 0;
-                    if (!IsPostBack)
-                    {
+                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_D"]));
+                    dalProd.inativarProduto(rParametro);
+                    string msg = $"<script> alert('Produto Inativado! Código:{rParametro}'); </script>";
+                    Response.Write(msg);
 
-                        if (Request.QueryString["PRODUTO_D"] != null)
-                        {
-                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_D"]));
-
-                            Produto prod = dalProd.buscarProdutoId(rParametro);
-
-                            if (prod.IdProduto != 0)
-                            {
-                                dalProd.inativarProduto(prod.IdProduto);
-                                string msg = $"<script> alert('Produto Inativado! Código:{prod.IdProduto}'); </script>";
-                                Response.Write(msg);
-                                Response.Redirect("~/ControleProduto.aspx");
-
-                            }
-                        }
-                        if (Request.QueryString["PRODUTO_E"] != null)
-                        {
-
-                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_E"]));
-
-                            Produto prod = dalProd.buscarProdutoId(rParametro);
-
-
-                            txtNomeE.Text = prod.NomeProduto;
-                            txtDescricaoE.Text = prod.DescricaoProduto;
-                            txtPrecoE.Text = prod.PrecoUnitario.ToString();
-                            ddlTipoProdE.SelectedValue = prod.TipoProduto.ToString();
-                            txtIdProdutoE.Text = rParametro.ToString();
-                            carregaDdlEditarTipoProduto();
-                            mdBack.Visible = true;
-                            mdProdE.Visible = true;
-                        }
-                        carregaDdl();
-                    }
                 }
-            }
-            catch (Exception)
-            {
-                Response.Redirect("~/Default.aspx");
+                if (Request.QueryString["PRODUTO_E"] != null)
+                {
+
+                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_E"]));
+
+                    Produto prod = dalProd.buscarProdutoId(rParametro);
+
+
+                    txtNomeE.Text = prod.NomeProduto;
+                    txtDescricaoE.Text = prod.DescricaoProduto;
+                    txtPrecoE.Text = prod.PrecoUnitario.ToString();
+                    ddlTipoProdE.SelectedValue = prod.TipoProduto.ToString();
+                    txtIdProdutoE.Text = rParametro.ToString();
+                    carregaDdlEditarTipoProduto();
+                    mdBack.Visible = true;
+                    mdProdE.Visible = true;
+                }
+                if (Request.QueryString["PRODUTO_A"] != null)
+                {
+
+                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_A"]));
+                    Produto prod = dalProd.buscarProdutoId(rParametro);
+                    string msg = $"<script> alert('Produto Ativado! Código:{rParametro}'); </script>";
+                    Response.Write(msg);
+
+                }
+                carregaDdl();
             }
         }
 
         #region Controle Produto
 
-        private void carregarTabela(int Tipo)
+        private void carregarTabelaAtivos(string Tipo, string Status)
         {
             DataTable rDta = new DataTable();
-            rDta = dalProd.buscarTodosProdutosTipo(Tipo);
+            rDta = dalProd.buscarTodosProdutosTipo(Tipo, Status);
             StringBuilder sb = new StringBuilder();
 
 
@@ -91,6 +84,7 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DESCRICAO</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>PRECO</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>FOTO</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>EDITAR</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>INATIVAR</center></th>");
             sb.AppendLine("</tr>");
@@ -106,8 +100,54 @@ namespace SistemaHotel
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_Prod"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["PRECO_Uni"] + "</td></center>");
                 sb.AppendLine($@"<td style='font-size:12px; letter-spacing: 1px;'><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleProduto.aspx?PRODUTO_E=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");      
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["STATUS_PROD"].ToString().Replace("S", "ATIVO") + "</td></center>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleProduto.aspx?PRODUTO_E=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleProduto.aspx?PRODUTO_D=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
+                sb.AppendLine("</tr>");
+
+            }
+            sb.AppendLine("</tbody>");
+            sb.AppendLine("</table>");
+
+            Panel1.Controls.Clear();
+            Panel1.Controls.Add(new LiteralControl(sb.ToString()));
+
+        }
+
+        private void carregarTabelaInativos(string Tipo, string Status)
+        {
+            DataTable rDta = new DataTable();
+            rDta = dalProd.buscarTodosProdutosTipo(Tipo, Status);
+            StringBuilder sb = new StringBuilder();
+
+
+            sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:12px;'>");
+            sb.AppendLine("<thead>");
+            sb.AppendLine("<tr>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DESCRICAO</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>PRECO</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>FOTO</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>EDITAR</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ATIVAR</center></th>");
+            sb.AppendLine("</tr>");
+            sb.AppendLine("</thead>");
+            sb.AppendLine("<tbody>");
+
+            foreach (DataRow dtr in rDta.Rows)
+            {
+
+                sb.AppendLine("<tr>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_Produto"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME_Prod"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_Prod"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["PRECO_Uni"] + "</td></center>");
+                sb.AppendLine($@"<td style='font-size:12px; letter-spacing: 1px;'><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["STATUS_PROD"].ToString().Replace("N", "INATIVO") + "</td></center>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleProduto.aspx?PRODUTO_E=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleProduto.aspx?PRODUTO_A=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
                 sb.AppendLine("</tr>");
 
             }
@@ -128,27 +168,37 @@ namespace SistemaHotel
                 Produto prod = new Produto();
                 prod.NomeProduto = txtNome.Text;
                 prod.DescricaoProduto = txtDescricao.Text;
-                prod.PrecoUnitario = decimal.Parse(txtPreco.Text);
+                prod.PrecoUnitario = decimal.Parse(txtPreco.Text.Replace(",", "."));
                 prod.TipoProduto = Convert.ToInt32(ddlTipoProdS.SelectedValue);
                 prod.StatusProd = 'S';
                 //faz o upload da foto e salva o nome no obj
-                if (fuProduto.PostedFile.FileName != "" && txtNome.Text != "" && txtDescricao.Text != "" && txtPreco.Text != "" && ddlTipoProdS.SelectedValue != "SELECIONE")
+                try
                 {
-                    prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
-                    string img = caminho + prod.FotoProduto;
-                    fuProduto.PostedFile.SaveAs(img);
-                    dalProd.inserirProduto(prod);
+                    if (fuProduto.PostedFile.FileName != "" && txtNome.Text != "" && txtDescricao.Text != "" && txtPreco.Text != "" && ddlTipoProdS.SelectedValue != "SELECIONE")
+                    {
+                        prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
+                        string img = caminho + prod.FotoProduto;
+                        fuProduto.PostedFile.SaveAs(img);
+                        dalProd.inserirProduto(prod);
 
-                    msg = $"<script> alert('Produto Inserido'); </script>";
-                    Response.Write(msg);
-                    limparCampos();
+                        msg = $"<script> alert('Produto Inserido'); </script>";
+                        Response.Write(msg);
+                        limparCampos();
+
+                    }
+                    else
+                    {
+                        msg = "<script> alert('Preencha todos os campos!'); </script>";
+                        Response.Write(msg);
+                    }
 
                 }
-                else
+                catch (Exception)
                 {
                     msg = "<script> alert('Preencha todos os campos!'); </script>";
                     Response.Write(msg);
                 }
+
 
             }
 
@@ -197,27 +247,40 @@ namespace SistemaHotel
                 Produto prod = new Produto();
                 prod.NomeProduto = txtNomeE.Text;
                 prod.DescricaoProduto = txtDescricaoE.Text;
-                prod.PrecoUnitario = decimal.Parse(txtPrecoE.Text);
+                prod.PrecoUnitario = decimal.Parse(txtPrecoE.Text.Replace(",", "."));
                 prod.IdProduto = Convert.ToInt32(txtIdProdutoE.Text);
-             
                 //alterar
+                try
+                {
+                    if (fuProdE.PostedFile.FileName != "" && txtNomeE.Text != "" && txtDescricaoE.Text != "" && txtPrecoE.Text != "" && ddlTipoProdE.SelectedValue != "SELECIONE")
+                    {
+                        //verificar se existe foto existe e deletar
+                        Produto rProd = dalProd.buscarProdutoId(prod.IdProduto);
+                        if (rProd.FotoProduto != "")
+                        {
+                            File.Delete(caminho + rProd.FotoProduto);
+                        }
+                        prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProdE.PostedFile.FileName;
+                        string img = caminho + prod.FotoProduto;
+                        fuProdE.PostedFile.SaveAs(img);
+                        dalProd.alterarProduto(prod);
+                        msg = $"<script> alert('O Produto Alterado:  Código {prod.IdProduto}'); </script>";
+                        Response.Write(msg);
+                        limparCampos();
+                    }
+                    else
+                    {
+                        msg = "<script> alert('Preencha todos os campos!'); </script>";
+                        Response.Write(msg);
+                    }
+                }
+                catch (Exception)
+                {
 
-                //verificar se existe foto existe e deletar
-                Produto rProd = dalProd.buscarProdutoId(prod.IdProduto);
-                if (rProd.FotoProduto != "")
-                {
-                    File.Delete(caminho + rProd.FotoProduto);
+                    msg = "<script> alert('Preencha todos os campos!'); </script>";
+                    Response.Write(msg);
                 }
-                if (fuProdE.PostedFile.FileName != "")
-                {
-                    prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProdE.PostedFile.FileName;
-                    string img = caminho + prod.FotoProduto;
-                    fuProdE.PostedFile.SaveAs(img);
-                    dalProd.alterarProduto(prod);
-                    msg = $"<script> alert('O Produto Alterado:  Código {prod.IdProduto}'); </script>";
-                    Response.Write(msg);      
-                    limparCampos();
-                }
+
 
             }
 
@@ -345,14 +408,22 @@ namespace SistemaHotel
 
         }
 
-        protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlTipo.SelectedValue != "SELECIONE")
+            if (ddlTipo.SelectedValue != "SELECIONE" && ddlStatus.SelectedValue != "SELECIONE")
             {
-                carregarTabela(int.Parse(ddlTipo.SelectedValue));
-            }
-        }
+                if (ddlStatus.SelectedValue == "S")
+                {
+                    carregarTabelaAtivos(ddlTipo.SelectedValue, ddlStatus.SelectedValue);
+                }
+                else
+                {
+                    carregarTabelaInativos(ddlTipo.SelectedValue, ddlStatus.SelectedValue);
+                }
 
+            }
+
+        }
     }
 }
 

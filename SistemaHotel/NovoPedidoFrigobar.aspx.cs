@@ -22,53 +22,44 @@ namespace SistemaHotel
         DALItemPedido dalItemPed = new DALItemPedido();
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+
+            int rParametro = 0;
+            if (!IsPostBack)
             {
-                if (Session["perfil"].ToString() == "CLIENTE")
+                if (Request.QueryString["PRODUTO_N"] != null)
                 {
-                    int rParametro = 0;
-                    if (!IsPostBack)
+
+                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_N"]));
+                    Produto prod = dalProd.buscarProdutoId(rParametro);
+                    txtIdProd.Text = prod.IdProduto.ToString();
+                    txtNomeProd.Text = prod.NomeProduto;
+                    txtDescricao.Text = prod.DescricaoProduto;
+                    txtPreco.Text = prod.PrecoUnitario.ToString();
+                    imgProd.Src = $@"IMAGENS_PRODUTOS\{prod.FotoProduto}";
+                    if (prod.TipoProduto == 1)
                     {
-                        if (Request.QueryString["PRODUTO_N"] != null)
-                        {
-
-                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_N"]));
-                            Produto prod = dalProd.buscarProdutoId(rParametro);
-                            txtIdProd.Text = prod.IdProduto.ToString();
-                            txtNomeProd.Text = prod.NomeProduto;
-                            txtDescricao.Text = prod.DescricaoProduto;
-                            txtPreco.Text = prod.PrecoUnitario.ToString();
-                            imgProd.Src = $@"IMAGENS_PRODUTOS\{prod.FotoProduto}";
-                            if (prod.TipoProduto == 1)
-                            {
-                                txtQuantidade.Enabled = true;
-                            }
-                            else
-                            {
-                                txtQuantidade.Text = "1";
-                            }
-                            mdBack.Visible = true;
-                            mdPed.Visible = true;
-                        }
-
-                        carregarTabela();
-
+                        txtQuantidade.Enabled = true;
                     }
-                    carregarTabela();
+                    else
+                    {
+                        txtQuantidade.Text = "1";
+                    }
+                    mdBack.Visible = true;
+                    mdPed.Visible = true;
                 }
 
+                carregarTabela();
+
             }
-            catch (Exception)
-            {
-                Response.Redirect("~/Default.aspx");
-            }
+            carregarTabela();
         }
+
 
         private void carregarTabela()
         {
 
             DataTable rDta = new DataTable();
-            rDta = dalProd.buscarTodosProdutosTipo(1);
+            rDta = dalProd.buscarTodosProdutosTipo("1", "S");
             StringBuilder sb = new StringBuilder();
 
 

@@ -84,6 +84,8 @@
     <Content Include="CSS\jquery.dataTables.css" />
     <Content Include="NovoPedidoFrigobar.aspx" />
     <Content Include="Scripts\a076d05399.js" />
+    <Content Include="Scripts\autoNumeric.js" />
+    <Content Include="Scripts\jquery-latest.min.js" />
     <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="CSS\StyleSheet.css.exclude" />
     <Content Include="IMAGENS\SISTEMA\logo_hotel.jpeg" />
@@ -1101,6 +1103,7 @@
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy1.pubxml" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />
+    <Content Include="Scripts\jquery.mask.js" />
     <Content Include="Scripts\mascara.js" />
     <Content Include="web.config" />
     <None Include="web.Debug.config">

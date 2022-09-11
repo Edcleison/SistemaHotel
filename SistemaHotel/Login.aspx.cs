@@ -24,6 +24,7 @@ namespace SistemaHotel
         {
             string login = txtLogin.Text;
             string senha = Criptografia.Encrypt(txtSenha.Text);
+            string msg = "";
 
             DALUsuario du = new DALUsuario();
             Usuario u = du.buscaUsuarioLogin(login);
@@ -40,17 +41,17 @@ namespace SistemaHotel
 
                         if (login != u.Login && senha == u.Senha)
                         {
-                            String msg = "<script> alert('Login incorreto!'); </script>";
+                            msg = "<script> alert('Login incorreto!'); </script>";
                             Response.Write(msg);
                         }
                         else if (login == u.Login && senha != u.Senha)
                         {
-                            String msg = "<script> alert('Senha incorreta!'); </script>";
+                            msg = "<script> alert('Senha incorreta!'); </script>";
                             Response.Write(msg);
                         }
                         else if (login != u.Login && senha != u.Senha)
                         {
-                            String msg = "<script> alert('Login e senha incorretos'); </script>";
+                            msg = "<script> alert('Login e senha incorretos'); </script>";
                             Response.Write(msg);
                         }
                         else
@@ -76,6 +77,11 @@ namespace SistemaHotel
                         }
 
                     }
+                    else
+                    {
+                        msg = "<script> alert('Login incorreto'); </script>";
+                        Response.Write(msg);
+                    }
 
                 }
             }
@@ -93,17 +99,17 @@ namespace SistemaHotel
 
                             if (login != u.Login && senha == u.Senha)
                             {
-                                String msg = "<script> alert('Login incorreto!'); </script>";
+                                 msg = "<script> alert('Login incorreto!'); </script>";
                                 Response.Write(msg);
                             }
                             else if (login == u.Login && senha != u.Senha)
                             {
-                                String msg = "<script> alert('Senha incorreta!'); </script>";
+                                 msg = "<script> alert('Senha incorreta!'); </script>";
                                 Response.Write(msg);
                             }
                             else if (login != u.Login && senha != u.Senha)
                             {
-                                String msg = "<script> alert('Login e senha incorretos'); </script>";
+                                 msg = "<script> alert('Login e senha incorretos'); </script>";
                                 Response.Write(msg);
                             }
                             else
@@ -124,7 +130,7 @@ namespace SistemaHotel
                                     case 3:
                                         Session["perfil"] = "CLIENTE";
                                         break;
-                                }                                
+                                }
                                 Response.Redirect("~/Default.aspx");
                             }
 
@@ -133,11 +139,11 @@ namespace SistemaHotel
                     }
                     else
                     {
-                        string msg = "<script> alert('Login não permitido!); </script>";
+                         msg = "<script> alert('Login não permitido!); </script>";
                         Response.Write(msg);
                     }
 
-                } 
+                }
             }
 
         }

@@ -449,7 +449,7 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-        public DataTable buscarUsuariosPerfilAtivos(string perfil)
+        public DataTable buscarUsuariosPerfilStatus(string Perfil,string Status)
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
@@ -465,10 +465,13 @@ namespace SistemaHotel.Controller
                                                             ,P.ID_PERFIL
                                                             FROM [DBO].[USUARIO] U
                                                             INNER JOIN PERFIL_USUARIO P
-                                                            ON (P.ID_USUARIO = U.ID_USUARIO) WHERE P.STATUS_USUARIO ='S' AND P.ID_PERFIL = '{perfil}'", connection))
+                                                            ON (P.ID_USUARIO = U.ID_USUARIO) 
+                                                            WHERE P.STATUS_USUARIO =@STATUS_USUARIO AND P.ID_PERFIL = @ID_PERFIL", connection))
                 {
                     try
                     {
+                        cmd.Parameters.AddWithValue("@STATUS_USUARIO", Status);
+                        cmd.Parameters.AddWithValue("ID_PERFIL", Perfil);
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
                         adp = new SqlDataAdapter(cmd);
@@ -488,7 +491,7 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-        public DataTable buscarUsuariosClientesAtivos(string perfil)
+        public DataTable buscarUsuariosClientesStatus(string Perfil,string Status)
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
@@ -513,8 +516,10 @@ namespace SistemaHotel.Controller
                                                             INNER JOIN CLIENTE C ON(C.COD_RESERVA = U.LOGIN)
                                                             INNER JOIN QUARTO Q ON (Q.ID_QUARTO = C.ID_QUARTO)
                                                             INNER JOIN PERFIL_USUARIO P ON (P.ID_USUARIO = U.ID_USUARIO)
-                                                            WHERE P.STATUS_USUARIO ='S' AND P.ID_PERFIL = '{perfil}'", connection))
+                                                            WHERE P.STATUS_USUARIO =@STATUS_USUARIO AND P.ID_PERFIL = @ID_PERFIL", connection))
                     {
+                        cmd.Parameters.AddWithValue("@STATUS_USUARIO",Status);
+                        cmd.Parameters.AddWithValue("ID_PERFIL", Perfil);
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
                         adp = new SqlDataAdapter(cmd);

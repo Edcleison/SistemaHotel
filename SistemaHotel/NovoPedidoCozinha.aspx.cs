@@ -24,61 +24,45 @@ namespace SistemaHotel
         DALCarrinho dalCar = new DALCarrinho();
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+
+            int rParametro = 0;
+            if (!IsPostBack)
             {
-                if (Session["perfil"].ToString() == "CLIENTE")
+                if (Request.QueryString["PRODUTO_N"] != null)
                 {
-                    int rParametro = 0;
-                    if (!IsPostBack)
+
+                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_N"]));
+                    Produto prod = dalProd.buscarProdutoId(rParametro);
+                    txtIdProd.Text = prod.IdProduto.ToString();
+                    txtNomeProd.Text = prod.NomeProduto;
+                    txtDescricao.Text = prod.DescricaoProduto;
+                    txtPreco.Text = prod.PrecoUnitario.ToString();
+                    imgProd.Src = $@"IMAGENS_PRODUTOS\{prod.FotoProduto}";
+                    if (prod.TipoProduto == 1)
                     {
-                        if (Request.QueryString["PRODUTO_N"] != null)
-                        {
-
-                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_N"]));
-                            Produto prod = dalProd.buscarProdutoId(rParametro);
-                            txtIdProd.Text = prod.IdProduto.ToString();
-                            txtNomeProd.Text = prod.NomeProduto;
-                            txtDescricao.Text = prod.DescricaoProduto;
-                            txtPreco.Text = prod.PrecoUnitario.ToString();
-                            imgProd.Src = $@"IMAGENS_PRODUTOS\{prod.FotoProduto}";
-                            if (prod.TipoProduto == 1)
-                            {
-                                txtQuantidade.Enabled = true;
-                            }
-                            else
-                            {
-                                txtQuantidade.Text = "1";
-                            }
-                            mdBack.Visible = true;
-                            mdPed.Visible = true;
-                        }
-                        if (Request.QueryString["CARRINHO_C"] != null)
-                        {
-                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_C"]));
-
-                            Carrinho car = dalCar.buscarCarrinhoId(rParametro);
-
-                            if (car.IdCarrinho != 0)
-                            {
-                                dalCar.excluirCarrinho(car.IdCarrinho);
-                                string msg = $"<script> alert('Produto Removido: Código: {car.IdProduto}'); </script>";
-                                Response.Write(msg);
-                            }
-                            mdCarr.Visible = true;
-                            carregarTabelaCarrinho(Session["login"].ToString());
-                        }
-                        carregarTabela();
-                        lblQtdeCarrinho.Text = dalCar.buscarCarrinhoQtde(Session["login"].ToString());
+                        txtQuantidade.Enabled = true;
                     }
-                    carregarTabela();
-                    lblQtdeCarrinho.Text = dalCar.buscarCarrinhoQtde(Session["login"].ToString());
+                    else
+                    {
+                        txtQuantidade.Text = "1";
+                    }
+                    mdBack.Visible = true;
+                    mdPed.Visible = true;
                 }
-
+                if (Request.QueryString["CARRINHO_C"] != null)
+                {
+                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_C"]));
+                    dalCar.excluirCarrinho(rParametro);
+                    string msg = $"<script> alert('Produto Removido: Código: {rParametro}'); </script>";
+                    Response.Write(msg);
+                    mdCarr.Visible = true;
+                    carregarTabelaCarrinho(Session["login"].ToString());
+                }
+                carregarTabela();
+                lblQtdeCarrinho.Text = dalCar.buscarCarrinhoQtde(Session["login"].ToString());
             }
-            catch (Exception)
-            {
-                Response.Redirect("~/Default.aspx");
-            }
+            carregarTabela();
+            lblQtdeCarrinho.Text = dalCar.buscarCarrinhoQtde(Session["login"].ToString());
         }
 
         #region Controle Pedido
@@ -86,7 +70,7 @@ namespace SistemaHotel
         {
 
             DataTable rDta = new DataTable();
-            rDta = dalProd.buscarTodosProdutosTipo(1);
+            rDta = dalProd.buscarTodosProdutosTipo("1", "S");
             StringBuilder sb = new StringBuilder();
 
 

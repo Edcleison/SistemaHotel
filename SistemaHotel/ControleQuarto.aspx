@@ -38,6 +38,16 @@
     <script src="Scripts/jquery.dataTables.min.js"></script>
     <script src="Scripts/dataTables.bootstrap4.min.js.js"></script>
 
+    <style>
+        .green {
+            background-color: lightseagreen !important;
+        }
+
+        .red {
+            background-color: lightcoral !important;
+        }
+    </style>
+
 
 
 
@@ -62,11 +72,19 @@
                 "ordering": false,
                 "info": false,
                 dom: 'Bfrtip',
-                buttons: [
+                buttons: ['excel'
 
-                ]
+                ],
+                "createdRow": function (row, data, dataIndex) {
+                    if (data[2] == "<center>ATIVO</center>") {
+                        $(row).addClass('green');
 
+                    }
+                    else if (data[2] == "<center>INATIVO</center>") {
+                        $(row).addClass('red');
 
+                    }
+                },
 
             });
         })
@@ -107,6 +125,21 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-sm">
+                    <span>&nbsp;</span>
+                </div>
+            </div>
+            <div class="col-sm">
+                <span>Listar Por: </span>
+            </div>
+            <div class="col-sm">
+                <asp:DropDownList ID="ddlStatus" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged">
+                    <asp:ListItem Value="SELECIONE">SELECIONE</asp:ListItem>
+                    <asp:ListItem Value="S">ATIVO</asp:ListItem>
+                    <asp:ListItem Value="N">INATIVO</asp:ListItem>
+                </asp:DropDownList>
+            </div>
+             <div class="row">
                 <div class="col-sm">
                     <span>&nbsp;</span>
                 </div>

@@ -23,54 +23,46 @@ namespace SistemaHotel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+
+            int rParametro = 0;
+            if (!IsPostBack)
             {
-                if (Session["perfil"].ToString() == "ADMINISTRADOR")
+                if (Request.QueryString["QUARTO_D"] != null)
                 {
-                    int rParametro = 0;
-                    if (!IsPostBack)
-                    {
-                        if (Request.QueryString["QUARTO_D"] != null)
-                        {
-                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_D"]));
-
-                            Quarto qua = dalQua.buscarQuartoId(rParametro);
-
-                            if (qua.IdQuarto != 0)
-                            {
-                                dalQua.inativarQuarto(qua.IdQuarto);
-                                string msg = $"<script> alert('Quarto Inativado: Código{qua.IdQuarto}'); </script>";
-                                Response.Write(msg);
-                            }
-                        }
-                        if (Request.QueryString["QUARTO_E"] != null)
-                        {
-
-                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_E"]));
-
-                            Quarto qua = dalQua.buscarQuartoId(rParametro);
-
-
-                            txtQuartoE.Text = qua.DescricaoQuarto;
-                            mdBack.Visible = true;
-                            mdQuarE.Visible = true;
-                        }
-                    }
-                    carregarTabela();
+                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_D"]));
+                    dalQua.inativarQuarto(rParametro);
+                    string msg = $"<script> alert('Quarto Inativado: Código{rParametro}'); </script>";
+                    Response.Write(msg);
                 }
-            }
-            catch (Exception)
-            {
-                Response.Redirect("~/Default.aspx");
+                if (Request.QueryString["QUARTO_E"] != null)
+                {
+
+                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_E"]));
+
+                    Quarto qua = dalQua.buscarQuartoId(rParametro);
+
+                    txtQuartoE.Text = qua.DescricaoQuarto;
+                    mdBack.Visible = true;
+                    mdQuarE.Visible = true;
+                }
+                if (Request.QueryString["QUARTO_A"] != null)
+                {
+
+                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_A"]));
+                    dalQua.ativarQuarto(rParametro);
+                    string msg = $"<script> alert('Quarto Ativado! Código:{rParametro}'); </script>";
+                    Response.Write(msg);
+
+                }
             }
         }
 
         #region Controle Quarto
 
-        private void carregarTabela()
+        private void carregarTabelaAtivos(string Status)
         {
             DataTable rDta = new DataTable();
-            rDta = dalQua.buscarTodosQuartos();
+            rDta = dalQua.buscarTodosQuartos(Status);
             StringBuilder sb = new StringBuilder();
 
 
@@ -79,6 +71,7 @@ namespace SistemaHotel
             sb.AppendLine("<tr>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DESCRIÇÃO</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>EDITAR</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>INATIVAR</center></th>");
             sb.AppendLine("</tr>");
@@ -89,10 +82,50 @@ namespace SistemaHotel
             {
 
                 sb.AppendLine("<tr>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_QUARTO"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_QUARTO"] + "</center></td>");      
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_QUARTO"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["STATUS_QUAR"].ToString().Replace("S", "ATIVO") + "</td></center>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleQuarto.aspx?QUARTO_E=" + Criptografia.Encrypt(dtr["ID_QUARTO"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleQuarto.aspx?QUARTO_D=" + Criptografia.Encrypt(dtr["ID_QUARTO"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
+                sb.AppendLine("</tr>");
+
+            }
+            sb.AppendLine("</tbody>");
+            sb.AppendLine("</table>");
+
+            Panel1.Controls.Clear();
+            Panel1.Controls.Add(new LiteralControl(sb.ToString()));
+
+        }
+
+        private void carregarTabelaInativos(string Status)
+        {
+            DataTable rDta = new DataTable();
+            rDta = dalQua.buscarTodosQuartos(Status);
+            StringBuilder sb = new StringBuilder();
+
+
+            sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:12px;'>");
+            sb.AppendLine("<thead>");
+            sb.AppendLine("<tr>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DESCRIÇÃO</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>EDITAR</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ATIVAR</center></th>");
+            sb.AppendLine("</tr>");
+            sb.AppendLine("</thead>");
+            sb.AppendLine("<tbody>");
+
+            foreach (DataRow dtr in rDta.Rows)
+            {
+
+                sb.AppendLine("<tr>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_QUARTO"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_QUARTO"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["STATUS_QUAR"].ToString().Replace("N", "INATIVO") + "</td></center>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleQuarto.aspx?QUARTO_E=" + Criptografia.Encrypt(dtr["ID_QUARTO"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleQuarto.aspx?QUARTO_A=" + Criptografia.Encrypt(dtr["ID_QUARTO"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
                 sb.AppendLine("</tr>");
 
             }
@@ -176,6 +209,24 @@ namespace SistemaHotel
             }
 
 
+        }
+
+        protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlStatus.SelectedValue != "SELECIONE")
+            {
+                if (ddlStatus.SelectedValue == "S")
+                {
+                    carregarTabelaAtivos(ddlStatus.SelectedValue);
+                }
+                else
+                {
+                    carregarTabelaInativos(ddlStatus.SelectedValue);
+                }
+
+
+
+            }
         }
     }
 }

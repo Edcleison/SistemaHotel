@@ -41,6 +41,17 @@
     <script src="Scripts/jquery.dataTables.min.js"></script>
     <script src="Scripts/dataTables.bootstrap4.min.js.js"></script>
 
+    <style>
+        .green {
+            background-color: lightseagreen !important;
+        }
+
+        .red {
+            background-color: lightcoral !important;
+        }
+    </style>
+
+
 
 
 
@@ -65,19 +76,36 @@
                 "ordering": false,
                 "info": false,
                 dom: 'Bfrtip',
-                buttons: [
+                buttons: ['excel'
 
-                ]
+                ],
+                "createdRow": function (row, data, dataIndex) {
+                    if (data[5] == "<center>ATIVO</center>") {
+                        $(row).addClass('green');
 
+                    }
+                    else if (data[5] == "<center>INATIVO</center>") {
+                        $(row).addClass('red');
 
+                    }
+                },
 
             });
         })
     </script>
 
-    
 
-     <script src="Scripts/mascara.js"></script>
+    <%--<script src="Scripts/mascara.js"></script>--%>
+
+    <script src="Scripts/jquery-latest.min.js"></script>
+    <script src="Scripts/autoNumeric.js"></script>
+    <script>
+        jQuery(function ($) {
+            $('#ContentPlaceHolder1_txtPreco').autoNumeric({ aSep: '.', aDec: ',', vMax: '999999999.99' });
+            $('#ContentPlaceHolder1_txtPrecoE').autoNumeric({ aSep: '.', aDec: ',', vMax: '999999999.99' });
+        });
+    </script>
+
 
     <style>
         .modal-personalizado {
@@ -122,9 +150,23 @@
                 </div>
 
                 <div class="col-sm">
-                    <asp:DropDownList ID="ddlTipo" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged">
+                    <asp:DropDownList ID="ddlTipo" runat="server">
                     </asp:DropDownList>
-
+                </div>
+                <div class="col-sm">
+                    <span>Listar Por: </span>
+                </div>
+                <div class="col-sm">
+                    <asp:DropDownList ID="ddlStatus" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged">
+                        <asp:ListItem Value="SELECIONE">SELECIONE</asp:ListItem>
+                        <asp:ListItem Value="S">ATIVO</asp:ListItem>
+                        <asp:ListItem Value="N">INATIVO</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-sm">
+                    <span>&nbsp;</span>
                 </div>
             </div>
         </div>
@@ -178,7 +220,7 @@
                                     <span>Preço: </span>
                                 </div>
                                 <div class="col-sm">
-                                     <asp:TextBox runat="server" ID="txtPreco" onkeyup="formataValor(this,event);"></asp:TextBox>                 
+                                    <asp:TextBox runat="server" ID="txtPreco"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">

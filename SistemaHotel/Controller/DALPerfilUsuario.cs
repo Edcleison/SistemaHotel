@@ -193,9 +193,34 @@ namespace SistemaHotel.Controller
 
                     try
                     {
-
-                        connection.Open();
                         cmd.Parameters.AddWithValue("ID_USUARIO", IdUsuario);
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        cmd.Connection.Close();
+                    }
+                }
+            }
+        }
+
+        public void ativarUsuario(int IdUsuario)
+        {
+
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"UPDATE [dbo].[PERFIL_USUARIO] set STATUS_USUARIO = 'S' where ID_USUARIO=@ID_USUARIO", connection))
+                {
+
+                    try
+                    {
+                        cmd.Parameters.AddWithValue("ID_USUARIO", IdUsuario);
+                        connection.Open();
                         cmd.ExecuteNonQuery();
                     }
                     catch (Exception erro)

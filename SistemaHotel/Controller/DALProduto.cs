@@ -92,8 +92,9 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-        public DataTable buscarTodosProdutosTipo(int Tipo)
+        public DataTable buscarTodosProdutosTipo(string Tipo, string Status)
         {
+          
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
 
@@ -105,12 +106,14 @@ namespace SistemaHotel.Controller
                                                             ,[DESCRICAO_PROD]
                                                             ,[NOME_PROD]
                                                             ,[FOTO_PROD]
+                                                            ,STATUS_PROD
                                                         FROM [DBO].[PRODUTO]
-                                                        WHERE ID_TIPO_PROD = @ID_TIPO_PROD AND STATUS_PROD='S'", connection))
+                                                        WHERE ID_TIPO_PROD = @ID_TIPO_PROD AND STATUS_PROD=@STATUS_PROD", connection))
                 {
                     try
                     {
                         cmd.Parameters.AddWithValue("@ID_TIPO_PROD", Tipo);
+                        cmd.Parameters.AddWithValue("@STATUS_PROD", Status);
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
                         adp = new SqlDataAdapter(cmd);
@@ -145,7 +148,7 @@ namespace SistemaHotel.Controller
                                                             ,[DESCRICAO_PROD]
                                                             ,[NOME_PROD]
                                                             ,[FOTO_PROD]
-                                                        FROM [DBO].[PRODUTO] WHERE ID_PRODUTO = @ID_PRODUTO AND STATUS_PROD='S'", connection))
+                                                        FROM [DBO].[PRODUTO] WHERE ID_PRODUTO = @ID_PRODUTO", connection))
                 {
                     try
                     {
@@ -219,6 +222,33 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand(@"UPDATE [DBO].[PRODUTO] SET STATUS_PROD ='N' WHERE ID_PRODUTO = @ID_PRODUTO", connection))
+                {
+
+                    try
+                    {
+                        connection.Open();
+                        cmd.Parameters.AddWithValue("ID_PRODUTO", IdProduto);
+                        cmd.ExecuteNonQuery();
+                        cmd.Connection.Close();
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        cmd.Connection.Close();
+                    }
+                }
+            }
+        }
+
+        public void ativarProduto(int IdProduto)
+        {
+
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"UPDATE [DBO].[PRODUTO] SET STATUS_PROD ='S' WHERE ID_PRODUTO = @ID_PRODUTO", connection))
                 {
 
                     try

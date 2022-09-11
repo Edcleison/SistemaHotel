@@ -24,32 +24,20 @@ namespace SistemaHotel
         DALCliente dalCli = new DALCliente();
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+
+            if (!IsPostBack)
             {
-                if (Session["perfil"].ToString() == "CLIENTE")
-                {
-
-                    if (!IsPostBack)
-                    {
-                        carregaDdlStatus();
-                        carregaDdlTipo();
-                    }
-
-                }
+                carregaDdlStatus();
+                carregaDdlTipo();
             }
-            catch (Exception)
-            {
-                Response.Redirect("~/Default.aspx");
-            }
-
         }
 
 
-        private void carregarTabela(string IdCliente,string Tipo, string Status)
+        private void carregarTabela(string IdCliente, string Tipo, string Status)
         {
             decimal total = 0;
             DataTable rDta = new DataTable();
-            rDta = dalPed.buscarTodosPedidosCliente(IdCliente,Tipo, Status);
+            rDta = dalPed.buscarTodosPedidosCliente(IdCliente, Tipo, Status);
             StringBuilder sb = new StringBuilder();
 
 
@@ -65,7 +53,7 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>PREÇO UNI.</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>QTDE</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DT. FIM</center></th>");    
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DT. FIM</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -86,7 +74,7 @@ namespace SistemaHotel
                 if (dtr["DATA_FINALIZACAO"].ToString() != "")
                 {
                     sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + Convert.ToDateTime(dtr["DATA_FINALIZACAO"]).ToString("dd/MM/yyyy HH:mm") + "</center></td>");
-                   
+
                 }
                 else
                 {
@@ -185,7 +173,7 @@ namespace SistemaHotel
             Cliente cli = dalCli.buscarClienteReserva(Session["login"].ToString());
             if (ddlTipo.SelectedValue != "TODOS" && ddlStatus.SelectedValue != "TODOS")
             {
-                carregarTabela(cli.IdCliente.ToString(),ddlStatus.SelectedValue.ToString(), ddlTipo.SelectedValue.ToString());
+                carregarTabela(cli.IdCliente.ToString(), ddlStatus.SelectedValue.ToString(), ddlTipo.SelectedValue.ToString());
             }
             else if (ddlTipo.SelectedValue != "TODOS" && ddlStatus.SelectedValue == "TODOS")
             {
@@ -193,7 +181,7 @@ namespace SistemaHotel
             }
             else if (ddlTipo.SelectedValue == "TODOS" && ddlStatus.SelectedValue != "TODOS")
             {
-                carregarTabela(cli.IdCliente.ToString(),ddlStatus.SelectedValue.ToString(), "");
+                carregarTabela(cli.IdCliente.ToString(), ddlStatus.SelectedValue.ToString(), "");
             }
             else
             {
