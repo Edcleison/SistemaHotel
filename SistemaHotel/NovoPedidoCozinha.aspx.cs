@@ -63,8 +63,6 @@ namespace SistemaHotel
                                 dalCar.excluirCarrinho(car.IdCarrinho);
                                 string msg = $"<script> alert('Produto Removido: Código: {car.IdProduto}'); </script>";
                                 Response.Write(msg);
-                                Response.Redirect("~/NovoPedidoCozinha.aspx");
-
                             }
                             mdCarr.Visible = true;
                             carregarTabelaCarrinho(Session["login"].ToString());

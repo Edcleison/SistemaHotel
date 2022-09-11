@@ -184,7 +184,7 @@ namespace SistemaHotel.Controller
             {
                 using (SqlCommand cmd = new SqlCommand(@"UPDATE [DBO].[PRODUTO]
                                                        SET [PRECO_UNI] =@PRECO_UNI
-                                                          ,[DESCRICAO_PROD] = @[DESCRICAO_PROD]
+                                                          ,[DESCRICAO_PROD] = @DESCRICAO_PROD
                                                           ,[NOME_PROD] = @NOME_PROD
                                                           ,[FOTO_PROD] = @FOTO_PROD                                                         
                                                           WHERE  ID_PRODUTO = @ID_PRODUTO", connection))

@@ -45,11 +45,7 @@ namespace SistemaHotel
                             {
                                 dalPerfUsu.inativarUsuario(usu.IdUsuario);
                                 string msg = $"<script> alert('Usuário Inativado: Código {usu.IdUsuario}'); </script>";
-                                Response.Write(msg);
-                                Response.Redirect("~/ControleUsuario.aspx");
-
-
-
+                                Response.Write(msg);                              
                             }
                         }
                         if (Request.QueryString["CLIENTE_E"] != null)

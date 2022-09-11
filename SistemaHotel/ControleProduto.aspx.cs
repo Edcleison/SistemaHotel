@@ -10,7 +10,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SistemaHotel.Controller;
 using SistemaHotel.Utils;
-
+using System.IO;
 
 namespace SistemaHotel
 {
@@ -59,6 +59,7 @@ namespace SistemaHotel
                             txtDescricaoE.Text = prod.DescricaoProduto;
                             txtPrecoE.Text = prod.PrecoUnitario.ToString();
                             ddlTipoProdE.SelectedValue = prod.TipoProduto.ToString();
+                            txtIdProdutoE.Text = rParametro.ToString();
                             carregaDdlEditarTipoProduto();
                             mdBack.Visible = true;
                             mdProdE.Visible = true;
@@ -194,18 +195,27 @@ namespace SistemaHotel
                 string msg = "";
                 string caminho = Server.MapPath(@"IMAGENS_PRODUTOS\");
                 Produto prod = new Produto();
-                prod.NomeProduto = txtNome.Text;
-                prod.DescricaoProduto = txtDescricao.Text;
-                prod.PrecoUnitario = decimal.Parse(txtPreco.Text);
-                //faz o upload da foto e salva o nome no obj
-                if (fuProduto.PostedFile.FileName != "")
+                prod.NomeProduto = txtNomeE.Text;
+                prod.DescricaoProduto = txtDescricaoE.Text;
+                prod.PrecoUnitario = decimal.Parse(txtPrecoE.Text);
+                prod.IdProduto = Convert.ToInt32(txtIdProdutoE.Text);
+             
+                //alterar
+
+                //verificar se existe foto existe e deletar
+                Produto rProd = dalProd.buscarProdutoId(prod.IdProduto);
+                if (rProd.FotoProduto != "")
                 {
-                    prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
+                    File.Delete(caminho + rProd.FotoProduto);
+                }
+                if (fuProdE.PostedFile.FileName != "")
+                {
+                    prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProdE.PostedFile.FileName;
                     string img = caminho + prod.FotoProduto;
-                    fuProduto.PostedFile.SaveAs(img);
+                    fuProdE.PostedFile.SaveAs(img);
                     dalProd.alterarProduto(prod);
-                    msg = $"<script> alert('O Produto Alterado: {prod.IdProduto}'); </script>";
-                    Response.Write(msg);
+                    msg = $"<script> alert('O Produto Alterado:  Código {prod.IdProduto}'); </script>";
+                    Response.Write(msg);      
                     limparCampos();
                 }
 

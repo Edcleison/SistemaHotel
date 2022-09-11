@@ -29,6 +29,7 @@ namespace SistemaHotel
                 if (Session["perfil"].ToString() != "CLIENTE")
                 {
                     int rParametro = 0;
+                    string msg = "";
                     if (!IsPostBack)
                     {
                         if (Request.QueryString["ATENDIMENTO_S"] != null)
@@ -44,7 +45,8 @@ namespace SistemaHotel
                                 ped.DataFinalizacao = DateTime.Now;
                                 ped.IdAdm = adm.IdAdm;
                                 dalPed.alterarStatusAtendimentoAdm(ped);
-                                Response.Redirect("~/Atendimento.aspx");
+                                msg = $"<script> alert('Atendimento Finalizado: Código do Adm {adm.IdAdm}'); </script>";
+                                Response.Write(msg);
 
                             }
                             if (Session["perfil"].ToString() == "FUNCIONARIO")
@@ -55,7 +57,8 @@ namespace SistemaHotel
                                 ped.DataFinalizacao = DateTime.Now;
                                 ped.IdFuncionario = fun.IdFuncionario;
                                 dalPed.alterarStatusAtendimentoFuncionario(ped);
-                                Response.Redirect("~/Atendimento.aspx");
+                                msg = $"<script> alert('Atendimento Finalizado: Código do Funcionário {fun.IdFuncionario}'); </script>";
+                                Response.Write(msg);
                             }
                         }
                         if (Request.QueryString["ATENDIMENTO_N"] != null)
@@ -71,7 +74,8 @@ namespace SistemaHotel
                                 ped.DataFinalizacao = DateTime.Now;
                                 ped.IdAdm = adm.IdAdm;
                                 dalPed.alterarStatusAtendimentoAdm(ped);
-                                Response.Redirect("~/Atendimento.aspx");
+                                msg = $"<script> alert('Atendimento Recusado: Código do Adm {adm.IdAdm}'); </script>";
+                                Response.Write(msg);
                             }
                             if (Session["perfil"].ToString() == "FUNCIONARIO")
                             {
@@ -81,7 +85,8 @@ namespace SistemaHotel
                                 ped.DataFinalizacao = DateTime.Now;
                                 ped.IdFuncionario = fun.IdFuncionario;
                                 dalPed.alterarStatusAtendimentoFuncionario(ped);
-                                Response.Redirect("~/Atendimento.aspx");
+                                msg = $"<script> alert('Atendimento Finalizado: Código do Funcionário {fun.IdFuncionario}'); </script>";
+                                Response.Write(msg);
 
                             }
                         }

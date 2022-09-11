@@ -39,9 +39,8 @@ namespace SistemaHotel
                             if (qua.IdQuarto != 0)
                             {
                                 dalQua.inativarQuarto(qua.IdQuarto);
-                                string msg = $"<script> alert('Quarto Inativado! Código{qua.IdQuarto}'); </script>";
+                                string msg = $"<script> alert('Quarto Inativado: Código{qua.IdQuarto}'); </script>";
                                 Response.Write(msg);
-                                Response.Redirect("~/ControleQuarto.aspx");
                             }
                         }
                         if (Request.QueryString["QUARTO_E"] != null)

@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    
+
 
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/bower_components/bootstrap/css/bootstrap.min.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/bower_components/sweetalert/css/sweetalert.css") %>" />
@@ -41,7 +41,7 @@
     <script src="Scripts/jquery.dataTables.min.js"></script>
     <script src="Scripts/dataTables.bootstrap4.min.js.js"></script>
 
-    
+
 
 
     <script type="text/javascript">
@@ -75,7 +75,9 @@
         })
     </script>
 
-    <script src="Scripts/mascara.js"></script>
+    
+
+     <script src="Scripts/mascara.js"></script>
 
     <style>
         .modal-personalizado {
@@ -176,7 +178,7 @@
                                     <span>Preço: </span>
                                 </div>
                                 <div class="col-sm">
-                                    <asp:TextBox runat="server" ID="txtPreco" onkeyup="formataValor(this,event);"></asp:TextBox>
+                                     <asp:TextBox runat="server" ID="txtPreco" onkeyup="formataValor(this,event);"></asp:TextBox>                 
                                 </div>
                             </div>
                             <div class="row">
@@ -235,6 +237,19 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm">
+                                    <span>Id Produto: </span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox runat="server" ID="txtIdProdutoE" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
                                     <span>Nome: </span>
                                 </div>
                                 <div class="col-sm">
@@ -264,7 +279,7 @@
                                     <span>Preço: </span>
                                 </div>
                                 <div class="col-sm">
-                                    <asp:TextBox runat="server" ID="txtPrecoE"></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="txtPrecoE" onkeyup="formataValor(this,event);"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">
@@ -305,6 +320,6 @@
             </div>
         </div>
     </asp:Panel>
-    
+
 </asp:Content>
 

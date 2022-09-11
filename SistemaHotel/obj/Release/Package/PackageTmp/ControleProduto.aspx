@@ -2,6 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
+    
+
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/bower_components/bootstrap/css/bootstrap.min.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/bower_components/sweetalert/css/sweetalert.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/icon/themify-icons/themify-icons.css") %>" />
@@ -31,14 +33,15 @@
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/js/script.js") %>"></script>
 
     <link href="CSS/bootstrap.css" rel="stylesheet" />
+
     <link href="CSS/dataTables.bootstrap4.min.css" rel="stylesheet" />
-    <link href="CSS/jquery.dataTables.min.css.css" rel="stylesheet" />
+    <link href="CSS/jquery.dataTables.min.css" rel="stylesheet" />
 
     <script src="Scripts/jquery-3.5.1.js"></script>
     <script src="Scripts/jquery.dataTables.min.js"></script>
     <script src="Scripts/dataTables.bootstrap4.min.js.js"></script>
 
-
+    
 
 
     <script type="text/javascript">
@@ -46,16 +49,17 @@
             $('#example').DataTable({
                 "language": {
                     "emptyTable": "Não foram encontrados registros",
-                
-                "paginate": {
-                    "previous": "Anterior:",
-                    "next": "Próxima:",
-                    "first": "Primeira:",
-                    "last": "Última:",
+
+                    "paginate": {
+                        "previous": "<",
+                        "next": ">",
+                        "first": "<<",
+                        "last": ">>",
+                    },
+                    "search": "Pesquisar:",
                 },
-                "search": "Pesquisar:",
-                "scrollY": '500px',
-                "scrollCollapse": true,
+                //"scrollY": '500px',
+                //"scrollCollapse": true,
                 "paging": true,
                 "pageLength": 10,
                 "ordering": false,
@@ -301,5 +305,6 @@
             </div>
         </div>
     </asp:Panel>
+    
 </asp:Content>
 

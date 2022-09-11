@@ -29,9 +29,10 @@
     <!-- layout padrao  -->
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/plugins/bootstrap-notify/bootstrap-notify.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveUrl("~/layout/js/script.js") %>"></script>
+    
     <link href="CSS/bootstrap.css" rel="stylesheet" />
     <link href="CSS/dataTables.bootstrap4.min.css" rel="stylesheet" />
-    <link href="CSS/jquery.dataTables.min.css.css" rel="stylesheet" />
+    <link href="CSS/jquery.dataTables.min.css" rel="stylesheet" />
 
     <%--<script src="Scripts/jquery-1.11.3.min.js"></script>
     <link href="CSS/jquery.dataTables.css" rel="stylesheet" />
@@ -63,10 +64,10 @@
                 "language": {
                     "emptyTable": "Não foram encontrados registros",
                     "paginate": {
-                        "previous": "Anterior:",
-                        "next": "Próxima:",
-                        "first": "Primeira:",
-                        "last": "Última:",
+                        "previous": "<",
+                        "next": ">",
+                        "first": "<<",
+                        "last": ">>",
                     },
                     "search": "Pesquisar:",
 
