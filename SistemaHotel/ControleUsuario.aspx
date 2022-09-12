@@ -181,11 +181,14 @@
                     <asp:DropDownList ID="ddlPerfil" runat="server"></asp:DropDownList>
                 </div>
                 <div class="col-sm">
-                    <asp:DropDownList ID="ddlStatus" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged">
-                        <asp:ListItem Value="SELECIONE">SELECIONE</asp:ListItem>
+                    <asp:DropDownList ID="ddlStatus" runat="server">
+                        <asp:ListItem Value="TODOS">TODOS</asp:ListItem>
                         <asp:ListItem Value="S">ATIVO</asp:ListItem>
                         <asp:ListItem Value="N">INATIVO</asp:ListItem>
                     </asp:DropDownList>
+                </div>
+                <div class="col-sm">
+                    <asp:LinkButton ID="lnkPesquisar" class="btn btn-primary btn-lg" OnClick="lnkPesquisar_Click" runat="server">Pesquisar</asp:LinkButton>
                 </div>
             </div>
             <div class="row">
@@ -293,6 +296,151 @@
                         </div>
                         <div class="modal-footer">
                             <asp:LinkButton ID="lnkSenha" class="btn btn-success" OnClick="lnkSenha_Click" runat="server">Salvar</asp:LinkButton>
+                        </div>
+                    </div>
+                </div>
+                <script src="Scripts/jquery.min.js"></script>
+                <script type="text/javascript">
+                    var senha = $('#txtNovaSenha');
+                    var olho = $("#olho");
+                    olho.mousedown(function () {
+                        senha.attr("type", "text");
+                    });
+
+                    olho.mouseup(function () {
+                        senha.attr("type", "password");
+
+                    });
+                    // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
+                    //citada pelo nosso amigo nos comentários
+                    $("#olho").mouseout(function () {
+                        $("#txtNovaSenha").attr("type", "password");
+                    });
+                </script>
+                <script type="text/javascript">
+                    var ConfirmaSenha = $('#txtConfirmaSenha');
+                    var olhoDois = $("#olhoDois");
+
+                    olhoDois.mousedown(function () {
+                        ConfirmaSenha.attr("type", "text");
+                    });
+
+                    olhoDois.mouseup(function () {
+                        ConfirmaSenha.attr("type", "password");
+                    });
+                    // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
+                    //citada pelo nosso amigo nos comentários
+                    $("#olhoDois").mouseout(function () {
+                        $("#txtConfimaSenha").attr("type", "password");
+                    });
+                </script>
+            </div>
+            <div class="modal fade show" id="mdUsuE" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
+                <%--<div class="modal-dialog modal-lg" role="document">--%>
+                <div class="modal-dialog modal-personalizado" role="document">
+                    <div class="modal-content" visible="false" style="border-radius: 10px;">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Editar Usuário:</h5>
+                            <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </asp:LinkButton>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>Id: </span>
+                                    </div>
+                                    <div class="col-sm">
+                                        <asp:TextBox runat="server" ID="txtIdUsuarioE" enabled="false"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>&nbsp;</span>
+                                    </div>
+                                    </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>Nome: </span>
+                                    </div>
+                                    <div class="col-sm">
+                                        <asp:TextBox runat="server" ID="txtNomeE"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>&nbsp;</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>Sobrenome: </span>
+                                    </div>
+                                    <div class="col-sm">
+                                        <asp:TextBox runat="server" ID="txtSobrenomeE"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>&nbsp;</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>Digite o Login: </span>
+                                    </div>
+                                    <div class="col-sm">
+                                        <asp:TextBox runat="server" ID="txtLoginE"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>&nbsp;</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>Perfil: </span>
+                                    </div>
+                                    <div class="col-sm">
+                                        <asp:DropDownList ID="ddlPerfilUsuE" runat="server"></asp:DropDownList>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>&nbsp;</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>Digite a Senha: </span>
+                                    </div>
+                                    <div class="col-sm">
+                                        <asp:TextBox type="password" runat="server" ID="txtNovaSenhaE" MaxLength="8">                                    
+                                        </asp:TextBox>
+                                        <img id="olho" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
+                                        <p>**Senha até 8 caracteres</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>&nbsp;</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>Confirme a senha: </span>
+                                    </div>
+                                    <div class="col-sm">
+                                        <asp:TextBox type="password" runat="server" ID="txtConfirmaSenhaE" MaxLength="8"></asp:TextBox>
+                                        <img id="olhoDois" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
+                                    </div>
+                                </div>
+        </div>
+        </div>
+                        <div class="modal-footer">
+                            <asp:LinkButton ID="lnkAlterarUsuario" class="btn btn-success" OnClick="lnkAlterarUsuario_Click" runat="server">Salvar</asp:LinkButton>
                         </div>
                     </div>
                 </div>

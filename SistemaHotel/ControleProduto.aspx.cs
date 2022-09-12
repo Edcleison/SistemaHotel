@@ -69,7 +69,7 @@ namespace SistemaHotel
 
         #region Controle Produto
 
-        private void carregarTabelaAtivos(string Tipo, string Status)
+        private void carregarTabela(string Tipo, string Status)
         {
             DataTable rDta = new DataTable();
             rDta = dalProd.buscarTodosProdutosTipo(Tipo, Status);
@@ -86,7 +86,18 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>FOTO</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>EDITAR</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>INATIVAR</center></th>");
+            if (Status == "S")
+            {
+                sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>INATIVAR</center></th>");
+            }
+            else if (Status == "N")
+            {
+                sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ATIVAR</center></th>");
+            }
+            else
+            {
+                sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ATIVAR/INATIVAR</center></th>");
+            } 
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -100,9 +111,23 @@ namespace SistemaHotel
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_Prod"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["PRECO_Uni"] + "</td></center>");
                 sb.AppendLine($@"<td style='font-size:12px; letter-spacing: 1px;'><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["STATUS_PROD"].ToString().Replace("S", "ATIVO") + "</td></center>");
+                if (dtr["STATUS_PROD"].ToString() == "S")
+                {
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["STATUS_PROD"].ToString().Replace("S", "ATIVO") + "</td></center>");
+                }
+                else
+                {
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["STATUS_PROD"].ToString().Replace("N", "INATIVO") + "</td></center>");
+                }
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleProduto.aspx?PRODUTO_E=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleProduto.aspx?PRODUTO_D=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
+                if (dtr["STATUS_PROD"].ToString() == "S")
+                {
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleProduto.aspx?PRODUTO_D=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
+                }
+                else
+                {
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleProduto.aspx?PRODUTO_A=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
+                }
                 sb.AppendLine("</tr>");
 
             }
@@ -113,52 +138,6 @@ namespace SistemaHotel
             Panel1.Controls.Add(new LiteralControl(sb.ToString()));
 
         }
-
-        private void carregarTabelaInativos(string Tipo, string Status)
-        {
-            DataTable rDta = new DataTable();
-            rDta = dalProd.buscarTodosProdutosTipo(Tipo, Status);
-            StringBuilder sb = new StringBuilder();
-
-
-            sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:12px;'>");
-            sb.AppendLine("<thead>");
-            sb.AppendLine("<tr>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DESCRICAO</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>PRECO</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>FOTO</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>EDITAR</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ATIVAR</center></th>");
-            sb.AppendLine("</tr>");
-            sb.AppendLine("</thead>");
-            sb.AppendLine("<tbody>");
-
-            foreach (DataRow dtr in rDta.Rows)
-            {
-
-                sb.AppendLine("<tr>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_Produto"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME_Prod"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_Prod"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["PRECO_Uni"] + "</td></center>");
-                sb.AppendLine($@"<td style='font-size:12px; letter-spacing: 1px;'><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["STATUS_PROD"].ToString().Replace("N", "INATIVO") + "</td></center>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleProduto.aspx?PRODUTO_E=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleProduto.aspx?PRODUTO_A=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
-                sb.AppendLine("</tr>");
-
-            }
-            sb.AppendLine("</tbody>");
-            sb.AppendLine("</table>");
-
-            Panel1.Controls.Clear();
-            Panel1.Controls.Add(new LiteralControl(sb.ToString()));
-
-        }
-
         protected void lnkSalvarProduto_Click(object sender, EventArgs e)
         {
             try
@@ -312,7 +291,7 @@ namespace SistemaHotel
                         ddlTipo.DataValueField = "ID_TIPO_PROD";
                         ddlTipo.DataSource = dta.Copy();
                         ddlTipo.DataBind();
-                        ddlTipo.Items.Insert(0, "SELECIONE");
+                        ddlTipo.Items.Insert(0, "TODOS");
                     }
                     catch (Exception erro)
                     {
@@ -408,20 +387,30 @@ namespace SistemaHotel
 
         }
 
-        protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ddlTipo.SelectedValue != "SELECIONE" && ddlStatus.SelectedValue != "SELECIONE")
-            {
-                if (ddlStatus.SelectedValue == "S")
-                {
-                    carregarTabelaAtivos(ddlTipo.SelectedValue, ddlStatus.SelectedValue);
-                }
-                else
-                {
-                    carregarTabelaInativos(ddlTipo.SelectedValue, ddlStatus.SelectedValue);
-                }
 
+        protected void lnkPesquisar_Click(object sender, EventArgs e)
+        {
+
+
+            if (ddlTipo.SelectedValue != "TODOS" && ddlStatus.SelectedValue != "TODOS")
+            {
+                carregarTabela(ddlTipo.SelectedValue.ToString(), ddlStatus.SelectedValue.ToString());
             }
+            else if (ddlTipo.SelectedValue != "TODOS" && ddlStatus.SelectedValue == "TODOS")
+            {
+                carregarTabela(ddlTipo.SelectedValue.ToString(), "");
+            }
+            else if (ddlTipo.SelectedValue == "TODOS" && ddlStatus.SelectedValue != "TODOS")
+            {
+                carregarTabela("", ddlStatus.SelectedValue.ToString());
+            }
+            else
+            {
+                carregarTabela("", "");
+            }
+
+
+
 
         }
     }

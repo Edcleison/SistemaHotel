@@ -86,6 +86,34 @@ namespace SistemaHotel.Controller
             }
             return fun;
         }
+
+        public void alterarFuncionario(Funcionario fun)
+        {
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"UPDATE FUNCIONARIO SET ID_PERFIL = @ID_PERFIL WHERE  ID_USUARIO = @ID_USUARIO", connection))
+                {
+                    try
+                    {
+
+                        cmd.Parameters.AddWithValue("ID_PERFIL", fun.IdPerfil);
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        cmd.Connection.Close();
+                    }
+
+
+                }
+
+            }
+        }
     }
 }
 

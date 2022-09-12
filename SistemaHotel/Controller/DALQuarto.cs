@@ -52,18 +52,26 @@ namespace SistemaHotel.Controller
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
+            string parStatus = "";
+            if (Status != "")
+            {
+                parStatus = "WHERE STATUS_QUAR = @STATUS_QUAR";
+            }
             using (SqlConnection connection = new SqlConnection(cnn))
             {
 
 
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_QUARTO]
+                using (SqlCommand cmd = new SqlCommand($@"SELECT [ID_QUARTO]
                                                           ,[DESCRICAO_QUARTO]
                                                           ,[STATUS_QUAR]
-                                                      FROM [DBO].[QUARTO] WHERE STATUS_QUAR=@STATUS_QUAR", connection))
+                                                      FROM [DBO].[QUARTO] {parStatus}", connection))
                 {
                     try
                     {
-                        cmd.Parameters.AddWithValue("STATUS_QUAR", Status);
+                        if (Status!="")
+                        {
+                            cmd.Parameters.AddWithValue("STATUS_QUAR", Status);
+                        }
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
                         adp = new SqlDataAdapter(cmd);

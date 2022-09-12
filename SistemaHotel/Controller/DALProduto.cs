@@ -94,7 +94,21 @@ namespace SistemaHotel.Controller
 
         public DataTable buscarTodosProdutosTipo(string Tipo, string Status)
         {
-          
+
+            string parTipoStatus = "";
+            if (Tipo != "" && Status != "")
+            {
+                parTipoStatus = "WHERE PR.ID_TIPO_PROD =@ID_TIPO_PROD AND P.ID_STATUS_PED = @ID_STATUS_PED";
+            }
+            else if (Tipo != "" && Status == "")
+            {
+                parTipoStatus = "WHERE PR.ID_TIPO_PROD =@ID_TIPO_PROD";
+            }
+            else if (Tipo == "" && Status != "")
+            { 
+                parTipoStatus = "WHERE P.ID_STATUS_PROD = @ID_STATUS_PROD";
+            }
+
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
 
@@ -108,12 +122,23 @@ namespace SistemaHotel.Controller
                                                             ,[FOTO_PROD]
                                                             ,STATUS_PROD
                                                         FROM [DBO].[PRODUTO]
-                                                        WHERE ID_TIPO_PROD = @ID_TIPO_PROD AND STATUS_PROD=@STATUS_PROD", connection))
+                                                        {parTipoStatus}", connection))
                 {
                     try
                     {
-                        cmd.Parameters.AddWithValue("@ID_TIPO_PROD", Tipo);
-                        cmd.Parameters.AddWithValue("@STATUS_PROD", Status);
+                        if (Tipo != "" && Status != "")
+                        {
+                            cmd.Parameters.AddWithValue("@ID_TIPO_PROD", Tipo);
+                            cmd.Parameters.AddWithValue("@STATUS_PROD", Status);
+                        }
+                        else if (Tipo != "" && Status == "")
+                        {
+                            cmd.Parameters.AddWithValue("@ID_TIPO_PROD", Tipo);
+                        }
+                        else if (Tipo == "" && Status != "")
+                        {
+                            cmd.Parameters.AddWithValue("@STATUS_PROD", Status);
+                        }
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
                         adp = new SqlDataAdapter(cmd);
