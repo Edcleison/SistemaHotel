@@ -80,36 +80,39 @@ footer {
 /*
     Define a configuração dos botões (links) do menu
 */
-ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    width: 150px;
-}
-
-ul li {
-    position: relative;
-}
-
-li ul {
-    position: absolute;
-    left: 149px;
-    top: 0;
+.input {
     display: none;
 }
 
-ul li a {
-    display: block;
-    text-decoration: none;
-    color: #E2144A;
-    background: #fff;
-    padding: 5px;
-    border: 1px solid #ccc;
+.dropdown {
+    position: relative;
+    margin: 0;
+    display: inline-block;
 }
-li:hover ul {
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
     display: block;
-    background-color: red;
-    color: white;
+}
+
+    .dropdown-content a:hover {
+        background-color: red;
+    }
+
+.input:checked~ .dropdown-content {
+    display: block;
 }
 
 .menu {
@@ -122,19 +125,10 @@ li:hover ul {
 }
 
 
-.menulink a {
-    display: block;
-    color: black;
-    padding: 1px;
-    text-decoration: none;
-    object-fit:contain;
-}
 
 
-    .menulink:hover {
-        background-color: red;
-        color: white;
-    }
+
+   
 
 /*
 .linkBotoes a:hover, a:active {
