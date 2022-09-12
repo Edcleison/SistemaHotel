@@ -39,6 +39,20 @@ namespace SistemaHotel
                     string msg = $"<script> alert('Usuário Inativado: Código {rParametro}'); </script>";
                     Response.Write(msg);
                 }
+                if (Request.QueryString["USUARIO_E"] != null)
+                {
+                    carregaDdlUsuarioE();
+                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_E"]));
+                    Usuario usu = dalUsu.buscarUsuarioId(rParametro);
+                    txtIdUsuarioE.Text = usu.IdUsuario.ToString();
+                    txtNomeE.Text = usu.NomeUsuario;
+                    txtSobrenomeE.Text = usu.SobrenomeUsuario;
+                    txtLoginE.Text = usu.Login;
+                    PerfilUsuario perfUsu = new PerfilUsuario();
+                    perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.IdUsuario);
+                    mdBack.Visible = true;
+                    mdUsuE.Visible = true;
+                }
                 if (Request.QueryString["CLIENTE_E"] != null)
                 {
                     carregaDdlQuartoE();
@@ -71,7 +85,7 @@ namespace SistemaHotel
 
         #region ControleUsuario
 
-        private void carregarTabelaAtivos(string Perfil, string Status)
+        private void carregarTabela(string Perfil, string Status)
         {
             DataTable rDta = new DataTable();
             rDta = dalUsu.buscarUsuariosPerfilStatus(Perfil, Status);
@@ -85,7 +99,20 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>LOGIN</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>INATIVAR</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>EDITAR</center></th>");
+            if (Status == "S")
+            {
+                sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>INATIVAR</center></th>");
+            }
+            else if (Status == "N")
+            {
+                sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ATIVAR</center></th>");
+            }
+            else
+            {
+                sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ATIVAR/INATIVAR</center></th>");
+            }
+
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -97,8 +124,24 @@ namespace SistemaHotel
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_Usuario"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME"] + " " + dtr["SOBRENOME"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["LOGIN"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["STATUS_USUARIO"].ToString().Replace("S", "ATIVO") + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
+                if (dtr["STATUS_USUARIO"].ToString() == "S")
+                {
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["STATUS_USUARIO"].ToString().Replace("S", "ATIVO") + "</center></td>");
+                }
+                else
+                {
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["STATUS_USUARIO"].ToString().Replace("N", "INATIVO") + "</center></td>");
+                }
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?USUARIO_E=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
+                if (dtr["STATUS_USUARIO"].ToString() == "S")
+                {
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
+                }
+                else
+                {
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?USUARIO_A=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
+                }
+
                 sb.AppendLine("</tr>");
 
             }
@@ -109,44 +152,7 @@ namespace SistemaHotel
             Panel1.Controls.Add(new LiteralControl(sb.ToString()));
 
         }
-        private void carregarTabelaInativos(string Perfil, string Status)
-        {
-            DataTable rDta = new DataTable();
-            rDta = dalUsu.buscarUsuariosPerfilStatus(Perfil, Status);
-            StringBuilder sb = new StringBuilder();
 
-
-            sb.AppendLine("<table id='tabelaUsuarios' class='display' style='width: 100% font-size:12px;'>");
-            sb.AppendLine("<thead>");
-            sb.AppendLine("<tr>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>LOGIN</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ATIVAR</center></th>");
-            sb.AppendLine("</tr>");
-            sb.AppendLine("</thead>");
-            sb.AppendLine("<tbody>");
-
-            foreach (DataRow dtr in rDta.Rows)
-            {
-
-                sb.AppendLine("<tr>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_Usuario"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME"] + " " + dtr["SOBRENOME"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["LOGIN"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["STATUS_USUARIO"].ToString().Replace("N", "INATIVO") + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?USUARIO_A=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
-                sb.AppendLine("</tr>");
-
-            }
-            sb.AppendLine("</tbody>");
-            sb.AppendLine("</table>");
-
-            Panel1.Controls.Clear();
-            Panel1.Controls.Add(new LiteralControl(sb.ToString()));
-
-        }
 
         protected void lnkSenha_Click(object sender, EventArgs e)
         {
@@ -258,7 +264,44 @@ namespace SistemaHotel
 
                 }
             }
+
         }
+        private void carregaDdlUsuarioE()
+        {
+            DataTable dta = new DataTable();
+            SqlDataAdapter adp;
+
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_PERFIL, UPPER(DESCRICAO_PERFIL) AS PERFIL FROM PERFIL WHERE ID_PERFIL <> 3 ORDER BY PERFIL", connection))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                        adp = new SqlDataAdapter(cmd);
+                        adp.Fill(dta);
+                        cmd.Connection.Close();
+                        ddlPerfilUsuE.DataTextField = "PERFIL";
+                        ddlPerfilUsuE.DataValueField = "ID_PERFIL";
+                        ddlPerfilUsuE.DataSource = dta.Copy();
+                        ddlPerfilUsuE.DataBind();
+                        ddlPerfilUsuE.Items.Insert(0, "SELECIONE");
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        cmd.Connection.Close();
+                    }
+
+                }
+            }
+        }
+
+
 
         protected void novoUsuario_Click(object sender, EventArgs e)
         {
@@ -268,11 +311,79 @@ namespace SistemaHotel
 
         }
 
+        protected void lnkAlterarUsuario_Click(object sender, EventArgs e)
+        {
+            //varifica se todos os campos estão preenchidos
+            if (!string.IsNullOrEmpty(txtLoginE.Text) && !string.IsNullOrEmpty(txtNovaSenhaE.Text) && !string.IsNullOrEmpty(txtConfirmaSenhaE.Text) && ddlPerfilUsuE.SelectedValue != "SELECIONE")
+            {
+                // verifica se as senhas são iguais
+                if (txtNovaSenha.Text == txtConfirmaSenha.Text)
+                {
+                    Usuario usu = new Usuario();
+                    //campos relacionados passagem devalores dos textbox para os atributos do objeto Usuário
+                    usu.NomeUsuario = txtNomeE.Text;
+                    usu.SobrenomeUsuario = txtSobrenomeE.Text;
+                    usu.Login = txtLoginE.Text;
+                    usu.Senha = Criptografia.Encrypt(txtNovaSenhaE.Text);
+                    //altera o objeto Usuário
+                    dalUsu.alterarUsuario(usu);
+                    //objeto PerfilUsuario
+                    PerfilUsuario perfUsu = new PerfilUsuario();
+                    //campos relacionados passagem devalores dos textbox para os atributos do objeto PerfilUsuário
+                    perfUsu.IdPerfil = int.Parse(ddlPerfilUsuE.SelectedValue);
+                    perfUsu.IdUsuario = int.Parse(txtIdUsuarioE.Text);
+                    //insere o objeto PerfilUsuário
+                    dalPerfUsu.alterarPefilUsuario(perfUsu);
+                    //campos relacionados a criação do Usuário na Administracao
+                    if (ddlPerfilUsuE.SelectedValue == "1")
+                    {
+                        Administracao adm = new Administracao();
+                        adm = dalAdm.buscarAdmIdUsuario(int.Parse(txtIdUsuarioE.Text));
+                        if (adm.IdAdm == 0)
+                        {
+                            adm.IdUsuario = perfUsu.IdUsuario;
+                            adm.IdPerfil = perfUsu.IdPerfil;
+                            dalAdm.inserirAdministracao(adm);
+
+                        }
+                       
+                    }
+                    else
+                    {
+                        Funcionario fun = new Funcionario();
+                        fun = dalFun.buscarFuncionarioIdUsuario(int.Parse(txtIdUsuarioE.Text));
+                        if (fun.IdFuncionario == 0)
+                        {
+                            fun.IdUsuario = perfUsu.IdUsuario;
+                            fun.IdPerfil = perfUsu.IdPerfil;
+                            dalFun.inserirFuncionario(fun);
+                        } 
+                    }
+
+                    string msg = $"<script> alert('Usuário Atualizado: Código {txtIdUsuarioE.Text}'); </script>";
+                    Response.Write(msg);  
+                }
+                else
+                {
+                    string msg = "<script> alert('Senhas Diferentes!'); </script>";
+                    Response.Write(msg);
+
+                }
+
+            }
+            else
+            {
+                string msg = "<script> alert('Preencha todos os campos!'); </script>";
+                Response.Write(msg);
+            }
+
+        }
+
         #endregion
 
         #region ControleCliente
 
-        private void carregarTabelaClientesAtivos(string Perfil, string Status)
+        private void carregarTabelaClientes(string Perfil, string Status)
         {
             DataTable rDta = new DataTable();
             rDta = dalUsu.buscarUsuariosClientesStatus(Perfil, Status);
@@ -290,7 +401,19 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DATA FIM</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>EDITAR</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>INATIVAR</center></th>");
+            if (Status == "S")
+            {
+                sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>INATIVAR</center></th>");
+            }
+            else if (true)
+            {
+                sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>INATIVAR</center></th>");
+            }
+            else
+            {
+                sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ATIVAR/INATIVAR</center></th>");
+            }
+
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -305,9 +428,23 @@ namespace SistemaHotel
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME"] + " " + dtr["SOBRENOME"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + Convert.ToDateTime(dtr["DATA_Entrada"]).ToString("dd/MM/yyyy") + "</center></td>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + Convert.ToDateTime(dtr["DATA_SAIDA"]).ToString("dd/MM/yyyy") + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["STATUS_USUARIO"].ToString().Replace("S", "ATIVO") + "</center></td>");
+                if (dtr["STATUS_USUARIO"].ToString() == "S")
+                {
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["STATUS_USUARIO"].ToString().Replace("S", "ATIVO") + "</center></td>");
+                }
+                else
+                {
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["STATUS_USUARIO"].ToString().Replace("N", "INATIVO") + "</center></td>");
+                }
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?CLIENTE_E=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
+                if (dtr["STATUS_USUARIO"].ToString() == "S")
+                {
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
+                }
+                else
+                {
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?USUARIO_A=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
+                }
                 sb.AppendLine("</tr>");
 
             }
@@ -319,51 +456,6 @@ namespace SistemaHotel
 
         }
 
-        private void carregarTabelaClientesInativos(string Perfil, string Status)
-        {
-            DataTable rDta = new DataTable();
-            rDta = dalUsu.buscarUsuariosClientesStatus(Perfil, Status);
-            StringBuilder sb = new StringBuilder();
-
-
-            sb.AppendLine("<table id='tabelaClientes' class='display' style='width: 100% font-size:12px;'>");
-            sb.AppendLine("<thead>");
-            sb.AppendLine("<tr>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>CÓDIGO DA RESERVA</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>QUARTO</th></center>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME</th></center>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DATA INICIO</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DATA FIM</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>EDITAR</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ATIVAR</center></th>");
-            sb.AppendLine("</tr>");
-            sb.AppendLine("</thead>");
-            sb.AppendLine("<tbody>");
-
-            foreach (DataRow dtr in rDta.Rows)
-            {
-
-                sb.AppendLine("<tr>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_USUARIO"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["LOGIN"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_QUARTO"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME"] + " " + dtr["SOBRENOME"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + Convert.ToDateTime(dtr["DATA_Entrada"]).ToString("dd/MM/yyyy") + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["STATUS_USUARIO"].ToString().Replace("S", "ATIVO") + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?CLIENTE_E=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-edit'></i></center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?USUARIO_A=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off'></i></center></td>");
-                sb.AppendLine("</tr>");
-
-            }
-            sb.AppendLine("</tbody>");
-            sb.AppendLine("</table>");
-
-            Panel1.Controls.Clear();
-            Panel1.Controls.Add(new LiteralControl(sb.ToString()));
-
-        }
 
         protected void novoCliente_Click(object sender, EventArgs e)
         {
@@ -630,11 +722,16 @@ namespace SistemaHotel
         private void limparCampos()
         {
             txtNome.Text = "";
+            txtNomeE.Text = "";
             txtSobreNome.Text = "";
+            txtSobrenomeE.Text = "";
+            txtLoginE.Text = "";
             txtLogin.Text = "";
             txtNovaSenha.Text = "";
+            txtNovaSenhaE.Text = "";
             txtConfirmaSenha.Text = "";
-            ddlPerfil.SelectedIndex = -1;
+            txtConfirmaSenhaE.Text = "";
+            ddlPerfil.SelectedIndex = -1;       
             txtCdReservaE.Text = "";
             txtCodReserva.Text = "";
             ddlQuarto.SelectedIndex = -1;
@@ -646,6 +743,7 @@ namespace SistemaHotel
             txtDataIni.Text = "";
             txtDataIniE.Text = "";
             ddlPerfilNovoUsu.SelectedIndex = -1;
+            ddlPerfilUsuE.SelectedIndex = -1;
             txtSenhaRand.Text = "";
         }
 
@@ -669,7 +767,7 @@ namespace SistemaHotel
                         ddlPerfil.DataValueField = "ID_PERFIL";
                         ddlPerfil.DataSource = dta.Copy();
                         ddlPerfil.DataBind();
-                        ddlPerfil.Items.Insert(0, "SELECIONE");
+                        ddlPerfil.Items.Insert(0, "TODOS");
                     }
                     catch (Exception erro)
                     {
@@ -687,39 +785,52 @@ namespace SistemaHotel
             mdUsu.Visible = false;
             mdCli.Visible = false;
             modEditCli.Visible = false;
+            mdUsuE.Visible = false;
             limparCampos();
         }
 
-
-
-        #endregion
-
-        protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
+        protected void lnkPesquisar_Click(object sender, EventArgs e)
         {
-
             if (ddlPerfil.SelectedValue != "SELECIONE" && ddlStatus.SelectedValue != "SELECIONE")
             {
                 if (ddlPerfil.SelectedValue != "3")
                 {
-                    if (ddlStatus.SelectedValue == "S")
+                    if (ddlPerfil.SelectedValue != "TODOS" && ddlStatus.SelectedValue != "TODOS")
                     {
-                        carregarTabelaAtivos(ddlPerfil.SelectedValue, ddlStatus.SelectedValue);
+                        carregarTabela(ddlPerfil.SelectedValue.ToString(), ddlStatus.SelectedValue.ToString());
+                    }
+                    else if (ddlPerfil.SelectedValue != "TODOS" && ddlStatus.SelectedValue == "TODOS")
+                    {
+                        carregarTabela(ddlPerfil.SelectedValue.ToString(), "");
+                    }
+                    else if (ddlPerfil.SelectedValue == "TODOS" && ddlStatus.SelectedValue != "TODOS")
+                    {
+                        carregarTabela(ddlStatus.SelectedValue.ToString(), "");
                     }
                     else
                     {
-                        carregarTabelaInativos(ddlPerfil.SelectedValue, ddlStatus.SelectedValue);
+                        carregarTabela("", "");
                     }
+
 
                 }
                 else
                 {
-                    if (ddlStatus.SelectedValue == "S")
+                    if (ddlPerfil.SelectedValue != "TODOS" && ddlStatus.SelectedValue != "TODOS")
                     {
-                        carregarTabelaClientesAtivos(ddlPerfil.SelectedValue, ddlStatus.SelectedValue);
+                        carregarTabelaClientes(ddlPerfil.SelectedValue.ToString(), ddlStatus.SelectedValue.ToString());
+                    }
+                    else if (ddlPerfil.SelectedValue != "TODOS" && ddlStatus.SelectedValue == "TODOS")
+                    {
+                        carregarTabelaClientes(ddlPerfil.SelectedValue.ToString(), "");
+                    }
+                    else if (ddlPerfil.SelectedValue == "TODOS" && ddlStatus.SelectedValue != "TODOS")
+                    {
+                        carregarTabelaClientes(ddlStatus.SelectedValue.ToString(), "");
                     }
                     else
                     {
-                        carregarTabelaClientesInativos(ddlPerfil.SelectedValue, ddlStatus.SelectedValue);
+                        carregarTabelaClientes("", "");
                     }
 
                 }
@@ -727,6 +838,12 @@ namespace SistemaHotel
             }
 
         }
+
+        #endregion
+
+
+
+
     }
 }
 

@@ -259,11 +259,11 @@ namespace SistemaHotel.Controller
             }
             else if (IdStatus != "" && IdTipoProd == "")
             {
-                parTipoStatus = "AND P.ID_STATUS_PED = @ID_STATUS_PED";
+                parTipoStatus = "WHERE P.ID_STATUS_PED = @ID_STATUS_PED";
             }
             else if (IdStatus == "" && IdTipoProd != "")
             {
-                parTipoStatus = "AND PR.ID_TIPO_PROD =@ID_TIPO_PROD";
+                parTipoStatus = "WHERE PR.ID_TIPO_PROD =@ID_TIPO_PROD";
             }
 
             DataTable dta = new DataTable();

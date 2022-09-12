@@ -13,100 +13,6 @@ namespace SistemaHotel.Controller
         string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
 
 
-
-        #region DALPerfilUsuario_OLD
-        //public void inserirPerfil(PerfilUsuario pUsu)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(cnn))
-        //    {
-        //        using (SqlCommand cmd = new SqlCommand(@"INSERT INTO [DBO].[PERFIL_USUARIO]
-        //                                           ([ID_PERFIL]                                                   
-        //                                            ,[ATIVO]
-        //                                             ,[ID_USUARIO])
-        //                                     VALUES(@ID_PERFIL,@ATIVO,@ID_USUARIO)", connection))
-        //        {
-
-        //            try
-        //            {
-        //                cmd.Connection.Open();
-        //                cmd.Parameters.AddWithValue("ID_PERFIL", pUsu.Perfil);                        
-        //                cmd.Parameters.AddWithValue("ATIVO",'S');
-        //                cmd.Parameters.AddWithValue("ID_USUARIO",pUsu.IdUsuario);
-        //                cmd.ExecuteNonQuery();
-        //                cmd.Connection.Close();
-        //            }
-        //            catch (Exception erro)
-        //            {
-        //                throw new Exception(erro.Message);
-        //            }
-
-        //        }
-        //    }
-
-        //}
-
-        //public PerfilUsuario buscarUsuarioPerfil(int IdUsuario)
-        //{
-        //    PerfilUsuario pUsu = new PerfilUsuario();      
-        //    try
-        //    {
-        //        using (SqlConnection connection = new SqlConnection(cnn))
-        //        {
-        //            using (SqlCommand cmd = new SqlCommand(@"SELECT [ID]
-        //                                                ,[ID_PERFIL]
-        //                                                ,[ATIVO]
-        //                                                ,[ID_USUARIO]
-        //                                            FROM[DBO].[PERFIL_USUARIO] where ID_USUARIO = @ID_USUARIO", connection))
-        //            {
-        //                cmd.Parameters.AddWithValue("@ID_USUARIO", IdUsuario);
-        //                connection.Open();
-        //                SqlDataReader registro = cmd.ExecuteReader();
-        //                if (registro.HasRows)
-        //                {
-        //                    registro.Read();
-        //                    pUsu.Id = Convert.ToInt32(registro["ID"]);
-        //                    pUsu.Perfil = Convert.ToInt32(registro["ID_PERFIL"]);                            
-        //                    pUsu.Ativo = Convert.ToChar(registro["ATIVO"]);
-        //                    pUsu.IdUsuario = Convert.ToInt32(registro["ID_USUARIO"]);
-
-
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception erro)
-        //    {
-        //        throw new Exception(erro.Message);
-        //    }
-        //    return pUsu;
-
-        //}
-
-        //public void excluirUsuario(int IdUsuario)
-        //{
-
-        //    using (SqlConnection connection = new SqlConnection(cnn))
-        //    {
-        //        using (SqlCommand cmd = new SqlCommand(@"DELETE FROM [dbo].[PERFIL_USUARIO] WHERE ID_USUARIO = @ID_USUARIO", connection))
-        //        {
-
-        //            try
-        //            {
-
-        //                connection.Open();
-        //                cmd.Parameters.AddWithValue("ID_USUARIO", IdUsuario);
-        //                cmd.ExecuteNonQuery();
-        //                cmd.Connection.Close();
-        //            }
-        //            catch (Exception erro)
-        //            {
-        //                throw new Exception(erro.Message);
-        //            }
-        //        }
-        //    }
-        //}
-        #endregion
-
         public void inserirPerfilUsuario(PerfilUsuario pUsu)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
@@ -181,6 +87,35 @@ namespace SistemaHotel.Controller
 
             }
             return pUsu;
+        }
+
+        public void alterarPefilUsuario(PerfilUsuario perfUsu)
+        {
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"UPDATE PERFIL_USUARIO SET ID_PERFIL = @ID_PERFIL WHERE  ID_USUARIO = @ID_USUARIO", connection))
+                {
+                    try
+                    {
+                       
+                        cmd.Parameters.AddWithValue("ID_PERFIL", perfUsu.IdPerfil);
+                        cmd.Parameters.AddWithValue("ID_USUARIO", perfUsu.IdUsuario);
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        cmd.Connection.Close();
+                    }
+
+
+                }
+
+            }
         }
 
         public void inativarUsuario(int IdUsuario)

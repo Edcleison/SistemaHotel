@@ -454,6 +454,20 @@ namespace SistemaHotel.Controller
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
 
+            string parPerfilStatus = "";
+            if (Perfil != "" && Status != "")
+            {
+                parPerfilStatus = "WHERE P.STATUS_USUARIO =@STATUS_USUARIO AND P.ID_PERFIL = @ID_PERFIL";
+            }
+            else if (Perfil != "" && Status == "")
+            {
+                parPerfilStatus = "WHERE P.STATUS_USUARIO =@STATUS_USUARIO";
+            }
+            else if (Perfil == "" && Status != "")
+            {
+                parPerfilStatus = "WHERE P.ID_PERFIL = @ID_PERFIL";
+            }
+
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand($@"SELECT U.[ID_USUARIO]
@@ -466,12 +480,24 @@ namespace SistemaHotel.Controller
                                                             FROM [DBO].[USUARIO] U
                                                             INNER JOIN PERFIL_USUARIO P
                                                             ON (P.ID_USUARIO = U.ID_USUARIO) 
-                                                            WHERE P.STATUS_USUARIO =@STATUS_USUARIO AND P.ID_PERFIL = @ID_PERFIL", connection))
+                                                            {parPerfilStatus}", connection))
                 {
                     try
                     {
-                        cmd.Parameters.AddWithValue("@STATUS_USUARIO", Status);
-                        cmd.Parameters.AddWithValue("ID_PERFIL", Perfil);
+                        if (Perfil != "" && Status != "")
+                        {
+                            cmd.Parameters.AddWithValue("ID_PERFIL", Perfil);
+                            cmd.Parameters.AddWithValue("@STATUS_USUARIO", Status);
+                        }
+                        else if (Perfil != "" && Status == "")
+                        {
+                            cmd.Parameters.AddWithValue("ID_PERFIL", Perfil);
+                        }
+                        else if (Perfil == "" && Status != "")
+                        {
+                            cmd.Parameters.AddWithValue("@STATUS_USUARIO", Status);
+                        }
+
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
                         adp = new SqlDataAdapter(cmd);
@@ -495,6 +521,19 @@ namespace SistemaHotel.Controller
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
+            string parPerfilStatus = "";
+            if (Perfil != "" && Status != "")
+            {
+                parPerfilStatus = "WHERE P.STATUS_USUARIO =@STATUS_USUARIO AND P.ID_PERFIL = @ID_PERFIL";
+            }
+            else if (Perfil != "" && Status == "")
+            {
+                parPerfilStatus = "WHERE P.STATUS_USUARIO =@STATUS_USUARIO";
+            }
+            else if (Perfil == "" && Status != "")
+            {
+                parPerfilStatus = "WHERE P.ID_PERFIL = @ID_PERFIL";
+            }
             try
             {
                 using (SqlConnection connection = new SqlConnection(cnn))
@@ -516,10 +555,21 @@ namespace SistemaHotel.Controller
                                                             INNER JOIN CLIENTE C ON(C.COD_RESERVA = U.LOGIN)
                                                             INNER JOIN QUARTO Q ON (Q.ID_QUARTO = C.ID_QUARTO)
                                                             INNER JOIN PERFIL_USUARIO P ON (P.ID_USUARIO = U.ID_USUARIO)
-                                                            WHERE P.STATUS_USUARIO =@STATUS_USUARIO AND P.ID_PERFIL = @ID_PERFIL", connection))
+                                                            {parPerfilStatus}", connection))
                     {
-                        cmd.Parameters.AddWithValue("@STATUS_USUARIO",Status);
-                        cmd.Parameters.AddWithValue("ID_PERFIL", Perfil);
+                        if (Perfil != "" && Status != "")
+                        {
+                            cmd.Parameters.AddWithValue("ID_PERFIL", Perfil);
+                            cmd.Parameters.AddWithValue("@STATUS_USUARIO", Status);
+                        }
+                        else if (Perfil != "" && Status == "")
+                        {
+                            cmd.Parameters.AddWithValue("ID_PERFIL", Perfil);
+                        }
+                        else if (Perfil == "" && Status != "")
+                        {
+                            cmd.Parameters.AddWithValue("@STATUS_USUARIO", Status);
+                        }
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
                         adp = new SqlDataAdapter(cmd);
@@ -634,7 +684,7 @@ namespace SistemaHotel.Controller
                     {
                         cmd.Connection.Open();
                         cmd.Parameters.AddWithValue("LOGIN", usu.Login);
-                        cmd.Parameters.AddWithValue("Id_Usuario", usu.IdUsuario);
+                        cmd.Parameters.AddWithValue("ID_USUARIO", usu.IdUsuario);
                         cmd.ExecuteNonQuery();                       
                     }
                     catch (Exception erro)
