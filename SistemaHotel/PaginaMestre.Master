@@ -46,9 +46,11 @@
         <header>
             <nav>
                 <ul>
-                    <li>
+                    <li class="dropdown">
                         <asp:Image ID="Image1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png" />
-                        <ul class="menu" aria-expanded="true">
+                        <label for="check01" >menu</label>
+                        <input id="check01" type="checkbox" class="input" />
+                        <ul class="dropdown-content">
                             <li class="menulink">
                                 <asp:HyperLink ID="Home" runat="server" NavigateUrl="Default.aspx">Home</asp:HyperLink></li>
                             <li class="menulink">
