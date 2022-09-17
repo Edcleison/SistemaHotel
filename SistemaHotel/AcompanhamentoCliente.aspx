@@ -149,8 +149,8 @@
             </div>
             <hr />
             <div class="col-sm">
-                <h3>Total:
-                    <asp:Label ID="lblTotal" runat="server" Font-Size="Large"></asp:Label></h3>
+                <h5>Total:
+                    <asp:Label ID="lblTotal" runat="server" Font-Size="Large"></asp:Label></h5>
             </div>
         </div>
     </asp:Panel>

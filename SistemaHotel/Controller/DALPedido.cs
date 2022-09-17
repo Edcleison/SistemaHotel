@@ -178,7 +178,7 @@ namespace SistemaHotel.Controller
             string parTipoStatus = "";
             if (IdTipoProd != "" && IdStatus != "")
             {
-                parTipoStatus = "AND P.ID_STATUS_PED = @ID_STATUS_PED AND PR.ID_TIPO_PROD =@ID_TIPO_PROD";
+                parTipoStatus = "WHERE P.ID_STATUS_PED = @ID_STATUS_PED AND PR.ID_TIPO_PROD =@ID_TIPO_PROD";
             }
             else if (IdStatus != "" && IdTipoProd == "")
             {
@@ -259,11 +259,11 @@ namespace SistemaHotel.Controller
             }
             else if (IdStatus != "" && IdTipoProd == "")
             {
-                parTipoStatus = "WHERE P.ID_STATUS_PED = @ID_STATUS_PED";
+                parTipoStatus = "AND P.ID_STATUS_PED = @ID_STATUS_PED";
             }
             else if (IdStatus == "" && IdTipoProd != "")
             {
-                parTipoStatus = "WHERE PR.ID_TIPO_PROD =@ID_TIPO_PROD";
+                parTipoStatus = "AND PR.ID_TIPO_PROD =@ID_TIPO_PROD";
             }
 
             DataTable dta = new DataTable();
@@ -395,7 +395,7 @@ namespace SistemaHotel.Controller
                         {
                             registro.Read();
                             ped.IdPedido = Convert.ToInt32(registro["ID_PEDIDO"]);
-                            ped.IdStatus = Convert.ToInt32(registro["ID_STATUS"]);
+                            ped.IdStatus = Convert.ToInt32(registro["ID_STATUS_PED"]);
                             ped.IdCliente = Convert.ToInt32(registro["ID_CLIENTE"]);
                             ped.ValorTotal = Convert.ToDecimal(registro["VALOR_TOTAL"]);
                             ped.DataAbertura = Convert.ToDateTime(registro["DATA_ABERTURA"]);
@@ -421,7 +421,7 @@ namespace SistemaHotel.Controller
             {
                 using (SqlCommand cmd = new SqlCommand(@"UPDATE [DBO].[PEDIDO]
                                                        SET [ID_STATUS_PED] = @ID_STATUS_PED
-                                                          ,[ID_ADM] = @ID_ADM)                                                        
+                                                          ,[ID_ADM] = @ID_ADM                                                       
                                                           ,[DATA_FINALIZACAO] = @DATA_FINALIZACAO
                                                      WHERE ID_PEDIDO = @ID_PEDIDO", connection))
                 {

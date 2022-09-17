@@ -24,13 +24,15 @@ namespace SistemaHotel
         DALCarrinho dalCar = new DALCarrinho();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //try
+            //{
+            //    if (Session["perfil"].ToString() =="CLIENTE")
+            //    {
             int rParametro = 0;
             if (!IsPostBack)
             {
                 if (Request.QueryString["PRODUTO_N"] != null)
                 {
-
                     rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_N"]));
                     Produto prod = dalProd.buscarProdutoId(rParametro);
                     txtIdProd.Text = prod.IdProduto.ToString();
@@ -51,9 +53,9 @@ namespace SistemaHotel
                 }
                 if (Request.QueryString["CARRINHO_C"] != null)
                 {
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_C"]));
+                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["CARRINHO_C"]));
                     dalCar.excluirCarrinho(rParametro);
-                    string msg = $"<script> alert('Produto Removido: Código: {rParametro}'); </script>";
+                    string msg = $"<script> alert('Produto Removido'); </script>";
                     Response.Write(msg);
                     mdCarr.Visible = true;
                     carregarTabelaCarrinho(Session["login"].ToString());
@@ -63,6 +65,18 @@ namespace SistemaHotel
             }
             carregarTabela();
             lblQtdeCarrinho.Text = dalCar.buscarCarrinhoQtde(Session["login"].ToString());
+            //    }
+            //    else
+            //    {
+            //        Response.Redirect("~/Default.aspx");
+            //    }
+
+            //}
+            //catch (Exception)
+            //{
+
+            //    Response.Redirect("~/Default.aspx");
+            //}
         }
 
         #region Controle Pedido
@@ -120,7 +134,7 @@ namespace SistemaHotel
                 dalCar.inserirCarrinho(car);
             }
 
-            string msg = $"<script> alert('Produto(s) Adicionado(s): Código: {car.IdProduto} Qtde: {txtQuantidade.Text}'); </script>";
+            string msg = $"<script> alert('Produto(s) Adicionado(s): ID: {car.IdProduto} Qtde: {txtQuantidade.Text}'); </script>";
             Response.Write(msg);
 
         }
@@ -154,7 +168,7 @@ namespace SistemaHotel
                     lblTotal.Text = "";
                 }
                 dalCar.excluirCarrinhoCliente(cli.IdCliente);
-                string msg = $"<script> alert('Pedido Realizado: Código: {ped.IdPedido}'); </script>";
+                string msg = $"<script> alert('Pedido Realizado: ID: {ped.IdPedido}'); </script>";
                 Response.Write(msg);
                 mdBack.Visible = false;
                 mdCarr.Visible = false;
@@ -165,9 +179,7 @@ namespace SistemaHotel
                 string msg = $"<script> alert('Carrinho Vazio!'); </script>";
                 Response.Write(msg);
                 mdCarr.Visible = false;
-                mdBack.Visible = false;
-                Response.Redirect("~/NovoPedidoCozinha.aspx");
-
+                mdBack.Visible = false;              
             }
 
         }
@@ -182,7 +194,7 @@ namespace SistemaHotel
             DataTable rDta = new DataTable();
             rDta = dalCar.buscarCarrinhoCliente(codReserva, 1);
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:12px;'>");
+            sb.AppendLine("<table id='exampleCarr' class='display' style='width: 100% font-size:12px;'>");
             sb.AppendLine("<thead>");
             sb.AppendLine("<tr>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID</center></th>");
@@ -238,8 +250,7 @@ namespace SistemaHotel
 
             mdBack.Visible = false;
             mdPed.Visible = false;
-            mdCarr.Visible = false;
-            Response.Redirect("~/NovoPedidoCozinha.aspx");
+            mdCarr.Visible = false; 
             limparCampos();
 
         }

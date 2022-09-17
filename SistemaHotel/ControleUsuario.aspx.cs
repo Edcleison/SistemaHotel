@@ -25,8 +25,10 @@ namespace SistemaHotel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
+            //try
+            //{
+            //    if (Session["perfil"].ToString() == "ADMINISTRADOR")
+            //    {
             int rParametro = 0;
 
             if (!IsPostBack)
@@ -36,7 +38,7 @@ namespace SistemaHotel
                 {
                     rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_D"]));
                     dalPerfUsu.inativarUsuario(rParametro);
-                    string msg = $"<script> alert('Usuário Inativado: Código {rParametro}'); </script>";
+                    string msg = $"<script> alert('Usuário Inativado: ID {rParametro}'); </script>";
                     Response.Write(msg);
                 }
                 if (Request.QueryString["USUARIO_E"] != null)
@@ -74,12 +76,24 @@ namespace SistemaHotel
 
                     rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_A"]));
                     dalPerfUsu.ativarUsuario(rParametro);
-                    string msg = $"<script> alert('Usuário Ativado! Código:{rParametro}'); </script>";
+                    string msg = $"<script> alert('Usuário Ativado! ID:{rParametro}'); </script>";
                     Response.Write(msg);
 
                 }
                 carregaDdl();
             }
+            //    }
+            //    else
+            //    {
+            //        Response.Redirect("~/Default.aspx");
+            //    }
+
+            //}
+            //catch (Exception)
+            //{
+
+            //    Response.Redirect("~/Default.aspx");
+            //}
 
         }
 
@@ -346,7 +360,7 @@ namespace SistemaHotel
                             dalAdm.inserirAdministracao(adm);
 
                         }
-                       
+
                     }
                     else
                     {
@@ -357,11 +371,11 @@ namespace SistemaHotel
                             fun.IdUsuario = perfUsu.IdUsuario;
                             fun.IdPerfil = perfUsu.IdPerfil;
                             dalFun.inserirFuncionario(fun);
-                        } 
+                        }
                     }
 
-                    string msg = $"<script> alert('Usuário Atualizado: Código {txtIdUsuarioE.Text}'); </script>";
-                    Response.Write(msg);  
+                    string msg = $"<script> alert('Usuário Atualizado: ID {txtIdUsuarioE.Text}'); </script>";
+                    Response.Write(msg);
                 }
                 else
                 {
@@ -478,28 +492,68 @@ namespace SistemaHotel
 
                 if (usu.Login == "")
                 {
-                    DateTime dataIni = Convert.ToDateTime(txtInputDataIni.Text);
-                    DateTime dataFim = Convert.ToDateTime(txtInputDataFim.Text);
-
-                    if (dataIni > DateTime.Now)
+                    try
                     {
-                        if (dataIni < dataFim)
+                        //DateTime dataIni = DateTime.ParseExact($"{sDataIniDia}/{sDataIniMes}/{sDataIniAno} {ddlInputHoraIni.Text}", "dd/MM/yyyy HH:mm", null);
+                        //DateTime dataFim = DateTime.ParseExact($"{sDataFimDia}/{sDataFimMes}/{sDataFimAno} {ddlInputHoraFim.Text}", "dd/MM/yyyy HH:mm", null);
+                        DateTime dataIni = DateTime.ParseExact(txtInputDataIni.Text, "dd/MM/yyyy HH:mm", null);
+                        DateTime dataFim = DateTime.ParseExact(txtInputDataFim.Text, "dd/MM/yyyy HH:mm", null);
+
+                        if (dataIni > DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
                         {
-                            //campos relacionados ao cadastro de cliente                           
-                            Cliente cli = new Cliente();
-                            cli.CodReserva = sCdReserva;
-                            cli.IdQuarto = int.Parse(ddlQuarto.SelectedValue);
-                            cli.NomeCliente = txtNomeCliente.Text;
-                            cli.SobreNomeCliente = txtSobrenomeCliente.Text;
-                            cli.DataEntrada = dataIni;
-                            cli.DataSaida = dataFim;
-                            //verifica se tem algum cliente ocupando o quarto com o id selecionado no DropDownList                           
-                            DataTable dta = dalCli.verificarOcupacaoQuarto(ddlQuarto.SelectedValue);
-                            if (dta.Rows.Count > 0)
+                            if (dataIni < dataFim)
                             {
-                                DateTime dataOcupa;
-                                dataOcupa = Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]);
-                                if (dataOcupa < DateTime.Now)
+                                //campos relacionados ao cadastro de cliente                           
+                                Cliente cli = new Cliente();
+                                cli.CodReserva = sCdReserva;
+                                cli.IdQuarto = int.Parse(ddlQuarto.SelectedValue);
+                                cli.NomeCliente = txtNomeCliente.Text;
+                                cli.SobreNomeCliente = txtSobrenomeCliente.Text;
+                                cli.DataEntrada = dataIni;
+                                cli.DataSaida = dataFim;
+                                //verifica se tem algum cliente ocupando o quarto com o id selecionado no DropDownList                           
+                                DataTable dta = dalCli.verificarOcupacaoQuarto(ddlQuarto.SelectedValue);
+
+                                if (dta.Rows.Count > 0)
+                                {
+                                    DateTime dataOcupa = DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null);
+                                    if (dataOcupa < DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
+                                    {
+                                        dalCli.inserirCliente(cli);
+                                        //campos relacionados ao cadastro de usuário
+                                        usu.Login = sCdReserva;
+                                        usu.NomeUsuario = txtNomeCliente.Text;
+                                        usu.SobrenomeUsuario = txtSobrenomeCliente.Text;
+                                        txtSenhaRand.Text = SenhaRandomica.RandLetras(5) + SenhaRandomica.RandNumeros(3);
+                                        usu.Senha = Criptografia.Encrypt(txtSenhaRand.Text);
+                                        dalUsu.inserirUsuario(usu);
+
+                                        //busca o usuário que cadastrou no banco
+                                        usu = dalUsu.buscaUsuarioLogin(sCdReserva);
+
+                                        //campos relacionados ao cadastro do perfil do usuário
+                                        PerfilUsuario perfUsu = new PerfilUsuario();
+                                        perfUsu.IdPerfil = 3;
+                                        perfUsu.IdUsuario = usu.IdUsuario;
+                                        perfUsu.StatusPerfilUsuario = 'S';
+                                        dalPerfUsu.inserirPerfilUsuario(perfUsu);
+
+                                        //campos de retorno das datas cadastradas
+                                        txtDataIni.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
+                                        txtDataFim.Text = cli.DataSaida.ToString("dd/MM/yyyy HH:mm");
+
+                                        string msg = "<script> alert('Cadastro realizado!'); </script>";
+                                        Response.Write(msg);
+                                    }
+                                    else
+                                    {
+                                        string msg = $"<script> alert('Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {dataOcupa.ToString("dd/MM/yyyy HH:ss")} ID Cliente: {dta.Rows[0]["ID_CLIENTE"]}'); </script>";
+                                        Response.Write(msg);
+
+                                    }
+
+                                }
+                                else
                                 {
                                     dalCli.inserirCliente(cli);
                                     //campos relacionados ao cadastro de usuário
@@ -526,43 +580,14 @@ namespace SistemaHotel
 
                                     string msg = "<script> alert('Cadastro realizado!'); </script>";
                                     Response.Write(msg);
-                                }
-                                else
-                                {
-                                    string msg = $"<script> alert('Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {dataOcupa.ToString("dd/MM/yyyy HH:ss")} Cód. Cliente:{dta.Rows[0]["ID_CLIENTE"]}!'); </script>";
-                                    Response.Write(msg);
 
                                 }
 
                             }
                             else
                             {
-                                dalCli.inserirCliente(cli);
-                                //campos relacionados ao cadastro de usuário
-                                usu.Login = sCdReserva;
-                                usu.NomeUsuario = txtNomeCliente.Text;
-                                usu.SobrenomeUsuario = txtSobrenomeCliente.Text;
-                                txtSenhaRand.Text = SenhaRandomica.RandLetras(5) + SenhaRandomica.RandNumeros(3);
-                                usu.Senha = Criptografia.Encrypt(txtSenhaRand.Text);
-                                dalUsu.inserirUsuario(usu);
-
-                                //busca o usuário que cadastrou no banco
-                                usu = dalUsu.buscaUsuarioLogin(sCdReserva);
-
-                                //campos relacionados ao cadastro do perfil do usuário
-                                PerfilUsuario perfUsu = new PerfilUsuario();
-                                perfUsu.IdPerfil = 3;
-                                perfUsu.IdUsuario = usu.IdUsuario;
-                                perfUsu.StatusPerfilUsuario = 'S';
-                                dalPerfUsu.inserirPerfilUsuario(perfUsu);
-
-                                //campos de retorno das datas cadastradas
-                                txtDataIni.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
-                                txtDataFim.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
-
-                                string msg = "<script> alert('Cadastro realizado!'); </script>";
+                                string msg = "<script> alert('Datas não permitidas!'); </script>";
                                 Response.Write(msg);
-
                             }
 
                         }
@@ -570,16 +595,16 @@ namespace SistemaHotel
                         {
                             string msg = "<script> alert('Datas não permitidas!'); </script>";
                             Response.Write(msg);
+
                         }
 
                     }
-                    else
+                    catch (Exception erro)
                     {
-                        string msg = "<script> alert('Datas não permitidas!'); </script>";
-                        Response.Write(msg);
 
+                        string msg1 = $"<script> alert('{erro.Message}'); </script>";
+                        Response.Write(msg1);
                     }
-
 
                 }
                 else
@@ -598,11 +623,12 @@ namespace SistemaHotel
         protected void alterarData_Click(object sender, EventArgs e)
         {
             //data de saída atual
-            DateTime dataFim = Convert.ToDateTime(txtDataFimE.Text);
+            DateTime dataFim = DateTime.ParseExact(txtDataFimE.Text, "dd/MM/yyyy HH:mm", null);
             //nova data de saída
-            DateTime novaDataFim = Convert.ToDateTime(txtInputDataFimE.Text);
+           // DateTime novaDataFim = DateTime.ParseExact($"{txtInputDataFimE.Text} {ddlInputHoraFimE}", "dd/MM/yyyy HH:mm", null);
+            DateTime novaDataFim = DateTime.ParseExact(txtInputDataFimE.Text, "dd/MM/yyyy HH:mm", null);
 
-            if (novaDataFim > DateTime.Now && novaDataFim > dataFim)
+            if (novaDataFim > DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) && novaDataFim > dataFim)
             {
                 //campos relacionados a busca do cliente pelo cod_reserva
                 DALCliente dalCliente = new DALCliente();
@@ -613,9 +639,8 @@ namespace SistemaHotel
                 DataTable dta = dalCli.verificarOcupacaoQuarto(ddlQuartoE.SelectedValue);
                 if (dta.Rows.Count > 0)
                 {
-                    DateTime dataOcupa;
-                    dataOcupa = Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]);
-                    if (dataOcupa < DateTime.Now)
+                    DateTime dataOcupa = DateTime.ParseExact(dta.Rows[0]["DATA_SAIDA"].ToString(), "dd/MM/yyyy HH:mm", null);
+                    if (dataOcupa < DateTime.ParseExact(DateTime.Now.ToString(), "dd/MM/yyyy HH:mm", null))
                     {
                         dalCliente.alterarCliente(cli);
                         txtDataFimE.Text = novaDataFim.ToString();
@@ -624,7 +649,7 @@ namespace SistemaHotel
                     }
                     else
                     {
-                        string msg = $"<script> alert('Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {dataOcupa.ToString("dd/MM/yyyy HH:mm")} !'); </script>";
+                        string msg = $"<script> alert('Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {dataOcupa.ToString("dd/MM/yyyy HH:mm")} ID Cliente: {dta.Rows[0]["ID_CLIENTE"]}'); </script>";
                         Response.Write(msg);
                     }
 
@@ -633,7 +658,7 @@ namespace SistemaHotel
                 {
                     dalCliente.alterarCliente(cli);
                     txtDataFimE.Text = novaDataFim.ToString();
-                    string msg = $"<script> alert('Data Alterada: Código Cliente:{cli.IdCliente} Data:{novaDataFim}!'); </script>";
+                    string msg = $"<script> alert('Data Alterada: ID Cliente:{cli.IdCliente} Data:{novaDataFim}!'); </script>";
                     Response.Write(msg);
                 }
             }
@@ -731,7 +756,7 @@ namespace SistemaHotel
             txtNovaSenhaE.Text = "";
             txtConfirmaSenha.Text = "";
             txtConfirmaSenhaE.Text = "";
-            ddlPerfil.SelectedIndex = -1;       
+            ddlPerfil.SelectedIndex = -1;
             txtCdReservaE.Text = "";
             txtCodReserva.Text = "";
             ddlQuarto.SelectedIndex = -1;

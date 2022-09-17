@@ -98,15 +98,15 @@ namespace SistemaHotel.Controller
             string parTipoStatus = "";
             if (Tipo != "" && Status != "")
             {
-                parTipoStatus = "WHERE PR.ID_TIPO_PROD =@ID_TIPO_PROD AND P.ID_STATUS_PED = @ID_STATUS_PED";
+                parTipoStatus = "WHERE ID_TIPO_PROD =@ID_TIPO_PROD AND STATUS_PROD = @STATUS_PROD";
             }
             else if (Tipo != "" && Status == "")
             {
-                parTipoStatus = "WHERE PR.ID_TIPO_PROD =@ID_TIPO_PROD";
+                parTipoStatus = "WHERE ID_TIPO_PROD =@ID_TIPO_PROD";
             }
             else if (Tipo == "" && Status != "")
             { 
-                parTipoStatus = "WHERE P.ID_STATUS_PROD = @ID_STATUS_PROD";
+                parTipoStatus = "WHERE STATUS_PROD = @STATUS_PROD";
             }
 
             DataTable dta = new DataTable();

@@ -5878,7 +5878,6 @@
     <Content Include="Login.aspx" />
     <Content Include="PaginaMestre.Master" />
     <Content Include="Scripts\dataTables.bootstrap4.min.js.js" />
-    <Content Include="Scripts\JavaScriptFunctions.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.min.js" />

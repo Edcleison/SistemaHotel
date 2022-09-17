@@ -23,8 +23,10 @@ namespace SistemaHotel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
+            //try
+            //{
+            //    if (Session["perfil"].ToString()=="ADMINISTRDOR")
+            //    {
             int rParametro = 0;
             if (!IsPostBack)
             {
@@ -33,7 +35,7 @@ namespace SistemaHotel
                 {
                     rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_D"]));
                     dalProd.inativarProduto(rParametro);
-                    string msg = $"<script> alert('Produto Inativado! Código:{rParametro}'); </script>";
+                    string msg = $"<script> alert('Produto Inativado! ID:{rParametro}'); </script>";
                     Response.Write(msg);
 
                 }
@@ -59,12 +61,27 @@ namespace SistemaHotel
 
                     rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_A"]));
                     Produto prod = dalProd.buscarProdutoId(rParametro);
-                    string msg = $"<script> alert('Produto Ativado! Código:{rParametro}'); </script>";
+                    dalProd.ativarProduto(rParametro);
+                    string msg = $"<script> alert('Produto Ativado! ID:{rParametro}'); </script>";
                     Response.Write(msg);
 
                 }
                 carregaDdl();
+                //        }
+                //        else
+                //        {
+                //            Response.Redirect("~/Default.aspx");
+                //        }
+
+                //    }
+
+                //}
+                //catch (Exception)
+                //{
+
+                //    Response.Redirect("~/Default.aspx");
             }
+
         }
 
         #region Controle Produto
@@ -97,7 +114,7 @@ namespace SistemaHotel
             else
             {
                 sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ATIVAR/INATIVAR</center></th>");
-            } 
+            }
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -183,7 +200,7 @@ namespace SistemaHotel
 
             catch (Exception erro)
             {
-                string msg1 = $"<script> alert({erro.Message}'); </script>";
+                string msg1 = $"<script> alert('{erro.Message}'); </script>";
             }
 
         }
@@ -243,7 +260,7 @@ namespace SistemaHotel
                         string img = caminho + prod.FotoProduto;
                         fuProdE.PostedFile.SaveAs(img);
                         dalProd.alterarProduto(prod);
-                        msg = $"<script> alert('O Produto Alterado:  Código {prod.IdProduto}'); </script>";
+                        msg = $"<script> alert('O Produto Alterado:  ID {prod.IdProduto}'); </script>";
                         Response.Write(msg);
                         limparCampos();
                     }
@@ -265,7 +282,7 @@ namespace SistemaHotel
 
             catch (Exception erro)
             {
-                string msg1 = $"<script> alert({erro.Message}'); </script>";
+                string msg1 = $"<script> alert('{erro.Message}'); </script>";
 
             }
         }

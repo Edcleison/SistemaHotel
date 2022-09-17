@@ -68,6 +68,35 @@
         })
     </script>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#exampleCarr').DataTable({
+                "emptyTable": "Não foram encontrados registros",
+                "language": {
+                    "paginate": {
+                        "previous": "<",
+                        "next": ">",
+                        "first": "<<",
+                        "last": ">>",
+                    },
+                    "search": "Pesquisar:",
+
+                },
+                "paging": true,
+                "pageLength": 10,
+                "ordering": false,
+                "info": false,
+                dom: 'Bfrtip',
+                buttons: [
+
+                ]
+
+
+
+            });
+        })
+    </script>
+
 
     <style>
         .modal-dialog modal-lg {

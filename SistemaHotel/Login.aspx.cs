@@ -89,7 +89,7 @@ namespace SistemaHotel
             {
                 DALCliente dcli = new DALCliente();
                 Cliente cli = dcli.buscarClienteReserva(login);
-                if (cli.DataSaida > DateTime.Now)
+                if (DateTime.ParseExact(cli.DataSaida.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) > DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
                 {
                     if (login != "" && senha != "")
                     {
@@ -139,7 +139,8 @@ namespace SistemaHotel
                     }
                     else
                     {
-                         msg = "<script> alert('Login não permitido!); </script>";
+                        dpu.inativarUsuario(u.IdUsuario);
+                        msg = "<script> alert('Login não permitido!); </script>";
                         Response.Write(msg);
                     }
 

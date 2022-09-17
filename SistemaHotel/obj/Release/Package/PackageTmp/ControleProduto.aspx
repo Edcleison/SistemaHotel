@@ -157,14 +157,18 @@
                     <span>Listar Por: </span>
                 </div>
                 <div class="col-sm">
-                    <asp:DropDownList ID="ddlStatus" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged">
-                        <asp:ListItem Value="SELECIONE">SELECIONE</asp:ListItem>
+                    <asp:DropDownList ID="ddlStatus" runat="server">
+                        <asp:ListItem Value="TODOS">TODOS</asp:ListItem>
                         <asp:ListItem Value="S">ATIVO</asp:ListItem>
                         <asp:ListItem Value="N">INATIVO</asp:ListItem>
                     </asp:DropDownList>
                 </div>
+                <div class="col-sm">
+                    <asp:LinkButton ID="lnkPesquisar" class="btn btn-primary btn-lg" OnClick="lnkPesquisar_Click" runat="server">Pesquisar</asp:LinkButton>
+                </div>
             </div>
-             <div class="row">
+
+            <div class="row">
                 <div class="col-sm">
                     <span>&nbsp;</span>
                 </div>

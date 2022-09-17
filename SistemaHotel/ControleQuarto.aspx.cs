@@ -23,7 +23,10 @@ namespace SistemaHotel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //try
+            //{
+            //    if (Session["perfil"].ToString() == "ADMINISTRADOR")
+            //    {
             int rParametro = 0;
             if (!IsPostBack)
             {
@@ -31,7 +34,7 @@ namespace SistemaHotel
                 {
                     rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_D"]));
                     dalQua.inativarQuarto(rParametro);
-                    string msg = $"<script> alert('Quarto Inativado: Código{rParametro}'); </script>";
+                    string msg = $"<script> alert('Quarto Inativado: ID{rParametro}'); </script>";
                     Response.Write(msg);
                 }
                 if (Request.QueryString["QUARTO_E"] != null)
@@ -50,11 +53,26 @@ namespace SistemaHotel
 
                     rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_A"]));
                     dalQua.ativarQuarto(rParametro);
-                    string msg = $"<script> alert('Quarto Ativado! Código: {rParametro}'); </script>";
+                    string msg = $"<script> alert('Quarto Ativado! ID: {rParametro}'); </script>";
                     Response.Write(msg);
 
                 }
             }
+
+            //    }
+            //    else
+            //    {
+            //        Response.Redirect("~/Default.aspx");
+            //    }
+
+            //}
+            //catch (Exception)
+            //{
+
+            //    Response.Redirect("~/Default.aspx");
+            //}
+
+
         }
 
         #region Controle Quarto
@@ -177,7 +195,7 @@ namespace SistemaHotel
                 Quarto qua = new Quarto();
                 qua.DescricaoQuarto = txtQuartoE.Text;
                 dalQua.alterarQuarto(qua);
-                string msg = $"<script> alert('Quarto alterado: Código{qua.IdQuarto}'); </script>";
+                string msg = $"<script> alert('Quarto alterado: ID{qua.IdQuarto}'); </script>";
                 Response.Write(msg);
 
             }

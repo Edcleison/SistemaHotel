@@ -535,13 +535,69 @@
                                         <asp:TextBox ID="txtInputDataIni" runat="server"></asp:TextBox>
                                         <%--onkeyup="formataDataeHora(this,event);" MaxLength="17"--%>
                                     </div>
+                                   <%-- <div class="col-sm">
+                                        <asp:DropDownList ID="ddlInputHoraIni" TextMode="Date" runat="server">
+                                            <asp:ListItem>00:00</asp:ListItem>
+                                            <asp:ListItem>01:00</asp:ListItem>
+                                            <asp:ListItem>02:00</asp:ListItem>
+                                            <asp:ListItem>03:00</asp:ListItem>
+                                            <asp:ListItem>04:00</asp:ListItem>
+                                            <asp:ListItem>05:00</asp:ListItem>
+                                            <asp:ListItem>06:00</asp:ListItem>
+                                            <asp:ListItem>07:00</asp:ListItem>
+                                            <asp:ListItem>08:00</asp:ListItem>
+                                            <asp:ListItem>09:00</asp:ListItem>
+                                            <asp:ListItem>10:00</asp:ListItem>
+                                            <asp:ListItem>11:00</asp:ListItem>
+                                            <asp:ListItem>12:00</asp:ListItem>
+                                            <asp:ListItem>13:00</asp:ListItem>
+                                            <asp:ListItem>14:00</asp:ListItem>
+                                            <asp:ListItem>15:00</asp:ListItem>
+                                            <asp:ListItem>16:00</asp:ListItem>
+                                            <asp:ListItem>17:00</asp:ListItem>
+                                            <asp:ListItem>18:00</asp:ListItem>
+                                            <asp:ListItem>19:00</asp:ListItem>
+                                            <asp:ListItem>20:00</asp:ListItem>
+                                            <asp:ListItem>21:00</asp:ListItem>
+                                            <asp:ListItem>22:00</asp:ListItem>
+                                            <asp:ListItem>23:00</asp:ListItem>  
+                                        </asp:DropDownList>        
+                                    </div>--%>
                                     <div class="col-sm">
                                         <span>Data Fim:</span>
                                     </div>
                                     <div class="col-sm">
-                                        <asp:TextBox ID="txtInputDataFim" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtInputDataFim"  runat="server"></asp:TextBox>
                                         <%--onkeyup="formataDataeHora(this,event);" MaxLength="17"--%>
                                     </div>
+                                    <%--<div class="col-sm">
+                                        <asp:DropDownList ID="ddlInputHoraFim" TextMode="Date" runat="server">
+                                            <asp:ListItem>00:00</asp:ListItem>
+                                            <asp:ListItem>01:00</asp:ListItem>
+                                            <asp:ListItem>02:00</asp:ListItem>
+                                            <asp:ListItem>03:00</asp:ListItem>
+                                            <asp:ListItem>04:00</asp:ListItem>
+                                            <asp:ListItem>05:00</asp:ListItem>
+                                            <asp:ListItem>06:00</asp:ListItem>
+                                            <asp:ListItem>07:00</asp:ListItem>
+                                            <asp:ListItem>08:00</asp:ListItem>
+                                            <asp:ListItem>09:00</asp:ListItem>
+                                            <asp:ListItem>10:00</asp:ListItem>
+                                            <asp:ListItem>11:00</asp:ListItem>
+                                            <asp:ListItem>12:00</asp:ListItem>
+                                            <asp:ListItem>13:00</asp:ListItem>
+                                            <asp:ListItem>14:00</asp:ListItem>
+                                            <asp:ListItem>15:00</asp:ListItem>
+                                            <asp:ListItem>16:00</asp:ListItem>
+                                            <asp:ListItem>17:00</asp:ListItem>
+                                            <asp:ListItem>18:00</asp:ListItem>
+                                            <asp:ListItem>19:00</asp:ListItem>
+                                            <asp:ListItem>20:00</asp:ListItem>
+                                            <asp:ListItem>21:00</asp:ListItem>
+                                            <asp:ListItem>22:00</asp:ListItem>
+                                            <asp:ListItem>23:00</asp:ListItem>  
+                                        </asp:DropDownList>        
+                                    </div>--%>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm">
@@ -637,6 +693,34 @@
                                         <asp:TextBox ID="txtInputDataFimE" runat="server"></asp:TextBox>
                                         <%--onkeyup="formataDataeHora(this,event);" MaxLength="17"--%>
                                     </div>
+                                    <%-- <div class="col-sm">
+                                        <asp:DropDownList ID="ddlInputHoraFimE" TextMode="Date" runat="server">
+                                            <asp:ListItem>00:00</asp:ListItem>
+                                            <asp:ListItem>01:00</asp:ListItem>
+                                            <asp:ListItem>02:00</asp:ListItem>
+                                            <asp:ListItem>03:00</asp:ListItem>
+                                            <asp:ListItem>04:00</asp:ListItem>
+                                            <asp:ListItem>05:00</asp:ListItem>
+                                            <asp:ListItem>06:00</asp:ListItem>
+                                            <asp:ListItem>07:00</asp:ListItem>
+                                            <asp:ListItem>08:00</asp:ListItem>
+                                            <asp:ListItem>09:00</asp:ListItem>
+                                            <asp:ListItem>10:00</asp:ListItem>
+                                            <asp:ListItem>11:00</asp:ListItem>
+                                            <asp:ListItem>12:00</asp:ListItem>
+                                            <asp:ListItem>13:00</asp:ListItem>
+                                            <asp:ListItem>14:00</asp:ListItem>
+                                            <asp:ListItem>15:00</asp:ListItem>
+                                            <asp:ListItem>16:00</asp:ListItem>
+                                            <asp:ListItem>17:00</asp:ListItem>
+                                            <asp:ListItem>18:00</asp:ListItem>
+                                            <asp:ListItem>19:00</asp:ListItem>
+                                            <asp:ListItem>20:00</asp:ListItem>
+                                            <asp:ListItem>21:00</asp:ListItem>
+                                            <asp:ListItem>22:00</asp:ListItem>
+                                            <asp:ListItem>23:00</asp:ListItem>  
+                                        </asp:DropDownList>        
+                                    </div>--%>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm">

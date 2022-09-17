@@ -336,7 +336,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public DataTable verificarOcupacaoQuarto(string idQuarto)
+        public DataTable verificarOcupacaoQuarto(string IdQuarto)
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;            
@@ -348,11 +348,12 @@ namespace SistemaHotel.Controller
                                                         ,Q.DESCRICAO_QUARTO
                                                         FROM [DBO].[CLIENTE] C
                                                         INNER JOIN QUARTO Q ON (Q.ID_QUARTO = C.ID_QUARTO)
-                                                        WHERE C.ID_QUARTO = {idQuarto}
+                                                        WHERE C.ID_QUARTO = @ID_QUARTO
                                                         ORDER BY [DATA_SAIDA] DESC ", connection))
                 {
                     try
                     {
+                        cmd.Parameters.AddWithValue("ID_QUARTO", IdQuarto);
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
                         adp = new SqlDataAdapter(cmd);

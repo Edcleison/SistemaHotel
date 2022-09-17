@@ -24,12 +24,27 @@ namespace SistemaHotel
         DALCliente dalCli = new DALCliente();
         protected void Page_Load(object sender, EventArgs e)
         {
+            //try
+            //{
+            //    if (Session["perfil"].ToString() =="CLIENTE")
+            //    {
+                    if (!IsPostBack)
+                    {
+                        carregaDdlStatus();
+                        carregaDdlTipo();
+                    }
+                //}
+                //else
+                //{
+                //    Response.Redirect("~/Defautl.aspx");
+                //}
+               
+            //}
+            //catch (Exception)
+            //{
 
-            if (!IsPostBack)
-            {
-                carregaDdlStatus();
-                carregaDdlTipo();
-            }
+            //    Response.Redirect("~/Defautl.aspx");
+            //}         
         }
 
 
@@ -81,7 +96,7 @@ namespace SistemaHotel
                     sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + " " + "</center></th>");
                 }
                 sb.AppendLine("</tr>");
-                total += decimal.Parse(dtr["PRECO_UNI"].ToString());
+                total += decimal.Parse(dtr["PRECO_UNI"].ToString()) * int.Parse(dtr["QUANTIDADE"].ToString());
 
             }
             sb.AppendLine("</tbody>");

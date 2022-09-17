@@ -21,13 +21,30 @@ namespace SistemaHotel
         DALPedido dalPed = new DALPedido();
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
+            //    try
+            //    {
+            //        if (Session["perfil"].ToString() == "ADMINISTRADOR")
+            //        {
             if (!IsPostBack)
-            {
-                carregaDdlStatus();
-                carregaDdlTipo();
-            }
+                    {
+                        carregaDdlStatus();
+                        carregaDdlTipo();
+                    }
+
+                //}
+            //    else
+            //    {
+            //        Response.Redirect("~/Default.aspx");
+            //    }
+
+            //}
+            //catch (Exception)
+            //{
+
+            //    Response.Redirect("~/Default.aspx");
+            //}
+        //}
+  
         }
 
 

@@ -22,7 +22,10 @@ namespace SistemaHotel
         DALItemPedido dalItemPed = new DALItemPedido();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //try
+            //{
+            //    if (Session["perfil"].ToString() =="CLIENTE")
+            //    {
             int rParametro = 0;
             if (!IsPostBack)
             {
@@ -52,6 +55,18 @@ namespace SistemaHotel
 
             }
             carregarTabela();
+            //    }
+            //    else
+            //    {
+            //        Response.Redirect("~/Default.aspx");
+            //    }
+
+            //}
+            //catch (Exception)
+            //{
+
+            //    Response.Redirect("~/Default.aspx");
+            //}
         }
 
 
@@ -59,7 +74,7 @@ namespace SistemaHotel
         {
 
             DataTable rDta = new DataTable();
-            rDta = dalProd.buscarTodosProdutosTipo("1", "S");
+            rDta = dalProd.buscarTodosProdutosTipo("2", "S");
             StringBuilder sb = new StringBuilder();
 
 
@@ -85,7 +100,7 @@ namespace SistemaHotel
                 sb.AppendLine("<td><center>" + dtr["DESCRICAO_PROD"] + "</center></td>");
                 sb.AppendLine("<td><center>" + dtr["PRECO_UNI"] + "</center></td>");
                 sb.AppendLine($@"<td><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></center></td>");
-                sb.AppendLine("<td><center><a href='NovoPedidoCozinha.aspx?PRODUTO_N=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-plus'></i></center></td>");
+                sb.AppendLine("<td><center><a href='NovoPedidoFrigobar.aspx?PRODUTO_N=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-plus'></i></center></td>");
                 sb.AppendLine("</tr>");
 
             }
@@ -116,7 +131,8 @@ namespace SistemaHotel
             itemPed.IdCliente = cli.IdCliente;
             itemPed.Quantidade = int.Parse(txtQuantidade.Text);
             dalItemPed.inserirItemPedido(itemPed);
-            string msg = $"<script> alert('Pedido Realizado: Código: {ped.IdPedido}'); </script>";
+            string msg = $"<script> alert('Pedido Realizado: ID: {ped.IdPedido}'); </script>";
+            Response.Write(msg);
 
         }
 
@@ -127,7 +143,6 @@ namespace SistemaHotel
 
             mdBack.Visible = false;
             mdPed.Visible = false;
-            Response.Redirect("~/NovoPedidoFrigobar.aspx");
             limparCampos();
 
         }
