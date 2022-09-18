@@ -3,7 +3,7 @@
 /*
     Cria a configuração de estilo da estrutura do site (topo, menu,conteúdo e radapé)
 */
-header {
+/*header {
     width: auto;
     height: 20%;
     margin: auto;
@@ -11,20 +11,20 @@ header {
     padding: 0em;
     background-color: #DFDFDF;
     box-shadow: -3px 2px 20px 0px #2E2E2E;
-}
+}*/
 
-nav {
+/*nav {
     width: 14%;
     margin-top: 0.4em;
     margin-right: 1em;
     float: left;
-}
+}*/
 
 main {
-    width: 80%;
-    min-height: 30em;
-    margin: 2em auto;
-    padding: 0.6em;
+    width: 95%;
+    min-height: 15em;
+    margin: 1em auto;
+    padding: 0.3em;
     background-color: none;
     box-shadow: -3px 2px 20px 0px #2E2E2E;
 }
@@ -68,19 +68,19 @@ footer {
 /*
     Define a configuração da imagem do menu
 */
-.linkhome {
+/*.linkhome {
     width: 30%;
     margin-left: 2em;
     margin-top: 2em;
  
     
-}
+}*/
 
 
 /*
     Define a configuração dos botões (links) do menu
 */
-.input {
+/*.input {
     display: none;
 }
 
@@ -122,7 +122,7 @@ footer {
     width:200px;
     background-color: #DFDFDF;
     
-}
+}*/
 
 
 
@@ -153,18 +153,6 @@ footer {
     box-shadow: -3px 2px 20px 0px #2E2E2E;
 }
 
-.cxFloatMsg {
-    width: 30%;
-    height: 15em;
-    border: 1px solid #737373;
-    background-color: RGBA( 220, 220, 220, 1);
-    box-shadow: 1px 1px 3px 1px #DFDFDF;
-    position: absolute;
-    top: 40%;
-    left: 25%;
-    padding: 2em;
-    z-index: 1000;
-    display: none;
-}
+
 
 

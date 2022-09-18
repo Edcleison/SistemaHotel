@@ -1,0 +1,6 @@
+C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\bin\SistemaHotel.dll
+C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\bin\SistemaHotel.pdb
+C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Release\SistemaHotel.csproj.AssemblyReference.cache
+C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Release\SistemaHotel.csproj.CoreCompileInputs.cache
+C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Release\SistemaHotel.dll
+C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Release\SistemaHotel.pdb

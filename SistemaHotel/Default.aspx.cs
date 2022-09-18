@@ -13,22 +13,27 @@ namespace SistemaHotel
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["login"] != null)
+
+            if (!IsPostBack)
             {
 
-                lbNomeUsuario.Text = Session["nome"].ToString();
-                lbLogin.Text = Session["login"].ToString();
-                lbPerfil.Text = Session["perfil"].ToString();
-                if (Session["perfil"].ToString()=="CLIENTE")
+                if (Session["login"] != null)
                 {
-                    divTotal.Visible = true;
-                    DALCliente dalCli = new DALCliente();
-                    Cliente cli = dalCli.buscarClienteReserva(Session["login"].ToString());
-                    DALPedido dalPed = new DALPedido();
-                    lblTotal.Text = $"R$ {dalPed.buscarValorTotalCliente(cli.IdCliente)}";
+
+                    lbNomeUsuario.Text = Session["nome"].ToString();
+                    lbLogin.Text = Session["login"].ToString();
+                    lbPerfil.Text = Session["perfil"].ToString();
+                    if (Session["perfil"].ToString() == "CLIENTE")
+                    {
+                        divTotal.Visible = true;
+                        DALCliente dalCli = new DALCliente();
+                        Cliente cli = dalCli.buscarClienteReserva(Session["login"].ToString());
+                        DALPedido dalPed = new DALPedido();
+                        lblTotal.Text = $"R$ {dalPed.buscarValorTotalCliente(cli.IdCliente)}";
+
+                    }
 
                 }
-
             }
 
         }

@@ -158,8 +158,8 @@ namespace SistemaHotel
                 //sb.AppendLine($@"<td style='font-size:12px; letter-spacing: 1px;'><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_PROD"]}'></center></td>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["QUANTIDADE"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_STATUS_PED"] + "</td></center>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href=Atendimento.aspx?ATENDIMENTO_S=" + Criptografia.Encrypt(dtr["ID_PEDIDO"].ToString()) + "><i class='fa fa-check-square'></i></center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href=Atendimento.aspx?ATENDIMENTO_N=" + Criptografia.Encrypt(dtr["ID_PEDIDO"].ToString()) + "><i class='fa fa-minus-square'></i></center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href=Atendimento.aspx?ATENDIMENTO_S=" + Criptografia.Encrypt(dtr["ID_PEDIDO"].ToString()) + "><i class='fa fa-check'></i></center></td>");
+                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href=Atendimento.aspx?ATENDIMENTO_N=" + Criptografia.Encrypt(dtr["ID_PEDIDO"].ToString()) + "><i class='fa fa-close'></i></center></td>");
                 sb.AppendLine("</tr>");
 
             }

@@ -23,24 +23,38 @@ namespace SistemaHotel
             }
             else if (Session["perfil"].ToString() == "ADMINISTRADOR")
             {
-                ControleProduto.Visible = true;
-                ControleAtendimento.Visible = true;
-                ControleUsuario.Visible = true;
-                ControleQuarto.Visible = true;
-                Atendimento.Visible = true;
 
+                //ControleProduto.Visible = true;
+                //ControleAtendimento.Visible = true;
+                //ControleUsuario.Visible = true;
+                //ControleQuarto.Visible = true;
+                //Atendimento.Visible = true;
+
+                NovoPedidoCozinha.Visible = false;
+                NovoPedidoFrigobar.Visible = false;
             }
 
             else if (Session["perfil"].ToString() == "FUNCIONARIO")
             {
 
-                Atendimento.Visible = true;
+                ControleProduto.Visible = false;
+                ControleAtendimento.Visible = false;
+                ControleUsuario.Visible = false;
+                ControleQuarto.Visible = false;
+
+                NovoPedidoCozinha.Visible = false;
+                NovoPedidoFrigobar.Visible = false;
+                AcompanhamentoCliente.Visible = false;
+
 
             }
             else
             {
-                NovoPedidoCozinha.Visible = true;
-                NovoPedidoFrigobar.Visible = true;
+                Atendimento.Visible = false;
+                ControleProduto.Visible = false;
+                ControleAtendimento.Visible = false;
+                ControleUsuario.Visible = false;
+                ControleQuarto.Visible = false;
 
             }
         }
