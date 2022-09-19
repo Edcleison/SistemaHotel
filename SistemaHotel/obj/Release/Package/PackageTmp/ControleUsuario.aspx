@@ -1,34 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="ControleUsuario.aspx.cs" Inherits="SistemaHotel.ControleUsuario" %>
+﻿<%@ Page Title="Controle - Usuarios" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="ControleUsuario.aspx.cs" Inherits="SistemaHotel.ControleUsuario" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/bower_components/bootstrap/css/bootstrap.min.css") %>" />
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/bower_components/sweetalert/css/sweetalert.css") %>" />
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/icon/themify-icons/themify-icons.css") %>" />
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/icon/icofont/css/icofont.css") %>" />
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/icon/feather/css/feather.css") %>" />
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/css/component.css") %>" />
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/css/jquery.mCustomScrollbar.css") %>" />
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/icon/icofont/css/icofont.css") %>" />
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/assets/icon/font-awesome/css/font-awesome.min.css") %>" />
-    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/layout/css/style.css") %>" />
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/bootstrap/js/bootstrap.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net/js/jquery.dataTables.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/pages/data-table/js/jszip.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/pages/data-table/js/pdfmake.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/pages/data-table/js/vfs_fonts.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/pages/data-table/extensions/key-table/js/dataTables.keyTable.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-buttons/js/buttons.print.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-buttons/js/buttons.html5.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/js/bootstrap-growl.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/assets/js/modalEffects.js") %>"></script>
-    <!-- layout padrao  -->
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/plugins/bootstrap-notify/bootstrap-notify.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/layout/js/script.js") %>"></script>
 
     <link href="CSS/bootstrap.css" rel="stylesheet" />
     <link href="CSS/dataTables.bootstrap4.min.css" rel="stylesheet" />
@@ -159,13 +131,14 @@
 
 <asp:Content ID="Content12" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <asp:Panel ID="Panel3" runat="server" GroupingText="Controle de Usuários">
-
+    <asp:Panel ID="Panel3" runat="server" Style="font-family: Calibri">
+        <h5 class="p-3 mb-2 bg-dark text-white">Controle de Usuários</h5>
+        <hr />
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    <asp:LinkButton ID="novoUsuario" class="btn btn-primary" runat="server" OnClick="novoUsuario_Click">Novo Usuário</asp:LinkButton>
-                    <asp:LinkButton ID="LinkButton2" class="btn btn-primary" runat="server" OnClick="novoCliente_Click">Novo Cliente</asp:LinkButton>
+                    <asp:LinkButton ID="novoUsuario" class="btn btn-dark" runat="server" OnClick="novoUsuario_Click">Novo Usuário</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton2" class="btn btn-dark" runat="server" OnClick="novoCliente_Click">Novo Cliente</asp:LinkButton>
                 </div>
             </div>
             <div class="row">
@@ -188,7 +161,7 @@
                     </asp:DropDownList>
                 </div>
                 <div class="col-sm">
-                    <asp:LinkButton ID="lnkPesquisar" class="btn btn-primary btn-lg" OnClick="lnkPesquisar_Click" runat="server">Pesquisar</asp:LinkButton>
+                    <asp:LinkButton ID="lnkPesquisar" class="btn btn-dark" OnClick="lnkPesquisar_Click" runat="server">Pesquisar</asp:LinkButton>
                 </div>
             </div>
             <div class="row">
@@ -295,7 +268,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <asp:LinkButton ID="lnkSenha" class="btn btn-success" OnClick="lnkSenha_Click" runat="server">Salvar</asp:LinkButton>
+                            <asp:LinkButton ID="lnkSenha" class="btn btn-dark" OnClick="lnkSenha_Click" runat="server">Salvar</asp:LinkButton>
                         </div>
                     </div>
                 </div>
@@ -440,7 +413,7 @@
         </div>
         </div>
                         <div class="modal-footer">
-                            <asp:LinkButton ID="lnkAlterarUsuario" class="btn btn-success" OnClick="lnkAlterarUsuario_Click" runat="server">Salvar</asp:LinkButton>
+                            <asp:LinkButton ID="lnkAlterarUsuario" class="btn btn-dark" OnClick="lnkAlterarUsuario_Click" runat="server">Salvar</asp:LinkButton>
                         </div>
                     </div>
                 </div>
@@ -628,7 +601,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <asp:LinkButton ID="salvarNovoCliente" class="btn btn-success" runat="server" OnClick="salvarNovoCliente_Click">Novo Cliente</asp:LinkButton>
+                            <asp:LinkButton ID="salvarNovoCliente" class="btn btn-dark" runat="server" OnClick="salvarNovoCliente_Click">Novo Cliente</asp:LinkButton>
                         </div>
 
                     </div>
@@ -755,7 +728,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <asp:LinkButton ID="alterarData" class="btn btn-success" runat="server" OnClick="alterarData_Click">Salvar Alterações</asp:LinkButton>
+                                <asp:LinkButton ID="alterarData" class="btn btn-dark" runat="server" OnClick="alterarData_Click">Salvar Alterações</asp:LinkButton>
                             </div>
                         </div>
                     </div>
