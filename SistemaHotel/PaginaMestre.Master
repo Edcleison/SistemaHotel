@@ -62,6 +62,16 @@
                 </ul>--%>
             <%-- </nav> --%>
             <div class="pos-f-t">
+                 <nav class="navbar navbar-dark bg-dark">
+                    <div class="col-sm">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Alterna navegação">
+                             <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    <div class="col-sm">
+                         <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.jpeg" CssClass="linkhome" ImageAlign="Middle" />
+                    </div>        
+                </nav>
                 <div class="collapse" id="navbarToggleExternalContent">
                     <div class="bg-dark p-4">
                         <div class="container">
@@ -92,20 +102,13 @@
                             <div class="row">
                                 <asp:HyperLink ID="AcompanhamentoCliente" runat="server" NavigateUrl="AcompanhamentoCliente.aspx" class="text-white h5">Acompanhamento - Pedidos</asp:HyperLink>
                             </div>
-
                             <div class="row">
                                 <asp:HyperLink ID="Sair" runat="server" NavigateUrl="~/Login.aspx" class="text-white h5">Sair</asp:HyperLink>
                             </div>
                         </div>
                     </div>
                 </div>
-                <nav class="navbar navbar-dark bg-dark">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Alterna navegação">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </nav>
-            </div>
-            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.jpeg" CssClass="linkhome" ImageAlign="Middle" />
+            </div>   
         </header>
         <main>
             <div>

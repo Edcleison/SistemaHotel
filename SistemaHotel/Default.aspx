@@ -1,6 +1,13 @@
 ﻿<%@ Page Title="Home" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SistemaHotel.Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="CSS/bootstrap.css" rel="stylesheet" />
+    <link href="CSS/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="CSS/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <script src="Scripts/jquery-3.5.1.js"></script>
+    <script src="Scripts/jquery.dataTables.min.js"></script>
+    <script src="Scripts/dataTables.bootstrap4.min.js.js"></script>
     <script src="Scripts/a076d05399.js"></script>  
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
