@@ -1,8 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SistemaHotel.Default1" %>
+﻿<%@ Page Title="Home" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SistemaHotel.Default" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="Scripts/a076d05399.js"></script>
+    <link href="CSS/bootstrap.css" rel="stylesheet" />
+    <link href="CSS/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="CSS/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <script src="Scripts/jquery-3.5.1.js"></script>
+    <script src="Scripts/jquery.dataTables.min.js"></script>
+    <script src="Scripts/dataTables.bootstrap4.min.js.js"></script>
+    <script src="Scripts/a076d05399.js"></script>  
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Panel ID="PnlHome" Style="font-family: Calibri" runat="server">
@@ -13,13 +19,13 @@
                 <div class="col-sm">
                     <br />
                     <asp:Label ID="lbNomeUsuarioLegenda" Font-Bold="true" runat="server" Text="Bem Vindo!"></asp:Label>
-                    <asp:Label ID="lbNomeUsuario" runat="server" Font-Bold="true" Text="Nome do Usuário"></asp:Label>
+                    <asp:Label ID="lbNomeUsuario" runat="server"  Font-Bold="true" Text="Nome do Usuário"></asp:Label>
                     <br />
-                    <asp:Label ID="lbLoginLegenda" runat="server" Font-Bold="true" Text="Login:"></asp:Label>
-                    <asp:Label ID="lbLogin" runat="server" Font-Bold="true" Text="Login"></asp:Label>
+                    <asp:Label ID="lbLoginLegenda" runat="server"  Font-Bold="true" Text="Login:"></asp:Label>
+                    <asp:Label ID="lbLogin" runat="server"  Font-Bold="true" Text="Login"></asp:Label>
                     <br />
-                    <asp:Label ID="lbPerfilLegenda" runat="server" Font-Bold="true" Text="Perfil:"></asp:Label>
-                    <asp:Label ID="lbPerfil" runat="server" Font-Bold="true" Text="Perfil do Usuário"></asp:Label>
+                    <asp:Label ID="lbPerfilLegenda" runat="server"  Font-Bold="true" Text="Perfil:"></asp:Label>
+                    <asp:Label ID="lbPerfil" runat="server"  Font-Bold="true" Text="Perfil do Usuário"></asp:Label>
                     <br />
                 </div>
                 <div class="col-sm">
