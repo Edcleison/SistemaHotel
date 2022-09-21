@@ -46,8 +46,8 @@ namespace SistemaHotel
                         }
                         else if (login == u.Login && senha != u.Senha)
                         {
-                            msg = "<script> alert('Senha incorreta!'); </script>";
-                            Response.Write(msg);
+                            //msg = "<script> alert('Senha incorreta!'); </script>";
+                            //Response.Write(msg);
                         }
                         else if (login != u.Login && senha != u.Senha)
                         {
