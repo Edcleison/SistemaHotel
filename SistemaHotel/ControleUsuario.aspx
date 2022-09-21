@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-   <%-- <link href="CSS/bootstrap.css" rel="stylesheet" />
+    <%-- <link href="CSS/bootstrap.css" rel="stylesheet" />
     <link href="CSS/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="CSS/jquery.dataTables.min.css" rel="stylesheet" />
 
@@ -20,6 +20,8 @@
 
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet" />
+   
+   
 
     <style>
         .green {
@@ -258,7 +260,7 @@
                                     <div class="col-sm">
                                         <asp:TextBox type="password" runat="server" ID="txtNovaSenha" MaxLength="8">                                    
                                         </asp:TextBox>
-                                        <img id="olho" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
+                                        <img id="olhoNovoUsu" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
                                         <p>**Senha até 8 caracteres</p>
                                     </div>
                                 </div>
@@ -273,7 +275,7 @@
                                     </div>
                                     <div class="col-sm">
                                         <asp:TextBox type="password" runat="server" ID="txtConfirmaSenha" MaxLength="8"></asp:TextBox>
-                                        <img id="olhoDois" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
+                                        <img id="olhoConfirmaNovoUsu" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
                                     </div>
                                 </div>
                             </div>
@@ -282,40 +284,40 @@
                             <asp:LinkButton ID="lnkSenha" class="btn btn-dark" OnClick="lnkSenha_Click" runat="server">Salvar</asp:LinkButton>
                         </div>
                     </div>
-                </div>
+                </div>              
                 <script src="Scripts/jquery.min.js"></script>
                 <script type="text/javascript">
-                    var senha = $('#txtNovaSenha');
-                    var olho = $("#olho");
-                    olho.mousedown(function () {
+                    var senha = $('#ContentPlaceHolder1_txtNovaSenha');
+                    var olhoNovoUsu = $("#olhoNovoUsu");
+                    olhoNovoUsu.mousedown(function () {
                         senha.attr("type", "text");
                     });
 
-                    olho.mouseup(function () {
+                    olhoNovoUsu.mouseup(function () {
                         senha.attr("type", "password");
 
                     });
                     // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
                     //citada pelo nosso amigo nos comentários
-                    $("#olho").mouseout(function () {
-                        $("#txtNovaSenha").attr("type", "password");
+                    $("#olhoNovoUsu").mouseout(function () {
+                        $("#ContentPlaceHolder1_txtNovaSenha").attr("type", "password");
                     });
                 </script>
                 <script type="text/javascript">
-                    var ConfirmaSenha = $('#txtConfirmaSenha');
-                    var olhoDois = $("#olhoDois");
+                    var ConfirmaSenha = $('#ContentPlaceHolder1_txtConfirmaSenha');
+                    var olhoConfirmaNovoUsu = $("#olhoConfirmaNovoUsu");
 
-                    olhoDois.mousedown(function () {
+                    olhoConfirmaNovoUsu.mousedown(function () {
                         ConfirmaSenha.attr("type", "text");
                     });
 
-                    olhoDois.mouseup(function () {
+                    olhoConfirmaNovoUsu.mouseup(function () {
                         ConfirmaSenha.attr("type", "password");
                     });
                     // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
                     //citada pelo nosso amigo nos comentários
-                    $("#olhoDois").mouseout(function () {
-                        $("#txtConfimaSenha").attr("type", "password");
+                    $("#olhoConfirmaNovoUsu").mouseout(function () {
+                        $("#ContentPlaceHolder1_txtConfimaSenha").attr("type", "password");
                     });
                 </script>
             </div>
@@ -336,14 +338,14 @@
                                         <span>Id: </span>
                                     </div>
                                     <div class="col-sm">
-                                        <asp:TextBox runat="server" ID="txtIdUsuarioE" enabled="false"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="txtIdUsuarioE" Enabled="false"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm">
                                         <span>&nbsp;</span>
                                     </div>
-                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm">
                                         <span>Nome: </span>
@@ -421,16 +423,17 @@
                                         <img id="olhoDois" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
                                     </div>
                                 </div>
-        </div>
-        </div>
+                            </div>
+                        </div>
                         <div class="modal-footer">
                             <asp:LinkButton ID="lnkAlterarUsuario" class="btn btn-dark" OnClick="lnkAlterarUsuario_Click" runat="server">Salvar</asp:LinkButton>
                         </div>
                     </div>
                 </div>
+               
                 <script src="Scripts/jquery.min.js"></script>
                 <script type="text/javascript">
-                    var senha = $('#txtNovaSenha');
+                    var senha = $('#ContentPlaceHolder1_txtNovaSenhaE');
                     var olho = $("#olho");
                     olho.mousedown(function () {
                         senha.attr("type", "text");
@@ -443,11 +446,11 @@
                     // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
                     //citada pelo nosso amigo nos comentários
                     $("#olho").mouseout(function () {
-                        $("#txtNovaSenha").attr("type", "password");
+                        $("#ContentPlaceHolder1_txtNovaSenhaE").attr("type", "password");
                     });
                 </script>
                 <script type="text/javascript">
-                    var ConfirmaSenha = $('#txtConfirmaSenha');
+                    var ConfirmaSenha = $('#ContentPlaceHolder1_txtConfirmaSenhaE');
                     var olhoDois = $("#olhoDois");
 
                     olhoDois.mousedown(function () {
@@ -460,7 +463,7 @@
                     // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
                     //citada pelo nosso amigo nos comentários
                     $("#olhoDois").mouseout(function () {
-                        $("#txtConfimaSenha").attr("type", "password");
+                        $("#ContentPlaceHolder1_txtConfimaSenhaE").attr("type", "password");
                     });
                 </script>
             </div>
@@ -519,7 +522,7 @@
                                         <asp:TextBox ID="txtInputDataIni" runat="server"></asp:TextBox>
                                         <%--onkeyup="formataDataeHora(this,event);" MaxLength="17"--%>
                                     </div>
-                                   <%-- <div class="col-sm">
+                                    <%-- <div class="col-sm">
                                         <asp:DropDownList ID="ddlInputHoraIni" TextMode="Date" runat="server">
                                             <asp:ListItem>00:00</asp:ListItem>
                                             <asp:ListItem>01:00</asp:ListItem>
@@ -551,7 +554,7 @@
                                         <span>Data Fim:</span>
                                     </div>
                                     <div class="col-sm">
-                                        <asp:TextBox ID="txtInputDataFim"  runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtInputDataFim" runat="server"></asp:TextBox>
                                         <%--onkeyup="formataDataeHora(this,event);" MaxLength="17"--%>
                                     </div>
                                     <%--<div class="col-sm">
@@ -623,7 +626,7 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content" visible="false" style="border-radius: 10px;">
                         <div class="modal-header">
-                            <h5 class="modal-title">Editar Data Final do Cliente:</h5>
+                            <h5 class="modal-title">Editar Data de Saída:</h5>
                             <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </asp:LinkButton>

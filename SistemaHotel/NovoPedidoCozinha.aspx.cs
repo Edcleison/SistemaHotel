@@ -88,15 +88,15 @@ namespace SistemaHotel
             StringBuilder sb = new StringBuilder();
 
 
-            sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:12px;'>");
+            sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:15px;'>");
             sb.AppendLine("<thead>");
             sb.AppendLine("<tr>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DESCRICAO</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>PRECO</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>FOTO</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ADICIONAR</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ID</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>NOME</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>DESCRIÇÃO</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>PRECO</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>FOTO</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ADICIONAR</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -105,12 +105,12 @@ namespace SistemaHotel
             {
 
                 sb.AppendLine("<tr>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_Produto"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME_PROD"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_PROD"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["PRECO_UNI"] + "</center></td>");
-                sb.AppendLine($@"<td style='font-size:12px; letter-spacing: 1px;'><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></center></td>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center><a href='NovoPedidoCozinha.aspx?PRODUTO_N=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-plus'></i></center></td>");
+                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["ID_Produto"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["NOME_PROD"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_PROD"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["PRECO_UNI"] + "</center></td>");
+                sb.AppendLine($@"<td style='font-size:15px; letter-spacing: 1px;'><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></center></td>");
+                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center><a href='NovoPedidoCozinha.aspx?PRODUTO_N=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-plus' style='color: green'></i></center></td>");
                 sb.AppendLine("</tr>");
 
             }
@@ -194,14 +194,14 @@ namespace SistemaHotel
             DataTable rDta = new DataTable();
             rDta = dalCar.buscarCarrinhoCliente(codReserva, 1);
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<table id='exampleCarr' class='display' style='width: 100% font-size:12px;'>");
+            sb.AppendLine("<table id='exampleCarr' class='display' style='width: 100% font-size:15px;'>");
             sb.AppendLine("<thead>");
             sb.AppendLine("<tr>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DESCRICAO</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>PRECO</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>REMOVER</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ID</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>NOME</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>DESCRIÇÃO</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>PRECO</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>REMOVER</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -209,11 +209,11 @@ namespace SistemaHotel
             foreach (DataRow dtr in rDta.Rows)
             {
                 sb.AppendLine("<tr>");
-                sb.AppendLine($"<td style='font-size:12px; letter-spacing: 1px;'><center> {dtr["ID_Produto"]}</center></td>");
-                sb.AppendLine($"<td style='font-size:12px; letter-spacing: 1px;'><center> {dtr["NOME_PROD"]}</center></td>");
-                sb.AppendLine($"<td style='font-size:12px; letter-spacing: 1px;'><center>{dtr["DESCRICAO_PROD"]}</center></td>");
-                sb.AppendLine($"<td style='font-size:12px; letter-spacing: 1px;'><center>{dtr["PRECO_UNI"]}</center></td>");
-                sb.AppendLine($"<td style='font-size:12px; letter-spacing: 1px;'><center><a href='NovoPedidoCozinha.aspx?CARRINHO_C={Criptografia.Encrypt(dtr["ID_CARRINHO"].ToString())}'><i class='fa fa-minus'></i></center></td>");
+                sb.AppendLine($"<td style='font-size:15px; letter-spacing: 1px;'><center> {dtr["ID_Produto"]}</center></td>");
+                sb.AppendLine($"<td style='font-size:15px; letter-spacing: 1px;'><center> {dtr["NOME_PROD"]}</center></td>");
+                sb.AppendLine($"<td style='font-size:15px; letter-spacing: 1px;'><center>{dtr["DESCRICAO_PROD"]}</center></td>");
+                sb.AppendLine($"<td style='font-size:15px; letter-spacing: 1px;'><center>{dtr["PRECO_UNI"]}</center></td>");
+                sb.AppendLine($"<td style='font-size:15px; letter-spacing: 1px;'><center><a href='NovoPedidoCozinha.aspx?CARRINHO_C={Criptografia.Encrypt(dtr["ID_CARRINHO"].ToString())}'><i class='fa fa-minus' style='color: red'></i></center></td>");
                 sb.AppendLine("</tr>");
                 total += decimal.Parse(dtr["PRECO_UNI"].ToString());
 

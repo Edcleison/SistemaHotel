@@ -81,12 +81,12 @@ namespace SistemaHotel
             sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:15px;'>");
             sb.AppendLine("<thead>");
             sb.AppendLine("<tr>");
-            sb.AppendLine("<th><center>ID</center></th>");
-            sb.AppendLine("<th><center>NOME</center></th>");
-            sb.AppendLine("<th><center>DESCRICAO</center></th>");
-            sb.AppendLine("<th><center>PRECO</center></th>");
-            sb.AppendLine("<th><center>FOTO</center></th>");
-            sb.AppendLine("<th><center>ADICIONAR</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ID</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>NOME</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>DESCRIÇÃO</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>PRECO</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>FOTO</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ADICIONAR</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -95,12 +95,12 @@ namespace SistemaHotel
             {
 
                 sb.AppendLine("<tr>");
-                sb.AppendLine("<td><center>" + dtr["ID_Produto"] + "</center></td>");
-                sb.AppendLine("<td><center>" + dtr["NOME_PROD"] + "</center></td>");
-                sb.AppendLine("<td><center>" + dtr["DESCRICAO_PROD"] + "</center></td>");
-                sb.AppendLine("<td><center>" + dtr["PRECO_UNI"] + "</center></td>");
-                sb.AppendLine($@"<td><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></center></td>");
-                sb.AppendLine("<td><center><a href='NovoPedidoFrigobar.aspx?PRODUTO_N=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-plus'></i></center></td>");
+                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["ID_Produto"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["NOME_PROD"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_PROD"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["PRECO_UNI"] + "</center></td>");
+                sb.AppendLine($@"<td style='font-size:15px; letter-spacing: 1px;'><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></center></td>");
+                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center><a href='NovoPedidoFrigobar.aspx?PRODUTO_N=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-plus' style='color: green'></i></center></td>");
                 sb.AppendLine("</tr>");
 
             }

@@ -74,7 +74,7 @@ namespace SistemaHotel
                                     break;
                             }
                             Response.Redirect("~/Default.aspx");
-                            
+
                         }
 
                     }
@@ -100,17 +100,17 @@ namespace SistemaHotel
 
                             if (login != u.Login && senha == u.Senha)
                             {
-                                 msg = "<script> alert('Login incorreto!'); </script>";
+                                msg = "<script> alert('Login incorreto!'); </script>";
                                 Response.Write(msg);
                             }
                             else if (login == u.Login && senha != u.Senha)
                             {
-                                 msg = "<script> alert('Senha incorreta!'); </script>";
+                                msg = "<script> alert('Senha incorreta!'); </script>";
                                 Response.Write(msg);
                             }
                             else if (login != u.Login && senha != u.Senha)
                             {
-                                 msg = "<script> alert('Login e senha incorretos'); </script>";
+                                msg = "<script> alert('Login e senha incorretos'); </script>";
                                 Response.Write(msg);
                             }
                             else
@@ -140,11 +140,18 @@ namespace SistemaHotel
                     }
                     else
                     {
-                        dpu.inativarUsuario(u.IdUsuario);
-                        msg = "<script> alert('Login não permitido!); </script>";
+                        msg = "<script> alert('Login incorreto'); </script>";
                         Response.Write(msg);
                     }
-
+                }
+                else
+                {
+                    if (pu.StatusPerfilUsuario =='S')
+                    {
+                        dpu.inativarUsuario(u.IdUsuario);
+                    }
+                    msg = "<script> alert('Login não permitido!'); </script>";
+                    Response.Write(msg);
                 }
             }
 

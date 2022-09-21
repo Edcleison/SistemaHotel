@@ -1,14 +1,6 @@
 ﻿<%@ Page Title="Controle - Atendimentos" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="ControleAtendimento.aspx.cs" Inherits="SistemaHotel.ControleAtendimento" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
-    <%--<link href="CSS/bootstrap.css" rel="stylesheet" />
-    <link href="CSS/dataTables.bootstrap4.min.css" rel="stylesheet" />
-    <link href="CSS/jquery.dataTables.min.css" rel="stylesheet" />
-
-    <script src="Scripts/jquery-3.5.1.js"></script>
-    <script src="Scripts/jquery.dataTables.min.js"></script>
-    <script src="Scripts/dataTables.bootstrap4.min.js.js"></script>--%>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>

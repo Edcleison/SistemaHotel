@@ -32,6 +32,7 @@ namespace SistemaHotel
 
                 NovoPedidoCozinha.Visible = false;
                 NovoPedidoFrigobar.Visible = false;
+                ResumoPedidos.Visible = false;
             }
 
             else if (Session["perfil"].ToString() == "FUNCIONARIO")
@@ -44,7 +45,7 @@ namespace SistemaHotel
 
                 NovoPedidoCozinha.Visible = false;
                 NovoPedidoFrigobar.Visible = false;
-                AcompanhamentoCliente.Visible = false;
+                ResumoPedidos.Visible = false;
 
 
             }

@@ -33,7 +33,7 @@
                 <div class="modal-dialog modal-personalizado" role="document">
                     <div class="modal-content" visible="true" style="border-radius: 10px;">
                         <div class="modal-header">
-                            <h5 class="modal-title">Login: </h5>
+                            <h5 class="modal-title"></h5>
                         </div>
                         <div class="modal-body">
                             <div class="container">
@@ -71,9 +71,7 @@
                             <asp:LinkButton ID="btlogar" runat="server" class="btn btn-dark" OnClick="btlogar_Click">Logar</asp:LinkButton>
                             <asp:LinkButton ID="lnkRecadastrarSenha" runat="server" class="btn btn-dark" OnClick="lnkRecadastrarSenha_Click">Redefinir Senha</asp:LinkButton>
                         </div>
-                    </div>
-                    <div>
-                    </div>
+                    </div>                   
                 </div>
                 <script src="Scripts/jquery.min.js"></script>
                 <script type="text/javascript">

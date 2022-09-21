@@ -1,13 +1,7 @@
 ﻿<%@ Page Title="Atendimento" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="Atendimento.aspx.cs" Inherits="SistemaHotel.Atendimento" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-   <%-- <link href="CSS/bootstrap.css" rel="stylesheet" />
-    <link href="CSS/dataTables.bootstrap4.min.css" rel="stylesheet" />
-    <link href="CSS/jquery.dataTables.min.css" rel="stylesheet" />
 
-    <script src="Scripts/jquery-3.5.1.js"></script>
-    <script src="Scripts/jquery.dataTables.min.js"></script>
-    <script src="Scripts/dataTables.bootstrap4.min.js.js"></script>--%>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
@@ -31,6 +25,26 @@
 
         .red {
             background-color: lightcoral !important;
+        }
+        #circulo_yellow {
+            background: lightyellow;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+        }
+
+        #circulo_green {
+            background: lightseagreen;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+        }
+
+        #circulo_red {
+            background: lightcoral;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
         }
     </style>
 
@@ -95,6 +109,21 @@
                     </p>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-1">
+                    <span>Legenda: </span>
+                </div>
+                <div class="col-2">
+                    <span id="circulo_yellow" style="background-color: lightyellow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Em Aberto</span>
+                </div>
+                <div class="col-2">
+                    <span id="circulo_green" style="background-color: lightseagreen">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Finalizado</span>
+                </div>
+                <div class="col-2">
+                    <span id="circulo_red" style="background-color: lightcoral">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Recusado</span>
+                </div>
+            </div>
+            <hr />
         </div>
         <div class="row">
             <div class="col-sm">

@@ -204,7 +204,9 @@ namespace SistemaHotel.Controller
                         cmd.Parameters.AddWithValue("SOBRENOME_CLIENTE", cli.SobreNomeCliente);                      
                         cmd.Parameters.AddWithValue("DATA_ENTRADA", cli.DataEntrada);
                         cmd.Parameters.AddWithValue("DATA_SAIDA", cli.DataSaida);
+                        cmd.Parameters.AddWithValue("ID_CLIENTE", cli.IdCliente);
                         connection.Open();
+                        cmd.ExecuteNonQuery();
                     }
                     catch (Exception erro)
                     {

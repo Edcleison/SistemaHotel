@@ -461,11 +461,11 @@ namespace SistemaHotel.Controller
             }
             else if (Perfil != "" && Status == "")
             {
-                parPerfilStatus = "WHERE P.STATUS_USUARIO =@STATUS_USUARIO";
+                parPerfilStatus = "WHERE P.ID_PERFIL = @ID_PERFIL";
             }
             else if (Perfil == "" && Status != "")
             {
-                parPerfilStatus = "WHERE P.ID_PERFIL = @ID_PERFIL";
+                parPerfilStatus = "WHERE P.STATUS_USUARIO =@STATUS_USUARIO";
             }
 
             using (SqlConnection connection = new SqlConnection(cnn))
@@ -528,11 +528,11 @@ namespace SistemaHotel.Controller
             }
             else if (Perfil != "" && Status == "")
             {
-                parPerfilStatus = "WHERE P.STATUS_USUARIO =@STATUS_USUARIO";
+                parPerfilStatus = "WHERE P.ID_PERFIL = @ID_PERFIL" ;
             }
             else if (Perfil == "" && Status != "")
             {
-                parPerfilStatus = "WHERE P.ID_PERFIL = @ID_PERFIL";
+                parPerfilStatus = "WHERE P.STATUS_USUARIO =@STATUS_USUARIO";
             }
             try
             {
