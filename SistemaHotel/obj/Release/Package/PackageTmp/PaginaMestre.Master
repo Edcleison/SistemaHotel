@@ -8,15 +8,15 @@
     <title>Sistema - Serviços de Hotel</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
 
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/icon/themify-icons/themify-icons.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/icon/icofont/css/icofont.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/icon/feather/css/feather.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/icon/font-awesome/css/font-awesome.min.css") %>" />
- 
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
@@ -33,7 +33,7 @@
     <link href="CSS/Estilos.css" rel="stylesheet" />
     <script src="Scripts/jquery.mask.js"></script>
     <script src="Scripts/autoNumeric.js"></script>
-     
+
 </head>
 
 <body>
@@ -70,15 +70,15 @@
                 </ul>--%>
             <%-- </nav> --%>
             <div class="pos-f-t">
-                 <nav class="navbar navbar-dark bg-dark">
+                <nav class="navbar navbar-dark bg-dark">
                     <div class="col-sm">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Alterna navegação">
-                             <span class="navbar-toggler-icon"></span>
+                            <span class="navbar-toggler-icon"></span>
                         </button>
                     </div>
                     <div class="col-sm">
-                         <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.jpeg" CssClass="linkhome" ImageAlign="Middle" />
-                    </div>        
+                        <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.jpeg" CssClass="linkhome" ImageAlign="Middle" />
+                    </div>
                 </nav>
                 <div class="collapse" id="navbarToggleExternalContent">
                     <div class="bg-dark p-4">
@@ -87,7 +87,7 @@
                                 <asp:HyperLink ID="Home" runat="server" NavigateUrl="Default.aspx" class="text-white h5">Home</asp:HyperLink>
                             </div>
                             <div class="row">
-                              <asp:HyperLink ID="Atendimento" runat="server" NavigateUrl="Atendimento.aspx" class="text-white h5">Atendimento</asp:HyperLink>   
+                                <asp:HyperLink ID="Atendimento" runat="server" NavigateUrl="Atendimento.aspx" class="text-white h5">Atendimento</asp:HyperLink>
                             </div>
                             <div class="row">
                                 <asp:HyperLink ID="ControleAtendimento" runat="server" NavigateUrl="ControleAtendimento.aspx" class="text-white h5">Controle Atendimento</asp:HyperLink>
@@ -116,7 +116,7 @@
                         </div>
                     </div>
                 </div>
-            </div>   
+            </div>
         </header>
         <main>
             <div>

@@ -69,7 +69,7 @@
                 "ordering": false,
                 "info": false,
                 dom: 'Bfrtip',
-                buttons: ['excel'
+                buttons: ['excel','pdf',
 
                 ],
                 "createdRow": function (row, data, dataIndex) {
