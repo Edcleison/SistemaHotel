@@ -9,10 +9,11 @@ using System.Web.UI.WebControls;
 
 namespace SistemaHotel
 {
-    public partial class Default1 : System.Web.UI.Page
+    public partial class Default_OLD : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
 
@@ -42,4 +43,6 @@ namespace SistemaHotel
             Response.Redirect("~/AcompanhamentoCliente.aspx");
         }
     }
+
 }
+

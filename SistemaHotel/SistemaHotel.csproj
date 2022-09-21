@@ -66,6 +66,7 @@
     <Content Include="ControleQuarto.aspx" />
     <Content Include="ControleProduto.aspx" />
     <Content Include="CSS\jquery.dataTables.css" />
+    <Content Include="Default.aspx" />
     <Content Include="layout\assets\css\component.css" />
     <Content Include="layout\assets\css\font-awesome.min.css" />
     <Content Include="layout\assets\css\jquery.mCustomScrollbar.css" />
@@ -5830,7 +5831,7 @@
     <Content Include="CSS\dataTables.bootstrap4.min.css" />
     <Content Include="CSS\Estilos.css" />
     <Content Include="CSS\jquery.dataTables.min.css" />
-    <Content Include="Default.aspx" />
+    <Content Include="Default_OLD.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="PaginaMestre.Master" />
     <Content Include="Scripts\dataTables.bootstrap4.min.js.js" />
@@ -5890,6 +5891,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default_OLD.aspx.cs">
+      <DependentUpon>Default_OLD.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default_OLD.aspx.designer.cs">
+      <DependentUpon>Default_OLD.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
