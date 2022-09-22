@@ -23,63 +23,69 @@ namespace SistemaHotel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    if (Session["perfil"].ToString()=="ADMINISTRDOR")
-            //    {
-            int rParametro = 0;
-            if (!IsPostBack)
+            try
+            {
+                if (Session["perfil"].ToString() == "Administrador")
+                {
+                    int rParametro = 0;
+                    if (!IsPostBack)
+                    {
+
+                        if (Request.QueryString["PRODUTO_D"] != null)
+                        {
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_D"]));
+                            dalProd.inativarProduto(rParametro);
+                            //string msg = $"<script> alert('Produto Inativado! ID: {rParametro}'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                            Produto Inativado! ID: {rParametro}
+                                            </div>");
+
+                        }
+                        if (Request.QueryString["PRODUTO_E"] != null)
+                        {
+
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_E"]));
+
+                            Produto prod = dalProd.buscarProdutoId(rParametro);
+
+
+                            txtNomeE.Text = prod.NomeProduto;
+                            txtDescricaoE.Text = prod.DescricaoProduto;
+                            txtPrecoE.Text = prod.PrecoUnitario.ToString();
+                            ddlTipoProdE.SelectedValue = prod.TipoProduto.ToString();
+                            txtIdProdutoE.Text = rParametro.ToString();
+                            carregaDdlEditarTipoProduto();
+                            mdBack.Visible = true;
+                            mdProdE.Visible = true;
+                        }
+                        if (Request.QueryString["PRODUTO_A"] != null)
+                        {
+
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_A"]));
+                            Produto prod = dalProd.buscarProdutoId(rParametro);
+                            dalProd.ativarProduto(rParametro);
+                            //string msg = $"<script> alert('Produto Ativado! ID:{rParametro}'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-sucess alert-dismissible fade show' role='alert'>
+                                           Produto Ativado! ID: {rParametro}
+                                            </div>");
+
+                        }
+                        carregaDdl();
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Default.aspx");
+                    }
+
+                }
+
+            }
+            catch (Exception)
             {
 
-                if (Request.QueryString["PRODUTO_D"] != null)
-                {
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_D"]));
-                    dalProd.inativarProduto(rParametro);
-                    string msg = $"<script> alert('Produto Inativado! ID:{rParametro}'); </script>";
-                    Response.Write(msg);
-
-                }
-                if (Request.QueryString["PRODUTO_E"] != null)
-                {
-
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_E"]));
-
-                    Produto prod = dalProd.buscarProdutoId(rParametro);
-
-
-                    txtNomeE.Text = prod.NomeProduto;
-                    txtDescricaoE.Text = prod.DescricaoProduto;
-                    txtPrecoE.Text = prod.PrecoUnitario.ToString();
-                    ddlTipoProdE.SelectedValue = prod.TipoProduto.ToString();
-                    txtIdProdutoE.Text = rParametro.ToString();
-                    carregaDdlEditarTipoProduto();
-                    mdBack.Visible = true;
-                    mdProdE.Visible = true;
-                }
-                if (Request.QueryString["PRODUTO_A"] != null)
-                {
-
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_A"]));
-                    Produto prod = dalProd.buscarProdutoId(rParametro);
-                    dalProd.ativarProduto(rParametro);
-                    string msg = $"<script> alert('Produto Ativado! ID:{rParametro}'); </script>";
-                    Response.Write(msg);
-
-                }
-                carregaDdl();
-                //        }
-                //        else
-                //        {
-                //            Response.Redirect("~/Default.aspx");
-                //        }
-
-                //    }
-
-                //}
-                //catch (Exception)
-                //{
-
-                //    Response.Redirect("~/Default.aspx");
+                Response.Redirect("~/Default.aspx");
             }
 
         }
@@ -166,22 +172,33 @@ namespace SistemaHotel
                         fuProduto.PostedFile.SaveAs(img);
                         dalProd.inserirProduto(prod);
 
-                        msg = $"<script> alert('Produto Inserido'); </script>";
-                        Response.Write(msg);
+                        //msg = $"<script> alert('Produto Inserido!'); </script>";
+                        //Response.Write(msg);
+                        Response.Write($@"<div class='alert alert-sucess alert-dismissible fade show' role='alert'>
+                                          Produto Inserido!
+                                            </div>");
                         limparCampos();
 
                     }
                     else
                     {
-                        msg = "<script> alert('Preencha todos os campos!'); </script>";
-                        Response.Write(msg);
+                        //msg = "<script> alert('Preencha todos os campos!'); </script>";
+                        //Response.Write(msg);
+                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                         Preencha todos os campos!
+                                            </div>");
                     }
 
                 }
                 catch (Exception)
                 {
-                    msg = "<script> alert('Preencha todos os campos!'); </script>";
-                    Response.Write(msg);
+                    //msg = "<script> alert('Preencha todos os campos!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                         Preencha todos os campos!
+                                            </div>");
+
+
                 }
 
 
@@ -249,21 +266,31 @@ namespace SistemaHotel
                         string img = caminho + prod.FotoProduto;
                         fuProdE.PostedFile.SaveAs(img);
                         dalProd.alterarProduto(prod);
-                        msg = $"<script> alert('O Produto Alterado:  ID {prod.IdProduto}'); </script>";
-                        Response.Write(msg);
+                        //msg = $"<script> alert('O Produto Alterado:  ID {prod.IdProduto}'); </script>";
+                        //Response.Write(msg);
+                        Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                       O Produto Alterado:  ID {prod.IdProduto}
+                                            </div>");
                         limparCampos();
                     }
                     else
                     {
-                        msg = "<script> alert('Preencha todos os campos!'); </script>";
-                        Response.Write(msg);
+                        //msg = "<script> alert('Preencha todos os campos!'); </script>";
+                        //Response.Write(msg);
+                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                      Preencha todos os campos!
+                                            </div>");
+
                     }
                 }
                 catch (Exception)
                 {
 
-                    msg = "<script> alert('Preencha todos os campos!'); </script>";
-                    Response.Write(msg);
+                    //msg = "<script> alert('Preencha todos os campos!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                      Preencha todos os campos!
+                                            </div>");
                 }
 
 

@@ -22,51 +22,51 @@ namespace SistemaHotel
         DALItemPedido dalItemPed = new DALItemPedido();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    if (Session["perfil"].ToString() =="CLIENTE")
-            //    {
-            int rParametro = 0;
-            if (!IsPostBack)
+            try
             {
-                if (Request.QueryString["PRODUTO_N"] != null)
+                if (Session["perfil"].ToString() == "Cliente")
                 {
+                    int rParametro = 0;
+                    if (!IsPostBack)
+                    {
+                        if (Request.QueryString["PRODUTO_N"] != null)
+                        {
 
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_N"]));
-                    Produto prod = dalProd.buscarProdutoId(rParametro);
-                    txtIdProd.Text = prod.IdProduto.ToString();
-                    txtNomeProd.Text = prod.NomeProduto;
-                    txtDescricao.Text = prod.DescricaoProduto;
-                    txtPreco.Text = prod.PrecoUnitario.ToString();
-                    imgProd.Src = $@"IMAGENS_PRODUTOS\{prod.FotoProduto}";
-                    if (prod.TipoProduto == 1)
-                    {
-                        txtQuantidade.Enabled = true;
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_N"]));
+                            Produto prod = dalProd.buscarProdutoId(rParametro);
+                            txtIdProd.Text = prod.IdProduto.ToString();
+                            txtNomeProd.Text = prod.NomeProduto;
+                            txtDescricao.Text = prod.DescricaoProduto;
+                            txtPreco.Text = prod.PrecoUnitario.ToString();
+                            imgProd.Src = $@"IMAGENS_PRODUTOS\{prod.FotoProduto}";
+                            if (prod.TipoProduto == 1)
+                            {
+                                txtQuantidade.Enabled = true;
+                            }
+                            else
+                            {
+                                txtQuantidade.Text = "1";
+                            }
+                            mdBack.Visible = true;
+                            mdPed.Visible = true;
+                        }
+
+                        carregarTabela();
+
                     }
-                    else
-                    {
-                        txtQuantidade.Text = "1";
-                    }
-                    mdBack.Visible = true;
-                    mdPed.Visible = true;
+                    carregarTabela();
+                }
+                else
+                {
+                    Response.Redirect("~/Default.aspx");
                 }
 
-                carregarTabela();
-
             }
-            carregarTabela();
-            //    }
-            //    else
-            //    {
-            //        Response.Redirect("~/Default.aspx");
-            //    }
+            catch (Exception)
+            {
 
-            //}
-            //catch (Exception)
-            //{
-
-            //    Response.Redirect("~/Default.aspx");
-            //}
+                Response.Redirect("~/Default.aspx");
+            }
         }
 
 
@@ -131,8 +131,11 @@ namespace SistemaHotel
             itemPed.IdCliente = cli.IdCliente;
             itemPed.Quantidade = int.Parse(txtQuantidade.Text);
             dalItemPed.inserirItemPedido(itemPed);
-            string msg = $"<script> alert('Pedido Realizado: ID: {ped.IdPedido}'); </script>";
-            Response.Write(msg);
+            //string msg = $"<script> alert('Pedido Realizado: ID: {ped.IdPedido}'); </script>";
+            //Response.Write(msg);
+            Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                           Pedido Realizado: ID: {ped.IdPedido}  
+                            </div>");
 
         }
 

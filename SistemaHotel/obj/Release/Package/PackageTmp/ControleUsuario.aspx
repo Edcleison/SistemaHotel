@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Controle - Usuarios" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="ControleUsuario.aspx.cs" Inherits="SistemaHotel.ControleUsuario" %>
+﻿<%@ Page Title="Controle - Usuários" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="ControleUsuario.aspx.cs" Inherits="SistemaHotel.ControleUsuario" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -56,7 +56,7 @@
                 "ordering": false,
                 "info": false,
                 dom: 'Bfrtip',
-                buttons: ['excel'
+                buttons: ['excel','pdf',
 
                 ],
                 "createdRow": function (row, data, dataIndex) {
@@ -95,7 +95,7 @@
                 "ordering": false,
                 "info": false,
                 dom: 'Bfrtip',
-                buttons: ['excel'
+                buttons: ['excel','pdf',
 
                 ],
                 "createdRow": function (row, data, dataIndex) {

@@ -23,54 +23,61 @@ namespace SistemaHotel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    if (Session["perfil"].ToString() == "ADMINISTRADOR")
-            //    {
-            int rParametro = 0;
-            if (!IsPostBack)
+            try
             {
-                if (Request.QueryString["QUARTO_D"] != null)
+                if (Session["perfil"].ToString() == "Administrador")
                 {
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_D"]));
-                    dalQua.inativarQuarto(rParametro);
-                    string msg = $"<script> alert('Quarto Inativado: ID{rParametro}'); </script>";
-                    Response.Write(msg);
+                    int rParametro = 0;
+                    if (!IsPostBack)
+                    {
+                        if (Request.QueryString["QUARTO_D"] != null)
+                        {
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_D"]));
+                            dalQua.inativarQuarto(rParametro);
+                            //string msg = $"<script> alert('Quarto Inativado: ID {rParametro}'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                     Quarto Inativado: ID {rParametro}
+                                            </div>");
+                        }
+                        if (Request.QueryString["QUARTO_E"] != null)
+                        {
+
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_E"]));
+
+                            Quarto qua = dalQua.buscarQuartoId(rParametro);
+
+                            txtQuartoE.Text = qua.DescricaoQuarto;
+                            mdBack.Visible = true;
+                            mdQuarE.Visible = true;
+                        }
+                        if (Request.QueryString["QUARTO_A"] != null)
+                        {
+
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_A"]));
+                            dalQua.ativarQuarto(rParametro);
+                            //string msg = $"<script> alert('Quarto Ativado! ID: {rParametro}'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                     Quarto Ativado! ID: {rParametro}
+                                            </div>");
+
+
+                        }
+                    }
+
                 }
-                if (Request.QueryString["QUARTO_E"] != null)
+                else
                 {
-
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_E"]));
-
-                    Quarto qua = dalQua.buscarQuartoId(rParametro);
-
-                    txtQuartoE.Text = qua.DescricaoQuarto;
-                    mdBack.Visible = true;
-                    mdQuarE.Visible = true;
+                    Response.Redirect("~/Default.aspx");
                 }
-                if (Request.QueryString["QUARTO_A"] != null)
-                {
 
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_A"]));
-                    dalQua.ativarQuarto(rParametro);
-                    string msg = $"<script> alert('Quarto Ativado! ID: {rParametro}'); </script>";
-                    Response.Write(msg);
-
-                }
             }
+            catch (Exception)
+            {
 
-            //    }
-            //    else
-            //    {
-            //        Response.Redirect("~/Default.aspx");
-            //    }
-
-            //}
-            //catch (Exception)
-            //{
-
-            //    Response.Redirect("~/Default.aspx");
-            //}
+                Response.Redirect("~/Default.aspx");
+            }
 
 
         }
@@ -165,14 +172,20 @@ namespace SistemaHotel
                 qua.DescricaoQuarto = txtQuarto.Text;
                 qua.StatusQuar = 'S';
                 dalQua.inserirQuarto(qua);
-                string msg = "<script> alert('Quarto inserido!'); </script>";
-                Response.Write(msg);
+                //string msg = "<script> alert('Quarto inserido!'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                    Quarto inserido!
+                                            </div>");
 
             }
             else
             {
-                string msg = "<script> alert('Preencha o Quarto!'); </script>";
-                Response.Write(msg);
+                //string msg = "<script> alert('Preencha o Quarto!'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                  Preencha o Quarto!
+                                            </div>");
             }
 
         }
@@ -184,14 +197,20 @@ namespace SistemaHotel
                 Quarto qua = new Quarto();
                 qua.DescricaoQuarto = txtQuartoE.Text;
                 dalQua.alterarQuarto(qua);
-                string msg = $"<script> alert('Quarto alterado: ID{qua.IdQuarto}'); </script>";
-                Response.Write(msg);
+                //string msg = $"<script> alert('Quarto alterado: ID{qua.IdQuarto}'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                               Quarto alterado: ID {qua.IdQuarto}
+                                            </div>");
 
             }
             else
             {
-                string msg = "<script> alert('Preencha o Quarto!'); </script>";
-                Response.Write(msg);
+                //string msg = "<script> alert('Preencha o Quarto!'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                               Preencha o Quarto!
+                                            </div>");
             }
 
 

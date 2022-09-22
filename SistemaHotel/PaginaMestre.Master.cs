@@ -21,28 +21,21 @@ namespace SistemaHotel
                 Response.Redirect("~/login.aspx");
 
             }
-            else if (Session["perfil"].ToString() == "ADMINISTRADOR")
+            else if (Session["perfil"].ToString() == "Administrador")
             {
-
-                //ControleProduto.Visible = true;
-                //ControleAtendimento.Visible = true;
-                //ControleUsuario.Visible = true;
-                //ControleQuarto.Visible = true;
-                //Atendimento.Visible = true;
 
                 NovoPedidoCozinha.Visible = false;
                 NovoPedidoFrigobar.Visible = false;
                 ResumoPedidos.Visible = false;
             }
 
-            else if (Session["perfil"].ToString() == "FUNCIONARIO")
+            else if (Session["perfil"].ToString() == "Funcionário")
             {
 
                 ControleProduto.Visible = false;
                 ControleAtendimento.Visible = false;
                 ControleUsuario.Visible = false;
                 ControleQuarto.Visible = false;
-
                 NovoPedidoCozinha.Visible = false;
                 NovoPedidoFrigobar.Visible = false;
                 ResumoPedidos.Visible = false;

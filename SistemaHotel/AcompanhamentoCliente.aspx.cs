@@ -24,27 +24,27 @@ namespace SistemaHotel
         DALCliente dalCli = new DALCliente();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    if (Session["perfil"].ToString() =="CLIENTE")
-            //    {
+            try
+            {
+                if (Session["perfil"].ToString() == "Cliente")
+                {
                     if (!IsPostBack)
                     {
                         carregaDdlStatus();
                         carregaDdlTipo();
                     }
-                //}
-                //else
-                //{
-                //    Response.Redirect("~/Defautl.aspx");
-                //}
-               
-            //}
-            //catch (Exception)
-            //{
+                }
+                else
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
 
-            //    Response.Redirect("~/Defautl.aspx");
-            //}         
+            }
+            catch (Exception)
+            {
+
+                Response.Redirect("~/Default.aspx");
+            }
         }
 
 
@@ -64,7 +64,7 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>QUARTO</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME CLIENTE</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME PRODUTO</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DESC PRODUTO</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DESC. PRODUTO</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>PREÇO UN</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>QTDE</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");

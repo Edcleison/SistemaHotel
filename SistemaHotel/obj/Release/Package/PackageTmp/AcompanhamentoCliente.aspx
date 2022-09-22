@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Acompanhamento" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="AcompanhamentoCliente.aspx.cs" Inherits="SistemaHotel.AcompanhamentoCliente" %>
+﻿<%@ Page Title="Extrato de Pedidos" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="AcompanhamentoCliente.aspx.cs" Inherits="SistemaHotel.AcompanhamentoCliente" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <%--<link href="CSS/bootstrap.css" rel="stylesheet" />
@@ -80,7 +80,7 @@
                 "ordering": false,
                 "info": false,
                 dom: 'Bfrtip',
-                buttons: ['excel',
+                buttons: ['pdf',
 
                 ],
                 "createdRow": function (row, data, dataIndex) {

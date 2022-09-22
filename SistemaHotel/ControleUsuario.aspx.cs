@@ -25,75 +25,81 @@ namespace SistemaHotel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    if (Session["perfil"].ToString() == "ADMINISTRADOR")
-            //    {
-            int rParametro = 0;
+            try
+            {
+                if (Session["perfil"].ToString() == "Administrador")
+                {
+                    int rParametro = 0;
 
-            if (!IsPostBack)
+                    if (!IsPostBack)
+                    {
+
+                        if (Request.QueryString["USUARIO_D"] != null)
+                        {
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_D"]));
+                            dalPerfUsu.inativarUsuario(rParametro);
+                            //string msg = $"<script> alert('Usuário Inativado: ID {rParametro}'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                    Usuário Inativado: ID {rParametro}
+                                            </div>");
+                        }
+                        if (Request.QueryString["USUARIO_E"] != null)
+                        {
+                            carregaDdlUsuarioE();
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_E"]));
+                            Usuario usu = dalUsu.buscarUsuarioId(rParametro);
+                            txtIdUsuarioE.Text = usu.IdUsuario.ToString();
+                            txtNomeE.Text = usu.NomeUsuario;
+                            txtSobrenomeE.Text = usu.SobrenomeUsuario;
+                            txtLoginE.Text = usu.Login;
+                            PerfilUsuario perfUsu = new PerfilUsuario();
+                            perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.IdUsuario);
+                            mdBack.Visible = true;
+                            mdUsuE.Visible = true;
+                        }
+                        if (Request.QueryString["CLIENTE_E"] != null)
+                        {
+                            carregaDdlQuartoE();
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["CLIENTE_E"]));
+                            Usuario usu = dalUsu.buscarUsuarioId(rParametro);
+                            Cliente cli = dalCli.buscarClienteReserva(usu.Login);
+                            txtCdReservaE.Text = cli.CodReserva;
+                            ddlQuartoE.SelectedValue = cli.IdQuarto.ToString();
+                            txtNomeClienteE.Text = cli.NomeCliente + " " + cli.SobreNomeCliente;
+                            txtDataIni.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
+                            txtDataIni.Text = cli.DataSaida.ToString("dd/MM/yyyy HH:mm");
+                            txtDataIniE.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
+                            txtDataFimE.Text = cli.DataSaida.ToString("dd/MM/yyyy HH:mm");
+                            mdBack.Visible = true;
+                            modEditCli.Visible = true;
+                        }
+                        if (Request.QueryString["USUARIO_A"] != null)
+                        {
+
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_A"]));
+                            dalPerfUsu.ativarUsuario(rParametro);
+                            //string msg = $"<script> alert('Usuário Ativado! ID:{rParametro}'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                    Usuário Ativado! ID:{rParametro}
+                                            </div>");
+
+                        }
+                        carregaDdl();
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
+
+            }
+            catch (Exception)
             {
 
-                if (Request.QueryString["USUARIO_D"] != null)
-                {
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_D"]));
-                    dalPerfUsu.inativarUsuario(rParametro);
-                    string msg = $"<script> alert('Usuário Inativado: ID {rParametro}'); </script>";
-                    Response.Write(msg);
-                }
-                if (Request.QueryString["USUARIO_E"] != null)
-                {
-                    carregaDdlUsuarioE();
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_E"]));
-                    Usuario usu = dalUsu.buscarUsuarioId(rParametro);
-                    txtIdUsuarioE.Text = usu.IdUsuario.ToString();
-                    txtNomeE.Text = usu.NomeUsuario;
-                    txtSobrenomeE.Text = usu.SobrenomeUsuario;
-                    txtLoginE.Text = usu.Login;
-                    PerfilUsuario perfUsu = new PerfilUsuario();
-                    perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.IdUsuario);
-                    mdBack.Visible = true;
-                    mdUsuE.Visible = true;
-                }
-                if (Request.QueryString["CLIENTE_E"] != null)
-                {
-                    carregaDdlQuartoE();
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["CLIENTE_E"]));
-                    Usuario usu = dalUsu.buscarUsuarioId(rParametro);
-                    Cliente cli = dalCli.buscarClienteReserva(usu.Login);
-                    txtCdReservaE.Text = cli.CodReserva;
-                    ddlQuartoE.SelectedValue = cli.IdQuarto.ToString();
-                    txtNomeClienteE.Text = cli.NomeCliente + " " + cli.SobreNomeCliente;
-                    txtDataIni.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
-                    txtDataIni.Text = cli.DataSaida.ToString("dd/MM/yyyy HH:mm");
-                    txtDataIniE.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
-                    txtDataFimE.Text = cli.DataSaida.ToString("dd/MM/yyyy HH:mm");
-                    mdBack.Visible = true;
-                    modEditCli.Visible = true;
-                }
-                if (Request.QueryString["USUARIO_A"] != null)
-                {
-
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_A"]));
-                    dalPerfUsu.ativarUsuario(rParametro);
-                    string msg = $"<script> alert('Usuário Ativado! ID:{rParametro}'); </script>";
-                    Response.Write(msg);
-
-                }
-                carregaDdl();
+                Response.Redirect("~/Default.aspx");
             }
-            //    }
-            //    else
-            //    {
-            //        Response.Redirect("~/Default.aspx");
-            //    }
-
-            //}
-            //catch (Exception)
-            //{
-
-            //    Response.Redirect("~/Default.aspx");
-            //}
 
         }
 
@@ -114,7 +120,7 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>LOGIN</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>STATUS</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>EDITAR</center></th>");
-            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ATIVAR/INATIVAR</center></th>");         
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ATIVAR/INATIVAR</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");
@@ -171,8 +177,14 @@ namespace SistemaHotel
                     //se o perfil estiver atívo retorna a mensagem de já cadastrado
                     if (usu.Login != "")
                     {
-                        string msg = "<script> alert('Usuário já cadastrado!'); </script>";
-                        Response.Write(msg);
+                        //string msg = "<script> alert('Usuário já cadastrado!'); </script>";
+                        //Response.Write(msg);
+                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                  Usuário já cadastrado!
+                                            </div>");
+
+
+
 
                     }
                     //se a consulta no banco retornar um login vazio ele cadastra o Usuário
@@ -213,23 +225,32 @@ namespace SistemaHotel
 
                         }
 
-                        string msg = "<script> alert('Cadastro realizado!'); </script>";
-                        Response.Write(msg);
+                        //string msg = "<script> alert('Cadastro realizado!'); </script>";
+                        //Response.Write(msg);
+                        Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                  Cadastro realizado!
+                                            </div>");
                         limparCampos();
                     }
                 }
                 else
                 {
-                    string msg = "<script> alert('Senhas Diferentes!'); </script>";
-                    Response.Write(msg);
+                    //string msg = "<script> alert('Senhas Diferentes!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                 Senhas Diferentes!
+                                            </div>");
 
                 }
 
             }
             else
             {
-                string msg = "<script> alert('Preencha todos os campos!'); </script>";
-                Response.Write(msg);
+                //string msg = "<script> alert('Preencha todos os campos!'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                 Senhas Diferentes!
+                                            </div>");
             }
         }
 
@@ -362,21 +383,30 @@ namespace SistemaHotel
                         }
                     }
 
-                    string msg = $"<script> alert('Usuário Atualizado: ID {txtIdUsuarioE.Text}'); </script>";
-                    Response.Write(msg);
+                    //string msg = $"<script> alert('Usuário Atualizado: ID {txtIdUsuarioE.Text}'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                               Usuário Atualizado: ID {txtIdUsuarioE.Text}
+                                            </div>");
                 }
                 else
                 {
-                    string msg = "<script> alert('Senhas Diferentes!'); </script>";
-                    Response.Write(msg);
+                    //string msg = "<script> alert('Senhas Diferentes!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                           Senhas Diferentes!
+                                            </div>");
 
                 }
 
             }
             else
             {
-                string msg = "<script> alert('Preencha todos os campos!'); </script>";
-                Response.Write(msg);
+                //string msg = "<script> alert('Preencha todos os campos!'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                           Preencha todos os campos!
+                                            </div>");
             }
 
         }
@@ -520,13 +550,20 @@ namespace SistemaHotel
                                         txtDataIni.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
                                         txtDataFim.Text = cli.DataSaida.ToString("dd/MM/yyyy HH:mm");
 
-                                        string msg = "<script> alert('Cadastro realizado!'); </script>";
-                                        Response.Write(msg);
+                                        //string msg = "<script> alert('Cadastro realizado!'); </script>";
+                                        //Response.Write(msg);
+                                        Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                                         Cadastro realizado!
+                                                         </div>");
+
                                     }
                                     else
                                     {
-                                        string msg = $"<script> alert('Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {dataOcupa.ToString("dd/MM/yyyy HH:ss")} ID Cliente: {dta.Rows[0]["ID_CLIENTE"]}'); </script>";
-                                        Response.Write(msg);
+                                        //string msg = $"<script> alert('Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {dataOcupa.ToString("dd/MM/yyyy HH:ss")} ID Cliente: {dta.Rows[0]["ID_CLIENTE"]}'); </script>";
+                                        //Response.Write(msg);
+                                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                            Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {dataOcupa.ToString("dd/MM/yyyy HH: ss")} ID Cliente: {dta.Rows[0]["ID_CLIENTE"]}
+                                                             </div>");
 
                                     }
 
@@ -556,23 +593,33 @@ namespace SistemaHotel
                                     txtDataIni.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
                                     txtDataFim.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
 
-                                    string msg = "<script> alert('Cadastro realizado!'); </script>";
-                                    Response.Write(msg);
+                                    //string msg = "<script> alert('Cadastro realizado!'); </script>";
+                                    //Response.Write(msg);
+                                    Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                                    Cadastro realizado!
+                                                     </div>");
 
                                 }
 
                             }
                             else
                             {
-                                string msg = "<script> alert('Datas não permitidas!'); </script>";
-                                Response.Write(msg);
+                                //string msg = "<script> alert('Datas não permitidas!'); </script>";
+                                //Response.Write(msg);
+                                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                                Datas não permitidas!
+                                                </div>");
                             }
 
                         }
                         else
                         {
-                            string msg = "<script> alert('Datas não permitidas!'); </script>";
-                            Response.Write(msg);
+                            //string msg = "<script> alert('Datas não permitidas!'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                            Datas não permitidas!
+                                            </div>");
+
 
                         }
 
@@ -580,21 +627,31 @@ namespace SistemaHotel
                     catch (Exception erro)
                     {
 
-                        string msg1 = $"<script> alert('{erro.Message}'); </script>";
-                        Response.Write(msg1);
+                        //string msg1 = $"<script> alert('{erro.Message}'); </script>";
+                        //Response.Write(msg1);
+                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                        {erro.Message}
+                                            </div>");
                     }
 
                 }
                 else
                 {
-                    string msg = "<script> alert('Cliente já cadastrado!'); </script>";
-                    Response.Write(msg);
+                    //string msg = "<script> alert('Cliente já cadastrado!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                       Cliente já cadastrado!
+                                            </div>");
                 }
             }
             else
             {
-                string msg = "<script> alert('Preencha Todos os campos!'); </script>";
-                Response.Write(msg);
+                //string msg = "<script> alert('Preencha Todos os campos!'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                    Preencha Todos os campos!
+                                            </div>");
+
             }
         }
 
@@ -620,30 +677,43 @@ namespace SistemaHotel
                     if (DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) < DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
                     {
                         //alterar a data de saída do cliente
-                        dalCliente.alterarCliente(cli);                       
+                        dalCliente.alterarCliente(cli);
                         txtDataFimE.Text = novaDataFim.ToString("dd/MM/yyyy HH:mm");
-                        string msg = $"<script> alert('Data Alterada {novaDataFim.ToString("dd/MM/yyyy HH:mm")} ID Cliente {cli.IdCliente}'); </script>";
-                        Response.Write(msg);
+                        //string msg = $"<script> alert('Data Alterada {novaDataFim.ToString("dd/MM/yyyy HH:mm")} ID Cliente {cli.IdCliente}'); </script>";
+                        //Response.Write(msg);
+                        Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                        Data Alterada {novaDataFim.ToString("dd/MM/yyyy HH:mm")} ID Cliente {cli.IdCliente}
+                                            </div>");
+
                     }
                     else
                     {
-                        string msg = $"<script> alert('Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null)} ID Cliente: {dta.Rows[0]["ID_CLIENTE"]}'); </script>";
-                        Response.Write(msg);
+                        //string msg = $"<script> alert('Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null)} ID Cliente: {dta.Rows[0]["ID_CLIENTE"]}'); </script>";
+                        //Response.Write(msg);
+                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                  Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null)} ID Cliente: {dta.Rows[0]["ID_CLIENTE"]}
+                                            </div>");
                     }
 
                 }
                 else
                 {
                     dalCliente.alterarCliente(cli);
-                    txtDataFimE.Text = novaDataFim.ToString();
-                    string msg = $"<script> alert('Data Alterada: ID Cliente:{cli.IdCliente} Data:{novaDataFim}!'); </script>";
-                    Response.Write(msg);
+                    //txtDataFimE.Text = novaDataFim.ToString();
+                    //string msg = $"<script> alert('Data Alterada: ID Cliente:{cli.IdCliente} Data:{novaDataFim}!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                    Data Alterada: ID Cliente:{cli.IdCliente} Data:{novaDataFim}!
+                                    </div>");
                 }
             }
             else
             {
-                string msg = "<script> alert('Data não permitida!!'); </script>";
-                Response.Write(msg);
+                //string msg = "<script> alert('Data não permitida!'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                  Data não permitida!
+                                    </div>");
 
             }
 

@@ -21,35 +21,29 @@ namespace SistemaHotel
         DALPedido dalPed = new DALPedido();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //    try
-            //    {
-            //        if (Session["perfil"].ToString() == "ADMINISTRADOR")
-            //        {
-            if (!IsPostBack)
+            try
+            {
+                if (Session["perfil"].ToString() == "Administrador")
+                {
+                    if (!IsPostBack)
                     {
                         carregaDdlStatus();
                         carregaDdlTipo();
                     }
 
-                //}
-            //    else
-            //    {
-            //        Response.Redirect("~/Default.aspx");
-            //    }
+                }
+                else
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
 
-            //}
-            //catch (Exception)
-            //{
+            }
+            catch (Exception)
+            {
 
-            //    Response.Redirect("~/Default.aspx");
-            //}
-        //}
-  
+                Response.Redirect("~/Default.aspx");
+            }
         }
-
-
-
-
 
         private void carregarTabela(string Tipo, string Status)
         {
@@ -70,8 +64,8 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>QTDE</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DATA FIM</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID ADM/ID FUNC</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME ADM/ID FUNC</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>ID ADM/ID FUNC.</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME ADM/NOME FUNC.</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>PERFIL</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");

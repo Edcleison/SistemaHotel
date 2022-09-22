@@ -24,59 +24,62 @@ namespace SistemaHotel
         DALCarrinho dalCar = new DALCarrinho();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    if (Session["perfil"].ToString() =="CLIENTE")
-            //    {
-            int rParametro = 0;
-            if (!IsPostBack)
+            try
             {
-                if (Request.QueryString["PRODUTO_N"] != null)
+                if (Session["perfil"].ToString() == "Cliente")
                 {
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_N"]));
-                    Produto prod = dalProd.buscarProdutoId(rParametro);
-                    txtIdProd.Text = prod.IdProduto.ToString();
-                    txtNomeProd.Text = prod.NomeProduto;
-                    txtDescricao.Text = prod.DescricaoProduto;
-                    txtPreco.Text = prod.PrecoUnitario.ToString();
-                    imgProd.Src = $@"IMAGENS_PRODUTOS\{prod.FotoProduto}";
-                    if (prod.TipoProduto == 1)
+                    int rParametro = 0;
+                    if (!IsPostBack)
                     {
-                        txtQuantidade.Enabled = true;
+                        if (Request.QueryString["PRODUTO_N"] != null)
+                        {
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_N"]));
+                            Produto prod = dalProd.buscarProdutoId(rParametro);
+                            txtIdProd.Text = prod.IdProduto.ToString();
+                            txtNomeProd.Text = prod.NomeProduto;
+                            txtDescricao.Text = prod.DescricaoProduto;
+                            txtPreco.Text = prod.PrecoUnitario.ToString();
+                            imgProd.Src = $@"IMAGENS_PRODUTOS\{prod.FotoProduto}";
+                            if (prod.TipoProduto == 1)
+                            {
+                                txtQuantidade.Enabled = true;
+                            }
+                            else
+                            {
+                                txtQuantidade.Text = "1";
+                            }
+                            mdBack.Visible = true;
+                            mdPed.Visible = true;
+                        }
+                        if (Request.QueryString["CARRINHO_C"] != null)
+                        {
+                            rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["CARRINHO_C"]));
+                            dalCar.excluirCarrinho(rParametro);
+                            //string msg = $"<script> alert('Produto Removido!'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                            Produto Removido!
+                                             </div>");
+                            mdCarr.Visible = true;
+                            carregarTabelaCarrinho(Session["login"].ToString());
+                        }
+                        carregarTabela();
+                        lblQtdeCarrinho.Text = dalCar.buscarCarrinhoQtde(Session["login"].ToString());
                     }
-                    else
-                    {
-                        txtQuantidade.Text = "1";
-                    }
-                    mdBack.Visible = true;
-                    mdPed.Visible = true;
+                    carregarTabela();
+                    lblQtdeCarrinho.Text = dalCar.buscarCarrinhoQtde(Session["login"].ToString());
                 }
-                if (Request.QueryString["CARRINHO_C"] != null)
+                else
                 {
-                    rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["CARRINHO_C"]));
-                    dalCar.excluirCarrinho(rParametro);
-                    string msg = $"<script> alert('Produto Removido'); </script>";
-                    Response.Write(msg);
-                    mdCarr.Visible = true;
-                    carregarTabelaCarrinho(Session["login"].ToString());
+                    Response.Redirect("~/Default.aspx");
                 }
-                carregarTabela();
-                lblQtdeCarrinho.Text = dalCar.buscarCarrinhoQtde(Session["login"].ToString());
+
             }
-            carregarTabela();
-            lblQtdeCarrinho.Text = dalCar.buscarCarrinhoQtde(Session["login"].ToString());
-            //    }
-            //    else
-            //    {
-            //        Response.Redirect("~/Default.aspx");
-            //    }
+            catch (Exception)
+            {
 
-            //}
-            //catch (Exception)
-            //{
-
-            //    Response.Redirect("~/Default.aspx");
-            //}
+                Response.Redirect("~/Default.aspx");
+            }
         }
 
         #region Controle Pedido
@@ -134,8 +137,11 @@ namespace SistemaHotel
                 dalCar.inserirCarrinho(car);
             }
 
-            string msg = $"<script> alert('Produto(s) Adicionado(s): ID: {car.IdProduto} Qtde: {txtQuantidade.Text}'); </script>";
-            Response.Write(msg);
+            //string msg = $"<script> alert('Produto(s) Adicionado(s): ID: {car.IdProduto} Qtde: {txtQuantidade.Text}'); </script>";
+            //Response.Write(msg);
+            Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            Produto(s) Adicionado(s): ID: {car.IdProduto} Qtde: {txtQuantidade.Text}  
+                            </div>");
 
         }
 
@@ -168,16 +174,22 @@ namespace SistemaHotel
                     lblTotal.Text = "";
                 }
                 dalCar.excluirCarrinhoCliente(cli.IdCliente);
-                string msg = $"<script> alert('Pedido Realizado: ID: {ped.IdPedido}'); </script>";
-                Response.Write(msg);
+                //string msg = $"<script> alert('Pedido Realizado: ID: {ped.IdPedido}'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                         Pedido Realizado: ID: {ped.IdPedido}
+                            </div>");
                 mdBack.Visible = false;
                 mdCarr.Visible = false;
 
             }
             else
             {
-                string msg = $"<script> alert('Carrinho Vazio!'); </script>";
-                Response.Write(msg);
+                //string msg = $"<script> alert('Carrinho Vazio!'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                        Carrinho Vazio!
+                            </div>");
                 mdCarr.Visible = false;
                 mdBack.Visible = false;              
             }
@@ -239,8 +251,11 @@ namespace SistemaHotel
             //busca os dados do cliente pelo cod_reserva
             Cliente cli = dalCli.buscarClienteReserva(Session["login"].ToString());
             dalCar.excluirCarrinhoCliente(cli.IdCliente);
-            string msg = $"<script> alert('Carrinho Vazio!'); </script>";
-            Response.Write(msg);
+            //string msg = $"<script> alert('Carrinho Vazio!'); </script>";
+            //Response.Write(msg);
+            Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                        Carrinho Vazio!
+                            </div>");
             carregarTabelaCarrinho(Session["login"].ToString());
         }
         #endregion

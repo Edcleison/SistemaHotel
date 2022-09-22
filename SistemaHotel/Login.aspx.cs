@@ -41,18 +41,27 @@ namespace SistemaHotel
 
                         if (login != u.Login && senha == u.Senha)
                         {
-                            msg = "<script> alert('Login incorreto!'); </script>";
-                            Response.Write(msg);
+                            //msg = "<script> alert('Login incorreto!'); </script>";
+                            //Response.Write(msg);
+                            Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                              Login incorreto!  
+                                            </div>");
                         }
                         else if (login == u.Login && senha != u.Senha)
                         {
                             //msg = "<script> alert('Senha incorreta!'); </script>";
                             //Response.Write(msg);
+                            Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                               Senha incorreta!  
+                                            </div>");
                         }
                         else if (login != u.Login && senha != u.Senha)
                         {
-                            msg = "<script> alert('Login e senha incorretos'); </script>";
-                            Response.Write(msg);
+                            //msg = "<script> alert('Login e senha incorretos!'); </script>";
+                            //Response.Write(msg);
+                            Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                              Login e senha incorretos! 
+                                            </div>");
                         }
                         else
                         {
@@ -64,13 +73,13 @@ namespace SistemaHotel
                             switch (pu.IdPerfil)
                             {
                                 case 1:
-                                    Session["perfil"] = "ADMINISTRADOR";
+                                    Session["perfil"] = "Administrador";
                                     break;
                                 case 2:
-                                    Session["perfil"] = "FUNCIONARIO";
+                                    Session["perfil"] = "Funcionário";
                                     break;
                                 case 3:
-                                    Session["perfil"] = "CLIENTE";
+                                    Session["perfil"] = "Cliente";
                                     break;
                             }
                             Response.Redirect("~/Default.aspx");
@@ -80,8 +89,11 @@ namespace SistemaHotel
                     }
                     else
                     {
-                        msg = "<script> alert('Login incorreto'); </script>";
-                        Response.Write(msg);
+                        //msg = "<script> alert('Login incorreto!'); </script>";
+                        //Response.Write(msg);
+                        Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                              Login incorreto! 
+                                            </div>");
                     }
 
                 }
@@ -100,18 +112,27 @@ namespace SistemaHotel
 
                             if (login != u.Login && senha == u.Senha)
                             {
-                                msg = "<script> alert('Login incorreto!'); </script>";
-                                Response.Write(msg);
+                                //msg = "<script> alert('Login incorreto!'); </script>";
+                                //Response.Write(msg);
+                                Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                              Login incorreto! 
+                                            </div>");
                             }
                             else if (login == u.Login && senha != u.Senha)
                             {
-                                msg = "<script> alert('Senha incorreta!'); </script>";
-                                Response.Write(msg);
+                                //msg = "<script> alert('Senha incorreta!'); </script>";
+                                //Response.Write(msg);
+                                Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                             Senha incorreta!
+                                            </div>");
                             }
                             else if (login != u.Login && senha != u.Senha)
                             {
-                                msg = "<script> alert('Login e senha incorretos'); </script>";
-                                Response.Write(msg);
+                                //msg = "<script> alert('Login e senha incorretos!'); </script>";
+                                //Response.Write(msg);
+                                Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                             Login e senha incorretos!
+                                            </div>");
                             }
                             else
                             {
@@ -140,18 +161,24 @@ namespace SistemaHotel
                     }
                     else
                     {
-                        msg = "<script> alert('Login incorreto'); </script>";
-                        Response.Write(msg);
+                        //msg = "<script> alert('Login incorreto!'); </script>";
+                        //Response.Write(msg);
+                        Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                           Login incorreto!
+                                            </div>");
                     }
                 }
                 else
                 {
-                    if (pu.StatusPerfilUsuario =='S')
+                    if (pu.StatusPerfilUsuario == 'S')
                     {
                         dpu.inativarUsuario(u.IdUsuario);
                     }
-                    msg = "<script> alert('Login não permitido!'); </script>";
-                    Response.Write(msg);
+                    //msg = "<script> alert('Login não permitido!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                          Login não permitido!
+                                            </div>");
                 }
             }
 
@@ -190,22 +217,31 @@ namespace SistemaHotel
                     usu.IdUsuario = perfUsu.IdUsuario;
                     usu.Senha = Criptografia.Encrypt(txtConfirmaSenha.Text);
                     dalUsu.alterarSenha(usu);
-                    string msg = "<script> alert('Senha Atualizada!'); </script>";
-                    Response.Write(msg);
+                    //string msg = "<script> alert('Senha Atualizada!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                         Senha Atualizada!
+                                            </div>");
                     limparCampos();
                 }
                 else
                 {
-                    string msg = "<script> alert('Digite as Senhas Iguais!'); </script>";
-                    Response.Write(msg);
+                    //string msg = "<script> alert('Digite as Senhas Iguais!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                         Digite as Senhas Iguais!
+                                            </div>");
                 }
 
 
             }
             else
             {
-                string msg = "<script> alert('Login não encontrado!'); </script>";
-                Response.Write(msg);
+                //string msg = "<script> alert('Login não encontrado!'); </script>";
+                //Response.Write(msg);
+                Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                        Login não encontrado!
+                                            </div>");
             }
 
         }

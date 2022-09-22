@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="ControleProduto.aspx.cs" Inherits="SistemaHotel.ControleProduto" %>
+﻿<%@ Page Title="Produtoa" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="ControleProduto.aspx.cs" Inherits="SistemaHotel.ControleProduto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -69,7 +69,7 @@
                 "ordering": false,
                 "info": false,
                 dom: 'Bfrtip',
-                buttons: ['excel'
+                buttons: ['excel','pdf',
 
                 ],
                 "createdRow": function (row, data, dataIndex) {

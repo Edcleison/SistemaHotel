@@ -25,10 +25,10 @@ namespace SistemaHotel
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //try
-            //{
-            //    if (Session["perfil"].ToString() =="ADMINISTRADOR" || Session["perfil"].ToString() == "FUNCIONARIO")
-            //    {
+            try
+            {
+                if (Session["perfil"].ToString() == "Administrador" || Session["perfil"].ToString() == "Funcionário")
+                {
                     if (!IsPostBack)
                     {
                         int rParametro = 0;
@@ -39,7 +39,7 @@ namespace SistemaHotel
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["ATENDIMENTO_S"]));
                             Usuario usu = dalUsu.buscaUsuarioLogin(Session["login"].ToString());
                             Pedido ped = dalPed.buscarPedidoId(rParametro);
-                            if (Session["perfil"].ToString() == "ADMINISTRADOR")
+                            if (Session["perfil"].ToString() == "Administrador")
                             {
                                 DALAdministracao dalAdm = new DALAdministracao();
                                 Administracao adm = dalAdm.buscarAdmIdUsuario(usu.IdUsuario);
@@ -47,11 +47,15 @@ namespace SistemaHotel
                                 ped.DataFinalizacao = DateTime.Now;
                                 ped.IdAdm = adm.IdAdm;
                                 dalPed.alterarStatusAtendimentoAdm(ped);
-                                msg = $"<script> alert('Atendimento Finalizado: ID do Adm {adm.IdAdm}'); </script>";
-                                Response.Write(msg);
+                                //msg = $"<script> alert('Atendimento Finalizado: ID do Administrador {adm.IdAdm}'); </script>";
+                                //Response.Write(msg);
+                                Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                             Atendimento Finalizado: ID do Administrador {adm.IdAdm}  
+                                            </div>");
+
 
                             }
-                            if (Session["perfil"].ToString() == "FUNCIONARIO")
+                            if (Session["perfil"].ToString() == "Funcionário")
                             {
                                 DALFuncionario dalFun = new DALFuncionario();
                                 Funcionario fun = dalFun.buscarFuncionarioIdUsuario(usu.IdUsuario);
@@ -59,8 +63,11 @@ namespace SistemaHotel
                                 ped.DataFinalizacao = DateTime.Now;
                                 ped.IdFuncionario = fun.IdFuncionario;
                                 dalPed.alterarStatusAtendimentoFuncionario(ped);
-                                msg = $"<script> alert('Atendimento Finalizado: ID do Funcionário {fun.IdFuncionario}'); </script>";
-                                Response.Write(msg);
+                                //msg = $"<script> alert('Atendimento Finalizado: ID do Funcionário {fun.IdFuncionario}'); </script>";
+                                //Response.Write(msg);
+                                Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                             Atendimento Finalizado: ID do Funcionário {fun.IdFuncionario}
+                                            </div>");
                             }
                         }
                         if (Request.QueryString["ATENDIMENTO_N"] != null)
@@ -68,7 +75,7 @@ namespace SistemaHotel
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["ATENDIMENTO_N"]));
                             Usuario usu = dalUsu.buscaUsuarioLogin(Session["login"].ToString());
                             Pedido ped = dalPed.buscarPedidoId(rParametro);
-                            if (Session["perfil"].ToString() == "ADMINISTRADOR")
+                            if (Session["perfil"].ToString() == "Administrador")
                             {
                                 DALAdministracao dalAdm = new DALAdministracao();
                                 Administracao adm = dalAdm.buscarAdmIdUsuario(usu.IdUsuario);
@@ -76,10 +83,13 @@ namespace SistemaHotel
                                 ped.DataFinalizacao = DateTime.Now;
                                 ped.IdAdm = adm.IdAdm;
                                 dalPed.alterarStatusAtendimentoAdm(ped);
-                                msg = $"<script> alert('Atendimento Recusado: ID do Adm {adm.IdAdm}'); </script>";
-                                Response.Write(msg);
+                                //msg = $"<script> alert('Atendimento Recusado: ID do Administrador {adm.IdAdm}'); </script>";
+                                //Response.Write(msg);
+                                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                             Atendimento Recusado: ID do Administrador {adm.IdAdm}
+                                            </div>");
                             }
-                            if (Session["perfil"].ToString() == "FUNCIONARIO")
+                            if (Session["perfil"].ToString() == "Funcionário")
                             {
                                 DALFuncionario dalFun = new DALFuncionario();
                                 Funcionario fun = dalFun.buscarFuncionarioIdUsuario(usu.IdUsuario);
@@ -87,12 +97,16 @@ namespace SistemaHotel
                                 ped.DataFinalizacao = DateTime.Now;
                                 ped.IdFuncionario = fun.IdFuncionario;
                                 dalPed.alterarStatusAtendimentoFuncionario(ped);
-                                msg = $"<script> alert('Atendimento Finalizado: ID do Funcionário {fun.IdFuncionario}'); </script>";
-                                Response.Write(msg);
+                                //msg = $"<script> alert('Atendimento Finalizado: ID do Funcionário {fun.IdFuncionario}'); </script>";
+                                //Response.Write(msg);
+                                Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                            Atendimento Finalizado: ID do Funcionário {fun.IdFuncionario}
+                                            </div>");
+
 
                             }
                         }
-                        if (Session["perfil"].ToString() == "FUNCIONARIO")
+                        if (Session["perfil"].ToString() == "Funcionário")
                         {
                             carregarTabela("1");
                         }
@@ -104,19 +118,19 @@ namespace SistemaHotel
 
                     }
 
-            //    }
-            //    else
-            //    {
-            //        Response.Redirect("~/Default.aspx");
-            //    }
-                
+                }
+                else
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
 
-            //}
-            //catch (Exception)
-            //{
 
-            //    Response.Redirect("~/Default.aspx");
-            //}                   
+            }
+            catch (Exception)
+            {
+
+                Response.Redirect("~/Default.aspx");
+            }
 
         }
         private void carregarTabela(string tipoProd)

@@ -414,7 +414,6 @@
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy1.pubxml" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />
     <Content Include="Scripts\jquery.mask.js" />
-    <Content Include="Scripts\mascara.js" />
     <Content Include="web.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>

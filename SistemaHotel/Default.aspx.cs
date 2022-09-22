@@ -22,7 +22,7 @@ namespace SistemaHotel
                     lbNomeUsuario.Text = Session["nome"].ToString();
                     lbLogin.Text = Session["login"].ToString();
                     lbPerfil.Text = Session["perfil"].ToString();
-                    if (Session["perfil"].ToString() == "CLIENTE")
+                    if (Session["perfil"].ToString() == "Cliente")
                     {
                         divTotal.Visible = true;
                         DALCliente dalCli = new DALCliente();
