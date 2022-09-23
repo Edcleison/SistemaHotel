@@ -80,7 +80,11 @@
                 "ordering": false,
                 "info": false,
                 dom: 'Bfrtip',
-                buttons: ['pdf',
+                buttons: [{
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL'
+                }
 
                 ],
                 "createdRow": function (row, data, dataIndex) {
@@ -103,22 +107,23 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <asp:Panel ID="PnlAtendimento" runat="server" Style="font-family: Calibri" >
-         <h5 class="p-3 mb-2 bg-dark text-white">Resumo de Pedidos</h5>
+    <asp:Panel ID="PnlAtendimento" runat="server" Style="font-family: Calibri">
+        <h5 class="p-3 mb-2 bg-dark text-white">Resumo de Pedidos</h5>
         <hr />
         <div class="container">
             <div class="row">
                 <div runat="server" class="col-5">
-                    <p><b>Tipo: </b>
-                    <asp:DropDownList ID="ddlTipo" runat="server">
-                    </asp:DropDownList>
+                    <p>
+                        <b>Tipo: </b>
+                        <asp:DropDownList ID="ddlTipo" runat="server">
+                        </asp:DropDownList>
                     </p>
                 </div>
                 <div runat="server" class="col-5">
                     <p>
-                        <b>Status: </b> 
-                    <asp:DropDownList ID="ddlStatus" runat="server">
-                    </asp:DropDownList>
+                        <b>Status: </b>
+                        <asp:DropDownList ID="ddlStatus" runat="server">
+                        </asp:DropDownList>
                     </p>
                 </div>
                 <div class="col-sm">
@@ -129,14 +134,20 @@
                 <div class="col-1">
                     <span>Legenda: </span>
                 </div>
-                <div class="col-2">
-                    <span id="circulo_yellow" style="background-color: lightyellow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Em Aberto</span>
-                </div>
-                <div class="col-2">
-                    <span id="circulo_green" style="background-color: lightseagreen">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Finalizado</span>
-                </div>
-                <div class="col-2">
-                    <span id="circulo_red" style="background-color: lightcoral">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Recusado</span>
+                <div class="col-4">
+                    <div class="border border-dark" style="background-color: lightgrey">
+                        <div class="row">
+                            <div class="col-sm">
+                                <span id="circulo_yellow" style="background-color: lightyellow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Em Aberto</span>
+                            </div>
+                            <div class="col-sm">
+                                <span id="circulo_green" style="background-color: lightseagreen">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Finalizado</span>
+                            </div>
+                            <div class="col-sm">
+                                <span id="circulo_red" style="background-color: lightcoral">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Recusado</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

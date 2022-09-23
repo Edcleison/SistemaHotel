@@ -144,13 +144,13 @@ namespace SistemaHotel
                                 switch (pu.IdPerfil)
                                 {
                                     case 1:
-                                        Session["perfil"] = "ADMINISTRADOR";
+                                        Session["perfil"] = "Administrador";
                                         break;
                                     case 2:
-                                        Session["perfil"] = "FUNCIONARIO";
+                                        Session["perfil"] = "Funcionário";
                                         break;
                                     case 3:
-                                        Session["perfil"] = "CLIENTE";
+                                        Session["perfil"] = "Cliente";
                                         break;
                                 }
                                 Response.Redirect("~/Default.aspx");
@@ -219,7 +219,7 @@ namespace SistemaHotel
                     dalUsu.alterarSenha(usu);
                     //string msg = "<script> alert('Senha Atualizada!'); </script>";
                     //Response.Write(msg);
-                    Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                    Response.Write(@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                          Senha Atualizada!
                                             </div>");
                     limparCampos();

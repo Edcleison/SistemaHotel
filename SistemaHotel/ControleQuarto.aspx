@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-   <%-- <link href="CSS/bootstrap.css" rel="stylesheet" />
+    <%-- <link href="CSS/bootstrap.css" rel="stylesheet" />
     <link href="CSS/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="CSS/jquery.dataTables.min.css" rel="stylesheet" />
 
@@ -69,7 +69,11 @@
                 "ordering": false,
                 "info": false,
                 dom: 'Bfrtip',
-                buttons: ['excel','pdf',
+                buttons: ['excel', {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL'
+                }
 
                 ],
                 "createdRow": function (row, data, dataIndex) {
@@ -114,7 +118,7 @@
 <asp:Content ID="Content12" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <asp:Panel ID="Panel3" runat="server" Style="font-family: Calibri">
-         <h5 class="p-3 mb-2 bg-dark text-white">Controle de Quartos</h5>
+        <h5 class="p-3 mb-2 bg-dark text-white">Controle de Quartos</h5>
         <hr />
         <div class="container">
             <div class="row">
@@ -123,28 +127,43 @@
                 </div>
             </div>
             <hr />
-            <div class="col-sm">
-                <p>
-                    <b>Status: </b>: 
-                <asp:DropDownList ID="ddlStatus" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged">
+            <div class="row">
+                <div class="col-2">
+                    <p>
+                        <b>Status: </b>: 
+                <asp:DropDownList ID="ddlStatus" runat="server">
                     <asp:ListItem Value="TODOS">TODOS</asp:ListItem>
                     <asp:ListItem Value="S">ATIVO</asp:ListItem>
                     <asp:ListItem Value="N">INATIVO</asp:ListItem>
                 </asp:DropDownList>
-                </p>
-
+                    </p>
+                </div>
+                <div class="col-2">
+                    <asp:LinkButton ID="lnkPesquisar" class="btn btn-dark" OnClick="lnkPesquisar_Click" runat="server">Pesquisar</asp:LinkButton>
+                </div>
             </div>
+            <div class="col-sm">
+                <span>&nbsp;</span>
+            </div>
+
             <div class="row">
                 <div class="col-1">
                     <span>Legenda: </span>
                 </div>
-                <div class="col-2">
-                    <span id="circulo_green" style="background-color: lightseagreen">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Ativo</span>
-                </div>
-                <div class="col-2">
-                    <span id="circulo_red" style="background-color: lightcoral">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Inativo</span>
+                <div class="col-4">
+                    <div class="border border-dark" style="background-color: lightgrey">
+                        <div class="row">
+                            <div class="col-sm">
+                                <span id="circulo_green" style="background-color: lightseagreen">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Ativo</span>
+                            </div>
+                            <div class="col-sm">
+                                <span id="circulo_red" style="background-color: lightcoral">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Inativo</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <hr />
         </div>
         <div class="col-12" align="center">
@@ -197,6 +216,19 @@
                     </div>
                     <div class="modal-body">
                         <div class="container">
+                             <div class="row">
+                                <div class="col-sm">
+                                    <span>Id Quarto: </span>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:TextBox runat="server" ID="txtIdQuartoE" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-sm">
                                     <span>Quarto: </span>

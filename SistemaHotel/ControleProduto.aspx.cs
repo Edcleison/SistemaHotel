@@ -174,7 +174,7 @@ namespace SistemaHotel
 
                         //msg = $"<script> alert('Produto Inserido!'); </script>";
                         //Response.Write(msg);
-                        Response.Write($@"<div class='alert alert-sucess alert-dismissible fade show' role='alert'>
+                        Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                           Produto Inserido!
                                             </div>");
                         limparCampos();

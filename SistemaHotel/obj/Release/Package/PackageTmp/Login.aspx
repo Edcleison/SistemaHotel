@@ -7,12 +7,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> 
     <link href="CSS/Estilos.css" rel="stylesheet" />
-
-
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $(".alert").fadeOut("slow", function () {
+                    $(this).alert('close');
+                });
+            }, 5000);
+        });
+    </script>
     <style>
         .modal-backdrop {
             background-image: url('https://cdn.tapetender70er.de/media/image/07/6f/e5/Papel-de-Parede-para-Hoteleira_944x944@2x.webp');
@@ -23,8 +29,9 @@
     </style>
 
 
+
 </head>
-<body>
+<body>    
     <form id="form1" runat="server">
         <div>
             <div class="modal-backdrop fade show" id="mdBack" runat="server" style="opacity: 0.2; display: block; filter: (alpha(opacity= 20))" visible="true"></div>
@@ -71,7 +78,7 @@
                             <asp:LinkButton ID="btlogar" runat="server" class="btn btn-dark" OnClick="btlogar_Click">Logar</asp:LinkButton>
                             <asp:LinkButton ID="lnkRecadastrarSenha" runat="server" class="btn btn-dark" OnClick="lnkRecadastrarSenha_Click">Redefinir Senha</asp:LinkButton>
                         </div>
-                    </div>                   
+                    </div>
                 </div>
                 <script src="Scripts/jquery.min.js"></script>
                 <script type="text/javascript">

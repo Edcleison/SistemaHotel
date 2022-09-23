@@ -36,7 +36,7 @@ namespace SistemaHotel
                             dalQua.inativarQuarto(rParametro);
                             //string msg = $"<script> alert('Quarto Inativado: ID {rParametro}'); </script>";
                             //Response.Write(msg);
-                            Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                      Quarto Inativado: ID {rParametro}
                                             </div>");
                         }
@@ -48,6 +48,7 @@ namespace SistemaHotel
                             Quarto qua = dalQua.buscarQuartoId(rParametro);
 
                             txtQuartoE.Text = qua.DescricaoQuarto;
+                            txtIdQuartoE.Text = qua.IdQuarto.ToString();
                             mdBack.Visible = true;
                             mdQuarE.Visible = true;
                         }
@@ -196,6 +197,7 @@ namespace SistemaHotel
             {
                 Quarto qua = new Quarto();
                 qua.DescricaoQuarto = txtQuartoE.Text;
+                qua.IdQuarto = int.Parse(txtIdQuartoE.Text);
                 dalQua.alterarQuarto(qua);
                 //string msg = $"<script> alert('Quarto alterado: ID{qua.IdQuarto}'); </script>";
                 //Response.Write(msg);
@@ -216,7 +218,7 @@ namespace SistemaHotel
 
         }
 
-        protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
+        protected void lnkPesquisar_Click(object sender, EventArgs e)
         {
             if (ddlStatus.SelectedValue != "TODOS")
             {

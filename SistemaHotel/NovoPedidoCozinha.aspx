@@ -66,6 +66,8 @@
                     "search": "Pesquisar:",
 
                 },
+                "scrollY": '150px',
+                "scrollCollapse": true,
                 "paging": true,
                 "pageLength": 10,
                 "ordering": false,
@@ -97,6 +99,7 @@
             overflow-y: auto;
             overflow-x: auto;
         }
+        
     </style>
 
 
