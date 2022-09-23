@@ -13,8 +13,8 @@
 
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet" />
-   
-   
+
+
 
     <style>
         .green {
@@ -23,6 +23,20 @@
 
         .red {
             background-color: lightcoral !important;
+        }
+
+        #circulo_green {
+            background: lightseagreen;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+        }
+
+        #circulo_red {
+            background: lightcoral;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
         }
     </style>
 
@@ -46,10 +60,14 @@
                 "scrollCollapse": true,
                 "paging": true,
                 "pageLength": 10,
-                "ordering": false,
+                "ordering": true,
                 "info": false,
                 dom: 'Bfrtip',
-                buttons: ['excel','pdf',
+                buttons: ['excel', {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL'
+                }
 
                 ],
                 "createdRow": function (row, data, dataIndex) {
@@ -88,7 +106,7 @@
                 "ordering": false,
                 "info": false,
                 dom: 'Bfrtip',
-                buttons: ['excel','pdf',
+                buttons: ['excel', 'pdf',
 
                 ],
                 "createdRow": function (row, data, dataIndex) {
@@ -153,13 +171,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm">
-                    <span>Listar Por: </span>
-                </div>
-                <div class="col-sm">
+                <div class="col-3">
+                    <span>Perfil: </span>
                     <asp:DropDownList ID="ddlPerfil" runat="server"></asp:DropDownList>
+                    <div class="row">
+                    </div>
                 </div>
-                <div class="col-sm">
+                <div class="col-3">
+                    <span>Status: </span>
                     <asp:DropDownList ID="ddlStatus" runat="server">
                         <asp:ListItem Value="TODOS">TODOS</asp:ListItem>
                         <asp:ListItem Value="S">ATIVO</asp:ListItem>
@@ -170,12 +189,29 @@
                     <asp:LinkButton ID="lnkPesquisar" class="btn btn-dark" OnClick="lnkPesquisar_Click" runat="server">Pesquisar</asp:LinkButton>
                 </div>
             </div>
+            <hr />
             <div class="row">
+                <div class="col-1">
+                    <span>Legenda: </span>
+                </div>
+                <div class="col-4">
+                    <div class="border border-dark" style="background-color: lightgrey">
+                        <div class="row">
+                            <div class="col-sm">
+                                <span id="circulo_green" style="background-color: lightseagreen">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Ativo</span>
+                            </div>
+                            <div class="col-sm">
+                                <span id="circulo_red" style="background-color: lightcoral">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Inativo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-sm">
-                    <span>&nbsp;</span>
+                    <p style="font-size: 13px;">*Filtre <b><i>Perfil=Cliente</i></b> para alterar a data de saída.</p>
                 </div>
             </div>
 
+            <hr />
 
             <div class="col-12" align="center">
                 <div id="Panel1" runat="server" visible="true">
@@ -277,7 +313,7 @@
                             <asp:LinkButton ID="lnkSenha" class="btn btn-dark" OnClick="lnkSenha_Click" runat="server">Salvar</asp:LinkButton>
                         </div>
                     </div>
-                </div>              
+                </div>
                 <script src="Scripts/jquery.min.js"></script>
                 <script type="text/javascript">
                     var senha = $('#ContentPlaceHolder1_txtNovaSenha');
@@ -382,7 +418,7 @@
                                     <div class="col-sm">
                                         <span>Perfil: </span>
                                     </div>
-                                    <div class="col-sm">
+                                    <div class="col-sm" runat="server" id="divDdlPerfilUsuarioE" visible="false">
                                         <asp:DropDownList ID="ddlPerfilUsuE" runat="server"></asp:DropDownList>
                                     </div>
                                 </div>
@@ -423,7 +459,7 @@
                         </div>
                     </div>
                 </div>
-               
+
                 <script src="Scripts/jquery.min.js"></script>
                 <script type="text/javascript">
                     var senha = $('#ContentPlaceHolder1_txtNovaSenhaE');

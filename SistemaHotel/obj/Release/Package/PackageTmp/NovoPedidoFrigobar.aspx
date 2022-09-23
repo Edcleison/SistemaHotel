@@ -74,7 +74,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Panel ID="PnlPedido" runat="server" Style="font-family: Calibri"></asp:Panel>
     <h5 class="p-3 mb-2 bg-dark text-white">Pedido Frigobar</h5>
-    <hr />    
+    <hr />
 
     <div class="col-12" align="center">
         <div id="Panel1" runat="server" visible="true">
@@ -82,7 +82,7 @@
     </div>
     <div class="modal-backdrop fade show" id="mdBack" runat="server" style="opacity: 0.2; display: block; filter: (alpha(opacity= 20))" visible="false"></div>
     <div class="modal fade show" id="mdPed" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
-        <div class="modal-dialog modal-lg" role="document">      
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" visible="false" style="border-radius: 10px;">
                 <div class="modal-header">
                     <h5 class="modal-title">Novo Pedido:</h5>

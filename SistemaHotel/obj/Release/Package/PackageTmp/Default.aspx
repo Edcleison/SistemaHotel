@@ -26,38 +26,36 @@
             <div class="row">
                 <div class="col-sm">
                     <div class="border border-dark">
-                        <div class="rounded">
-                            <div class="container">
+                        <div class="container">
 
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <asp:Label ID="lbNomeUsuarioLegenda" Font-Bold="true" runat="server" Text="Bem Vindo!"></asp:Label>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:Label ID="lbNomeUsuario" runat="server" Font-Bold="true" Text="Nome do Usuário"></asp:Label>
-                                    </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <asp:Label ID="lbNomeUsuarioLegenda" Font-Bold="true" runat="server" Text="Bem Vindo!"></asp:Label>
                                 </div>
-                                <hr />
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <asp:Label ID="lbLoginLegenda" runat="server" Font-Bold="true" Text="Login:"></asp:Label>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:Label ID="lbLogin" runat="server" Font-Bold="true" Text="Login"></asp:Label>
-                                    </div>
+                                <div class="col-sm">
+                                    <asp:Label ID="lbNomeUsuario" runat="server" Font-Bold="true" Text="Nome do Usuário"></asp:Label>
                                 </div>
-                                <hr />
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <asp:Label ID="lbPerfilLegenda" runat="server" Font-Bold="true" Text="Perfil:"></asp:Label>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:Label ID="lbPerfil" runat="server" Font-Bold="true" Text="Perfil do Usuário"></asp:Label>
-                                    </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm">
+                                    <asp:Label ID="lbLoginLegenda" runat="server" Font-Bold="true" Text="Login:"></asp:Label>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:Label ID="lbLogin" runat="server" Font-Bold="true" Text="Login"></asp:Label>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm">
+                                    <asp:Label ID="lbPerfilLegenda" runat="server" Font-Bold="true" Text="Perfil:"></asp:Label>
+                                </div>
+                                <div class="col-sm">
+                                    <asp:Label ID="lbPerfil" runat="server" Font-Bold="true" Text="Perfil do Usuário"></asp:Label>
                                 </div>
                             </div>
                         </div>
-                </div>
+                    </div>
                 </div>
                 <div class="col-sm">
                     <span>&nbsp;</span>

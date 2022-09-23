@@ -30,9 +30,9 @@
         div.alert {
             position: absolute;
             top: 30px;
-            right: 0;
-            width: 150px;
-            height: 60px;
+            right: 10px;
+            width: auto;
+            height: auto;
         }
     </style>
 

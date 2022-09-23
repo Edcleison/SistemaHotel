@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/icon/icofont/css/icofont.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/icon/feather/css/feather.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/icon/font-awesome/css/font-awesome.min.css") %>" />
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
@@ -37,8 +37,6 @@
             }, 5000);
         });
     </script>
-
-   
 
     <link href="CSS/Estilos.css" rel="stylesheet" />
     <script src="Scripts/jquery.mask.js"></script>
