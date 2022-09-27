@@ -90,35 +90,35 @@
                 </nav>
                 <div class="collapse" id="navbarToggleExternalContent">
                     <div class="bg-dark p-4">
-                        <div class="container">
-                            <div class="row">
+                        <div class="nav flex-column">
+                            <div class="nav-item">
                                 <asp:HyperLink ID="Home" runat="server" NavigateUrl="Default.aspx" class="text-white h5">Home</asp:HyperLink>
                             </div>
-                            <div class="row">
+                            <div class="nav-item">
                                 <asp:HyperLink ID="Atendimento" runat="server" NavigateUrl="Atendimento.aspx" class="text-white h5">Atendimento</asp:HyperLink>
                             </div>
-                            <div class="row">
+                            <div class="nav-item">
                                 <asp:HyperLink ID="ControleAtendimento" runat="server" NavigateUrl="ControleAtendimento.aspx" class="text-white h5">Controle Atendimento</asp:HyperLink>
                             </div>
-                            <div class="row">
+                            <div class="nav-item">
                                 <asp:HyperLink ID="ControleProduto" runat="server" NavigateUrl="ControleProduto.aspx" class="text-white h5">Controle de Produtos</asp:HyperLink>
                             </div>
-                            <div class="row">
+                            <div class="nav-item">
                                 <asp:HyperLink ID="ControleQuarto" runat="server" NavigateUrl="ControleQuarto.aspx" class="text-white h5">Controle de Quartos</asp:HyperLink>
                             </div>
-                            <div class="row">
+                            <div class="nav-item">
                                 <asp:HyperLink ID="ControleUsuario" runat="server" NavigateUrl="ControleUsuario.aspx" class="text-white h5">Controle de Usuários</asp:HyperLink>
                             </div>
-                            <div class="row">
+                            <div class="nav-item">
                                 <asp:HyperLink ID="NovoPedidoCozinha" runat="server" NavigateUrl="NovoPedidoCozinha.aspx" class="text-white h5">Pedido Cozinha</asp:HyperLink>
                             </div>
-                            <div class="row">
+                            <div class="nav-item">
                                 <asp:HyperLink ID="NovoPedidoFrigobar" runat="server" NavigateUrl="NovoPedidoFrigobar.aspx" class="text-white h5">Pedido Frigobar</asp:HyperLink>
                             </div>
-                            <div class="row">
+                            <div class="nav-item">
                                 <asp:HyperLink ID="ResumoPedidos" runat="server" NavigateUrl="AcompanhamentoCliente.aspx" class="text-white h5">Resumo - Pedidos</asp:HyperLink>
                             </div>
-                            <div class="row">
+                            <div class="nav-item">
                                 <asp:HyperLink ID="Sair" runat="server" NavigateUrl="~/Login.aspx" class="text-white h5">Sair</asp:HyperLink>
                             </div>
                         </div>
