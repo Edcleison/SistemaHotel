@@ -55,85 +55,6 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public DataTable buscarTodosPedidos()
-        {
-            DataTable dta = new DataTable();
-            SqlDataAdapter adp;
-            using (SqlConnection connection = new SqlConnection(cnn))
-            {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_PEDIDO]
-                                                               ,[ID_STATUS_PED]
-                                                               ,[ID_CLIENTE]
-                                                               ,[ID_ADM]
-                                                               ,[ID_FUNCIONARIO]
-                                                               ,[VALOR_TOTAL]
-                                                               ,[DATA_ABERTURA]
-                                                              ,[DATA_FINALIZACAO]
-                                                          FROM [dbo].[PEDIDO]", connection))
-                {
-                    try
-                    {
-                        cmd.Connection.Open();
-                        cmd.ExecuteNonQuery();
-                        adp = new SqlDataAdapter(cmd);
-                        adp.Fill(dta);
-
-                    }
-                    catch (Exception erro)
-                    {
-                        throw new Exception(erro.Message);
-                    }
-                    finally
-                    {
-                        cmd.Connection.Close();
-                    }
-                }
-            }
-            return dta;
-        }
-
-        public DataTable buscarTodosPedidosTipo(int IdTipoProd)
-        {
-            DataTable dta = new DataTable();
-            SqlDataAdapter adp;
-
-            using (SqlConnection connection = new SqlConnection(cnn))
-            {
-                using (SqlCommand cmd = new SqlCommand($@"SELECT P.ID_PEDIDO,P.DATA_ABERTURA,Q.DESCRICAO_QUARTO,C.NOME_CLIENTE,C.SOBRENOME_CLIENTE,
-                                                        PR.NOME_PROD,PR.DESCRICAO_PROD,IP.QUANTIDADE,S.DESCRICAO_STATUS_PED
-                                                        FROM PEDIDO P
-                                                        INNER JOIN CLIENTE C ON (C.ID_CLIENTE = P. ID_CLIENTE)
-                                                        INNER JOIN ITEM_PEDIDO IP ON (IP.ID_PEDIDO = P.ID_PEDIDO)
-                                                        INNER JOIN PRODUTO PR ON (PR.ID_PRODUTO = IP.ID_PRODUTO)
-                                                        INNER JOIN QUARTO Q ON (Q.ID_QUARTO = C.ID_QUARTO)
-                                                        INNER JOIN STATUS_PEDIDO S ON (S.ID_STATUS_PED = P.ID_STATUS_PED)
-                                                        INNER JOIN TIPO_PRODUTO TP ON (TP.ID_TIPO_PROD = PR.ID_TIPO_PROD)
-                                                        WHERE PR.ID_TIPO_PROD =@ID_TIPO_PROD", connection))
-                {
-                    try
-                    {
-                        cmd.Parameters.AddWithValue("@ID_TIPO_PROD", IdTipoProd);
-                        cmd.Connection.Open();
-                        cmd.ExecuteNonQuery();
-                        adp = new SqlDataAdapter(cmd);
-                        adp.Fill(dta);
-
-                    }
-                    catch (Exception erro)
-                    {
-                        throw new Exception(erro.Message);
-                    }
-                    finally
-                    {
-                        cmd.Connection.Close();
-                    }
-                }
-
-            }
-
-            return dta;
-        }
-
         public string buscarValorTotalCliente(int IdCliente)
         {
             DataTable dta = new DataTable();
@@ -171,8 +92,6 @@ namespace SistemaHotel.Controller
             return"";
         }
 
-
-
         public DataTable buscarTodosPedidosTipoStatus(string IdStatus, string IdTipoProd)
         {
             string parTipoStatus = "";
@@ -195,7 +114,7 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
 
-                using (SqlCommand cmd = new SqlCommand($@"SELECT P.ID_PEDIDO,P.DATA_ABERTURA,Q.DESCRICAO_QUARTO,C.NOME_CLIENTE,C.SOBRENOME_CLIENTE,PR.NOME_PROD,
+                using (SqlCommand cmd = new SqlCommand($@"SELECT P.ID_PEDIDO,P.DATA_ABERTURA,Q.NUMERO_QUARTO,Q.DESCRICAO_QUARTO,C.NOME_CLIENTE,C.SOBRENOME_CLIENTE,PR.NOME_PROD,
                                                             PR.DESCRICAO_PROD,IP.QUANTIDADE,S.DESCRICAO_STATUS_PED,P.DATA_FINALIZACAO,
                                                             P.ID_ADM,U.NOME AS NOME_ADM,U.SOBRENOME AS SOBRENOME_ADM,PA.DESCRICAO_PERFIL AS PERFIL_ADM,
                                                             P.ID_FUNCIONARIO,USU.NOME AS NOME_FUNC,USU.SOBRENOME AS SOBRENOME_FUNC,PF.DESCRICAO_PERFIL AS PERFIL_FUNC
@@ -272,7 +191,7 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
 
-                using (SqlCommand cmd = new SqlCommand($@"SELECT P.ID_PEDIDO,P.DATA_ABERTURA,Q.DESCRICAO_QUARTO,C.NOME_CLIENTE,C.SOBRENOME_CLIENTE,PR.NOME_PROD,
+                using (SqlCommand cmd = new SqlCommand($@"SELECT P.ID_PEDIDO,P.DATA_ABERTURA,Q.NUMERO_QUARTO,Q.DESCRICAO_QUARTO,C.NOME_CLIENTE,C.SOBRENOME_CLIENTE,PR.NOME_PROD,
                                                             PR.DESCRICAO_PROD,pr.PRECO_UNI ,IP.QUANTIDADE,s.DESCRICAO_STATUS_PED,P.DATA_FINALIZACAO
                                                             FROM PEDIDO P 
                                                             INNER JOIN CLIENTE C ON (C.ID_CLIENTE = P. ID_CLIENTE)

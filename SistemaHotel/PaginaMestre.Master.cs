@@ -42,14 +42,19 @@ namespace SistemaHotel
 
 
             }
-            else
+            else 
             {
+                DALCliente dalCli = new DALCliente();
+                Cliente cli = dalCli.buscarClienteReserva(Session["login"].ToString());
                 Atendimento.Visible = false;
                 ControleProduto.Visible = false;
                 ControleAtendimento.Visible = false;
                 ControleUsuario.Visible = false;
                 ControleQuarto.Visible = false;
-
+                if (cli.FlagPedidoFrigobar =='N')
+                {
+                    NovoPedidoFrigobar.Visible = false;
+                }
             }
         }
     } 

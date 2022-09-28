@@ -54,43 +54,6 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public DataTable buscarTodosProdutos()
-        {
-            DataTable dta = new DataTable();
-            SqlDataAdapter adp;
-            using (SqlConnection connection = new SqlConnection(cnn))
-            {
-
-
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_PRODUTO]
-                                                          ,[ID_TIPO_PROD]
-                                                          ,[PRECO_UNI]
-                                                          ,[DESCRICAO_PROD]
-                                                          ,[NOME_PROD]
-                                                          ,[FOTO_PROD]
-                                                      FROM [DBO].[PRODUTO]", connection))
-                {
-                    try
-                    {
-                        cmd.Connection.Open();
-                        cmd.ExecuteNonQuery();
-                        adp = new SqlDataAdapter(cmd);
-                        adp.Fill(dta);
-
-                    }
-                    catch (Exception erro)
-                    {
-                        throw new Exception(erro.Message);
-                    }
-                    finally
-                    {
-                        cmd.Connection.Close();
-                    }
-                }
-
-            }
-            return dta;
-        }
 
         public DataTable buscarTodosProdutosTipo(string Tipo, string Status)
         {

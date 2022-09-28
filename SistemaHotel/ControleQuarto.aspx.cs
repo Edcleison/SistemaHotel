@@ -47,7 +47,8 @@ namespace SistemaHotel
 
                             Quarto qua = dalQua.buscarQuartoId(rParametro);
 
-                            txtQuartoE.Text = qua.DescricaoQuarto;
+                            txtNumeroQuartoE.Text = qua.NumeroQuarto.ToString();
+                            txtDescricaoQuartoE.Text = qua.DescricaoQuarto;
                             txtIdQuartoE.Text = qua.IdQuarto.ToString();
                             mdBack.Visible = true;
                             mdQuarE.Visible = true;
@@ -96,7 +97,8 @@ namespace SistemaHotel
             sb.AppendLine("<thead>");
             sb.AppendLine("<tr>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ID</center></th>");
-            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>DESCRIÇÃO</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>NÚMERO QUARTO</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>DESCRIÇÃO QUARTO</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>STATUS</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>EDITAR</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ATIVAR/INATIVAR</center></th>");
@@ -109,6 +111,7 @@ namespace SistemaHotel
 
                 sb.AppendLine("<tr>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["ID_QUARTO"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["NUMERO_QUARTO"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_QUARTO"] + "</center></td>");
                 if (dtr["STATUS_QUAR"].ToString() == "S")
                 {
@@ -143,7 +146,10 @@ namespace SistemaHotel
         private void limparCampos()
         {
 
-            txtQuarto.Text = "";
+            txtNumeroQuarto.Text = "";
+            txtNumeroQuartoE.Text = "";
+            txtDescricaoQuartoE.Text = "";
+            txtDescricaoQuarto.Text = "";
 
         }
 
@@ -167,10 +173,11 @@ namespace SistemaHotel
 
         protected void lnkSalvarQuarto_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtQuarto.Text))
+            if (!string.IsNullOrEmpty(txtNumeroQuarto.Text) && !string.IsNullOrEmpty(txtDescricaoQuarto.Text))
             {
                 Quarto qua = new Quarto();
-                qua.DescricaoQuarto = txtQuarto.Text;
+                qua.NumeroQuarto = int.Parse(txtNumeroQuarto.Text);
+                qua.DescricaoQuarto = txtDescricaoQuarto.Text;
                 qua.StatusQuar = 'S';
                 dalQua.inserirQuarto(qua);
                 //string msg = "<script> alert('Quarto inserido!'); </script>";
@@ -193,10 +200,11 @@ namespace SistemaHotel
 
         protected void lnkSalvarQuartoE_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtQuartoE.Text))
+            if (!string.IsNullOrEmpty(txtNumeroQuartoE.Text) & !string.IsNullOrEmpty(txtDescricaoQuartoE.Text))
             {
                 Quarto qua = new Quarto();
-                qua.DescricaoQuarto = txtQuartoE.Text;
+                qua.NumeroQuarto = int.Parse(txtNumeroQuartoE.Text);
+                qua.DescricaoQuarto = txtDescricaoQuartoE.Text;
                 qua.IdQuarto = int.Parse(txtIdQuartoE.Text);
                 dalQua.alterarQuarto(qua);
                 //string msg = $"<script> alert('Quarto alterado: ID{qua.IdQuarto}'); </script>";

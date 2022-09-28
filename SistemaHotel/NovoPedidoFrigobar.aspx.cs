@@ -115,28 +115,44 @@ namespace SistemaHotel
         {
             //busca os dados do cliente pelo cod_reserva
             Cliente cli = dalCli.buscarClienteReserva(Session["login"].ToString());
-            //campos relacionados ao novo pedido
-            Pedido ped = new Pedido();
-            ped.IdCliente = cli.IdCliente;
-            ped.IdStatus = 1;
-            ped.DataAbertura = DateTime.Now;
-            ped.ValorTotal = decimal.Parse(txtPreco.Text);
-            dalPed.inserirPedido(ped);
-            //busca o pedido pelo id_cliente e Data_Abertura
-            ped = dalPed.buscarPedidoIdClienteData(ped.IdCliente, ped.DataAbertura);
-            //campos relacionados ao Item_Pedido
-            ItemPedido itemPed = new ItemPedido();
-            itemPed.IdPedido = ped.IdPedido;
-            itemPed.IdProduto = int.Parse(txtIdProd.Text);
-            itemPed.IdCliente = cli.IdCliente;
-            itemPed.Quantidade = int.Parse(txtQuantidade.Text);
-            dalItemPed.inserirItemPedido(itemPed);
-            //string msg = $"<script> alert('Pedido Realizado: ID: {ped.IdPedido}'); </script>";
-            //Response.Write(msg);
-            Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+            if (cli.FlagPedidoFrigobar=='S')
+            {
+                //campos relacionados ao novo pedido
+                Pedido ped = new Pedido();
+                ped.IdCliente = cli.IdCliente;
+                ped.IdStatus = 1;
+                ped.DataAbertura = DateTime.Now;
+                ped.ValorTotal = decimal.Parse(txtPreco.Text);
+                dalPed.inserirPedido(ped);
+                //busca o pedido pelo id_cliente e Data_Abertura
+                ped = dalPed.buscarPedidoIdClienteData(ped.IdCliente, ped.DataAbertura);
+                //campos relacionados ao Item_Pedido
+                ItemPedido itemPed = new ItemPedido();
+                itemPed.IdPedido = ped.IdPedido;
+                itemPed.IdProduto = int.Parse(txtIdProd.Text);
+                itemPed.IdCliente = cli.IdCliente;
+                itemPed.Quantidade = int.Parse(txtQuantidade.Text);
+                dalItemPed.inserirItemPedido(itemPed);
+                //string msg = $"<script> alert('Pedido Realizado: ID: {ped.IdPedido}'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                            Pedido Realizado: ID: {ped.IdPedido}  
                             </div>");
+                //inativa a flag para o cliente fazer pedidos de frigobar
+                cli.FlagPedidoFrigobar = 'N';
+                dalCli.alterarCliente(cli);
 
+            }
+            else
+            {
+                //string msg = $"<script> alert('Carrinho Vazio!'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                       Pedido não Permitido!
+                            </div>");
+            }
+            
+           
         }
 
 

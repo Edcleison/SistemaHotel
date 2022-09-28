@@ -103,7 +103,7 @@
                 "scrollCollapse": true,
                 "paging": true,
                 "pageLength": 10,
-                "ordering": false,
+                "ordering": true,
                 "info": false,
                 dom: 'Bfrtip',
                 buttons: ['excel', 'pdf',
@@ -150,7 +150,6 @@
         });
     </script>
 
-    <%--<script src="Scripts/mascara.js"></script>--%>
 </asp:Content>
 
 <asp:Content ID="Content12" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -219,7 +218,6 @@
             </div>
             <div class="modal-backdrop fade show" id="mdBack" runat="server" style="opacity: 0.2; display: block; filter: (alpha(opacity= 20))" visible="false"></div>
             <div class="modal fade show" id="mdUsu" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
-                <%--<div class="modal-dialog modal-lg" role="document">--%>
                 <div class="modal-dialog modal-personalizado" role="document">
                     <div class="modal-content" visible="false" style="border-radius: 10px;">
                         <div class="modal-header">
@@ -326,8 +324,7 @@
                         senha.attr("type", "password");
 
                     });
-                    // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-                    //citada pelo nosso amigo nos comentários
+
                     $("#olhoNovoUsu").mouseout(function () {
                         $("#ContentPlaceHolder1_txtNovaSenha").attr("type", "password");
                     });
@@ -343,15 +340,12 @@
                     olhoConfirmaNovoUsu.mouseup(function () {
                         ConfirmaSenha.attr("type", "password");
                     });
-                    // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-                    //citada pelo nosso amigo nos comentários
                     $("#olhoConfirmaNovoUsu").mouseout(function () {
                         $("#ContentPlaceHolder1_txtConfimaSenha").attr("type", "password");
                     });
                 </script>
             </div>
             <div class="modal fade show" id="mdUsuE" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
-                <%--<div class="modal-dialog modal-lg" role="document">--%>
                 <div class="modal-dialog modal-personalizado" role="document">
                     <div class="modal-content" visible="false" style="border-radius: 10px;">
                         <div class="modal-header">
@@ -418,7 +412,7 @@
                                     <div class="col-sm">
                                         <span>Perfil: </span>
                                     </div>
-                                    <div class="col-sm" runat="server" id="divDdlPerfilUsuarioE" visible="false">
+                                    <div class="col-sm">
                                         <asp:DropDownList ID="ddlPerfilUsuE" runat="server"></asp:DropDownList>
                                     </div>
                                 </div>
@@ -427,77 +421,15 @@
                                         <span>&nbsp;</span>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Digite a Senha: </span>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:TextBox type="password" runat="server" ID="txtNovaSenhaE" MaxLength="8">                                    
-                                        </asp:TextBox>
-                                        <img id="olho" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
-                                        <p>**Senha até 8 caracteres</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Confirme a senha: </span>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:TextBox type="password" runat="server" ID="txtConfirmaSenhaE" MaxLength="8"></asp:TextBox>
-                                        <img id="olhoDois" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <asp:LinkButton ID="lnkAlterarUsuario" class="btn btn-dark" OnClick="lnkAlterarUsuario_Click" runat="server">Salvar</asp:LinkButton>
                         </div>
                     </div>
-                </div>
-
-                <script src="Scripts/jquery.min.js"></script>
-                <script type="text/javascript">
-                    var senha = $('#ContentPlaceHolder1_txtNovaSenhaE');
-                    var olho = $("#olho");
-                    olho.mousedown(function () {
-                        senha.attr("type", "text");
-                    });
-
-                    olho.mouseup(function () {
-                        senha.attr("type", "password");
-
-                    });
-                    // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-                    //citada pelo nosso amigo nos comentários
-                    $("#olho").mouseout(function () {
-                        $("#ContentPlaceHolder1_txtNovaSenhaE").attr("type", "password");
-                    });
-                </script>
-                <script type="text/javascript">
-                    var ConfirmaSenha = $('#ContentPlaceHolder1_txtConfirmaSenhaE');
-                    var olhoDois = $("#olhoDois");
-
-                    olhoDois.mousedown(function () {
-                        ConfirmaSenha.attr("type", "text");
-                    });
-
-                    olhoDois.mouseup(function () {
-                        ConfirmaSenha.attr("type", "password");
-                    });
-                    // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-                    //citada pelo nosso amigo nos comentários
-                    $("#olhoDois").mouseout(function () {
-                        $("#ContentPlaceHolder1_txtConfimaSenhaE").attr("type", "password");
-                    });
-                </script>
+                </div>             
             </div>
             <div class="modal fade show" id="mdCli" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
-                <%--<div class="modal-dialog modal-lg" role="document">--%>
                 <div class="modal-dialog modal-personalizado" role="document">
                     <div class="modal-content" visible="false" style="border-radius: 10px;">
                         <div class="modal-header">
@@ -549,71 +481,14 @@
                                     </div>
                                     <div class="col-sm">
                                         <asp:TextBox ID="txtInputDataIni" runat="server"></asp:TextBox>
-                                        <%--onkeyup="formataDataeHora(this,event);" MaxLength="17"--%>
+                                        
                                     </div>
-                                    <%-- <div class="col-sm">
-                                        <asp:DropDownList ID="ddlInputHoraIni" TextMode="Date" runat="server">
-                                            <asp:ListItem>00:00</asp:ListItem>
-                                            <asp:ListItem>01:00</asp:ListItem>
-                                            <asp:ListItem>02:00</asp:ListItem>
-                                            <asp:ListItem>03:00</asp:ListItem>
-                                            <asp:ListItem>04:00</asp:ListItem>
-                                            <asp:ListItem>05:00</asp:ListItem>
-                                            <asp:ListItem>06:00</asp:ListItem>
-                                            <asp:ListItem>07:00</asp:ListItem>
-                                            <asp:ListItem>08:00</asp:ListItem>
-                                            <asp:ListItem>09:00</asp:ListItem>
-                                            <asp:ListItem>10:00</asp:ListItem>
-                                            <asp:ListItem>11:00</asp:ListItem>
-                                            <asp:ListItem>12:00</asp:ListItem>
-                                            <asp:ListItem>13:00</asp:ListItem>
-                                            <asp:ListItem>14:00</asp:ListItem>
-                                            <asp:ListItem>15:00</asp:ListItem>
-                                            <asp:ListItem>16:00</asp:ListItem>
-                                            <asp:ListItem>17:00</asp:ListItem>
-                                            <asp:ListItem>18:00</asp:ListItem>
-                                            <asp:ListItem>19:00</asp:ListItem>
-                                            <asp:ListItem>20:00</asp:ListItem>
-                                            <asp:ListItem>21:00</asp:ListItem>
-                                            <asp:ListItem>22:00</asp:ListItem>
-                                            <asp:ListItem>23:00</asp:ListItem>  
-                                        </asp:DropDownList>        
-                                    </div>--%>
                                     <div class="col-sm">
                                         <span>Data Fim:</span>
                                     </div>
                                     <div class="col-sm">
-                                        <asp:TextBox ID="txtInputDataFim" runat="server"></asp:TextBox>
-                                        <%--onkeyup="formataDataeHora(this,event);" MaxLength="17"--%>
+                                        <asp:TextBox ID="txtInputDataFim" runat="server"></asp:TextBox>                                    
                                     </div>
-                                    <%--<div class="col-sm">
-                                        <asp:DropDownList ID="ddlInputHoraFim" TextMode="Date" runat="server">
-                                            <asp:ListItem>00:00</asp:ListItem>
-                                            <asp:ListItem>01:00</asp:ListItem>
-                                            <asp:ListItem>02:00</asp:ListItem>
-                                            <asp:ListItem>03:00</asp:ListItem>
-                                            <asp:ListItem>04:00</asp:ListItem>
-                                            <asp:ListItem>05:00</asp:ListItem>
-                                            <asp:ListItem>06:00</asp:ListItem>
-                                            <asp:ListItem>07:00</asp:ListItem>
-                                            <asp:ListItem>08:00</asp:ListItem>
-                                            <asp:ListItem>09:00</asp:ListItem>
-                                            <asp:ListItem>10:00</asp:ListItem>
-                                            <asp:ListItem>11:00</asp:ListItem>
-                                            <asp:ListItem>12:00</asp:ListItem>
-                                            <asp:ListItem>13:00</asp:ListItem>
-                                            <asp:ListItem>14:00</asp:ListItem>
-                                            <asp:ListItem>15:00</asp:ListItem>
-                                            <asp:ListItem>16:00</asp:ListItem>
-                                            <asp:ListItem>17:00</asp:ListItem>
-                                            <asp:ListItem>18:00</asp:ListItem>
-                                            <asp:ListItem>19:00</asp:ListItem>
-                                            <asp:ListItem>20:00</asp:ListItem>
-                                            <asp:ListItem>21:00</asp:ListItem>
-                                            <asp:ListItem>22:00</asp:ListItem>
-                                            <asp:ListItem>23:00</asp:ListItem>  
-                                        </asp:DropDownList>        
-                                    </div>--%>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm">
@@ -634,11 +509,11 @@
                                 <div class="row">
                                     <div class="col-sm">
                                         <span>Período de: </span>
-                                        <asp:TextBox ID="txtDataIni" runat="server" Enabled="false"></asp:TextBox>
+                                        <asp:TextBox ID="txtDataIni" ForeColor="red" runat="server" Enabled="false"></asp:TextBox>
                                     </div>
                                     <div class="col-sm">
                                         <span>Até: </span>
-                                        <asp:TextBox ID="txtDataFim" runat="server" Enabled="false"></asp:TextBox>
+                                        <asp:TextBox ID="txtDataFim"  ForeColor="red" runat="server" Enabled="false"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
@@ -706,37 +581,8 @@
                                         <span>Nova Data de Saída:</span>
                                     </div>
                                     <div class="col-sm">
-                                        <asp:TextBox ID="txtInputDataFimE" runat="server"></asp:TextBox>
-                                        <%--onkeyup="formataDataeHora(this,event);" MaxLength="17"--%>
-                                    </div>
-                                    <%-- <div class="col-sm">
-                                        <asp:DropDownList ID="ddlInputHoraFimE" TextMode="Date" runat="server">
-                                            <asp:ListItem>00:00</asp:ListItem>
-                                            <asp:ListItem>01:00</asp:ListItem>
-                                            <asp:ListItem>02:00</asp:ListItem>
-                                            <asp:ListItem>03:00</asp:ListItem>
-                                            <asp:ListItem>04:00</asp:ListItem>
-                                            <asp:ListItem>05:00</asp:ListItem>
-                                            <asp:ListItem>06:00</asp:ListItem>
-                                            <asp:ListItem>07:00</asp:ListItem>
-                                            <asp:ListItem>08:00</asp:ListItem>
-                                            <asp:ListItem>09:00</asp:ListItem>
-                                            <asp:ListItem>10:00</asp:ListItem>
-                                            <asp:ListItem>11:00</asp:ListItem>
-                                            <asp:ListItem>12:00</asp:ListItem>
-                                            <asp:ListItem>13:00</asp:ListItem>
-                                            <asp:ListItem>14:00</asp:ListItem>
-                                            <asp:ListItem>15:00</asp:ListItem>
-                                            <asp:ListItem>16:00</asp:ListItem>
-                                            <asp:ListItem>17:00</asp:ListItem>
-                                            <asp:ListItem>18:00</asp:ListItem>
-                                            <asp:ListItem>19:00</asp:ListItem>
-                                            <asp:ListItem>20:00</asp:ListItem>
-                                            <asp:ListItem>21:00</asp:ListItem>
-                                            <asp:ListItem>22:00</asp:ListItem>
-                                            <asp:ListItem>23:00</asp:ListItem>  
-                                        </asp:DropDownList>        
-                                    </div>--%>
+                                        <asp:TextBox ID="txtInputDataFimE" runat="server"></asp:TextBox>                                        
+                                    </div>       
                                 </div>
                                 <div class="row">
                                     <div class="col-sm">
@@ -748,7 +594,7 @@
                                         <span>Período de: </span>
                                     </div>
                                     <div class="col-sm">
-                                        <asp:TextBox ID="txtDataIniE" runat="server" Enabled="false"></asp:TextBox>
+                                        <asp:TextBox ID="txtDataIniE"  ForeColor="red" runat="server" Enabled="false"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -761,7 +607,7 @@
                                         <span>Até: </span>
                                     </div>
                                     <div class="col-sm">
-                                        <asp:TextBox ID="txtDataFimE" runat="server" Enabled="false"></asp:TextBox>
+                                        <asp:TextBox ID="txtDataFimE"  ForeColor="red" runat="server" Enabled="false"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="row">

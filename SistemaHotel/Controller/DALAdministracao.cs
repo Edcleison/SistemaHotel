@@ -86,34 +86,6 @@ namespace SistemaHotel.Controller
             }
             return adm;
         }
-
-        public void alterarAdm(Administracao Adm)
-        {
-            using (SqlConnection connection = new SqlConnection(cnn))
-            {
-                using (SqlCommand cmd = new SqlCommand(@"UPDATE ADMINISTRACAO SET ID_PERFIL = @ID_PERFIL WHERE  ID_USUARIO = @ID_USUARIO", connection))
-                {
-                    try
-                    {
-
-                        cmd.Parameters.AddWithValue("ID_PERFIL", Adm.IdPerfil);
-                        cmd.Connection.Open();
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception erro)
-                    {
-                        throw new Exception(erro.Message);
-                    }
-                    finally
-                    {
-                        cmd.Connection.Close();
-                    }
-
-
-                }
-
-            }
-        }
     }
 }
 
