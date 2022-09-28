@@ -46,37 +46,7 @@
 
 <body>
     <form id="form1" runat="server">
-        <%--itemtype="~/CSS/Estilos.css"--%>
-        <header>
-            <%--  <nav>--%>
-            <%--<ul>
-                    <li class="dropdown">
-                        <asp:Image ID="Image1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/menu-icon-19353.png" />
-                        <label for="check01" >menu</label>
-                        <input id="check01" type="checkbox" class="input" />
-                        <ul class="dropdown-content">
-                            <li class="menulink">
-                                <asp:HyperLink ID="Home" runat="server" NavigateUrl="Default.aspx">Home</asp:HyperLink></li>
-                            <li class="menulink">
-                                <asp:HyperLink ID="Atendimento" runat="server" Visible="false" NavigateUrl="Atendimento.aspx">Atendimento</asp:HyperLink></li>
-                            <li class="menulink">
-                                <asp:HyperLink ID="ControleAtendimento" runat="server" Visible="false" NavigateUrl="ControleAtendimento.aspx">Controle Atendimento</asp:HyperLink></li>
-                            <li class="menulink">
-                                <asp:HyperLink ID="ControleProduto" runat="server" Visible="false" NavigateUrl="ControleProduto.aspx">Controle de Produtos</asp:HyperLink></li>
-                            <li class="menulink">
-                                <asp:HyperLink ID="ControleQuarto" runat="server" Visible="false" NavigateUrl="ControleQuarto.aspx">Controle de Quartos</asp:HyperLink></li>
-                            <li class="menulink">
-                                <asp:HyperLink ID="ControleUsuario" runat="server" Visible="false" NavigateUrl="ControleUsuario.aspx">Controle de Usuários</asp:HyperLink></li>
-                            <li class="menulink">
-                                <asp:HyperLink ID="NovoPedidoCozinha" runat="server" Visible="false" NavigateUrl="NovoPedidoCozinha.aspx">Pedido Cozinha</asp:HyperLink></li>
-                            <li class="menulink">
-                                <asp:HyperLink ID="NovoPedidoFrigobar" runat="server" Visible="false" NavigateUrl="NovoPedidoFrigobar.aspx">Pedido Frigobar</asp:HyperLink></li>
-                            <li class="menulink">
-                                <asp:HyperLink ID="Sair" runat="server" NavigateUrl="~/Login.aspx">Sair</asp:HyperLink></li>
-                        </ul>
-                    </li>
-                </ul>--%>
-            <%-- </nav> --%>
+        <header>   
             <div class="pos-f-t">
                 <nav class="navbar navbar-dark bg-dark">
                     <div class="col-sm">

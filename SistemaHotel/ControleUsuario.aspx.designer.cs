@@ -204,15 +204,6 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.TextBox txtLoginE;
 
         /// <summary>
-        /// divDdlPerfilUsuarioE control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDdlPerfilUsuarioE;
-
-        /// <summary>
         /// ddlPerfilUsuE control.
         /// </summary>
         /// <remarks>
@@ -220,24 +211,6 @@ namespace SistemaHotel
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPerfilUsuE;
-
-        /// <summary>
-        /// txtNovaSenhaE control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNovaSenhaE;
-
-        /// <summary>
-        /// txtConfirmaSenhaE control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtConfirmaSenhaE;
 
         /// <summary>
         /// lnkAlterarUsuario control.

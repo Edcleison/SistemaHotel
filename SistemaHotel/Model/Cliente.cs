@@ -15,6 +15,7 @@ namespace SistemaHotel.Model
         public string SobreNomeCliente { get; set; }
         public DateTime  DataEntrada { get; set; }
         public DateTime  DataSaida { get; set; }
+        public char  FlagPedidoFrigobar { get; set; }
 
         public Cliente()
         {
@@ -26,6 +27,7 @@ namespace SistemaHotel.Model
            
             this.DataEntrada = DateTime.Now;
             this.DataSaida = DateTime.Now;
+            this.FlagPedidoFrigobar = 'P';
         }
 
     }

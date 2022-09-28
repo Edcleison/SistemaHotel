@@ -43,8 +43,7 @@
     <form id="form1" runat="server">
         <div>
             <div class="modal-backdrop fade show" id="mdBack" runat="server" style="opacity: 0.2; display: block; filter: (alpha(opacity= 20))" visible="true"></div>
-            <div class="modal fade show" id="mdLog" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100));">
-                <%--<div class="modal-dialog modal-lg" role="document">--%>
+            <div class="modal fade show" id="mdLog" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100));">             
                 <div class="modal-dialog modal-personalizado" role="document">
                     <div class="modal-content" visible="true" style="border-radius: 10px;">
                         <div class="modal-header">
@@ -100,16 +99,13 @@
                     olho.mouseup(function () {
                         senha.attr("type", "password");
 
-                    });
-                    // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-                    //citada pelo nosso amigo nos comentários
+                    });                 
                     $("#olho").mouseout(function () {
                         $("#txtSenha").attr("type", "password");
                     });
                 </script>
             </div>
-            <div class="modal fade show" id="mdRedPass" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
-                <%--<div class="modal-dialog modal-lg" role="document">--%>
+            <div class="modal fade show" id="mdRedPass" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">            
                 <div class="modal-dialog modal-personalizado" role="document">
                     <div class="modal-content" visible="false" style="border-radius: 10px;">
                         <div class="modal-header">
@@ -182,9 +178,7 @@
                         olho.mouseup(function () {
                             senha.attr("type", "password");
 
-                        });
-                        // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-                        //citada pelo nosso amigo nos comentários
+                        });                      
                         $("#olhoR").mouseout(function () {
                             $("#txtNovaSenha").attr("type", "password");
                         });
@@ -199,9 +193,7 @@
 
                         olhoDois.mouseup(function () {
                             ConfirmaSenha.attr("type", "password");
-                        });
-                        // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-                        //citada pelo nosso amigo nos comentários
+                        });                        
                         $("#olhoDois").mouseout(function () {
                             $("#txtConfimaSenha").attr("type", "password");
                         });

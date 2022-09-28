@@ -24,13 +24,15 @@ namespace SistemaHotel.Controller
             {
                 using (SqlCommand cmd = new SqlCommand
                     (@"INSERT INTO [DBO].[QUARTO]
-                                       ([DESCRICAO_QUARTO]
+                                       ([NUMERO_QUARTO] 
+                                        ,[DESCRICAO_QUARTO]                               
                                        ,[STATUS_QUAR])
-                                 VALUES (@DESCRICAO_QUARTO,@STATUS_QUAR)", connection))
+                                 VALUES (@NUMERO_QUARTO,@DESCRICAO_QUARTO,@STATUS_QUAR)", connection))
                 {
                     try
                     {
                         cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("NUMERO_QUARTO", qua.NumeroQuarto);
                         cmd.Parameters.AddWithValue("DESCRICAO_QUARTO", qua.DescricaoQuarto);
                         cmd.Parameters.AddWithValue("STATUS_QUAR", qua.StatusQuar);
                         cmd.ExecuteNonQuery();
@@ -62,6 +64,7 @@ namespace SistemaHotel.Controller
 
 
                 using (SqlCommand cmd = new SqlCommand($@"SELECT [ID_QUARTO]
+                                                          ,[NUMERO_QUARTO]
                                                           ,[DESCRICAO_QUARTO]
                                                           ,[STATUS_QUAR]
                                                       FROM [DBO].[QUARTO] {parStatus}", connection))
@@ -92,8 +95,6 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-
-
         public Quarto buscarQuartoId(int Id)
         {
             Quarto qua = new Quarto();
@@ -102,6 +103,7 @@ namespace SistemaHotel.Controller
                 try
                 {
                     using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_QUARTO]
+                                                          ,[NUMERO_QUARTO]
                                                           ,[DESCRICAO_QUARTO]
                                                       FROM [DBO].[QUARTO]
                                                        WHERE ID_QUARTO = @ID_QUARTO", connection))
@@ -134,12 +136,13 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand(@"UPDATE [DBO].[QUARTO]
-                                                       SET [DESCRICAO_QUARTO] =@DESCRICAO_QUARTO
+                                                       SET [NUMERO_QUARTO] =@NUMERO_QUARTO, [DESCRICAO_QUARTO] =@DESCRICAO_QUARTO
                                                           WHERE  ID_QUARTO = @ID_QUARTO", connection))
                 {
                     try
                     {
                         cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("NUMERO_QUARTO", qua.NumeroQuarto);
                         cmd.Parameters.AddWithValue("DESCRICAO_QUARTO", qua.DescricaoQuarto);
                         cmd.Parameters.AddWithValue("ID_QUARTO", qua.IdQuarto);
                         cmd.ExecuteNonQuery();
@@ -157,7 +160,6 @@ namespace SistemaHotel.Controller
 
             }
         }
-
         public void inativarQuarto(int IdQuarto)
         {
 

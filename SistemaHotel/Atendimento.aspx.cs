@@ -137,7 +137,7 @@ namespace SistemaHotel
         {
 
             DataTable rDta = new DataTable();
-            rDta = dalPed.buscarTodosPedidosTipoStatus("1",tipoProd);
+            rDta = dalPed.buscarTodosPedidosTipoStatus("1", tipoProd);
             StringBuilder sb = new StringBuilder();
 
 
@@ -148,7 +148,7 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>DATA ABERTURA</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>QUARTO</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>NOME CLIENTE</center></th>");
-            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>NOME PRODUTO</center></th>");     
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>NOME PRODUTO</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>QUANTIDADE</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>STATUS</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ATENDER</center></th>");
@@ -163,7 +163,7 @@ namespace SistemaHotel
                 sb.AppendLine("<tr>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["ID_PEDIDO"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + Convert.ToDateTime(dtr["DATA_ABERTURA"]).ToString("dd/MM/yyyy HH:mm") + "</center></td>");
-                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_QUARTO"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["NUMERO_QUARTO"] + " - " + dtr["DESCRICAO_QUARTO"] + "</center></td>");
                 sb.AppendLine($"<td style='font-size:15px; letter-spacing: 1px;'><center>{dtr["NOME_CLIENTE"] + " " + dtr["SOBRENOME_CLIENTE"]}</center></td>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["NOME_PROD"] + "</td></center>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["QUANTIDADE"] + "</center></td>");

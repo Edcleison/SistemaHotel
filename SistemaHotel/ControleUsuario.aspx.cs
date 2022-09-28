@@ -51,11 +51,8 @@ namespace SistemaHotel
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_E"]));
                             Usuario usu = dalUsu.buscarUsuarioId(rParametro);
                             PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.IdUsuario);
-                            if (perfUsu.IdPerfil != 3)
-                            {
-                                divDdlPerfilUsuarioE.Visible = true;
-                                carregaDdlUsuarioE();
-                            }
+
+                            carregaDdlUsuarioE();
                             txtIdUsuarioE.Text = usu.IdUsuario.ToString();
                             txtNomeE.Text = usu.NomeUsuario;
                             txtSobrenomeE.Text = usu.SobrenomeUsuario;
@@ -85,7 +82,7 @@ namespace SistemaHotel
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_A"]));
                             Usuario usu = dalUsu.buscarUsuarioId(rParametro);
                             PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.IdUsuario);
-                            if (perfUsu.IdPerfil==3)
+                            if (perfUsu.IdPerfil == 3)
                             {
                                 carregaDdlQuartoE();
                                 Cliente cli = dalCli.buscarClienteReserva(usu.Login);
@@ -165,7 +162,15 @@ namespace SistemaHotel
                 {
                     sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["STATUS_USUARIO"].ToString().Replace("N", "INATIVO") + "</center></td>");
                 }
-                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?USUARIO_E=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-edit' style='color: blue'></i></center></td>");
+                if (dtr["ID_Perfil"].ToString() == "3")
+                {
+                    sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?CLIENTE_E=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-edit' style='color: blue'></i></center></td>");
+                }
+                else
+                {
+                    sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?USUARIO_E=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-edit' style='color: blue'></i></center></td>");
+                }
+
                 if (dtr["STATUS_USUARIO"].ToString() == "S")
                 {
                     sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center><a href='ControleUsuario.aspx?USUARIO_D=" + Criptografia.Encrypt(dtr["ID_Usuario"].ToString()) + "'><i class='fa fa-power-off' style='color: red'></i></center></td>");
@@ -364,110 +369,56 @@ namespace SistemaHotel
             Usuario usuR = dalUsu.buscarUsuarioId(int.Parse(txtIdUsuarioE.Text));
             PerfilUsuario perfUsuR = dalPerfUsu.buscarUsuarioPerfil(usuR.IdUsuario);
             //varifica se todos os campos estão preenchidos
-            if (!string.IsNullOrEmpty(txtLoginE.Text) && !string.IsNullOrEmpty(txtNovaSenhaE.Text) && !string.IsNullOrEmpty(txtConfirmaSenhaE.Text))
+            if (!string.IsNullOrEmpty(txtLoginE.Text) && ddlPerfilUsuE.SelectedValue != "SELECIONE")
             {
-                if (perfUsuR.IdPerfil != 3)
+
+                Usuario usu = new Usuario();
+                //campos relacionados passagem devalores dos textbox para os atributos do objeto Usuário
+                usu.NomeUsuario = txtNomeE.Text;
+                usu.SobrenomeUsuario = txtSobrenomeE.Text;
+                usu.Login = txtLoginE.Text;
+                //altera o objeto Usuário
+                dalUsu.alterarUsuario(usu);
+                //objeto PerfilUsuario
+                PerfilUsuario perfUsu = new PerfilUsuario();
+                //campos relacionados passagem devalores dos textbox para os atributos do objeto PerfilUsuário
+                perfUsu.IdPerfil = int.Parse(ddlPerfilUsuE.SelectedValue);
+                perfUsu.IdUsuario = int.Parse(txtIdUsuarioE.Text);
+                //insere o objeto PerfilUsuário
+                dalPerfUsu.alterarPefilUsuario(perfUsu);
+                //campos relacionados a criação do Usuário na Administracao
+                if (ddlPerfilUsuE.SelectedValue == "1")
                 {
-                    if (ddlPerfilUsuE.SelectedValue != "SELECIONE")
+                    Administracao adm = new Administracao();
+                    adm = dalAdm.buscarAdmIdUsuario(int.Parse(txtIdUsuarioE.Text));
+                    if (adm.IdAdm == 0)
                     {
-                        // verifica se as senhas são iguais
-                        if (txtNovaSenha.Text == txtConfirmaSenha.Text)
-                        {
-                            Usuario usu = new Usuario();
-                            //campos relacionados passagem devalores dos textbox para os atributos do objeto Usuário
-                            usu.NomeUsuario = txtNomeE.Text;
-                            usu.SobrenomeUsuario = txtSobrenomeE.Text;
-                            usu.Login = txtLoginE.Text;
-                            usu.Senha = Criptografia.Encrypt(txtNovaSenhaE.Text);
-                            //altera o objeto Usuário
-                            dalUsu.alterarUsuario(usu);
-                            //objeto PerfilUsuario
-                            PerfilUsuario perfUsu = new PerfilUsuario();
-                            //campos relacionados passagem devalores dos textbox para os atributos do objeto PerfilUsuário
-                            perfUsu.IdPerfil = int.Parse(ddlPerfilUsuE.SelectedValue);
-                            perfUsu.IdUsuario = int.Parse(txtIdUsuarioE.Text);
-                            //insere o objeto PerfilUsuário
-                            dalPerfUsu.alterarPefilUsuario(perfUsu);
-                            //campos relacionados a criação do Usuário na Administracao
-                            if (ddlPerfilUsuE.SelectedValue == "1")
-                            {
-                                Administracao adm = new Administracao();
-                                adm = dalAdm.buscarAdmIdUsuario(int.Parse(txtIdUsuarioE.Text));
-                                if (adm.IdAdm == 0)
-                                {
-                                    adm.IdUsuario = perfUsu.IdUsuario;
-                                    adm.IdPerfil = perfUsu.IdPerfil;
-                                    dalAdm.inserirAdministracao(adm);
+                        adm.IdUsuario = perfUsu.IdUsuario;
+                        adm.IdPerfil = perfUsu.IdPerfil;
+                        dalAdm.inserirAdministracao(adm);
 
-                                }
-
-                            }
-                            else
-                            {
-                                Funcionario fun = new Funcionario();
-                                fun = dalFun.buscarFuncionarioIdUsuario(int.Parse(txtIdUsuarioE.Text));
-                                if (fun.IdFuncionario == 0)
-                                {
-                                    fun.IdUsuario = perfUsu.IdUsuario;
-                                    fun.IdPerfil = perfUsu.IdPerfil;
-                                    dalFun.inserirFuncionario(fun);
-                                }
-                            }
-
-                            //string msg = $"<script> alert('Usuário Atualizado: ID {txtIdUsuarioE.Text}'); </script>";
-                            //Response.Write(msg);
-                            Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                               Usuário Atualizado: ID {txtIdUsuarioE.Text}
-                                            </div>");
-                        }
-                        else
-                        {
-                            //string msg = "<script> alert('Senhas Diferentes!'); </script>";
-                            //Response.Write(msg);
-                            Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                           Senhas Diferentes!
-                                            </div>");
-
-                        }
-
-                    }
-                    else
-                    {
-                        //string msg = "<script> alert('Preencha todos os campos!'); </script>";
-                        //Response.Write(msg);
-                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                           Preencha todos os campos!
-                                            </div>");
                     }
 
                 }
                 else
                 {
-                    // verifica se as senhas são iguais
-                    if (txtNovaSenha.Text == txtConfirmaSenha.Text)
+                    Funcionario fun = new Funcionario();
+                    fun = dalFun.buscarFuncionarioIdUsuario(int.Parse(txtIdUsuarioE.Text));
+                    if (fun.IdFuncionario == 0)
                     {
-                        Usuario usu = new Usuario();
-                        //campos relacionados passagem devalores dos textbox para os atributos do objeto Usuário
-                        usu.NomeUsuario = txtNomeE.Text;
-                        usu.SobrenomeUsuario = txtSobrenomeE.Text;
-                        usu.Login = txtLoginE.Text;
-                        usu.Senha = Criptografia.Encrypt(txtNovaSenhaE.Text);
-                        //altera o objeto Usuário
-                        dalUsu.alterarUsuario(usu);
+                        fun.IdUsuario = perfUsu.IdUsuario;
+                        fun.IdPerfil = perfUsu.IdPerfil;
+                        dalFun.inserirFuncionario(fun);
                     }
-                    else
-                    {
-                        //string msg = "<script> alert('Senhas Diferentes!'); </script>";
-                        //Response.Write(msg);
-                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                           Senhas Diferentes!
-                                            </div>");
-
-                    }
-
-
                 }
+                //string msg = $"<script> alert('Usuário Atualizado: ID {txtIdUsuarioE.Text}'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                               Usuário Atualizado: ID {txtIdUsuarioE.Text}
+                                            </div>");
             }
+
+
             else
             {
                 //string msg = "<script> alert('Preencha todos os campos!'); </script>";
@@ -570,8 +521,6 @@ namespace SistemaHotel
                 {
                     try
                     {
-                        //DateTime dataIni = DateTime.ParseExact($"{sDataIniDia}/{sDataIniMes}/{sDataIniAno} {ddlInputHoraIni.Text}", "dd/MM/yyyy HH:mm", null);
-                        //DateTime dataFim = DateTime.ParseExact($"{sDataFimDia}/{sDataFimMes}/{sDataFimAno} {ddlInputHoraFim.Text}", "dd/MM/yyyy HH:mm", null);
                         DateTime dataIni = DateTime.ParseExact(txtInputDataIni.Text, "dd/MM/yyyy HH:mm", null);
                         DateTime dataFim = DateTime.ParseExact(txtInputDataFim.Text, "dd/MM/yyyy HH:mm", null);
 
@@ -587,6 +536,7 @@ namespace SistemaHotel
                                 cli.SobreNomeCliente = txtSobrenomeCliente.Text;
                                 cli.DataEntrada = dataIni;
                                 cli.DataSaida = dataFim;
+                                cli.FlagPedidoFrigobar = 'S';
                                 //verifica se tem algum cliente ocupando o quarto com o id selecionado no DropDownList                           
                                 DataTable dta = dalCli.verificarOcupacaoQuarto(ddlQuarto.SelectedValue);
 
@@ -738,6 +688,8 @@ namespace SistemaHotel
                 Cliente cli = dalCliente.buscarClienteReserva(txtCdReservaE.Text.ToUpper());
                 //alteração da data de saída
                 cli.DataSaida = Convert.ToDateTime(novaDataFim);
+                //flag para poder fazer outro pedido de frigobar
+                cli.FlagPedidoFrigobar = 'S';
 
                 DataTable dta = dalCli.verificarOcupacaoQuarto(ddlQuartoE.SelectedValue);
                 if (dta.Rows.Count > 0)
@@ -769,7 +721,7 @@ namespace SistemaHotel
                     dalCliente.alterarCliente(cli);
                     Usuario usu = dalUsu.buscaUsuarioLogin(cli.CodReserva);
                     PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.IdUsuario);
-                    if (perfUsu.StatusPerfilUsuario !='S')
+                    if (perfUsu.StatusPerfilUsuario != 'S')
                     {
                         dalPerfUsu.ativarUsuario(usu.IdUsuario);
                     }
@@ -800,7 +752,7 @@ namespace SistemaHotel
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_QUARTO, UPPER(DESCRICAO_QUARTO) AS QUARTO FROM QUARTO ORDER BY DESCRICAO_QUARTO", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_QUARTO,CONCAT(NUMERO_QUARTO,' - ', UPPER(DESCRICAO_QUARTO))AS DESCRICAO FROM QUARTO ORDER BY DESCRICAO", connection))
                 {
                     try
                     {
@@ -809,7 +761,7 @@ namespace SistemaHotel
                         adp = new SqlDataAdapter(cmd);
                         adp.Fill(dta);
                         cmd.Connection.Close();
-                        ddlQuarto.DataTextField = "QUARTO";
+                        ddlQuarto.DataTextField = "DESCRICAO";
                         ddlQuarto.DataValueField = "ID_QUARTO";
                         ddlQuarto.DataSource = dta.Copy();
                         ddlQuarto.DataBind();
@@ -836,7 +788,7 @@ namespace SistemaHotel
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_QUARTO, UPPER(DESCRICAO_QUARTO) AS QUARTO FROM QUARTO ORDER BY DESCRICAO_QUARTO", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_QUARTO,CONCAT(NUMERO_QUARTO,' - ', UPPER(DESCRICAO_QUARTO))AS DESCRICAO FROM QUARTO ORDER BY DESCRICAO", connection))
                 {
                     try
                     {
@@ -845,7 +797,7 @@ namespace SistemaHotel
                         adp = new SqlDataAdapter(cmd);
                         adp.Fill(dta);
                         cmd.Connection.Close();
-                        ddlQuartoE.DataTextField = "QUARTO";
+                        ddlQuartoE.DataTextField = "DESCRICAO";
                         ddlQuartoE.DataValueField = "ID_QUARTO";
                         ddlQuartoE.DataSource = dta.Copy();
                         ddlQuartoE.DataBind();
@@ -875,9 +827,7 @@ namespace SistemaHotel
             txtLoginE.Text = "";
             txtLogin.Text = "";
             txtNovaSenha.Text = "";
-            txtNovaSenhaE.Text = "";
-            txtConfirmaSenha.Text = "";
-            txtConfirmaSenhaE.Text = "";
+            txtConfirmaSenha.Text = ""; 
             ddlPerfil.SelectedIndex = -1;
             txtCdReservaE.Text = "";
             txtCodReserva.Text = "";

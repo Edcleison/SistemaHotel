@@ -78,13 +78,22 @@ namespace SistemaHotel
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl mdQuar;
 
         /// <summary>
-        /// txtQuarto control.
+        /// txtNumeroQuarto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQuarto;
+        protected global::System.Web.UI.WebControls.TextBox txtNumeroQuarto;
+
+        /// <summary>
+        /// txtDescricaoQuarto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDescricaoQuarto;
 
         /// <summary>
         /// lnkSalvarQuarto control.
@@ -114,13 +123,22 @@ namespace SistemaHotel
         protected global::System.Web.UI.WebControls.TextBox txtIdQuartoE;
 
         /// <summary>
-        /// txtQuartoE control.
+        /// txtNumeroQuartoE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQuartoE;
+        protected global::System.Web.UI.WebControls.TextBox txtNumeroQuartoE;
+
+        /// <summary>
+        /// txtDescricaoQuartoE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDescricaoQuartoE;
 
         /// <summary>
         /// lnkSalvarQuartoE control.
