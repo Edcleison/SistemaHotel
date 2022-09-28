@@ -38,6 +38,18 @@
         });
     </script>
 
+    <style>
+        .alert {
+
+            position: fixed;
+            width: 100%;
+            text-align: left;
+            z-index: 99999;
+            outline: 9999px solid rgba(0,0,0,0.8);
+        }
+    </style>
+
+    
     <link href="CSS/Estilos.css" rel="stylesheet" />
     <script src="Scripts/jquery.mask.js"></script>
     <script src="Scripts/autoNumeric.js"></script>
