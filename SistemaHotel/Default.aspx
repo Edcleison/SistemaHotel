@@ -22,35 +22,34 @@
         <h5 class="p-3 mb-2 bg-dark text-white">Página Inicial</h5>
         <hr />
 
-        <div class="container">
-            <div class="row">
-                <div class="col-sm">
+        <div class="container-fluid">
+            <div class="row justify-content-md-center">
+                <div class="col-auto">
                     <div class="border border-dark">
                         <div class="container">
-
                             <div class="row">
-                                <div class="col-sm">
-                                    <asp:Label ID="lbNomeUsuarioLegenda" Font-Bold="true" runat="server" Text="Bem Vindo!"></asp:Label>
+                                <div class="col-auto">
+                                    <asp:Label ID="lbNomeUsuarioLegenda" Font-Bold="true" runat="server" Text="Bem Vindo:"></asp:Label>
                                 </div>
-                                <div class="col-sm">
+                                <div class="col-auto">
                                     <asp:Label ID="lbNomeUsuario" runat="server" Font-Bold="true" Text="Nome do Usuário"></asp:Label>
                                 </div>
                             </div>
                             <hr />
                             <div class="row">
-                                <div class="col-sm">
+                                <div class="col-auto">
                                     <asp:Label ID="lbLoginLegenda" runat="server" Font-Bold="true" Text="Login:"></asp:Label>
                                 </div>
-                                <div class="col-sm">
+                                <div class="col-auto">
                                     <asp:Label ID="lbLogin" runat="server" Font-Bold="true" Text="Login"></asp:Label>
                                 </div>
                             </div>
                             <hr />
                             <div class="row">
-                                <div class="col-sm">
+                                <div class="col-auto">
                                     <asp:Label ID="lbPerfilLegenda" runat="server" Font-Bold="true" Text="Perfil:"></asp:Label>
                                 </div>
-                                <div class="col-sm">
+                                <div class="col-auto">
                                     <asp:Label ID="lbPerfil" runat="server" Font-Bold="true" Text="Perfil do Usuário"></asp:Label>
                                 </div>
                             </div>
