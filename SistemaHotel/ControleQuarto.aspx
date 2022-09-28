@@ -13,6 +13,34 @@
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet" />
 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $(".alert").fadeOut("slow", function () {
+                    $(this).alert('close');
+                });
+            }, 5000);
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".close").click(function () {
+                $(".alert").hide();
+            });
+        });
+    </script>
+    <script>
+        function somenteNumeros(num) {
+            var er = /[^0-9]/;
+            er.lastIndex = 0;
+            var campo = num;
+            if (er.test(campo.value)) {
+                campo.value = "";
+            }
+        }
+    </script>
+
     <style>
         .green {
             background-color: lightseagreen !important;
@@ -164,7 +192,7 @@
         </div>
         <div class="modal-backdrop fade show" id="mdBack" runat="server" style="opacity: 0.2; display: block; filter: (alpha(opacity= 20))" visible="false"></div>
         <div class="modal fade show" id="mdQuar" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">           
-            <div class="modal-dialog modal-personalizado" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" visible="false" style="border-radius: 10px;">
                     <div class="modal-header">
                         <h5 class="modal-title">Novo Quarto:</h5>
@@ -179,7 +207,12 @@
                                     <span>Número Quarto: </span>
                                 </div>
                                 <div class="col-sm">
-                                    <asp:TextBox runat="server" TextMode="Number" ID="txtNumeroQuarto"></asp:TextBox>
+                                    <asp:TextBox runat="server" onkeyup="somenteNumeros(this);" ID="txtNumeroQuarto"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
                                 </div>
                             </div>
                             <div class="row">
@@ -232,7 +265,12 @@
                                     <span>Quarto: </span>
                                 </div>
                                 <div class="col-sm">
-                                    <asp:TextBox runat="server" TextMode="Number" ID="txtNumeroQuartoE"></asp:TextBox>
+                                    <asp:TextBox runat="server" onkeyup="somenteNumeros(this);" ID="txtNumeroQuartoE"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
                                 </div>
                             </div>
                              <div class="row">

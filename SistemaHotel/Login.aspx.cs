@@ -44,7 +44,10 @@ namespace SistemaHotel
                             //msg = "<script> alert('Login incorreto!'); </script>";
                             //Response.Write(msg);
                             Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                              Login incorreto!  
+                                              Login incorreto! 
+                                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                         }
                         else if (login == u.Login && senha != u.Senha)
@@ -52,7 +55,10 @@ namespace SistemaHotel
                             //msg = "<script> alert('Senha incorreta!'); </script>";
                             //Response.Write(msg);
                             Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                               Senha incorreta!  
+                                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                               Senha incorreta!
                                             </div>");
                         }
                         else if (login != u.Login && senha != u.Senha)
@@ -60,7 +66,10 @@ namespace SistemaHotel
                             //msg = "<script> alert('Login e senha incorretos!'); </script>";
                             //Response.Write(msg);
                             Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                              Login e senha incorretos! 
+                                              Login e senha incorretos!
+                                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                         }
                         else
@@ -93,6 +102,9 @@ namespace SistemaHotel
                         //Response.Write(msg);
                         Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                               Login incorreto! 
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                     }
 
@@ -116,6 +128,9 @@ namespace SistemaHotel
                                 //Response.Write(msg);
                                 Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                               Login incorreto! 
+                                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                             }
                             else if (login == u.Login && senha != u.Senha)
@@ -124,6 +139,9 @@ namespace SistemaHotel
                                 //Response.Write(msg);
                                 Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                              Senha incorreta!
+                                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                             }
                             else if (login != u.Login && senha != u.Senha)
@@ -132,6 +150,9 @@ namespace SistemaHotel
                                 //Response.Write(msg);
                                 Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                              Login e senha incorretos!
+                                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                             }
                             else
@@ -165,6 +186,9 @@ namespace SistemaHotel
                         //Response.Write(msg);
                         Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                            Login incorreto!
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                     }
                 }
@@ -178,6 +202,9 @@ namespace SistemaHotel
                     //Response.Write(msg);
                     Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                           Login não permitido!
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                 }
             }
@@ -221,6 +248,9 @@ namespace SistemaHotel
                     //Response.Write(msg);
                     Response.Write(@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                          Senha Atualizada!
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                     limparCampos();
                 }
@@ -230,6 +260,9 @@ namespace SistemaHotel
                     //Response.Write(msg);
                     Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                          Digite as Senhas Iguais!
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                 }
 
@@ -241,6 +274,9 @@ namespace SistemaHotel
                 //Response.Write(msg);
                 Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                         Login não encontrado!
+                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
             }
 

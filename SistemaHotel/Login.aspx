@@ -16,9 +16,17 @@
                 $(".alert").fadeOut("slow", function () {
                     $(this).alert('close');
                 });
-            }, 5000);
+            }, 3000);
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $(".close").click(function () {
+                $(".alert").hide();
+            });
+        });
+    </script>
+
     <style>
         .modal-backdrop {
             background-image: url('https://cdn.tapetender70er.de/media/image/07/6f/e5/Papel-de-Parede-para-Hoteleira_944x944@2x.webp');
@@ -27,12 +35,12 @@
             height: auto;
         }
 
-        div.alert {
-            position: absolute;
-            top: 30px;
-            right: 10px;
-            width: auto;
-            height: auto;
+        .alert {
+            position: fixed;
+            width: 100%;
+            text-align: left;
+            z-index: 99999;
+            outline: 9999px solid rgba(0,0,0,0.8);
         }
     </style>
 
@@ -43,7 +51,7 @@
     <form id="form1" runat="server">
         <div>
             <div class="modal-backdrop fade show" id="mdBack" runat="server" style="opacity: 0.2; display: block; filter: (alpha(opacity= 20))" visible="true"></div>
-            <div class="modal fade show" id="mdLog" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100));">             
+            <div class="modal fade show" id="mdLog" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100));">
                 <div class="modal-dialog modal-personalizado" role="document">
                     <div class="modal-content" visible="true" style="border-radius: 10px;">
                         <div class="modal-header">
@@ -99,13 +107,13 @@
                     olho.mouseup(function () {
                         senha.attr("type", "password");
 
-                    });                 
+                    });
                     $("#olho").mouseout(function () {
                         $("#txtSenha").attr("type", "password");
                     });
                 </script>
             </div>
-            <div class="modal fade show" id="mdRedPass" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">            
+            <div class="modal fade show" id="mdRedPass" runat="server" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="opacity: 1; display: block; filter: (alpha(opacity= 100))" visible="false">
                 <div class="modal-dialog modal-personalizado" role="document">
                     <div class="modal-content" visible="false" style="border-radius: 10px;">
                         <div class="modal-header">
@@ -178,7 +186,7 @@
                         olho.mouseup(function () {
                             senha.attr("type", "password");
 
-                        });                      
+                        });
                         $("#olhoR").mouseout(function () {
                             $("#txtNovaSenha").attr("type", "password");
                         });
@@ -193,7 +201,7 @@
 
                         olhoDois.mouseup(function () {
                             ConfirmaSenha.attr("type", "password");
-                        });                        
+                        });
                         $("#olhoDois").mouseout(function () {
                             $("#txtConfimaSenha").attr("type", "password");
                         });
@@ -201,7 +209,7 @@
                 </div>
             </div>
         </div>
-    </form>
+    </form>   
 </body>
 </html>
 

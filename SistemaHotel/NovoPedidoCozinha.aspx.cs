@@ -59,6 +59,9 @@ namespace SistemaHotel
                             //Response.Write(msg);
                             Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                             Produto Removido!
+                                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                              </div>");
                             mdCarr.Visible = true;
                             carregarTabelaCarrinho(Session["login"].ToString());
@@ -140,7 +143,10 @@ namespace SistemaHotel
             //string msg = $"<script> alert('Produto(s) Adicionado(s): ID: {car.IdProduto} Qtde: {txtQuantidade.Text}'); </script>";
             //Response.Write(msg);
             Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                            Produto(s) Adicionado(s): ID: {car.IdProduto} Qtde: {txtQuantidade.Text}  
+                            Produto(s) Adicionado(s): ID: {car.IdProduto} Qtde: {txtQuantidade.Text} 
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                             </div>");
 
         }
@@ -178,6 +184,9 @@ namespace SistemaHotel
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                          Pedido Realizado: ID: {ped.IdPedido}
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                             </div>");
                 mdBack.Visible = false;
                 mdCarr.Visible = false;
@@ -189,6 +198,9 @@ namespace SistemaHotel
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                         Carrinho Vazio!
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                             </div>");
                 mdCarr.Visible = false;
                 mdBack.Visible = false;              
@@ -255,6 +267,9 @@ namespace SistemaHotel
             //Response.Write(msg);
             Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                         Carrinho Vazio!
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                             </div>");
             carregarTabelaCarrinho(Session["login"].ToString());
         }

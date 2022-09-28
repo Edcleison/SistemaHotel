@@ -51,6 +51,9 @@ namespace SistemaHotel
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                              Atendimento Finalizado: ID do Administrador {adm.IdAdm}  
+                                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
 
 
@@ -67,6 +70,9 @@ namespace SistemaHotel
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                              Atendimento Finalizado: ID do Funcionário {fun.IdFuncionario}
+                                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                             }
                         }
@@ -87,6 +93,9 @@ namespace SistemaHotel
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                              Atendimento Recusado: ID do Administrador {adm.IdAdm}
+                                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                             }
                             if (Session["perfil"].ToString() == "Funcionário")
@@ -101,6 +110,9 @@ namespace SistemaHotel
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                             Atendimento Finalizado: ID do Funcionário {fun.IdFuncionario}
+                                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
 
 

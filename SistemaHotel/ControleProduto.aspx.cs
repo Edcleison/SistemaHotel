@@ -39,6 +39,9 @@ namespace SistemaHotel
                             //Response.Write(msg);
                             Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                             Produto Inativado! ID: {rParametro}
+                                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
 
                         }
@@ -69,6 +72,9 @@ namespace SistemaHotel
                             //Response.Write(msg);
                             Response.Write($@"<div class='alert alert-sucess alert-dismissible fade show' role='alert'>
                                            Produto Ativado! ID: {rParametro}
+                                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
 
                         }
@@ -176,6 +182,9 @@ namespace SistemaHotel
                         //Response.Write(msg);
                         Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                           Produto Inserido!
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                         limparCampos();
 
@@ -186,6 +195,9 @@ namespace SistemaHotel
                         //Response.Write(msg);
                         Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                          Preencha todos os campos!
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                     }
 
@@ -196,6 +208,9 @@ namespace SistemaHotel
                     //Response.Write(msg);
                     Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                          Preencha todos os campos!
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
 
 
@@ -270,6 +285,9 @@ namespace SistemaHotel
                         //Response.Write(msg);
                         Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                        O Produto Alterado:  ID {prod.IdProduto}
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                         limparCampos();
                     }
@@ -279,6 +297,9 @@ namespace SistemaHotel
                         //Response.Write(msg);
                         Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                       Preencha todos os campos!
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
 
                     }
@@ -290,6 +311,9 @@ namespace SistemaHotel
                     //Response.Write(msg);
                     Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                       Preencha todos os campos!
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                 }
 

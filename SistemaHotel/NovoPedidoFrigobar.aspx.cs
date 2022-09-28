@@ -115,7 +115,7 @@ namespace SistemaHotel
         {
             //busca os dados do cliente pelo cod_reserva
             Cliente cli = dalCli.buscarClienteReserva(Session["login"].ToString());
-            if (cli.FlagPedidoFrigobar=='S')
+            if (cli.FlagPedidoFrigobar == 'S')
             {
                 //campos relacionados ao novo pedido
                 Pedido ped = new Pedido();
@@ -136,7 +136,10 @@ namespace SistemaHotel
                 //string msg = $"<script> alert('Pedido Realizado: ID: {ped.IdPedido}'); </script>";
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                           Pedido Realizado: ID: {ped.IdPedido}  
+                           Pedido Realizado: ID: {ped.IdPedido}
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                             </div>");
                 //inativa a flag para o cliente fazer pedidos de frigobar
                 cli.FlagPedidoFrigobar = 'N';
@@ -149,10 +152,13 @@ namespace SistemaHotel
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                        Pedido não Permitido!
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                             </div>");
             }
-            
-           
+
+
         }
 
 

@@ -42,6 +42,9 @@ namespace SistemaHotel
                             //Response.Write(msg);
                             Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                     Usuário Inativado: ID {rParametro}
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                         }
                         if (Request.QueryString["USUARIO_E"] != null)
@@ -105,6 +108,9 @@ namespace SistemaHotel
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                     Usuário Ativado! ID:{rParametro}
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                             }
                         }
@@ -211,6 +217,9 @@ namespace SistemaHotel
                         //Response.Write(msg);
                         Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                   Usuário já cadastrado!
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
 
 
@@ -259,6 +268,9 @@ namespace SistemaHotel
                         //Response.Write(msg);
                         Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                   Cadastro realizado!
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                         limparCampos();
                     }
@@ -269,6 +281,9 @@ namespace SistemaHotel
                     //Response.Write(msg);
                     Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                  Senhas Diferentes!
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
 
                 }
@@ -280,6 +295,9 @@ namespace SistemaHotel
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                  Senhas Diferentes!
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
             }
         }
@@ -415,6 +433,9 @@ namespace SistemaHotel
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                Usuário Atualizado: ID {txtIdUsuarioE.Text}
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
             }
 
@@ -424,6 +445,9 @@ namespace SistemaHotel
                 //string msg = "<script> alert('Preencha todos os campos!'); </script>";
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                            Preencha todos os campos!
                                             </div>");
             }
@@ -572,6 +596,9 @@ namespace SistemaHotel
                                         //Response.Write(msg);
                                         Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                                          Cadastro realizado!
+                                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                                          </div>");
 
                                     }
@@ -581,6 +608,9 @@ namespace SistemaHotel
                                         //Response.Write(msg);
                                         Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                                             Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {dataOcupa.ToString("dd/MM/yyyy HH: ss")} ID Cliente: {dta.Rows[0]["ID_CLIENTE"]}
+                                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                                              </div>");
 
                                     }
@@ -615,6 +645,9 @@ namespace SistemaHotel
                                     //Response.Write(msg);
                                     Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                                     Cadastro realizado!
+                                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                                      </div>");
 
                                 }
@@ -626,6 +659,9 @@ namespace SistemaHotel
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                                 Datas não permitidas!
+                                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                                 </div>");
                             }
 
@@ -636,6 +672,9 @@ namespace SistemaHotel
                             //Response.Write(msg);
                             Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                             Datas não permitidas!
+                                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
 
 
@@ -649,6 +688,9 @@ namespace SistemaHotel
                         //Response.Write(msg1);
                         Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                         {erro.Message}
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                     }
 
@@ -659,6 +701,9 @@ namespace SistemaHotel
                     //Response.Write(msg);
                     Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                        Cliente já cadastrado!
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                 }
             }
@@ -668,6 +713,9 @@ namespace SistemaHotel
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                     Preencha Todos os campos!
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
 
             }
@@ -703,6 +751,9 @@ namespace SistemaHotel
                         //Response.Write(msg);
                         Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                         Data Alterada {novaDataFim.ToString("dd/MM/yyyy HH:mm")} ID Cliente {cli.IdCliente}
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
 
                     }
@@ -712,6 +763,9 @@ namespace SistemaHotel
                         //Response.Write(msg);
                         Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                   Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null)} ID Cliente: {dta.Rows[0]["ID_CLIENTE"]}
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                             </div>");
                     }
 
@@ -730,6 +784,9 @@ namespace SistemaHotel
                     //Response.Write(msg);
                     Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                     Data Alterada: ID Cliente:{cli.IdCliente} Data:{novaDataFim}!
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                     </div>");
                 }
             }
@@ -738,6 +795,9 @@ namespace SistemaHotel
                 //string msg = "<script> alert('Data não permitida!'); </script>";
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
                                   Data não permitida!
                                     </div>");
 
