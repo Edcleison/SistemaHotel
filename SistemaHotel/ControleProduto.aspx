@@ -56,7 +56,7 @@
                 //"scrollCollapse": true,
                 "paging": true,
                 "pageLength": 10,
-                "ordering": false,
+                "ordering": true,
                 "info": false,
                 dom: 'Bfrtip',
                 buttons: ['excel', {
