@@ -15,12 +15,7 @@ using SistemaHotel.Utils;
 namespace SistemaHotel
 {
     public partial class ControleQuarto : System.Web.UI.Page
-    {
-        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
-
-
-        DALQuarto dalQua = new DALQuarto();
-
+    {      
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -33,7 +28,7 @@ namespace SistemaHotel
                         if (Request.QueryString["QUARTO_D"] != null)
                         {
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_D"]));
-                            dalQua.inativarQuarto(rParametro);
+                            DALQuarto.inativarQuarto(rParametro);
                             //string msg = $"<script> alert('Quarto Inativado: ID {rParametro}'); </script>";
                             //Response.Write(msg);
                             Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
@@ -48,7 +43,7 @@ namespace SistemaHotel
 
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_E"]));
 
-                            Quarto qua = dalQua.buscarQuartoId(rParametro);
+                            Quarto qua = DALQuarto.buscarQuartoId(rParametro);
 
                             txtNumeroQuartoE.Text = qua.NumeroQuarto.ToString();
                             txtDescricaoQuartoE.Text = qua.DescricaoQuarto;
@@ -60,7 +55,7 @@ namespace SistemaHotel
                         {
 
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_A"]));
-                            dalQua.ativarQuarto(rParametro);
+                            DALQuarto.ativarQuarto(rParametro);
                             //string msg = $"<script> alert('Quarto Ativado! ID: {rParametro}'); </script>";
                             //Response.Write(msg);
                             Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
@@ -95,7 +90,7 @@ namespace SistemaHotel
         private void carregarTabela(string Status)
         {
             DataTable rDta = new DataTable();
-            rDta = dalQua.buscarTodosQuartos(Status);
+            rDta = DALQuarto.buscarTodosQuartos(Status);
             StringBuilder sb = new StringBuilder();
 
 
@@ -185,7 +180,7 @@ namespace SistemaHotel
                 qua.NumeroQuarto = int.Parse(txtNumeroQuarto.Text);
                 qua.DescricaoQuarto = txtDescricaoQuarto.Text;
                 qua.StatusQuar = 'S';
-                dalQua.inserirQuarto(qua);
+                DALQuarto.inserirQuarto(qua);
                 //string msg = "<script> alert('Quarto inserido!'); </script>";
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
@@ -218,7 +213,7 @@ namespace SistemaHotel
                 qua.NumeroQuarto = int.Parse(txtNumeroQuartoE.Text);
                 qua.DescricaoQuarto = txtDescricaoQuartoE.Text;
                 qua.IdQuarto = int.Parse(txtIdQuartoE.Text);
-                dalQua.alterarQuarto(qua);
+                DALQuarto.alterarQuarto(qua);
                 //string msg = $"<script> alert('Quarto alterado: ID{qua.IdQuarto}'); </script>";
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>

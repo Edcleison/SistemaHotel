@@ -11,11 +11,11 @@ using System.Web;
 
 namespace SistemaHotel.Controller
 {
-    public class DALProduto
+    public static class DALProduto
     {
-        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
+        static string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
 
-        public void inserirProduto(Produto prod)
+        public static void inserirProduto(Produto prod)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
@@ -55,7 +55,7 @@ namespace SistemaHotel.Controller
         }
 
 
-        public DataTable buscarTodosProdutosTipo(string Tipo, string Status)
+        public static DataTable buscarTodosProdutosTipo(string Tipo, string Status)
         {
 
             string parTipoStatus = "";
@@ -68,7 +68,7 @@ namespace SistemaHotel.Controller
                 parTipoStatus = "WHERE ID_TIPO_PROD =@ID_TIPO_PROD";
             }
             else if (Tipo == "" && Status != "")
-            { 
+            {
                 parTipoStatus = "WHERE STATUS_PROD = @STATUS_PROD";
             }
 
@@ -123,7 +123,7 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-        public Produto buscarProdutoId(int IdProduto)
+        public static Produto buscarProdutoId(int IdProduto)
         {
             Produto prod = new Produto();
 
@@ -169,7 +169,7 @@ namespace SistemaHotel.Controller
             return prod;
         }
 
-        public void alterarProduto(Produto prod)
+        public static void alterarProduto(Produto prod)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
@@ -204,7 +204,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public void inativarProduto(int IdProduto)
+        public static void inativarProduto(int IdProduto)
         {
 
             using (SqlConnection connection = new SqlConnection(cnn))
@@ -231,7 +231,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public void ativarProduto(int IdProduto)
+        public static void ativarProduto(int IdProduto)
         {
 
             using (SqlConnection connection = new SqlConnection(cnn))

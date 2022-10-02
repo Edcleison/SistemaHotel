@@ -11,12 +11,12 @@ using System.Web;
 
 namespace SistemaHotel.Controller
 {
-    public class DALItemPedido
+    public static class DALItemPedido
     {
-        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
+        static  string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
 
 
-        public void inserirItemPedido(ItemPedido ItemPed)
+        public static void inserirItemPedido(ItemPedido ItemPed)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {

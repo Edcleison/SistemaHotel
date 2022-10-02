@@ -26,10 +26,10 @@ namespace SistemaHotel
             string senha = Criptografia.Encrypt(txtSenha.Text);
             string msg = "";
 
-            DALUsuario du = new DALUsuario();
-            Usuario u = du.buscaUsuarioLogin(login);
-            DALPerfilUsuario dpu = new DALPerfilUsuario();
-            PerfilUsuario pu = dpu.buscarUsuarioPerfil(u.IdUsuario);
+           
+            Usuario u = DALUsuario.buscaUsuarioLogin(login);
+          
+            PerfilUsuario pu = DALPerfilUsuario.buscarUsuarioPerfil(u.IdUsuario);
 
             if (pu.IdPerfil != 3)
             {
@@ -112,8 +112,8 @@ namespace SistemaHotel
             }
             else
             {
-                DALCliente dcli = new DALCliente();
-                Cliente cli = dcli.buscarClienteReserva(login);
+               
+                Cliente cli = DALCliente.buscarClienteReserva(login);
                 if (DateTime.ParseExact(cli.DataSaida.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) > DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
                 {
                     if (login != "" && senha != "")
@@ -196,7 +196,7 @@ namespace SistemaHotel
                 {
                     if (pu.StatusPerfilUsuario == 'S')
                     {
-                        dpu.inativarUsuario(u.IdUsuario);
+                        DALPerfilUsuario.inativarUsuario(u.IdUsuario);
                     }
                     //msg = "<script> alert('Login não permitido!'); </script>";
                     //Response.Write(msg);
@@ -230,11 +230,10 @@ namespace SistemaHotel
 
         protected void lnkSenha_Click(object sender, EventArgs e)
         {
-            DALUsuario dalUsu = new DALUsuario();
+          
             string login = txtLoginR.Text;
-            Usuario usu = dalUsu.buscaUsuarioLogin(login);
-            DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
-            PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.IdUsuario);
+            Usuario usu = DALUsuario.buscaUsuarioLogin(login);
+            PerfilUsuario perfUsu = DALPerfilUsuario.buscarUsuarioPerfil(usu.IdUsuario);
 
             if (perfUsu.StatusPerfilUsuario == 'S')
             {
@@ -243,7 +242,7 @@ namespace SistemaHotel
 
                     usu.IdUsuario = perfUsu.IdUsuario;
                     usu.Senha = Criptografia.Encrypt(txtConfirmaSenha.Text);
-                    dalUsu.alterarSenha(usu);
+                    DALUsuario.alterarSenha(usu);
                     //string msg = "<script> alert('Senha Atualizada!'); </script>";
                     //Response.Write(msg);
                     Response.Write(@"<div class='alert alert-success alert-dismissible fade show' role='alert'>

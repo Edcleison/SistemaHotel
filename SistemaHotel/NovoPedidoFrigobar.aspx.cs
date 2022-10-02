@@ -16,10 +16,6 @@ namespace SistemaHotel
 {
     public partial class NovoPedidoFrigobar : System.Web.UI.Page
     {
-        DALProduto dalProd = new DALProduto();
-        DALCliente dalCli = new DALCliente();
-        DALPedido dalPed = new DALPedido();
-        DALItemPedido dalItemPed = new DALItemPedido();
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -33,7 +29,7 @@ namespace SistemaHotel
                         {
 
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_N"]));
-                            Produto prod = dalProd.buscarProdutoId(rParametro);
+                            Produto prod = DALProduto.buscarProdutoId(rParametro);
                             txtIdProd.Text = prod.IdProduto.ToString();
                             txtNomeProd.Text = prod.NomeProduto;
                             txtDescricao.Text = prod.DescricaoProduto;
@@ -74,7 +70,7 @@ namespace SistemaHotel
         {
 
             DataTable rDta = new DataTable();
-            rDta = dalProd.buscarTodosProdutosTipo("2", "S");
+            rDta = DALProduto.buscarTodosProdutosTipo("2", "S");
             StringBuilder sb = new StringBuilder();
 
 
@@ -114,7 +110,7 @@ namespace SistemaHotel
         protected void lnkPedido_Click(object sender, EventArgs e)
         {
             //busca os dados do cliente pelo cod_reserva
-            Cliente cli = dalCli.buscarClienteReserva(Session["login"].ToString());
+            Cliente cli = DALCliente.buscarClienteReserva(Session["login"].ToString());
             if (cli.FlagPedidoFrigobar == 'S')
             {
                 //campos relacionados ao novo pedido
@@ -123,16 +119,16 @@ namespace SistemaHotel
                 ped.IdStatus = 1;
                 ped.DataAbertura = DateTime.Now;
                 ped.ValorTotal = decimal.Parse(txtPreco.Text);
-                dalPed.inserirPedido(ped);
+                DALPedido.inserirPedido(ped);
                 //busca o pedido pelo id_cliente e Data_Abertura
-                ped = dalPed.buscarPedidoIdClienteData(ped.IdCliente, ped.DataAbertura);
+                ped = DALPedido.buscarPedidoIdClienteData(ped.IdCliente, ped.DataAbertura);
                 //campos relacionados ao Item_Pedido
                 ItemPedido itemPed = new ItemPedido();
                 itemPed.IdPedido = ped.IdPedido;
                 itemPed.IdProduto = int.Parse(txtIdProd.Text);
                 itemPed.IdCliente = cli.IdCliente;
                 itemPed.Quantidade = int.Parse(txtQuantidade.Text);
-                dalItemPed.inserirItemPedido(itemPed);
+                DALItemPedido.inserirItemPedido(itemPed);
                 //string msg = $"<script> alert('Pedido Realizado: ID: {ped.IdPedido}'); </script>";
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
@@ -143,7 +139,7 @@ namespace SistemaHotel
                             </div>");
                 //inativa a flag para o cliente fazer pedidos de frigobar
                 cli.FlagPedidoFrigobar = 'N';
-                dalCli.alterarCliente(cli);
+                DALCliente.alterarCliente(cli);
 
             }
             else

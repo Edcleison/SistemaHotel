@@ -17,11 +17,6 @@ namespace SistemaHotel
     {
         string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
         // classes de persistência com o banco de dados
-        DALPerfilUsuario dalPerfUsu = new DALPerfilUsuario();
-        DALUsuario dalUsu = new DALUsuario();
-        DALCliente dalCli = new DALCliente();
-        DALAdministracao dalAdm = new DALAdministracao();
-        DALFuncionario dalFun = new DALFuncionario();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,7 +32,7 @@ namespace SistemaHotel
                         if (Request.QueryString["USUARIO_D"] != null)
                         {
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_D"]));
-                            dalPerfUsu.inativarUsuario(rParametro);
+                            DALPerfilUsuario.inativarUsuario(rParametro);
                             //string msg = $"<script> alert('Usuário Inativado: ID {rParametro}'); </script>";
                             //Response.Write(msg);
                             Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
@@ -52,8 +47,8 @@ namespace SistemaHotel
 
 
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_E"]));
-                            Usuario usu = dalUsu.buscarUsuarioId(rParametro);
-                            PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.IdUsuario);
+                            Usuario usu = DALUsuario.buscarUsuarioId(rParametro);
+                            PerfilUsuario perfUsu = DALPerfilUsuario.buscarUsuarioPerfil(usu.IdUsuario);
 
                             carregaDdlUsuarioE();
                             txtIdUsuarioE.Text = usu.IdUsuario.ToString();
@@ -67,13 +62,11 @@ namespace SistemaHotel
                         {
                             carregaDdlQuartoE();
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["CLIENTE_E"]));
-                            Usuario usu = dalUsu.buscarUsuarioId(rParametro);
-                            Cliente cli = dalCli.buscarClienteReserva(usu.Login);
+                            Usuario usu = DALUsuario.buscarUsuarioId(rParametro);
+                            Cliente cli = DALCliente.buscarClienteReserva(usu.Login);
                             txtCdReservaE.Text = cli.CodReserva;
                             ddlQuartoE.SelectedValue = cli.IdQuarto.ToString();
                             txtNomeClienteE.Text = cli.NomeCliente + " " + cli.SobreNomeCliente;
-                            txtDataIni.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
-                            txtDataIni.Text = cli.DataSaida.ToString("dd/MM/yyyy HH:mm");
                             txtDataIniE.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
                             txtDataFimE.Text = cli.DataSaida.ToString("dd/MM/yyyy HH:mm");
                             mdBack.Visible = true;
@@ -83,12 +76,12 @@ namespace SistemaHotel
                         {
 
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["USUARIO_A"]));
-                            Usuario usu = dalUsu.buscarUsuarioId(rParametro);
-                            PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.IdUsuario);
+                            Usuario usu = DALUsuario.buscarUsuarioId(rParametro);
+                            PerfilUsuario perfUsu = DALPerfilUsuario.buscarUsuarioPerfil(usu.IdUsuario);
                             if (perfUsu.IdPerfil == 3)
                             {
                                 carregaDdlQuartoE();
-                                Cliente cli = dalCli.buscarClienteReserva(usu.Login);
+                                Cliente cli = DALCliente.buscarClienteReserva(usu.Login);
                                 txtCdReservaE.Text = cli.CodReserva;
                                 ddlQuartoE.SelectedValue = cli.IdQuarto.ToString();
                                 txtNomeClienteE.Text = cli.NomeCliente + " " + cli.SobreNomeCliente;
@@ -103,7 +96,7 @@ namespace SistemaHotel
                             }
                             else
                             {
-                                dalPerfUsu.ativarUsuario(rParametro);
+                                DALPerfilUsuario.ativarUsuario(rParametro);
                                 //string msg = $"<script> alert('Usuário Ativado! ID:{rParametro}'); </script>";
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
@@ -136,7 +129,7 @@ namespace SistemaHotel
         private void carregarTabela(string Perfil, string Status)
         {
             DataTable rDta = new DataTable();
-            rDta = dalUsu.buscarUsuariosPerfilStatus(Perfil, Status);
+            rDta = DALUsuario.buscarUsuariosPerfilStatus(Perfil, Status);
             StringBuilder sb = new StringBuilder();
 
 
@@ -202,7 +195,7 @@ namespace SistemaHotel
         {
             //trecho relacionado a busca de usuário pelo login para ver se ele já é cadastrado no banco
             string login = txtLogin.Text;
-            Usuario usu = dalUsu.buscaUsuarioLogin(login);
+            Usuario usu = DALUsuario.buscaUsuarioLogin(login);
 
             //varifica se todos os campos estão preenchidos
             if (!string.IsNullOrEmpty(txtLogin.Text) && !string.IsNullOrEmpty(txtNovaSenha.Text) && !string.IsNullOrEmpty(txtConfirmaSenha.Text) && ddlPerfilNovoUsu.SelectedValue != "0")
@@ -235,9 +228,9 @@ namespace SistemaHotel
                         usu.Login = txtLogin.Text;
                         usu.Senha = Criptografia.Encrypt(txtNovaSenha.Text);
                         //insere o objeto Usuário
-                        dalUsu.inserirUsuario(usu);
+                        DALUsuario.inserirUsuario(usu);
                         //recupera o usuário recém cadastrado para inserir o perfil
-                        usu = dalUsu.buscaUsuarioLogin(usu.Login);
+                        usu = DALUsuario.buscaUsuarioLogin(usu.Login);
                         //novo objeto PerfilUsuario
                         PerfilUsuario perfUsu = new PerfilUsuario();
                         //campos relacionados passagem devalores dos textbox para os atributos do objeto PerfilUsuário
@@ -245,14 +238,14 @@ namespace SistemaHotel
                         perfUsu.IdUsuario = usu.IdUsuario;
                         perfUsu.StatusPerfilUsuario = 'S';
                         //insere o objeto PerfilUsuário
-                        dalPerfUsu.inserirPerfilUsuario(perfUsu);
+                        DALPerfilUsuario.inserirPerfilUsuario(perfUsu);
                         //campos relacionados a criação do Usuário na Administracao
                         if (ddlPerfilNovoUsu.SelectedValue == "1")
                         {
                             Administracao adm = new Administracao();
                             adm.IdUsuario = usu.IdUsuario;
                             adm.IdPerfil = perfUsu.IdPerfil;
-                            dalAdm.inserirAdministracao(adm);
+                            DALAdministracao.inserirAdministracao(adm);
                         }
                         //campos relacionados a criação do Usuário na Funcionario
                         else
@@ -260,7 +253,7 @@ namespace SistemaHotel
                             Funcionario fun = new Funcionario();
                             fun.IdUsuario = usu.IdUsuario;
                             fun.IdPerfil = perfUsu.IdPerfil;
-                            dalFun.inserirFuncionario(fun);
+                            DALFuncionario.inserirFuncionario(fun);
 
                         }
 
@@ -384,8 +377,8 @@ namespace SistemaHotel
 
         protected void lnkAlterarUsuario_Click(object sender, EventArgs e)
         {
-            Usuario usuR = dalUsu.buscarUsuarioId(int.Parse(txtIdUsuarioE.Text));
-            PerfilUsuario perfUsuR = dalPerfUsu.buscarUsuarioPerfil(usuR.IdUsuario);
+            Usuario usuR = DALUsuario.buscarUsuarioId(int.Parse(txtIdUsuarioE.Text));
+            PerfilUsuario perfUsuR = DALPerfilUsuario.buscarUsuarioPerfil(usuR.IdUsuario);
             //varifica se todos os campos estão preenchidos
             if (!string.IsNullOrEmpty(txtLoginE.Text) && ddlPerfilUsuE.SelectedValue != "SELECIONE")
             {
@@ -396,24 +389,24 @@ namespace SistemaHotel
                 usu.SobrenomeUsuario = txtSobrenomeE.Text;
                 usu.Login = txtLoginE.Text;
                 //altera o objeto Usuário
-                dalUsu.alterarUsuario(usu);
+                DALUsuario.alterarUsuario(usu);
                 //objeto PerfilUsuario
                 PerfilUsuario perfUsu = new PerfilUsuario();
                 //campos relacionados passagem devalores dos textbox para os atributos do objeto PerfilUsuário
                 perfUsu.IdPerfil = int.Parse(ddlPerfilUsuE.SelectedValue);
                 perfUsu.IdUsuario = int.Parse(txtIdUsuarioE.Text);
                 //insere o objeto PerfilUsuário
-                dalPerfUsu.alterarPefilUsuario(perfUsu);
+                DALPerfilUsuario.alterarPefilUsuario(perfUsu);
                 //campos relacionados a criação do Usuário na Administracao
                 if (ddlPerfilUsuE.SelectedValue == "1")
                 {
                     Administracao adm = new Administracao();
-                    adm = dalAdm.buscarAdmIdUsuario(int.Parse(txtIdUsuarioE.Text));
+                    adm = DALAdministracao.buscarAdmIdUsuario(int.Parse(txtIdUsuarioE.Text));
                     if (adm.IdAdm == 0)
                     {
                         adm.IdUsuario = perfUsu.IdUsuario;
                         adm.IdPerfil = perfUsu.IdPerfil;
-                        dalAdm.inserirAdministracao(adm);
+                        DALAdministracao.inserirAdministracao(adm);
 
                     }
 
@@ -421,12 +414,12 @@ namespace SistemaHotel
                 else
                 {
                     Funcionario fun = new Funcionario();
-                    fun = dalFun.buscarFuncionarioIdUsuario(int.Parse(txtIdUsuarioE.Text));
+                    fun = DALFuncionario.buscarFuncionarioIdUsuario(int.Parse(txtIdUsuarioE.Text));
                     if (fun.IdFuncionario == 0)
                     {
                         fun.IdUsuario = perfUsu.IdUsuario;
                         fun.IdPerfil = perfUsu.IdPerfil;
-                        dalFun.inserirFuncionario(fun);
+                        DALFuncionario.inserirFuncionario(fun);
                     }
                 }
                 //string msg = $"<script> alert('Usuário Atualizado: ID {txtIdUsuarioE.Text}'); </script>";
@@ -461,7 +454,7 @@ namespace SistemaHotel
         private void carregarTabelaClientes(string Perfil, string Status)
         {
             DataTable rDta = new DataTable();
-            rDta = dalUsu.buscarUsuariosClientesStatus(Perfil, Status);
+            rDta = DALUsuario.buscarUsuariosClientesStatus(Perfil, Status);
             StringBuilder sb = new StringBuilder();
 
 
@@ -539,7 +532,7 @@ namespace SistemaHotel
                 string sCdReserva = txtCodReserva.Text;
                 Usuario usu = new Usuario();
                 //busca o usuário para ver se já está cadastrado no banco
-                usu = dalUsu.buscaUsuarioLogin(sCdReserva);
+                usu = DALUsuario.buscaUsuarioLogin(sCdReserva);
 
                 if (usu.Login == "")
                 {
@@ -562,31 +555,31 @@ namespace SistemaHotel
                                 cli.DataSaida = dataFim;
                                 cli.FlagPedidoFrigobar = 'S';
                                 //verifica se tem algum cliente ocupando o quarto com o id selecionado no DropDownList                           
-                                DataTable dta = dalCli.verificarOcupacaoQuarto(ddlQuarto.SelectedValue);
+                                DataTable dta = DALCliente.verificarOcupacaoQuarto(ddlQuarto.SelectedValue);
 
                                 if (dta.Rows.Count > 0)
                                 {
                                     DateTime dataOcupa = DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null);
                                     if (dataOcupa < DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
                                     {
-                                        dalCli.inserirCliente(cli);
+                                        DALCliente.inserirCliente(cli);
                                         //campos relacionados ao cadastro de usuário
                                         usu.Login = sCdReserva;
                                         usu.NomeUsuario = txtNomeCliente.Text;
                                         usu.SobrenomeUsuario = txtSobrenomeCliente.Text;
                                         txtSenhaRand.Text = SenhaRandomica.RandLetras(5) + SenhaRandomica.RandNumeros(3);
                                         usu.Senha = Criptografia.Encrypt(txtSenhaRand.Text);
-                                        dalUsu.inserirUsuario(usu);
+                                        DALUsuario.inserirUsuario(usu);
 
                                         //busca o usuário que cadastrou no banco
-                                        usu = dalUsu.buscaUsuarioLogin(sCdReserva);
+                                        usu = DALUsuario.buscaUsuarioLogin(sCdReserva);
 
                                         //campos relacionados ao cadastro do perfil do usuário
                                         PerfilUsuario perfUsu = new PerfilUsuario();
                                         perfUsu.IdPerfil = 3;
                                         perfUsu.IdUsuario = usu.IdUsuario;
                                         perfUsu.StatusPerfilUsuario = 'S';
-                                        dalPerfUsu.inserirPerfilUsuario(perfUsu);
+                                        DALPerfilUsuario.inserirPerfilUsuario(perfUsu);
 
                                         //campos de retorno das datas cadastradas
                                         txtDataIni.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
@@ -618,24 +611,24 @@ namespace SistemaHotel
                                 }
                                 else
                                 {
-                                    dalCli.inserirCliente(cli);
+                                    DALCliente.inserirCliente(cli);
                                     //campos relacionados ao cadastro de usuário
                                     usu.Login = sCdReserva;
                                     usu.NomeUsuario = txtNomeCliente.Text;
                                     usu.SobrenomeUsuario = txtSobrenomeCliente.Text;
                                     txtSenhaRand.Text = SenhaRandomica.RandLetras(5) + SenhaRandomica.RandNumeros(3);
                                     usu.Senha = Criptografia.Encrypt(txtSenhaRand.Text);
-                                    dalUsu.inserirUsuario(usu);
+                                    DALUsuario.inserirUsuario(usu);
 
                                     //busca o usuário que cadastrou no banco
-                                    usu = dalUsu.buscaUsuarioLogin(sCdReserva);
+                                    usu = DALUsuario.buscaUsuarioLogin(sCdReserva);
 
                                     //campos relacionados ao cadastro do perfil do usuário
                                     PerfilUsuario perfUsu = new PerfilUsuario();
                                     perfUsu.IdPerfil = 3;
                                     perfUsu.IdUsuario = usu.IdUsuario;
                                     perfUsu.StatusPerfilUsuario = 'S';
-                                    dalPerfUsu.inserirPerfilUsuario(perfUsu);
+                                    DALPerfilUsuario.inserirPerfilUsuario(perfUsu);
 
                                     //campos de retorno das datas cadastradas
                                     txtDataIni.Text = cli.DataEntrada.ToString("dd/MM/yyyy HH:mm");
@@ -732,20 +725,19 @@ namespace SistemaHotel
             if (novaDataFim > DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) && novaDataFim > dataFim)
             {
                 //campos relacionados a busca do cliente pelo cod_reserva
-                DALCliente dalCliente = new DALCliente();
-                Cliente cli = dalCliente.buscarClienteReserva(txtCdReservaE.Text.ToUpper());
+                Cliente cli = DALCliente.buscarClienteReserva(txtCdReservaE.Text.ToUpper());
                 //alteração da data de saída
                 cli.DataSaida = Convert.ToDateTime(novaDataFim);
                 //flag para poder fazer outro pedido de frigobar
                 cli.FlagPedidoFrigobar = 'S';
 
-                DataTable dta = dalCli.verificarOcupacaoQuarto(ddlQuartoE.SelectedValue);
+                DataTable dta = DALCliente.verificarOcupacaoQuarto(ddlQuartoE.SelectedValue);
                 if (dta.Rows.Count > 0)
                 {
                     if (DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) < DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
                     {
                         //alterar a data de saída do cliente
-                        dalCliente.alterarCliente(cli);
+                        DALCliente.alterarCliente(cli);
                         txtDataFimE.Text = novaDataFim.ToString("dd/MM/yyyy HH:mm");
                         //string msg = $"<script> alert('Data Alterada {novaDataFim.ToString("dd/MM/yyyy HH:mm")} ID Cliente {cli.IdCliente}'); </script>";
                         //Response.Write(msg);
@@ -772,12 +764,12 @@ namespace SistemaHotel
                 }
                 else
                 {
-                    dalCliente.alterarCliente(cli);
-                    Usuario usu = dalUsu.buscaUsuarioLogin(cli.CodReserva);
-                    PerfilUsuario perfUsu = dalPerfUsu.buscarUsuarioPerfil(usu.IdUsuario);
+                    DALCliente.alterarCliente(cli);
+                    Usuario usu = DALUsuario.buscaUsuarioLogin(cli.CodReserva);
+                    PerfilUsuario perfUsu = DALPerfilUsuario.buscarUsuarioPerfil(usu.IdUsuario);
                     if (perfUsu.StatusPerfilUsuario != 'S')
                     {
-                        dalPerfUsu.ativarUsuario(usu.IdUsuario);
+                        DALPerfilUsuario.ativarUsuario(usu.IdUsuario);
                     }
                     //txtDataFimE.Text = novaDataFim.ToString();
                     //string msg = $"<script> alert('Data Alterada: ID Cliente:{cli.IdCliente} Data:{novaDataFim}!'); </script>";

@@ -18,7 +18,6 @@ namespace SistemaHotel
     {
 
         string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
-        DALPedido dalPed = new DALPedido();
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -49,7 +48,7 @@ namespace SistemaHotel
         {
 
             DataTable rDta = new DataTable();
-            rDta = dalPed.buscarTodosPedidosTipoStatus(Tipo, Status);
+            rDta = DALPedido.buscarTodosPedidosTipoStatus(Tipo, Status);
             StringBuilder sb = new StringBuilder();
 
 

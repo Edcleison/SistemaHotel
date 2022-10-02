@@ -11,12 +11,12 @@ using System.Web;
 
 namespace SistemaHotel.Controller
 {
-    public class DALPedido
+    public static class DALPedido
     {
-        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
+        static string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
 
 
-        public void inserirPedido(Pedido ped)
+        public static void inserirPedido(Pedido ped)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
@@ -55,7 +55,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public string buscarValorTotalCliente(int IdCliente)
+        public static string buscarValorTotalCliente(int IdCliente)
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
@@ -83,16 +83,16 @@ namespace SistemaHotel.Controller
                         cmd.Connection.Close();
                     }
                 }
-                if (dta.Rows.Count >0)
+                if (dta.Rows.Count > 0)
                 {
                     return dta.Rows[0]["VALOR_TOTAL"].ToString();
                 }
 
             }
-            return"";
+            return "";
         }
 
-        public DataTable buscarTodosPedidosTipoStatus(string IdStatus, string IdTipoProd)
+        public static DataTable buscarTodosPedidosTipoStatus(string IdStatus, string IdTipoProd)
         {
             string parTipoStatus = "";
             if (IdTipoProd != "" && IdStatus != "")
@@ -169,7 +169,7 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-        public DataTable buscarTodosPedidosCliente(string IdCliente, string IdStatus, string IdTipoProd)
+        public static DataTable buscarTodosPedidosCliente(string IdCliente, string IdStatus, string IdTipoProd)
         {
             string parTipoStatus = "";
             if (IdTipoProd != "" && IdStatus != "")
@@ -242,7 +242,7 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-        public Pedido buscarPedidoId(int IdPedido)
+        public static Pedido buscarPedidoId(int IdPedido)
         {
             Pedido ped = new Pedido();
 
@@ -288,7 +288,7 @@ namespace SistemaHotel.Controller
             return ped;
         }
 
-        public Pedido buscarPedidoIdClienteData(int IdCliente, DateTime DataAbertura)
+        public static Pedido buscarPedidoIdClienteData(int IdCliente, DateTime DataAbertura)
         {
             Pedido ped = new Pedido();
 
@@ -334,7 +334,7 @@ namespace SistemaHotel.Controller
             return ped;
         }
 
-        public void alterarStatusAtendimentoAdm(Pedido ped)
+        public static void alterarStatusAtendimentoAdm(Pedido ped)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
@@ -368,7 +368,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public void alterarStatusAtendimentoFuncionario(Pedido ped)
+        public static void alterarStatusAtendimentoFuncionario(Pedido ped)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {

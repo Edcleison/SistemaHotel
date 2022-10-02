@@ -11,11 +11,11 @@ using System.Web;
 
 namespace SistemaHotel.Controller
 {
-    public class DALUsuario
+    public static class DALUsuario
     {
-        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
+        static string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
 
-        public void inserirUsuario(Usuario usu)
+        public static void inserirUsuario(Usuario usu)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
@@ -33,7 +33,7 @@ namespace SistemaHotel.Controller
                         cmd.Parameters.AddWithValue("SENHA", usu.Senha);
                         cmd.Parameters.AddWithValue("NOME", usu.NomeUsuario);
                         cmd.Parameters.AddWithValue("SOBRENOME", usu.SobrenomeUsuario);
-                        cmd.ExecuteNonQuery();                       
+                        cmd.ExecuteNonQuery();
                     }
                     catch (Exception erro)
                     {
@@ -48,7 +48,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public DataTable buscarUsuariosPerfilStatus(string Perfil,string Status)
+        public static DataTable buscarUsuariosPerfilStatus(string Perfil, string Status)
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
@@ -116,7 +116,7 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-        public DataTable buscarUsuariosClientesStatus(string Perfil,string Status)
+        public static DataTable buscarUsuariosClientesStatus(string Perfil, string Status)
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
@@ -127,7 +127,7 @@ namespace SistemaHotel.Controller
             }
             else if (Perfil != "" && Status == "")
             {
-                parPerfilStatus = "WHERE P.ID_PERFIL = @ID_PERFIL" ;
+                parPerfilStatus = "WHERE P.ID_PERFIL = @ID_PERFIL";
             }
             else if (Perfil == "" && Status != "")
             {
@@ -185,7 +185,7 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-        public Usuario buscarUsuarioId(int IdUsuario)
+        public static Usuario buscarUsuarioId(int IdUsuario)
         {
             Usuario usu = new Usuario();
 
@@ -228,7 +228,7 @@ namespace SistemaHotel.Controller
             return usu;
         }
 
-        public Usuario buscaUsuarioLogin(string Login)
+        public static Usuario buscaUsuarioLogin(string Login)
         {
             Usuario usu = new Usuario();
 
@@ -272,7 +272,7 @@ namespace SistemaHotel.Controller
 
         }
 
-        public void alterarUsuario(Usuario usu)
+        public static void alterarUsuario(Usuario usu)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
@@ -283,7 +283,7 @@ namespace SistemaHotel.Controller
                         cmd.Connection.Open();
                         cmd.Parameters.AddWithValue("LOGIN", usu.Login);
                         cmd.Parameters.AddWithValue("ID_USUARIO", usu.IdUsuario);
-                        cmd.ExecuteNonQuery();                       
+                        cmd.ExecuteNonQuery();
                     }
                     catch (Exception erro)
                     {
@@ -300,7 +300,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public void alterarSenha(Usuario usu)
+        public static void alterarSenha(Usuario usu)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
@@ -312,7 +312,7 @@ namespace SistemaHotel.Controller
                         cmd.Connection.Open();
                         cmd.Parameters.AddWithValue("SENHA", usu.Senha);
                         cmd.Parameters.AddWithValue("ID_USUARIO", usu.IdUsuario);
-                        cmd.ExecuteNonQuery();           
+                        cmd.ExecuteNonQuery();
                     }
                     catch (Exception erro)
                     {

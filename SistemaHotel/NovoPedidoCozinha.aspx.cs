@@ -16,12 +16,7 @@ namespace SistemaHotel
 {
     public partial class NovoPedidoCozinha : System.Web.UI.Page
     {
-        DALProduto dalProd = new DALProduto();
-        DALCliente dalCli = new DALCliente();
-        DALPedido dalPed = new DALPedido();
-        DALItemPedido dalItemPed = new DALItemPedido();
         List<Carrinho> prodsCar = new List<Carrinho>();
-        DALCarrinho dalCar = new DALCarrinho();
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -34,7 +29,7 @@ namespace SistemaHotel
                         if (Request.QueryString["PRODUTO_N"] != null)
                         {
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_N"]));
-                            Produto prod = dalProd.buscarProdutoId(rParametro);
+                            Produto prod = DALProduto.buscarProdutoId(rParametro);
                             txtIdProd.Text = prod.IdProduto.ToString();
                             txtNomeProd.Text = prod.NomeProduto;
                             txtDescricao.Text = prod.DescricaoProduto;
@@ -54,7 +49,7 @@ namespace SistemaHotel
                         if (Request.QueryString["CARRINHO_C"] != null)
                         {
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["CARRINHO_C"]));
-                            dalCar.excluirCarrinho(rParametro);
+                            DALCarrinho.excluirCarrinho(rParametro);
                             //string msg = $"<script> alert('Produto Removido!'); </script>";
                             //Response.Write(msg);
                             Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
@@ -67,10 +62,10 @@ namespace SistemaHotel
                             carregarTabelaCarrinho(Session["login"].ToString());
                         }
                         carregarTabela();
-                        lblQtdeCarrinho.Text = dalCar.buscarCarrinhoQtde(Session["login"].ToString());
+                        lblQtdeCarrinho.Text = DALCarrinho.buscarCarrinhoQtde(Session["login"].ToString());
                     }
                     carregarTabela();
-                    lblQtdeCarrinho.Text = dalCar.buscarCarrinhoQtde(Session["login"].ToString());
+                    lblQtdeCarrinho.Text = DALCarrinho.buscarCarrinhoQtde(Session["login"].ToString());
                 }
                 else
                 {
@@ -90,7 +85,7 @@ namespace SistemaHotel
         {
 
             DataTable rDta = new DataTable();
-            rDta = dalProd.buscarTodosProdutosTipo("1", "S");
+            rDta = DALProduto.buscarTodosProdutosTipo("1", "S");
             StringBuilder sb = new StringBuilder();
 
 
@@ -130,14 +125,14 @@ namespace SistemaHotel
         protected void lnkPedido_Click(object sender, EventArgs e)
         {
             Carrinho car = new Carrinho();
-            Cliente cli = dalCli.buscarClienteReserva(Session["login"].ToString());
+            Cliente cli = DALCliente.buscarClienteReserva(Session["login"].ToString());
 
             car.IdProduto = int.Parse(txtIdProd.Text);
             car.IdCliente = cli.IdCliente;
 
             for (int i = 1; i <= int.Parse(txtQuantidade.Text); i++)
             {
-                dalCar.inserirCarrinho(car);
+                DALCarrinho.inserirCarrinho(car);
             }
 
             //string msg = $"<script> alert('Produto(s) Adicionado(s): ID: {car.IdProduto} Qtde: {txtQuantidade.Text}'); </script>";
@@ -153,20 +148,20 @@ namespace SistemaHotel
 
         protected void lnkFechaPedido_Click(object sender, EventArgs e)
         {
-            DataTable dta = dalCar.buscarCarrinhoQtdeProd(Session["login"].ToString(), 1);
+            DataTable dta = DALCarrinho.buscarCarrinhoQtdeProd(Session["login"].ToString(), 1);
             if (dta.Rows.Count > 0)
             {
                 //busca os dados do cliente pelo cod_reserva
-                Cliente cli = dalCli.buscarClienteReserva(Session["login"].ToString());
+                Cliente cli = DALCliente.buscarClienteReserva(Session["login"].ToString());
                 //campos relacionados ao novo pedido
                 Pedido ped = new Pedido();
                 ped.IdCliente = cli.IdCliente;
                 ped.IdStatus = 1;
                 ped.DataAbertura = DateTime.Now;
                 ped.ValorTotal = decimal.Parse(lblTotal.Text);
-                dalPed.inserirPedido(ped);
+                DALPedido.inserirPedido(ped);
                 //busca o pedido pelo id_cliente e Data_Abertura
-                ped = dalPed.buscarPedidoIdClienteData(ped.IdCliente, ped.DataAbertura);
+                ped = DALPedido.buscarPedidoIdClienteData(ped.IdCliente, ped.DataAbertura);
                 //campos relacionados ao Item_Pedido
 
                 foreach (DataRow dtr in dta.Rows)
@@ -176,10 +171,10 @@ namespace SistemaHotel
                     itemPed.IdProduto = int.Parse(dtr["ID_PRODUTO"].ToString());
                     itemPed.IdCliente = cli.IdCliente;
                     itemPed.Quantidade = int.Parse(dtr["QTDE"].ToString());
-                    dalItemPed.inserirItemPedido(itemPed);
+                    DALItemPedido.inserirItemPedido(itemPed);
                     lblTotal.Text = "";
                 }
-                dalCar.excluirCarrinhoCliente(cli.IdCliente);
+                DALCarrinho.excluirCarrinhoCliente(cli.IdCliente);
                 //string msg = $"<script> alert('Pedido Realizado: ID: {ped.IdPedido}'); </script>";
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
@@ -216,7 +211,7 @@ namespace SistemaHotel
 
             decimal total = 0;
             DataTable rDta = new DataTable();
-            rDta = dalCar.buscarCarrinhoCliente(codReserva, 1);
+            rDta = DALCarrinho.buscarCarrinhoCliente(codReserva, 1);
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("<table id='exampleCarr' class='display' style='width: 100% font-size:15px;'>");
             sb.AppendLine("<thead>");
@@ -261,8 +256,8 @@ namespace SistemaHotel
         protected void lnkLimparCarrinho_Click(object sender, EventArgs e)
         {
             //busca os dados do cliente pelo cod_reserva
-            Cliente cli = dalCli.buscarClienteReserva(Session["login"].ToString());
-            dalCar.excluirCarrinhoCliente(cli.IdCliente);
+            Cliente cli = DALCliente.buscarClienteReserva(Session["login"].ToString());
+            DALCarrinho.excluirCarrinhoCliente(cli.IdCliente);
             //string msg = $"<script> alert('Carrinho Vazio!'); </script>";
             //Response.Write(msg);
             Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>

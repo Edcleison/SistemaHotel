@@ -12,11 +12,11 @@ using System.Web;
 namespace SistemaHotel.Controller
 {
 
-    public class DALCliente
+    public static class DALCliente
     {
-        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
+        static string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
 
-        public void inserirCliente(Cliente cli)
+        public static void inserirCliente(Cliente cli)
         {
 
             using (SqlConnection connection = new SqlConnection(cnn))
@@ -50,7 +50,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public void alterarCliente(Cliente cli)
+        public static void alterarCliente(Cliente cli)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
@@ -85,7 +85,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public Cliente buscarClienteReserva(string Reserva)
+        public static Cliente buscarClienteReserva(string Reserva)
         {
             Cliente cli = new Cliente();
             using (SqlConnection connection = new SqlConnection(cnn))
@@ -133,7 +133,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public DataTable verificarOcupacaoQuarto(string IdQuarto)
+        public static DataTable verificarOcupacaoQuarto(string IdQuarto)
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;            

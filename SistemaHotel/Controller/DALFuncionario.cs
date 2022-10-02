@@ -12,12 +12,12 @@ using System.Web;
 namespace SistemaHotel.Controller
 {
 
-    public class DALFuncionario
+    public static class DALFuncionario
     {
-        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
+        static string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
 
 
-        public void inserirFuncionario(Funcionario fun)
+        public static void inserirFuncionario(Funcionario fun)
         {
 
             using (SqlConnection connection = new SqlConnection(cnn))
@@ -32,7 +32,7 @@ namespace SistemaHotel.Controller
                     {
                         cmd.Connection.Open();
                         cmd.Parameters.AddWithValue("ID_USUARIO", fun.IdUsuario);
-                        cmd.Parameters.AddWithValue("ID_PERFIL", fun.IdPerfil);                       
+                        cmd.Parameters.AddWithValue("ID_PERFIL", fun.IdPerfil);
                         cmd.ExecuteNonQuery();
                     }
                     catch (Exception erro)
@@ -48,7 +48,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public Funcionario buscarFuncionarioIdUsuario(int IdUsuario)
+        public static Funcionario buscarFuncionarioIdUsuario(int IdUsuario)
         {
             Funcionario fun = new Funcionario();
             using (SqlConnection connection = new SqlConnection(cnn))
@@ -84,7 +84,7 @@ namespace SistemaHotel.Controller
             }
             return fun;
         }
-       
+
     }
 }
 

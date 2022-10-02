@@ -44,8 +44,8 @@ namespace SistemaHotel
             }
             else 
             {
-                DALCliente dalCli = new DALCliente();
-                Cliente cli = dalCli.buscarClienteReserva(Session["login"].ToString());
+              
+                Cliente cli = DALCliente.buscarClienteReserva(Session["login"].ToString());
                 Atendimento.Visible = false;
                 ControleProduto.Visible = false;
                 ControleAtendimento.Visible = false;

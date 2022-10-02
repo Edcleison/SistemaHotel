@@ -11,12 +11,12 @@ using System.Web;
 
 namespace SistemaHotel.Controller
 {
-    public class DALCarrinho
+    public static class DALCarrinho
     {
-        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
+        static string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
 
 
-        public void inserirCarrinho(Carrinho car)
+        public static void inserirCarrinho(Carrinho car)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
@@ -47,7 +47,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public DataTable buscarCarrinhoCliente(string codReserva, int TipoProd)
+        public static DataTable buscarCarrinhoCliente(string codReserva, int TipoProd)
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
@@ -55,7 +55,7 @@ namespace SistemaHotel.Controller
             {
 
 
-            using (SqlCommand cmd = new SqlCommand(@"SELECT C.[ID_CARRINHO]
+                using (SqlCommand cmd = new SqlCommand(@"SELECT C.[ID_CARRINHO]
                                                             ,C.[ID_PRODUTO]
                                                             ,C.[ID_CLIENTE]
                                                             ,P.NOME_PROD
@@ -93,7 +93,7 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-        public DataTable buscarCarrinhoQtdeProd(string codReserva, int TipoProd)
+        public static DataTable buscarCarrinhoQtdeProd(string codReserva, int TipoProd)
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
@@ -131,7 +131,7 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-        public string buscarCarrinhoQtde(string codReserva)
+        public static string buscarCarrinhoQtde(string codReserva)
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
@@ -169,10 +169,10 @@ namespace SistemaHotel.Controller
             {
                 return "0";
             }
-            
+
         }
 
-        public void excluirCarrinho(int IdCarrinho)
+        public static void excluirCarrinho(int IdCarrinho)
         {
 
             using (SqlConnection connection = new SqlConnection(cnn))
@@ -199,7 +199,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public void excluirCarrinhoCliente(int IdCliente)
+        public static void excluirCarrinhoCliente(int IdCliente)
         {
 
             using (SqlConnection connection = new SqlConnection(cnn))

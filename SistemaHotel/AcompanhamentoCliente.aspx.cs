@@ -18,10 +18,6 @@ namespace SistemaHotel
     {
 
         string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
-
-
-        DALPedido dalPed = new DALPedido();
-        DALCliente dalCli = new DALCliente();
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -52,7 +48,7 @@ namespace SistemaHotel
         {
             decimal total = 0;
             DataTable rDta = new DataTable();
-            rDta = dalPed.buscarTodosPedidosCliente(IdCliente, Tipo, Status);
+            rDta = DALPedido.buscarTodosPedidosCliente(IdCliente, Tipo, Status);
             StringBuilder sb = new StringBuilder();
 
 
@@ -106,8 +102,6 @@ namespace SistemaHotel
             Panel1.Controls.Add(new LiteralControl(sb.ToString()));
 
         }
-
-
 
         private void carregaDdlTipo()
         {
@@ -185,7 +179,7 @@ namespace SistemaHotel
 
         protected void lnkPesquisar_Click(object sender, EventArgs e)
         {
-            Cliente cli = dalCli.buscarClienteReserva(Session["login"].ToString());
+            Cliente cli = DALCliente.buscarClienteReserva(Session["login"].ToString());
             if (ddlTipo.SelectedValue != "TODOS" && ddlStatus.SelectedValue != "TODOS")
             {
                 carregarTabela(cli.IdCliente.ToString(), ddlStatus.SelectedValue.ToString(), ddlTipo.SelectedValue.ToString());

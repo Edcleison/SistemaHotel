@@ -18,9 +18,6 @@ namespace SistemaHotel
     {
         string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
 
-
-        DALProduto dalProd = new DALProduto();
-
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -34,7 +31,7 @@ namespace SistemaHotel
                         if (Request.QueryString["PRODUTO_D"] != null)
                         {
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_D"]));
-                            dalProd.inativarProduto(rParametro);
+                            DALProduto.inativarProduto(rParametro);
                             //string msg = $"<script> alert('Produto Inativado! ID: {rParametro}'); </script>";
                             //Response.Write(msg);
                             Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
@@ -50,7 +47,7 @@ namespace SistemaHotel
 
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_E"]));
 
-                            Produto prod = dalProd.buscarProdutoId(rParametro);
+                            Produto prod = DALProduto.buscarProdutoId(rParametro);
 
 
                             txtNomeE.Text = prod.NomeProduto;
@@ -66,8 +63,8 @@ namespace SistemaHotel
                         {
 
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_A"]));
-                            Produto prod = dalProd.buscarProdutoId(rParametro);
-                            dalProd.ativarProduto(rParametro);
+                            Produto prod = DALProduto.buscarProdutoId(rParametro);
+                            DALProduto.ativarProduto(rParametro);
                             //string msg = $"<script> alert('Produto Ativado! ID:{rParametro}'); </script>";
                             //Response.Write(msg);
                             Response.Write($@"<div class='alert alert-sucess alert-dismissible fade show' role='alert'>
@@ -101,7 +98,7 @@ namespace SistemaHotel
         private void carregarTabela(string Tipo, string Status)
         {
             DataTable rDta = new DataTable();
-            rDta = dalProd.buscarTodosProdutosTipo(Tipo, Status);
+            rDta = DALProduto.buscarTodosProdutosTipo(Tipo, Status);
             StringBuilder sb = new StringBuilder();
 
 
@@ -176,7 +173,7 @@ namespace SistemaHotel
                         prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
                         string img = caminho + prod.FotoProduto;
                         fuProduto.PostedFile.SaveAs(img);
-                        dalProd.inserirProduto(prod);
+                        DALProduto.inserirProduto(prod);
 
                         //msg = $"<script> alert('Produto Inserido!'); </script>";
                         //Response.Write(msg);
@@ -272,7 +269,7 @@ namespace SistemaHotel
                     if (fuProdE.PostedFile.FileName != "" && txtNomeE.Text != "" && txtDescricaoE.Text != "" && txtPrecoE.Text != "" && ddlTipoProdE.SelectedValue != "SELECIONE")
                     {
                         //verificar se existe foto existe e deletar
-                        Produto rProd = dalProd.buscarProdutoId(prod.IdProduto);
+                        Produto rProd = DALProduto.buscarProdutoId(prod.IdProduto);
                         if (rProd.FotoProduto != "")
                         {
                             File.Delete(caminho + rProd.FotoProduto);
@@ -280,7 +277,7 @@ namespace SistemaHotel
                         prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProdE.PostedFile.FileName;
                         string img = caminho + prod.FotoProduto;
                         fuProdE.PostedFile.SaveAs(img);
-                        dalProd.alterarProduto(prod);
+                        DALProduto.alterarProduto(prod);
                         //msg = $"<script> alert('O Produto Alterado:  ID {prod.IdProduto}'); </script>";
                         //Response.Write(msg);
                         Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>

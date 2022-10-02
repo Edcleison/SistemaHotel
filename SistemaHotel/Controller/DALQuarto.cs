@@ -12,12 +12,12 @@ using System.Web;
 namespace SistemaHotel.Controller
 {
 
-    public class DALQuarto
+    public static class DALQuarto
     {
-        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
+        static string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
 
 
-        public void inserirQuarto(Quarto qua)
+        public static void inserirQuarto(Quarto qua)
         {
 
             using (SqlConnection connection = new SqlConnection(cnn))
@@ -50,7 +50,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public DataTable buscarTodosQuartos(string Status)
+        public static DataTable buscarTodosQuartos(string Status)
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
@@ -71,7 +71,7 @@ namespace SistemaHotel.Controller
                 {
                     try
                     {
-                        if (Status!="")
+                        if (Status != "")
                         {
                             cmd.Parameters.AddWithValue("STATUS_QUAR", Status);
                         }
@@ -95,7 +95,7 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-        public Quarto buscarQuartoId(int Id)
+        public static Quarto buscarQuartoId(int Id)
         {
             Quarto qua = new Quarto();
             using (SqlConnection connection = new SqlConnection(cnn))
@@ -131,7 +131,7 @@ namespace SistemaHotel.Controller
             return qua;
         }
 
-        public void alterarQuarto(Quarto qua)
+        public static void alterarQuarto(Quarto qua)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
@@ -160,7 +160,7 @@ namespace SistemaHotel.Controller
 
             }
         }
-        public void inativarQuarto(int IdQuarto)
+        public static void inativarQuarto(int IdQuarto)
         {
 
             using (SqlConnection connection = new SqlConnection(cnn))
@@ -186,7 +186,7 @@ namespace SistemaHotel.Controller
                 }
             }
         }
-        public void ativarQuarto(int IdQuarto)
+        public static void ativarQuarto(int IdQuarto)
         {
 
             using (SqlConnection connection = new SqlConnection(cnn))

@@ -18,10 +18,6 @@ namespace SistemaHotel
     {
 
         string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
-
-
-        DALPedido dalPed = new DALPedido();
-        DALUsuario dalUsu = new DALUsuario();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -37,16 +33,16 @@ namespace SistemaHotel
                         {
 
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["ATENDIMENTO_S"]));
-                            Usuario usu = dalUsu.buscaUsuarioLogin(Session["login"].ToString());
-                            Pedido ped = dalPed.buscarPedidoId(rParametro);
+                            Usuario usu = DALUsuario.buscaUsuarioLogin(Session["login"].ToString());
+                            Pedido ped = DALPedido.buscarPedidoId(rParametro);
                             if (Session["perfil"].ToString() == "Administrador")
                             {
-                                DALAdministracao dalAdm = new DALAdministracao();
-                                Administracao adm = dalAdm.buscarAdmIdUsuario(usu.IdUsuario);
+                               
+                                Administracao adm = DALAdministracao.buscarAdmIdUsuario(usu.IdUsuario);
                                 ped.IdStatus = 2;
                                 ped.DataFinalizacao = DateTime.Now;
                                 ped.IdAdm = adm.IdAdm;
-                                dalPed.alterarStatusAtendimentoAdm(ped);
+                                DALPedido.alterarStatusAtendimentoAdm(ped);
                                 //msg = $"<script> alert('Atendimento Finalizado: ID do Administrador {adm.IdAdm}'); </script>";
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
@@ -60,12 +56,11 @@ namespace SistemaHotel
                             }
                             if (Session["perfil"].ToString() == "Funcionário")
                             {
-                                DALFuncionario dalFun = new DALFuncionario();
-                                Funcionario fun = dalFun.buscarFuncionarioIdUsuario(usu.IdUsuario);
+                                Funcionario fun = DALFuncionario.buscarFuncionarioIdUsuario(usu.IdUsuario);
                                 ped.IdStatus = 2;
                                 ped.DataFinalizacao = DateTime.Now;
                                 ped.IdFuncionario = fun.IdFuncionario;
-                                dalPed.alterarStatusAtendimentoFuncionario(ped);
+                                DALPedido.alterarStatusAtendimentoFuncionario(ped);
                                 //msg = $"<script> alert('Atendimento Finalizado: ID do Funcionário {fun.IdFuncionario}'); </script>";
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
@@ -79,16 +74,16 @@ namespace SistemaHotel
                         if (Request.QueryString["ATENDIMENTO_N"] != null)
                         {
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["ATENDIMENTO_N"]));
-                            Usuario usu = dalUsu.buscaUsuarioLogin(Session["login"].ToString());
-                            Pedido ped = dalPed.buscarPedidoId(rParametro);
+                            Usuario usu = DALUsuario.buscaUsuarioLogin(Session["login"].ToString());
+                            Pedido ped = DALPedido.buscarPedidoId(rParametro);
                             if (Session["perfil"].ToString() == "Administrador")
                             {
-                                DALAdministracao dalAdm = new DALAdministracao();
-                                Administracao adm = dalAdm.buscarAdmIdUsuario(usu.IdUsuario);
+                              
+                                Administracao adm = DALAdministracao.buscarAdmIdUsuario(usu.IdUsuario);
                                 ped.IdStatus = 3;
                                 ped.DataFinalizacao = DateTime.Now;
                                 ped.IdAdm = adm.IdAdm;
-                                dalPed.alterarStatusAtendimentoAdm(ped);
+                                DALPedido.alterarStatusAtendimentoAdm(ped);
                                 //msg = $"<script> alert('Atendimento Recusado: ID do Administrador {adm.IdAdm}'); </script>";
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
@@ -100,12 +95,12 @@ namespace SistemaHotel
                             }
                             if (Session["perfil"].ToString() == "Funcionário")
                             {
-                                DALFuncionario dalFun = new DALFuncionario();
-                                Funcionario fun = dalFun.buscarFuncionarioIdUsuario(usu.IdUsuario);
+                               
+                                Funcionario fun = DALFuncionario.buscarFuncionarioIdUsuario(usu.IdUsuario);
                                 ped.IdStatus = 3;
                                 ped.DataFinalizacao = DateTime.Now;
                                 ped.IdFuncionario = fun.IdFuncionario;
-                                dalPed.alterarStatusAtendimentoFuncionario(ped);
+                                DALPedido.alterarStatusAtendimentoFuncionario(ped);
                                 //msg = $"<script> alert('Atendimento Finalizado: ID do Funcionário {fun.IdFuncionario}'); </script>";
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
@@ -149,7 +144,7 @@ namespace SistemaHotel
         {
 
             DataTable rDta = new DataTable();
-            rDta = dalPed.buscarTodosPedidosTipoStatus("1", tipoProd);
+            rDta = DALPedido.buscarTodosPedidosTipoStatus("1", tipoProd);
             StringBuilder sb = new StringBuilder();
 
 

@@ -8,12 +8,12 @@ using System.Web;
 
 namespace SistemaHotel.Controller
 {
-    public class DALPerfilUsuario
+    public static class DALPerfilUsuario
     {
-        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
+        static string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
 
 
-        public void inserirPerfilUsuario(PerfilUsuario pUsu)
+        public static void inserirPerfilUsuario(PerfilUsuario pUsu)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
@@ -45,7 +45,7 @@ namespace SistemaHotel.Controller
             }
 
         }
-        public PerfilUsuario buscarUsuarioPerfil(int IdUsuario)
+        public static PerfilUsuario buscarUsuarioPerfil(int IdUsuario)
         {
             PerfilUsuario pUsu = new PerfilUsuario();
 
@@ -89,7 +89,7 @@ namespace SistemaHotel.Controller
             return pUsu;
         }
 
-        public void alterarPefilUsuario(PerfilUsuario perfUsu)
+        public static void alterarPefilUsuario(PerfilUsuario perfUsu)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
@@ -118,7 +118,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public void inativarUsuario(int IdUsuario)
+        public static void inativarUsuario(int IdUsuario)
         {
 
             using (SqlConnection connection = new SqlConnection(cnn))
@@ -144,7 +144,7 @@ namespace SistemaHotel.Controller
             }
         }
 
-        public void ativarUsuario(int IdUsuario)
+        public static void ativarUsuario(int IdUsuario)
         {
 
             using (SqlConnection connection = new SqlConnection(cnn))

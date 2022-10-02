@@ -12,12 +12,12 @@ using System.Web;
 namespace SistemaHotel.Controller
 {
 
-    public class DALAdministracao
+    public static class DALAdministracao
     {
-        string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
+        static string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
 
 
-        public void inserirAdministracao(Administracao adm)
+        public static void inserirAdministracao(Administracao adm)
         {
 
             using (SqlConnection connection = new SqlConnection(cnn))
@@ -50,7 +50,7 @@ namespace SistemaHotel.Controller
 
   
 
-        public Administracao buscarAdmIdUsuario(int IdUsuario)
+        public static Administracao buscarAdmIdUsuario(int IdUsuario)
         {
             Administracao adm = new Administracao();
             using (SqlConnection connection = new SqlConnection(cnn))

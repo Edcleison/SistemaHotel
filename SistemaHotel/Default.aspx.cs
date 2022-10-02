@@ -25,10 +25,8 @@ namespace SistemaHotel
                     if (Session["perfil"].ToString() == "Cliente")
                     {
                         divTotal.Visible = true;
-                        DALCliente dalCli = new DALCliente();
-                        Cliente cli = dalCli.buscarClienteReserva(Session["login"].ToString());
-                        DALPedido dalPed = new DALPedido();
-                        lblTotal.Text = $"R$ {dalPed.buscarValorTotalCliente(cli.IdCliente)}";
+                        Cliente cli = DALCliente.buscarClienteReserva(Session["login"].ToString());  
+                        lblTotal.Text = $"R$ {DALPedido.buscarValorTotalCliente(cli.IdCliente)}";
 
                     }
 
