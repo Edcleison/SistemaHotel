@@ -86,7 +86,6 @@
     <asp:Panel ID="PnlPedido" runat="server" Style="font-family: Calibri"></asp:Panel>
     <h5 class="p-3 mb-2 bg-dark text-white">Pedido Frigobar</h5>
     <hr />
-
     <div class="col-12" align="center">
         <div id="Panel1" runat="server" visible="true">
         </div>
@@ -132,7 +131,6 @@
                                 <span>&nbsp;</span>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-sm">
                                 <span>Descricao: </span>
@@ -154,13 +152,16 @@
                             <div class="col-sm">
                                 <asp:TextBox runat="server" ID="txtPreco" onkeyup="formataValor(this,event);" Enabled="false"></asp:TextBox>
                             </div>
+                            <div class="col-6">
+                                <p><b>Seu desconto é de: </b>
+                                    <asp:Label ID="lblDesconto" ForeColor="red" runat="server"></asp:Label></p>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm">
                                 <span>&nbsp;</span>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-sm">
                                 <span>Quantidade: </span>
@@ -168,12 +169,13 @@
                             <div class="col-sm">
                                 <asp:TextBox ID="txtQuantidade" TextMode="Number" runat="server" min="0" max="20" step="1" Enabled="false"></asp:TextBox>
                             </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <span>&nbsp;</span>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <span>&nbsp;</span>
                             </div>
                         </div>
+
                     </div>
                     <div class="modal-footer">
                         <asp:LinkButton ID="lnkPedido" class="btn btn-dark" OnClick="lnkPedido_Click" runat="server"><i class="fa fa-check" aria-hidden="true"></i> Fechar Pedido</asp:LinkButton>

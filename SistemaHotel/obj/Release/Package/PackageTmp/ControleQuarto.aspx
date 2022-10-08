@@ -31,13 +31,16 @@
         });
     </script>
     <script>
-        function somenteNumeros(num) {
-            var er = /[^0-9]/;
-            er.lastIndex = 0;
-            var campo = num;
-            if (er.test(campo.value)) {
-                campo.value = "";
+        function apenasNumeros(evt) {
+            if (window.event) {
+                var charCode = evt.keyCode;
+            } else if (evt.which) {
+                var charCode = evt.which
             }
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
         }
     </script>
 
@@ -126,12 +129,7 @@
             overflow-y: auto;
             overflow-x: auto;
         }
-    </style>
-
-    <script src="Scripts/mascara.js"></script>
-
-
-
+    </style>  
 </asp:Content>
 
 
@@ -207,7 +205,7 @@
                                     <span>Número Quarto: </span>
                                 </div>
                                 <div class="col-sm">
-                                    <asp:TextBox runat="server" onkeyup="somenteNumeros(this);" ID="txtNumeroQuarto"></asp:TextBox>
+                                    <asp:TextBox runat="server" onkeypress="return apenasNumeros(event);" ID="txtNumeroQuarto"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">
@@ -265,7 +263,7 @@
                                     <span>Quarto: </span>
                                 </div>
                                 <div class="col-sm">
-                                    <asp:TextBox runat="server" onkeyup="somenteNumeros(this);" ID="txtNumeroQuartoE"></asp:TextBox>
+                                    <asp:TextBox runat="server" onkeypress="return apenasNumeros(event);" ID="txtNumeroQuartoE"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">

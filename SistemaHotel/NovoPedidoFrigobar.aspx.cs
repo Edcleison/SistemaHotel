@@ -27,13 +27,19 @@ namespace SistemaHotel
                     {
                         if (Request.QueryString["PRODUTO_N"] != null)
                         {
-
+                            //busca os dados do cliente pelo cod_reserva
+                            Cliente cli = DALCliente.buscarClienteReserva(Session["login"].ToString());
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["PRODUTO_N"]));
                             Produto prod = DALProduto.buscarProdutoId(rParametro);
                             txtIdProd.Text = prod.IdProduto.ToString();
                             txtNomeProd.Text = prod.NomeProduto;
                             txtDescricao.Text = prod.DescricaoProduto;
-                            txtPreco.Text = prod.PrecoUnitario.ToString();
+                            //calcula o preco total do pedido de frigobar = (valor unitario (por dia) x qtde. de dias) - qtde de dias
+                            DateTime dataSaida = cli.DataSaida;
+                            int totalDias = (int)dataSaida.Subtract(DateTime.Today).TotalDays;
+                            decimal valorTotal = (prod.PrecoUnitario * totalDias) - totalDias;
+                            txtPreco.Text = valorTotal.ToString();
+                            lblDesconto.Text = totalDias.ToString()+",00";
                             imgProd.Src = $@"IMAGENS_PRODUTOS\{prod.FotoProduto}";
                             if (prod.TipoProduto == 1)
                             {
@@ -58,7 +64,7 @@ namespace SistemaHotel
                 }
 
             }
-            catch (Exception)
+            catch (Exception erro)
             {
 
                 Response.Redirect("~/Default.aspx");
@@ -80,7 +86,7 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ID</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>NOME</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>DESCRIÇÃO</center></th>");
-            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>PRECO</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>PREÇO POR DIA</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>FOTO</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ADICIONAR</center></th>");
             sb.AppendLine("</tr>");
@@ -118,6 +124,7 @@ namespace SistemaHotel
                 ped.IdCliente = cli.IdCliente;
                 ped.IdStatus = 1;
                 ped.DataAbertura = DateTime.Now;
+                
                 ped.ValorTotal = decimal.Parse(txtPreco.Text);
                 DALPedido.inserirPedido(ped);
                 //busca o pedido pelo id_cliente e Data_Abertura

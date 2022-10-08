@@ -222,10 +222,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm">
-                    <p style="font-size: 13px;">*Filtre <b><i>Perfil=Cliente</i></b> para alterar a data de saída.</p>
-                </div>
+                </div>  
             </div>
 
             <hr />
