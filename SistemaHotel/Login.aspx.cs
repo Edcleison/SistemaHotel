@@ -245,37 +245,67 @@ namespace SistemaHotel
             string login = txtLoginR.Text;
             Usuario usu = DALUsuario.buscaUsuarioLogin(login);
             PerfilUsuario perfUsu = DALPerfilUsuario.buscarUsuarioPerfil(usu.IdUsuario);
-
-            if (perfUsu.StatusPerfilUsuario == 'S')
+            if (!string.IsNullOrEmpty(txtLoginR.Text) && !string.IsNullOrEmpty(txtNovaSenha.Text) && !string.IsNullOrEmpty(txtConfirmaSenha.Text))
             {
-                if (txtNovaSenha.Text == txtConfirmaSenha.Text)
+                if (perfUsu.StatusPerfilUsuario == 'S')
                 {
+                    if (txtNovaSenha.Text.Length == 8 && txtConfirmaSenha.Text.Length == 8)
+                    {
+                        if (txtNovaSenha.Text == txtConfirmaSenha.Text)
+                        {
 
-                    usu.IdUsuario = perfUsu.IdUsuario;
-                    usu.Senha = Criptografia.Encrypt(txtConfirmaSenha.Text);
-                    DALUsuario.alterarSenha(usu);
-                    //string msg = "<script> alert('Senha Atualizada!'); </script>";
-                    //Response.Write(msg);
-                    Response.Write(@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            usu.IdUsuario = perfUsu.IdUsuario;
+                            usu.Senha = Criptografia.Encrypt(txtConfirmaSenha.Text);
+                            DALUsuario.alterarSenha(usu);
+                            //string msg = "<script> alert('Senha Atualizada!'); </script>";
+                            //Response.Write(msg);
+                            Response.Write(@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                          Senha Atualizada!
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
-                    limparCampos();
-                }
-                else
-                {
-                    //string msg = "<script> alert('Digite as Senhas Iguais!'); </script>";
-                    //Response.Write(msg);
-                    Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                            limparCampos();
+                        }
+                        else
+                        {
+                            //string msg = "<script> alert('Digite as Senhas Iguais!'); </script>";
+                            //Response.Write(msg);
+                            Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                          Digite as Senhas Iguais!
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
-                }
+                        }
+                    }
+                    else
+                    {
+                        //string msg = "<script> alert('Senha deve ter 8 caracteres!'); </script>";
+                        //Response.Write(msg);
+                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                 Senha deve ter 8 caracteres!
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                            </div>");
 
+                    }
+
+
+
+                }
+                else
+                {
+                    //string msg = "<script> alert('Login não encontrado!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                        Login não encontrado!
+                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                            </div>");
+                }
 
             }
             else
@@ -283,12 +313,13 @@ namespace SistemaHotel
                 //string msg = "<script> alert('Login não encontrado!'); </script>";
                 //Response.Write(msg);
                 Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                        Login não encontrado!
+                                       Preencha todos os campos!
                                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
             }
+
 
         }
         private void limparCampos()

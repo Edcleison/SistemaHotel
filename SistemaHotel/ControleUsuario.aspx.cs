@@ -200,15 +200,17 @@ namespace SistemaHotel
             //varifica se todos os campos estão preenchidos
             if (!string.IsNullOrEmpty(txtLogin.Text) && !string.IsNullOrEmpty(txtNovaSenha.Text) && !string.IsNullOrEmpty(txtConfirmaSenha.Text) && ddlPerfilNovoUsu.SelectedValue != "0")
             {
-                // verifica se as senhas são iguais
-                if (txtNovaSenha.Text == txtConfirmaSenha.Text)
+                if (txtNovaSenha.Text.Length == 8 && txtConfirmaSenha.Text.Length == 8)
                 {
-                    //se o perfil estiver atívo retorna a mensagem de já cadastrado
-                    if (usu.Login != "")
+                    // verifica se as senhas são iguais
+                    if (txtNovaSenha.Text == txtConfirmaSenha.Text)
                     {
-                        //string msg = "<script> alert('Usuário já cadastrado!'); </script>";
-                        //Response.Write(msg);
-                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                        //se o perfil estiver atívo retorna a mensagem de já cadastrado
+                        if (usu.Login != "")
+                        {
+                            //string msg = "<script> alert('Usuário já cadastrado!'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                   Usuário já cadastrado!
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
@@ -218,68 +220,83 @@ namespace SistemaHotel
 
 
 
-                    }
-                    //se a consulta no banco retornar um login vazio ele cadastra o Usuário
-                    else if (usu.Login == "")
-                    {
-                        //campos relacionados passagem devalores dos textbox para os atributos do objeto Usuário
-                        usu.NomeUsuario = txtNome.Text;
-                        usu.SobrenomeUsuario = txtSobreNome.Text;
-                        usu.Login = txtLogin.Text;
-                        usu.Senha = Criptografia.Encrypt(txtNovaSenha.Text);
-                        //insere o objeto Usuário
-                        DALUsuario.inserirUsuario(usu);
-                        //recupera o usuário recém cadastrado para inserir o perfil
-                        usu = DALUsuario.buscaUsuarioLogin(usu.Login);
-                        //novo objeto PerfilUsuario
-                        PerfilUsuario perfUsu = new PerfilUsuario();
-                        //campos relacionados passagem devalores dos textbox para os atributos do objeto PerfilUsuário
-                        perfUsu.IdPerfil = int.Parse(ddlPerfilNovoUsu.SelectedValue);
-                        perfUsu.IdUsuario = usu.IdUsuario;
-                        perfUsu.StatusPerfilUsuario = 'S';
-                        //insere o objeto PerfilUsuário
-                        DALPerfilUsuario.inserirPerfilUsuario(perfUsu);
-                        //campos relacionados a criação do Usuário na Administracao
-                        if (ddlPerfilNovoUsu.SelectedValue == "1")
-                        {
-                            Administracao adm = new Administracao();
-                            adm.IdUsuario = usu.IdUsuario;
-                            adm.IdPerfil = perfUsu.IdPerfil;
-                            DALAdministracao.inserirAdministracao(adm);
                         }
-                        //campos relacionados a criação do Usuário na Funcionario
-                        else
+                        //se a consulta no banco retornar um login vazio ele cadastra o Usuário
+                        else if (usu.Login == "")
                         {
-                            Funcionario fun = new Funcionario();
-                            fun.IdUsuario = usu.IdUsuario;
-                            fun.IdPerfil = perfUsu.IdPerfil;
-                            DALFuncionario.inserirFuncionario(fun);
+                            //campos relacionados passagem devalores dos textbox para os atributos do objeto Usuário
+                            usu.NomeUsuario = txtNome.Text;
+                            usu.SobrenomeUsuario = txtSobreNome.Text;
+                            usu.Login = txtLogin.Text;
+                            usu.Senha = Criptografia.Encrypt(txtNovaSenha.Text);
+                            //insere o objeto Usuário
+                            DALUsuario.inserirUsuario(usu);
+                            //recupera o usuário recém cadastrado para inserir o perfil
+                            usu = DALUsuario.buscaUsuarioLogin(usu.Login);
+                            //novo objeto PerfilUsuario
+                            PerfilUsuario perfUsu = new PerfilUsuario();
+                            //campos relacionados passagem devalores dos textbox para os atributos do objeto PerfilUsuário
+                            perfUsu.IdPerfil = int.Parse(ddlPerfilNovoUsu.SelectedValue);
+                            perfUsu.IdUsuario = usu.IdUsuario;
+                            perfUsu.StatusPerfilUsuario = 'S';
+                            //insere o objeto PerfilUsuário
+                            DALPerfilUsuario.inserirPerfilUsuario(perfUsu);
+                            //campos relacionados a criação do Usuário na Administracao
+                            if (ddlPerfilNovoUsu.SelectedValue == "1")
+                            {
+                                Administracao adm = new Administracao();
+                                adm.IdUsuario = usu.IdUsuario;
+                                adm.IdPerfil = perfUsu.IdPerfil;
+                                DALAdministracao.inserirAdministracao(adm);
+                            }
+                            //campos relacionados a criação do Usuário na Funcionario
+                            else
+                            {
+                                Funcionario fun = new Funcionario();
+                                fun.IdUsuario = usu.IdUsuario;
+                                fun.IdPerfil = perfUsu.IdPerfil;
+                                DALFuncionario.inserirFuncionario(fun);
 
-                        }
+                            }
 
-                        //string msg = "<script> alert('Cadastro realizado!'); </script>";
-                        //Response.Write(msg);
-                        Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            //string msg = "<script> alert('Cadastro realizado!'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                   Cadastro realizado!
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
-                        limparCampos();
+                            limparCampos();
+                        }
                     }
-                }
-                else
-                {
-                    //string msg = "<script> alert('Senhas Diferentes!'); </script>";
-                    //Response.Write(msg);
-                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                    else
+                    {
+                        //string msg = "<script> alert('Senhas Diferentes!'); </script>";
+                        //Response.Write(msg);
+                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                  Senhas Diferentes!
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
 
+                    }
+
                 }
+                else
+                {
+                    //string msg = "<script> alert('Senha deve ter 8 caracteres!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                 Senha deve ter 8 caracteres!
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                            </div>");
+
+                }
+
 
             }
             else
@@ -560,7 +577,7 @@ namespace SistemaHotel
                                 if (dta.Rows.Count > 0)
                                 {
                                     DateTime dataOcupa = DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null);
-                                    if (dataOcupa < DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
+                                    if (dataOcupa < dataIni)
                                     {
                                         DALCliente.inserirCliente(cli);
                                         //campos relacionados ao cadastro de usuário

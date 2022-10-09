@@ -218,7 +218,7 @@
                                    <span>Descrição Quarto: </span>
                                 </div>
                                 <div class="col-sm">
-                                    <asp:TextBox runat="server"  ID="txtDescricaoQuarto"></asp:TextBox>
+                                    <asp:TextBox runat="server"  ID="txtDescricaoQuarto" MaxLength="20"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">
@@ -276,7 +276,7 @@
                                    <span>Descrição Quarto: </span>
                                 </div>
                                 <div class="col-sm">
-                                    <asp:TextBox runat="server"  ID="txtDescricaoQuartoE"></asp:TextBox>
+                                    <asp:TextBox runat="server"  ID="txtDescricaoQuartoE" MaxLength="20"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">
