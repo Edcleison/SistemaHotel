@@ -26,9 +26,9 @@ namespace SistemaHotel
             string senha = Criptografia.Encrypt(txtSenha.Text);
             string msg = "";
 
-           
+
             Usuario u = DALUsuario.buscaUsuarioLogin(login);
-          
+
             PerfilUsuario pu = DALPerfilUsuario.buscarUsuarioPerfil(u.IdUsuario);
 
             if (pu.IdPerfil != 3)
@@ -112,7 +112,7 @@ namespace SistemaHotel
             }
             else
             {
-               
+
                 Cliente cli = DALCliente.buscarClienteReserva(login);
                 if (DateTime.ParseExact(cli.DataSaida.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) > DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
                 {
@@ -178,6 +178,17 @@ namespace SistemaHotel
                             }
 
                         }
+                        else
+                        {
+                            //msg = "<script> alert('Login incorreto!'); </script>";
+                            //Response.Write(msg);
+                            Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                           Login incorreto!
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                            </div>");
+                        }
 
                     }
                     else
@@ -185,7 +196,7 @@ namespace SistemaHotel
                         //msg = "<script> alert('Login incorreto!'); </script>";
                         //Response.Write(msg);
                         Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                           Login incorreto!
+                                           Preencha todos os campos!
                                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
@@ -198,10 +209,10 @@ namespace SistemaHotel
                     {
                         DALPerfilUsuario.inativarUsuario(u.IdUsuario);
                     }
-                    //msg = "<script> alert('Login não permitido!'); </script>";
+                    //msg = "<script> alert('Login incorreto!'); </script>";
                     //Response.Write(msg);
                     Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                          Login não permitido!
+                                          Login incorreto!
                                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
@@ -230,7 +241,7 @@ namespace SistemaHotel
 
         protected void lnkSenha_Click(object sender, EventArgs e)
         {
-          
+
             string login = txtLoginR.Text;
             Usuario usu = DALUsuario.buscaUsuarioLogin(login);
             PerfilUsuario perfUsu = DALPerfilUsuario.buscarUsuarioPerfil(usu.IdUsuario);

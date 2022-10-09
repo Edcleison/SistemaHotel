@@ -50,6 +50,9 @@ namespace SistemaHotel
             DataTable rDta = new DataTable();
             rDta = DALPedido.buscarTodosPedidosCliente(IdCliente, Tipo, Status);
             StringBuilder sb = new StringBuilder();
+            //busca os dados do cliente pelo cod_reserva
+            Cliente cli = DALCliente.buscarClienteReserva(Session["login"].ToString());
+            DateTime dataSaida = cli.DataSaida;
 
 
             sb.AppendLine("<table id='example' class='display' style='width: 100% font-size:12px;'>");
@@ -61,7 +64,7 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME CLIENTE</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>NOME PRODUTO</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DESC. PRODUTO</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>PREÇO UN</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>PREÇO</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>QTDE</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DATA FIM</center></th>");
@@ -79,7 +82,17 @@ namespace SistemaHotel
                 sb.AppendLine($"<td style='font-size:12px; letter-spacing: 1px;'><center>{dtr["NOME_CLIENTE"] + " " + dtr["SOBRENOME_CLIENTE"]}</center></td>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME_PROD"] + "</td></center>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_PROD"] + "</td></center>");
-                sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["PRECO_UNI"] + "</td></center>");
+                if (dtr["ID_TIPO_PROD"].ToString() == "1")
+                {
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["PRECO_UNI"] + "</td></center>");
+                }
+                else
+                {
+                    //calcula o preco total do pedido de frigobar = (valor unitario (por dia) x qtde. de dias) - qtde de dias
+                    int totalDias = (int)dataSaida.Subtract(DateTime.Today).TotalDays;
+                    decimal valorTotal = (Convert.ToDecimal(dtr["PRECO_UNI"].ToString()) * totalDias) - totalDias;
+                    sb.AppendLine($"<td style='font-size:12px; letter-spacing: 1px;'><center>{valorTotal}</td></center>");
+                }
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["QUANTIDADE"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_STATUS_PED"] + "</td></center>");
                 if (dtr["DATA_FINALIZACAO"].ToString() != "")
@@ -92,7 +105,18 @@ namespace SistemaHotel
                     sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + " " + "</center></th>");
                 }
                 sb.AppendLine("</tr>");
-                total += decimal.Parse(dtr["PRECO_UNI"].ToString()) * int.Parse(dtr["QUANTIDADE"].ToString());
+                if(dtr["ID_TIPO_PROD"].ToString() == "1")
+                {
+                    total += decimal.Parse(dtr["PRECO_UNI"].ToString()) * int.Parse(dtr["QUANTIDADE"].ToString());
+                }
+                else
+                {
+                    //calcula o preco total do pedido de frigobar = (valor unitario (por dia) x qtde. de dias) - qtde de dias
+                    int totalDias = (int)dataSaida.Subtract(DateTime.Today).TotalDays;
+                    decimal valorTotal = (Convert.ToDecimal(dtr["PRECO_UNI"].ToString()) * totalDias) - totalDias;
+                    total += valorTotal;
+                }
+                
 
             }
             sb.AppendLine("</tbody>");

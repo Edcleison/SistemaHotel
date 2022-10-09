@@ -734,11 +734,40 @@ namespace SistemaHotel
                 DataTable dta = DALCliente.verificarOcupacaoQuarto(ddlQuartoE.SelectedValue);
                 if (dta.Rows.Count > 0)
                 {
-                    if (DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) < DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
+                    if (Convert.ToInt32(dta.Rows[0]["ID_CLIENTE"]) == cli.IdCliente)
                     {
                         //alterar a data de saída do cliente
                         DALCliente.alterarCliente(cli);
                         txtDataFimE.Text = novaDataFim.ToString("dd/MM/yyyy HH:mm");
+                        //verifica se o perfil usuário está  inativo e ativa
+                        Usuario u = DALUsuario.buscaUsuarioLogin(cli.CodReserva);
+                        PerfilUsuario pu = DALPerfilUsuario.buscarUsuarioPerfil(u.IdUsuario);
+                        if (pu.StatusPerfilUsuario == 'N')
+                        {
+                            DALPerfilUsuario.ativarUsuario(u.IdUsuario);
+                        }
+                        //string msg = $"<script> alert('Data Alterada {novaDataFim.ToString("dd/MM/yyyy HH:mm")} ID Cliente {cli.IdCliente}'); </script>";
+                        //Response.Write(msg);
+                        Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                        Data Alterada {novaDataFim.ToString("dd/MM/yyyy HH:mm")} ID Cliente {cli.IdCliente}
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                            </div>");
+
+                    }
+                    else if (DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) < DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
+                    {
+                        //alterar a data de saída do cliente
+                        DALCliente.alterarCliente(cli);
+                        txtDataFimE.Text = novaDataFim.ToString("dd/MM/yyyy HH:mm");
+                        //verifica se o perfil usuário está  inativo e ativa
+                        Usuario u = DALUsuario.buscaUsuarioLogin(cli.CodReserva);
+                        PerfilUsuario pu = DALPerfilUsuario.buscarUsuarioPerfil(u.IdUsuario);
+                        if (pu.StatusPerfilUsuario == 'N')
+                        {
+                            DALPerfilUsuario.ativarUsuario(u.IdUsuario);
+                        }
                         //string msg = $"<script> alert('Data Alterada {novaDataFim.ToString("dd/MM/yyyy HH:mm")} ID Cliente {cli.IdCliente}'); </script>";
                         //Response.Write(msg);
                         Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
@@ -804,7 +833,7 @@ namespace SistemaHotel
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_QUARTO,CONCAT(NUMERO_QUARTO,' - ', UPPER(DESCRICAO_QUARTO))AS DESCRICAO FROM QUARTO ORDER BY DESCRICAO", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_QUARTO,CONCAT(NUMERO_QUARTO,' - ', UPPER(DESCRICAO_QUARTO))AS DESCRICAO FROM QUARTO WHERE STATUS_QUAR ='S' ORDER BY DESCRICAO", connection))
                 {
                     try
                     {
@@ -840,7 +869,7 @@ namespace SistemaHotel
 
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_QUARTO,CONCAT(NUMERO_QUARTO,' - ', UPPER(DESCRICAO_QUARTO))AS DESCRICAO FROM QUARTO ORDER BY DESCRICAO", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT ID_QUARTO,CONCAT(NUMERO_QUARTO,' - ', UPPER(DESCRICAO_QUARTO))AS DESCRICAO FROM QUARTO WHERE STATUS_QUAR ='S' ORDER BY DESCRICAO", connection))
                 {
                     try
                     {
@@ -879,7 +908,7 @@ namespace SistemaHotel
             txtLoginE.Text = "";
             txtLogin.Text = "";
             txtNovaSenha.Text = "";
-            txtConfirmaSenha.Text = ""; 
+            txtConfirmaSenha.Text = "";
             ddlPerfil.SelectedIndex = -1;
             txtCdReservaE.Text = "";
             txtCodReserva.Text = "";

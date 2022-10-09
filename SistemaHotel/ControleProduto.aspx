@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Produtoa" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="ControleProduto.aspx.cs" Inherits="SistemaHotel.ControleProduto" %>
+﻿<%@ Page Title="Produtos" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="ControleProduto.aspx.cs" Inherits="SistemaHotel.ControleProduto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 

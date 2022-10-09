@@ -76,12 +76,11 @@ namespace SistemaHotel
 
                         }
                         carregaDdl();
-                    }
-                    else
-                    {
-                        Response.Redirect("~/Default.aspx");
-                    }
-
+                    }                 
+                }
+                else
+                {
+                    Response.Redirect("~/Default.aspx");
                 }
 
             }
