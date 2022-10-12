@@ -36,11 +36,11 @@
 
     <style>
         .green {
-            background-color: lightseagreen !important;
+            background-color: #90ee90 !important;
         }
 
         .red {
-            background-color: lightcoral !important;
+            background-color: #ffbdb9 !important;
         }
 
         #circulo_green {
@@ -178,7 +178,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    <asp:LinkButton ID="novoUsuario" class="btn btn-dark" runat="server" OnClick="novoUsuario_Click">Novo Usuário</asp:LinkButton>
+                    <asp:LinkButton ID="novoUsuario" class="btn btn-dark" runat="server" OnClick="novoUsuario_Click">Novo Membro</asp:LinkButton>
                     <asp:LinkButton ID="LinkButton2" class="btn btn-dark" runat="server" OnClick="novoCliente_Click">Novo Cliente</asp:LinkButton>
                 </div>
             </div>
@@ -215,10 +215,10 @@
                     <div class="border border-dark" style="background-color: lightgrey">
                         <div class="row">
                             <div class="col-sm">
-                                <span id="circulo_green" style="background-color: lightseagreen">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Ativo</span>
+                                <span id="circulo_green" style="background-color: #90ee90">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Ativo</span>
                             </div>
                             <div class="col-sm">
-                                <span id="circulo_red" style="background-color: lightcoral">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Inativo</span>
+                                <span id="circulo_red" style="background-color: #ffbdb9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Inativo</span>
                             </div>
                         </div>
                     </div>
