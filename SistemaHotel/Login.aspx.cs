@@ -249,7 +249,7 @@ namespace SistemaHotel
             {
                 if (perfUsu.StatusPerfilUsuario == 'S')
                 {
-                    if (txtNovaSenha.Text.Length == 8 && txtConfirmaSenha.Text.Length == 8)
+                    if (txtNovaSenha.Text.Length >= 8 && txtConfirmaSenha.Text.Length >= 8)
                     {
                         if (txtNovaSenha.Text == txtConfirmaSenha.Text)
                         {
@@ -281,10 +281,10 @@ namespace SistemaHotel
                     }
                     else
                     {
-                        //string msg = "<script> alert('Senha deve ter 8 caracteres!'); </script>";
+                        //string msg = "<script> alert('Senha mínimo 8 caracteres!'); </script>";
                         //Response.Write(msg);
                         Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                 Senha deve ter 8 caracteres!
+                                 Senha mínimo 8 caracteres!
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>

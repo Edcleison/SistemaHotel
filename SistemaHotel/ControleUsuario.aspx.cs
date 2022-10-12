@@ -200,7 +200,7 @@ namespace SistemaHotel
             //varifica se todos os campos estão preenchidos
             if (!string.IsNullOrEmpty(txtLogin.Text) && !string.IsNullOrEmpty(txtNovaSenha.Text) && !string.IsNullOrEmpty(txtConfirmaSenha.Text) && ddlPerfilNovoUsu.SelectedValue != "0")
             {
-                if (txtNovaSenha.Text.Length == 8 && txtConfirmaSenha.Text.Length == 8)
+                if (txtNovaSenha.Text.Length >= 8 && txtConfirmaSenha.Text.Length >= 8)
                 {
                     // verifica se as senhas são iguais
                     if (txtNovaSenha.Text == txtConfirmaSenha.Text)
@@ -286,10 +286,10 @@ namespace SistemaHotel
                 }
                 else
                 {
-                    //string msg = "<script> alert('Senha deve ter 8 caracteres!'); </script>";
+                    //string msg = "<script> alert('Senha mínimo 8 caracteres!'); </script>";
                     //Response.Write(msg);
                     Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                 Senha deve ter 8 caracteres!
+                                 Senha mínimo 8 caracteres!
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
@@ -405,13 +405,14 @@ namespace SistemaHotel
                 usu.NomeUsuario = txtNomeE.Text;
                 usu.SobrenomeUsuario = txtSobrenomeE.Text;
                 usu.Login = txtLoginE.Text;
+                usu.IdUsuario = int.Parse(txtIdUsuarioE.Text);
                 //altera o objeto Usuário
                 DALUsuario.alterarUsuario(usu);
                 //objeto PerfilUsuario
                 PerfilUsuario perfUsu = new PerfilUsuario();
                 //campos relacionados passagem devalores dos textbox para os atributos do objeto PerfilUsuário
                 perfUsu.IdPerfil = int.Parse(ddlPerfilUsuE.SelectedValue);
-                perfUsu.IdUsuario = int.Parse(txtIdUsuarioE.Text);
+                perfUsu.IdUsuario = usu.IdUsuario;
                 //insere o objeto PerfilUsuário
                 DALPerfilUsuario.alterarPefilUsuario(perfUsu);
                 //campos relacionados a criação do Usuário na Administracao

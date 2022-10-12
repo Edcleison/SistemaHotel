@@ -276,12 +276,14 @@ namespace SistemaHotel.Controller
         {
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"UPDATE USUARIO SET LOGIN = @LOGIN WHERE  ID_Usuario = @ID_USUARIO", connection))
+                using (SqlCommand cmd = new SqlCommand(@"UPDATE USUARIO SET LOGIN = @LOGIN, NOME =@NOME,SOBRENOME=@SOBRENOME  WHERE  ID_Usuario = @ID_USUARIO", connection))
                 {
                     try
                     {
                         cmd.Connection.Open();
                         cmd.Parameters.AddWithValue("LOGIN", usu.Login);
+                        cmd.Parameters.AddWithValue("NOME", usu.NomeUsuario);
+                        cmd.Parameters.AddWithValue("SOBRENOME", usu.SobrenomeUsuario);
                         cmd.Parameters.AddWithValue("ID_USUARIO", usu.IdUsuario);
                         cmd.ExecuteNonQuery();
                     }
