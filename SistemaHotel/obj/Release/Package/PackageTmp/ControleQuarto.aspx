@@ -100,11 +100,11 @@
 
                 ],
                 "createdRow": function (row, data, dataIndex) {
-                    if (data[2] == "<center>ATIVO</center>") {
+                    if (data[3] == "<center>ATIVO</center>") {
                         $(row).addClass('green');
 
                     }
-                    else if (data[2] == "<center>INATIVO</center>") {
+                    else if (data[3] == "<center>INATIVO</center>") {
                         $(row).addClass('red');
 
                     }

@@ -127,22 +127,28 @@
                     </p>
                 </div>
             </div>
-            <div class="row">
+           <div class="row">
                 <div class="col-1">
                     <span>Legenda: </span>
                 </div>
-                <div class="col-2">
-                    <span id="circulo_yellow" style="background-color: lightyellow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Em Aberto</span>
+                <div class="col-5">
+                    <div class="border border-dark" style="background-color: lightgrey">
+                        <div class="row">
+                            <div class="col-sm">
+                                <span id="circulo_yellow" style="background-color: lightyellow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Em Aberto</span>
+                            </div>
+                            <div class="col-sm">
+                                <span id="circulo_green" style="background-color: lightseagreen">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Finalizado</span>
+                            </div>
+                            <div class="col-sm">
+                                <span id="circulo_red" style="background-color: lightcoral">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Recusado</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <span id="circulo_green" style="background-color: lightseagreen">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Finalizado</span>
-                </div>
-                <div class="col-2">
-                    <span id="circulo_red" style="background-color: lightcoral">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Recusado</span>
-                </div>
-            </div>
-            <hr />
+            </div>            
         </div>
+        <hr />
         <div class="row">
             <div class="col-sm">
                 <div id="Panel1" runat="server" visible="true">
