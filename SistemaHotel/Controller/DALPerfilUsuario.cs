@@ -143,6 +143,31 @@ namespace SistemaHotel.Controller
                 }
             }
         }
+        public static void inativarUsuariosProc()
+        {
+
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"[dbo].[INATIVA_CLIENTES_DATA_VENCIDA]", connection))
+                {
+
+                    try
+                    {
+                        connection.Open();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        cmd.Connection.Close();
+                    }
+                }
+            }
+        }
 
         public static void ativarUsuario(int IdUsuario)
         {

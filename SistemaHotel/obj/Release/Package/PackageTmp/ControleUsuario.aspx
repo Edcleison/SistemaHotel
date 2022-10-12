@@ -81,7 +81,7 @@
                 "ordering": true,
                 "info": false,
                 dom: 'Bfrtip',
-                buttons: ['excel', {
+                buttons: ['excelHtml5', {
                     extend: 'pdfHtml5',
                     orientation: 'landscape',
                     pageSize: 'LEGAL'

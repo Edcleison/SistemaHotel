@@ -34,15 +34,15 @@
 
     <style>
         .green {
-            background-color: lightseagreen !important;
+            background-color: #90ee90 !important;
         }
 
         .yellow {
-            background-color: lightyellow !important;
+            background-color: #ffffe0 !important;
         }
 
         .red {
-            background-color: lightcoral !important;
+            background-color: #ffbdb9 !important;
         }
         #circulo_yellow {
             background: lightyellow;
@@ -135,13 +135,13 @@
                     <div class="border border-dark" style="background-color: lightgrey">
                         <div class="row">
                             <div class="col-sm">
-                                <span id="circulo_yellow" style="background-color: lightyellow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Em Aberto</span>
+                                <span id="circulo_yellow" style="background-color: #ffffe0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Em Aberto</span>
                             </div>
                             <div class="col-sm">
-                                <span id="circulo_green" style="background-color: lightseagreen">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Finalizado</span>
+                                <span id="circulo_green" style="background-color: #90ee90">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Finalizado</span>
                             </div>
                             <div class="col-sm">
-                                <span id="circulo_red" style="background-color: lightcoral">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Recusado</span>
+                                <span id="circulo_red" style="background-color: #ffbdb9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Recusado</span>
                             </div>
                         </div>
                     </div>

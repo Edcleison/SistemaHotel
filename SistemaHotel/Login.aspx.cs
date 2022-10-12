@@ -18,6 +18,7 @@ namespace SistemaHotel
         protected void Page_Load(object sender, EventArgs e)
         {
             Session.Clear();
+            DALPerfilUsuario.inativarUsuariosProc();
         }
 
         protected void btlogar_Click(object sender, EventArgs e)
