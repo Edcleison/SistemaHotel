@@ -104,11 +104,8 @@
                 </asp:ContentPlaceHolder>
             </div>
         </main>
-        <footer>
-            <p>Serviços de Hotel</p>
-            <p>Site desenvolvido por: </p>
+        <footer>      
         </footer>
-
     </form>
 </body>
 </html>
