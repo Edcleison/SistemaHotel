@@ -18,7 +18,8 @@ namespace SistemaHotel
         protected void Page_Load(object sender, EventArgs e)
         {
             Session.Clear();
-           
+            DALPerfilUsuario.inativarUsuariosProc();
+
         }
 
         protected void btlogar_Click(object sender, EventArgs e)
@@ -92,7 +93,6 @@ namespace SistemaHotel
                                     Session["perfil"] = "Cliente";
                                     break;
                             }
-                            DALPerfilUsuario.inativarUsuariosProc();
                             Response.Redirect("~/Default.aspx");
                             
 
@@ -176,8 +176,7 @@ namespace SistemaHotel
                                     case 3:
                                         Session["perfil"] = "Cliente";
                                         break;
-                                }
-                                DALPerfilUsuario.inativarUsuariosProc();
+                                }                               
                                 Response.Redirect("~/Default.aspx");    
                             }
 
