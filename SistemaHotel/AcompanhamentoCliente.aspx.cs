@@ -105,17 +105,21 @@ namespace SistemaHotel
                     sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + " " + "</center></th>");
                 }
                 sb.AppendLine("</tr>");
-                if(dtr["ID_TIPO_PROD"].ToString() == "1")
+                if (dtr["DESCRICAO_STATUS_PED"].ToString() =="Finalizado")
                 {
-                    total += decimal.Parse(dtr["PRECO_UNI"].ToString()) * int.Parse(dtr["QUANTIDADE"].ToString());
+                    if (dtr["ID_TIPO_PROD"].ToString() == "1")
+                    {
+                        total += decimal.Parse(dtr["PRECO_UNI"].ToString()) * int.Parse(dtr["QUANTIDADE"].ToString());
+                    }
+                    else
+                    {
+                        //calcula o preco total do pedido de frigobar = (valor unitario (por dia) x qtde. de dias) - qtde de dias
+                        int totalDias = (int)dataSaida.Subtract(DateTime.Today).TotalDays;
+                        decimal valorTotal = (Convert.ToDecimal(dtr["PRECO_UNI"].ToString()) * totalDias) - totalDias;
+                        total += valorTotal;
+                    }
                 }
-                else
-                {
-                    //calcula o preco total do pedido de frigobar = (valor unitario (por dia) x qtde. de dias) - qtde de dias
-                    int totalDias = (int)dataSaida.Subtract(DateTime.Today).TotalDays;
-                    decimal valorTotal = (Convert.ToDecimal(dtr["PRECO_UNI"].ToString()) * totalDias) - totalDias;
-                    total += valorTotal;
-                }
+                
                 
 
             }

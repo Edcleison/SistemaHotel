@@ -115,6 +115,7 @@ namespace SistemaHotel.Controller
                         {
                             registro.Read();
                             qua.IdQuarto = Convert.ToInt32(registro["ID_QUARTO"]);
+                            qua.NumeroQuarto = Convert.ToInt32(registro["ID_QUARTO"]);
                             qua.DescricaoQuarto = Convert.ToString(registro["DESCRICAO_QUARTO"]);
                         }
                     }

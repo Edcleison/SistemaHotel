@@ -63,7 +63,7 @@ namespace SistemaHotel.Controller
             using (SqlConnection connection = new SqlConnection(cnn))
             {
                 using (SqlCommand cmd = new SqlCommand($@"SELECT SUM(VALOR_TOTAL) AS VALOR_TOTAL FROM PEDIDO
-                                                            WHERE  ID_CLIENTE =@ID_CLIENTE", connection))
+                                                            WHERE ID_STATUS_PED = 2 AND ID_CLIENTE =@ID_CLIENTE", connection))
                 {
                     try
                     {
@@ -192,7 +192,7 @@ namespace SistemaHotel.Controller
             {
 
                 using (SqlCommand cmd = new SqlCommand($@"SELECT P.ID_PEDIDO,P.DATA_ABERTURA,Q.NUMERO_QUARTO,Q.DESCRICAO_QUARTO,C.NOME_CLIENTE,C.SOBRENOME_CLIENTE,PR.NOME_PROD,
-                                                            PR.DESCRICAO_PROD,pr.PRECO_UNI ,IP.QUANTIDADE,s.DESCRICAO_STATUS_PED,P.DATA_FINALIZACAO,TP.ID_TIPO_PROD
+                                                            PR.DESCRICAO_PROD,pr.PRECO_UNI ,IP.QUANTIDADE,S.DESCRICAO_STATUS_PED,P.DATA_FINALIZACAO,TP.ID_TIPO_PROD
                                                             FROM PEDIDO P 
                                                             INNER JOIN CLIENTE C ON (C.ID_CLIENTE = P. ID_CLIENTE)
                                                             INNER JOIN ITEM_PEDIDO IP ON (IP.ID_PEDIDO = P.ID_PEDIDO)
