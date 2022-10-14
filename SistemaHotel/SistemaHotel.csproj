@@ -65,7 +65,7 @@
     <Content Include="ControleAtendimento.aspx" />
     <Content Include="ControleQuarto.aspx" />
     <Content Include="ControleProduto.aspx" />
-    <Content Include="CSS\jquery.dataTables.css" />
+    <Content Include="CSS\bootstrap.min.css" />
     <Content Include="Default.aspx" />
     <Content Include="icon\feather\css\feather.css" />
     <Content Include="icon\feather\fonts\feather.hxd" />
@@ -397,13 +397,15 @@
     <Content Include="NovoPedidoFrigobar.aspx" />
     <Content Include="Scripts\a076d05399.js" />
     <Content Include="Scripts\autoNumeric.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-latest.min.js" />
-    <Content Include="Scripts\jquery.dataTables.js" />
-    <Content Include="CSS\StyleSheet.css.exclude" />
     <Content Include="IMAGENS\SISTEMA\logo_hotel.jpeg" />
     <Content Include="IMAGENS\SISTEMA\menu-icon-19353.png" />
     <Content Include="Atendimento.aspx" />
     <Content Include="NovoPedidoCozinha.aspx" />
+    <Content Include="PaginaMestre.Master" />
     <None Include="Properties\PublishProfiles\hotelservicos - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\hotelservicos - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\hotelservicos - Web Deploy.pubxml" />
@@ -412,7 +414,6 @@
     <None Include="Properties\PublishProfiles\sistemahotel - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy1.pubxml" />
-    <Content Include="Scripts\jquery-1.11.3.min.js" />
     <Content Include="Scripts\jquery.mask.js" />
     <Content Include="web.config" />
     <None Include="web.Debug.config">
@@ -424,15 +425,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ControleUsuario.aspx" />
-    <Content Include="CSS\bootstrap.css" />
-    <Content Include="CSS\dataTables.bootstrap4.min.css" />
     <Content Include="CSS\Estilos.css" />
-    <Content Include="CSS\jquery.dataTables.min.css" />
     <Content Include="Login.aspx" />
-    <Content Include="PaginaMestre.Master" />
-    <Content Include="Scripts\dataTables.bootstrap4.min.js.js" />
-    <Content Include="Scripts\jquery-3.5.1.js" />
-    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.min.js" />
   </ItemGroup>
   <ItemGroup>
@@ -519,19 +513,19 @@
     <Compile Include="NovoPedidoFrigobar.aspx.designer.cs">
       <DependentUpon>NovoPedidoFrigobar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PaginaMestre.Master.cs">
-      <DependentUpon>PaginaMestre.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PaginaMestre.Master.designer.cs">
-      <DependentUpon>PaginaMestre.Master</DependentUpon>
-    </Compile>
     <Compile Include="NovoPedidoCozinha.aspx.cs">
       <DependentUpon>NovoPedidoCozinha.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="NovoPedidoCozinha.aspx.designer.cs">
       <DependentUpon>NovoPedidoCozinha.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaginaMestre.Master.cs">
+      <DependentUpon>PaginaMestre.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaginaMestre.Master.designer.cs">
+      <DependentUpon>PaginaMestre.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Criptografia.cs" />

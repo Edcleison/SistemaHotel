@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Atendimento" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="Atendimento.aspx.cs" Inherits="SistemaHotel.Atendimento" %>
+﻿<%@ Page Title="Pedidos em Aberto" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="Atendimento.aspx.cs" Inherits="SistemaHotel.Atendimento" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -131,18 +131,12 @@
                 <div class="col-1">
                     <span>Legenda: </span>
                 </div>
-                <div class="col-5">
+                <div class="col-2">
                     <div class="border border-dark" style="background-color: lightgrey">
                         <div class="row">
                             <div class="col-sm">
                                 <span id="circulo_yellow" style="background-color: #ffffe0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Em Aberto</span>
-                            </div>
-                            <div class="col-sm">
-                                <span id="circulo_green" style="background-color: #90ee90">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Finalizado</span>
-                            </div>
-                            <div class="col-sm">
-                                <span id="circulo_red" style="background-color: #ffbdb9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> Recusado</span>
-                            </div>
+                            </div>                         
                         </div>
                     </div>
                 </div>
