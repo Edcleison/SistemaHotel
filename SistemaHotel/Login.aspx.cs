@@ -84,7 +84,7 @@ namespace SistemaHotel
                             switch (pu.IdPerfil)
                             {
                                 case 1:
-                                    Session["perfil"] = "Administrador";
+                                    Session["perfil"] = "Administração";
                                     break;
                                 case 2:
                                     Session["perfil"] = "Funcionário";
@@ -168,7 +168,7 @@ namespace SistemaHotel
                                 switch (pu.IdPerfil)
                                 {
                                     case 1:
-                                        Session["perfil"] = "Administrador";
+                                        Session["perfil"] = "Administração";
                                         break;
                                     case 2:
                                         Session["perfil"] = "Funcionário";

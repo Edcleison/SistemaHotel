@@ -22,7 +22,7 @@ namespace SistemaHotel
         {
             try
             {
-                if (Session["perfil"].ToString() == "Administrador")
+                if (Session["perfil"].ToString() == "Administração")
                 {
                     int rParametro = 0;
 
@@ -241,7 +241,7 @@ namespace SistemaHotel
                             perfUsu.StatusPerfilUsuario = 'S';
                             //insere o objeto PerfilUsuário
                             DALPerfilUsuario.inserirPerfilUsuario(perfUsu);
-                            //campos relacionados a criação do Usuário na Administracao
+                            //campos relacionados a criação do Usuário na Administração
                             if (ddlPerfilNovoUsu.SelectedValue == "1")
                             {
                                 Administracao adm = new Administracao();
@@ -415,7 +415,7 @@ namespace SistemaHotel
                 perfUsu.IdUsuario = usu.IdUsuario;
                 //insere o objeto PerfilUsuário
                 DALPerfilUsuario.alterarPefilUsuario(perfUsu);
-                //campos relacionados a criação do Usuário na Administracao
+                //campos relacionados a criação do Usuário na Administração
                 if (ddlPerfilUsuE.SelectedValue == "1")
                 {
                     Administracao adm = new Administracao();
@@ -1001,7 +1001,7 @@ namespace SistemaHotel
                     }
                     else if (ddlPerfil.SelectedValue == "TODOS" && ddlStatus.SelectedValue != "TODOS")
                     {
-                        carregarTabela(ddlStatus.SelectedValue.ToString(), "");
+                        carregarTabela("", ddlStatus.SelectedValue.ToString());
                     }
                     else
                     {

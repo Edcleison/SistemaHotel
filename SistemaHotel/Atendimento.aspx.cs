@@ -23,7 +23,7 @@ namespace SistemaHotel
 
             try
             {
-                if (Session["perfil"].ToString() == "Administrador" || Session["perfil"].ToString() == "Funcionário")
+                if (Session["perfil"].ToString() == "Administração" || Session["perfil"].ToString() == "Funcionário")
                 {
                     if (!IsPostBack)
                     {
@@ -34,20 +34,35 @@ namespace SistemaHotel
 
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["ATENDIMENTO_S"]));
                             Usuario usu = DALUsuario.buscaUsuarioLogin(Session["login"].ToString());
-                            Pedido ped = DALPedido.buscarPedidoId(rParametro);
-                            if (Session["perfil"].ToString() == "Administrador")
+                            Pedido ped = DALPedido.buscarPedidoId(rParametro);     
+                            if (Session["perfil"].ToString() == "Administração")
                             {
+                                DataTable dta = DALItemPedido.buscarTipoPedidooId(ped.IdPedido);
                                 Administracao adm = DALAdministracao.buscarAdmIdUsuario(usu.IdUsuario);
-                                PedidoFrigobar pedFrif = new PedidoFrigobar();
-                                pedFrif.IdStatus = 2;
-                                pedFrif.DataFinalizacao = DateTime.Now;
-                                pedFrif.IdAdm = adm.IdAdm;
-                                pedFrif.IdAdm = ped.IdPedido;
-                                DALPedido.alterarStatusAtendimentoAdm(pedFrif);
-                                //msg = $"<script> alert('Atendimento Finalizado: ID do Administrador {adm.IdAdm}'); </script>";
+                                if (dta.Rows[0]["ID_TIPO_PROD"].ToString() == "1")
+                                {
+                                    PedidoCozinha pedCoz = new PedidoCozinha();
+                                    pedCoz.IdStatus = 2;
+                                    pedCoz.DataFinalizacao = DateTime.Now;
+                                    pedCoz.IdAdm = adm.IdAdm;
+                                    pedCoz.IdFuncionario = ped.IdPedido;
+                                    DALPedido.alterarStatusAtendimentoFuncionario(pedCoz);
+
+                                }
+                                else
+                                {
+                                    PedidoFrigobar pedFrig = new PedidoFrigobar();
+                                    pedFrig.IdStatus = 2;
+                                    pedFrig.DataFinalizacao = DateTime.Now;
+                                    pedFrig.IdAdm = adm.IdAdm;
+                                    pedFrig.IdAdm = ped.IdPedido;
+                                    DALPedido.alterarStatusAtendimentoAdm(pedFrig);
+                                }
+
+                                //msg = $"<script> alert('Atendimento Finalizado: ID  Administração {adm.IdAdm}'); </script>";
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                                             Atendimento Finalizado: ID do Administrador {adm.IdAdm}  
+                                             Atendimento Finalizado: ID  Administração {adm.IdAdm}  
                                                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
@@ -79,9 +94,9 @@ namespace SistemaHotel
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["ATENDIMENTO_N"]));
                             Usuario usu = DALUsuario.buscaUsuarioLogin(Session["login"].ToString());
                             Pedido ped = DALPedido.buscarPedidoId(rParametro);
-                            if (Session["perfil"].ToString() == "Administrador")
+                            if (Session["perfil"].ToString() == "Administração")
                             {
-                              
+
                                 Administracao adm = DALAdministracao.buscarAdmIdUsuario(usu.IdUsuario);
                                 PedidoFrigobar pedFrig = new PedidoFrigobar();
                                 pedFrig.IdStatus = 3;
@@ -89,10 +104,10 @@ namespace SistemaHotel
                                 pedFrig.IdAdm = adm.IdAdm;
                                 pedFrig.IdPedido = ped.IdPedido;
                                 DALPedido.alterarStatusAtendimentoAdm(pedFrig);
-                                //msg = $"<script> alert('Atendimento Recusado: ID do Administrador {adm.IdAdm}'); </script>";
+                                //msg = $"<script> alert('Atendimento Recusado: ID do Administração {adm.IdAdm}'); </script>";
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                             Atendimento Recusado: ID do Administrador {adm.IdAdm}
+                                             Atendimento Recusado: ID do Administração {adm.IdAdm}
                                             <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
@@ -100,7 +115,7 @@ namespace SistemaHotel
                             }
                             if (Session["perfil"].ToString() == "Funcionário")
                             {
-                               
+
                                 Funcionario fun = DALFuncionario.buscarFuncionarioIdUsuario(usu.IdUsuario);
                                 PedidoCozinha pedCoz = new PedidoCozinha();
                                 pedCoz.IdStatus = 3;

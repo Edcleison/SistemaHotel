@@ -21,7 +21,7 @@ namespace SistemaHotel
                 Response.Redirect("~/login.aspx");
 
             }
-            else if (Session["perfil"].ToString() == "Administrador")
+            else if (Session["perfil"].ToString() == "Administração")
             {
 
                 NovoPedidoCozinha.Visible = false;

@@ -51,6 +51,45 @@ namespace SistemaHotel.Controller
                 }
             }
         }
+
+        public static DataTable buscarTipoPedidooId(int IdPedido)
+        {
+            DataTable dta = new DataTable();
+            SqlDataAdapter adp;
+
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+
+
+                using (SqlCommand cmd = new SqlCommand(@"SELECT TOP 1  IP.[ID_PEDIDO]
+                                                        ,TP.ID_TIPO_PROD
+                                                        FROM [SERVICOHOTELARIA].[DBO].[ITEM_PEDIDO] IP
+                                                        INNER JOIN PRODUTO P ON (IP.ID_PRODUTO = P.ID_PRODUTO)
+                                                        INNER JOIN TIPO_PRODUTO TP ON (TP.ID_TIPO_PROD = P.ID_TIPO_PROD)
+                                                        WHERE ID_PEDIDO =@ID_PEDIDO", connection))
+                {
+                    try
+                    {
+
+                        cmd.Parameters.AddWithValue("@ID_PEDIDO", IdPedido);
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                        adp = new SqlDataAdapter(cmd);
+                        adp.Fill(dta);
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                }
+
+            }
+            return dta;
+        }
     }
 }
 

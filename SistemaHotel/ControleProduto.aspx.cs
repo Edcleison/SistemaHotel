@@ -22,7 +22,7 @@ namespace SistemaHotel
         {
             try
             {
-                if (Session["perfil"].ToString() == "Administrador")
+                if (Session["perfil"].ToString() == "Administração")
                 {
                     int rParametro = 0;
                     if (!IsPostBack)
