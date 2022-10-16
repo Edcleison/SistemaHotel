@@ -6,16 +6,13 @@ using System.Text;
 
 namespace SistemaHotel.Model
 {
-    public class Pedido
+    public class PedidoCozinha : Pedido
     {
-        public int IdPedido { get; set; }
-        public int IdStatus { get; set; }
-        public int IdCliente { get; set; }
-        public decimal ValorTotal { get; set; }
-        public DateTime DataAbertura { get; set; }
-        public DateTime DataFinalizacao { get; set; }
 
-        public Pedido()
+        public int IdAdm { get; set; }
+        public int IdFuncionario { get; set; }
+        
+        public PedidoCozinha()
         {
             IdPedido = 0;
             IdStatus = 0;         

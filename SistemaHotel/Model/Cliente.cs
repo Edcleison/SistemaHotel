@@ -7,7 +7,7 @@ namespace SistemaHotel.Model
 {
     public class Cliente
     {
-       
+
         public int IdCliente { get; set; }
         public int IdQuarto { get; set; }
         public string CodReserva { get; set; }

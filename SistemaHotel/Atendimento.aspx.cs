@@ -37,12 +37,13 @@ namespace SistemaHotel
                             Pedido ped = DALPedido.buscarPedidoId(rParametro);
                             if (Session["perfil"].ToString() == "Administrador")
                             {
-                               
                                 Administracao adm = DALAdministracao.buscarAdmIdUsuario(usu.IdUsuario);
-                                ped.IdStatus = 2;
-                                ped.DataFinalizacao = DateTime.Now;
-                                ped.IdAdm = adm.IdAdm;
-                                DALPedido.alterarStatusAtendimentoAdm(ped);
+                                PedidoFrigobar pedFrif = new PedidoFrigobar();
+                                pedFrif.IdStatus = 2;
+                                pedFrif.DataFinalizacao = DateTime.Now;
+                                pedFrif.IdAdm = adm.IdAdm;
+                                pedFrif.IdAdm = ped.IdPedido;
+                                DALPedido.alterarStatusAtendimentoAdm(pedFrif);
                                 //msg = $"<script> alert('Atendimento Finalizado: ID do Administrador {adm.IdAdm}'); </script>";
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
@@ -57,10 +58,12 @@ namespace SistemaHotel
                             if (Session["perfil"].ToString() == "Funcionário")
                             {
                                 Funcionario fun = DALFuncionario.buscarFuncionarioIdUsuario(usu.IdUsuario);
-                                ped.IdStatus = 2;
-                                ped.DataFinalizacao = DateTime.Now;
-                                ped.IdFuncionario = fun.IdFuncionario;
-                                DALPedido.alterarStatusAtendimentoFuncionario(ped);
+                                PedidoCozinha pedCoz = new PedidoCozinha();
+                                pedCoz.IdStatus = 2;
+                                pedCoz.DataFinalizacao = DateTime.Now;
+                                pedCoz.IdFuncionario = fun.IdFuncionario;
+                                pedCoz.IdFuncionario = ped.IdPedido;
+                                DALPedido.alterarStatusAtendimentoFuncionario(pedCoz);
                                 //msg = $"<script> alert('Atendimento Finalizado: ID do Funcionário {fun.IdFuncionario}'); </script>";
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
@@ -80,10 +83,12 @@ namespace SistemaHotel
                             {
                               
                                 Administracao adm = DALAdministracao.buscarAdmIdUsuario(usu.IdUsuario);
-                                ped.IdStatus = 3;
-                                ped.DataFinalizacao = DateTime.Now;
-                                ped.IdAdm = adm.IdAdm;
-                                DALPedido.alterarStatusAtendimentoAdm(ped);
+                                PedidoFrigobar pedFrig = new PedidoFrigobar();
+                                pedFrig.IdStatus = 3;
+                                pedFrig.DataFinalizacao = DateTime.Now;
+                                pedFrig.IdAdm = adm.IdAdm;
+                                pedFrig.IdPedido = ped.IdPedido;
+                                DALPedido.alterarStatusAtendimentoAdm(pedFrig);
                                 //msg = $"<script> alert('Atendimento Recusado: ID do Administrador {adm.IdAdm}'); </script>";
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
@@ -97,10 +102,12 @@ namespace SistemaHotel
                             {
                                
                                 Funcionario fun = DALFuncionario.buscarFuncionarioIdUsuario(usu.IdUsuario);
-                                ped.IdStatus = 3;
-                                ped.DataFinalizacao = DateTime.Now;
-                                ped.IdFuncionario = fun.IdFuncionario;
-                                DALPedido.alterarStatusAtendimentoFuncionario(ped);
+                                PedidoCozinha pedCoz = new PedidoCozinha();
+                                pedCoz.IdStatus = 3;
+                                pedCoz.DataFinalizacao = DateTime.Now;
+                                pedCoz.IdFuncionario = fun.IdFuncionario;
+                                pedCoz.IdPedido = ped.IdPedido;
+                                DALPedido.alterarStatusAtendimentoFuncionario(pedCoz);
                                 //msg = $"<script> alert('Atendimento Finalizado: ID do Funcionário {fun.IdFuncionario}'); </script>";
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>

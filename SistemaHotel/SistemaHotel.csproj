@@ -489,7 +489,10 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Membro.cs" />
     <Compile Include="Model\Carrinho.cs" />
+    <Compile Include="Model\PedidoFrigobar.cs" />
+    <Compile Include="Model\PedidoCozinha.cs" />
     <Compile Include="Model\Quarto.cs" />
     <Compile Include="Model\Funcionario.cs" />
     <Compile Include="Model\Cliente.cs" />

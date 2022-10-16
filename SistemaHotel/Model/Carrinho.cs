@@ -7,7 +7,7 @@ namespace SistemaHotel.Model
 {
     public class Carrinho
     {
-       
+
         public int IdCarrinho { get; set; }
         public int IdProduto { get; set; }
         public int IdCliente { get; set; }

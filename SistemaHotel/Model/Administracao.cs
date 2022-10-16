@@ -5,12 +5,10 @@ using System.Web;
 
 namespace SistemaHotel.Model
 {
-    public class Administracao
+    public class Administracao : Membro
     {
-       
+
         public int IdAdm { get; set; }
-        public int IdUsuario { get; set; }
-        public int IdPerfil { get; set; }
 
         public Administracao()
         {

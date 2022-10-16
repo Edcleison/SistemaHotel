@@ -171,14 +171,14 @@ namespace SistemaHotel
                 //busca os dados do cliente pelo cod_reserva
                 Cliente cli = DALCliente.buscarClienteReserva(Session["login"].ToString());
                 //campos relacionados ao novo pedido
-                Pedido ped = new Pedido();
+                PedidoCozinha ped = new PedidoCozinha();
                 ped.IdCliente = cli.IdCliente;
                 ped.IdStatus = 1;
                 ped.DataAbertura = DateTime.Now;
                 ped.ValorTotal = decimal.Parse(lblTotal.Text);
-                DALPedido.inserirPedido(ped);
+                DALPedido.inserirPedidoCozinha(ped);
                 //busca o pedido pelo id_cliente e Data_Abertura
-                ped = DALPedido.buscarPedidoIdClienteData(ped.IdCliente, ped.DataAbertura);
+                ped = DALPedido.buscarPedidoCozinhaIdClienteData(ped.IdCliente, ped.DataAbertura);
                 //campos relacionados ao Item_Pedido
 
                 foreach (DataRow dtr in dta.Rows)
