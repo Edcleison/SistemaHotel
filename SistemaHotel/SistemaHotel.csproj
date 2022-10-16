@@ -66,6 +66,8 @@
     <Content Include="ControleQuarto.aspx" />
     <Content Include="ControleProduto.aspx" />
     <Content Include="CSS\bootstrap.min.css" />
+    <Content Include="CSS\buttons.dataTables.min.css" />
+    <Content Include="CSS\jquery.dataTables.min.css" />
     <Content Include="Default.aspx" />
     <Content Include="icon\feather\css\feather.css" />
     <Content Include="icon\feather\fonts\feather.hxd" />
@@ -398,6 +400,9 @@
     <Content Include="Scripts\a076d05399.js" />
     <Content Include="Scripts\autoNumeric.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\buttons.html5.min.js" />
+    <Content Include="Scripts\buttons.print.min.js" />
+    <Content Include="Scripts\dataTables.buttons.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-latest.min.js" />
@@ -414,7 +419,11 @@
     <None Include="Properties\PublishProfiles\sistemahotel - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\sistemahotel - Web Deploy1.pubxml" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.mask.js" />
+    <Content Include="Scripts\jszip.min.js" />
+    <Content Include="Scripts\pdfmake.min.js" />
+    <Content Include="Scripts\vfs_fonts.js" />
     <Content Include="web.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
