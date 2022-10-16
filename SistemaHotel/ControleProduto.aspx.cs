@@ -262,6 +262,7 @@ namespace SistemaHotel
                 prod.DescricaoProduto = txtDescricaoE.Text;
                 prod.PrecoUnitario = decimal.Parse(txtPrecoE.Text.Replace(",", "."));
                 prod.IdProduto = Convert.ToInt32(txtIdProdutoE.Text);
+                prod.TipoProduto = Convert.ToInt32(ddlTipoProdE.SelectedValue);
                 //alterar
                 try
                 {

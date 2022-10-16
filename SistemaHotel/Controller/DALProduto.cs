@@ -178,6 +178,7 @@ namespace SistemaHotel.Controller
                                                           ,[DESCRICAO_PROD] = @DESCRICAO_PROD
                                                           ,[NOME_PROD] = @NOME_PROD
                                                           ,[FOTO_PROD] = @FOTO_PROD                                                         
+                                                          ,[ID_TIPO_PROD] = @ID_TIPO_PROD                                                         
                                                           WHERE  ID_PRODUTO = @ID_PRODUTO", connection))
                 {
                     try
@@ -186,6 +187,7 @@ namespace SistemaHotel.Controller
                         cmd.Parameters.AddWithValue("PRECO_UNI", prod.PrecoUnitario);
                         cmd.Parameters.AddWithValue("DESCRICAO_PROD", prod.DescricaoProduto);
                         cmd.Parameters.AddWithValue("NOME_PROD", prod.NomeProduto);
+                        cmd.Parameters.AddWithValue("ID_TIPO_PROD", prod.TipoProduto);
                         cmd.Parameters.AddWithValue("FOTO_PROD", prod.FotoProduto);
                         cmd.Parameters.AddWithValue("ID_PRODUTO", prod.IdProduto);
                         cmd.ExecuteNonQuery();
