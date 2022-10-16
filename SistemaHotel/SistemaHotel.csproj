@@ -475,6 +475,8 @@
       <DependentUpon>ControleUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controller\DALCarrinho.cs" />
+    <Compile Include="Controller\DALPedidoFrigobar.cs" />
+    <Compile Include="Controller\DALPedidoCozinha.cs" />
     <Compile Include="Controller\DALQuarto.cs" />
     <Compile Include="Controller\DALFuncionario.cs" />
     <Compile Include="Controller\DALAdministracao.cs" />

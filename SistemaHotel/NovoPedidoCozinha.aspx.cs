@@ -176,9 +176,9 @@ namespace SistemaHotel
                 ped.IdStatus = 1;
                 ped.DataAbertura = DateTime.Now;
                 ped.ValorTotal = decimal.Parse(lblTotal.Text);
-                DALPedido.inserirPedidoCozinha(ped);
+                DALPedidoCozinha.inserirPedidoCozinha(ped);
                 //busca o pedido pelo id_cliente e Data_Abertura
-                ped = DALPedido.buscarPedidoCozinhaIdClienteData(ped.IdCliente, ped.DataAbertura);
+                ped = DALPedidoCozinha.buscarPedidoCozinhaIdClienteData(ped.IdCliente, ped.DataAbertura);
                 //campos relacionados ao Item_Pedido
 
                 foreach (DataRow dtr in dta.Rows)

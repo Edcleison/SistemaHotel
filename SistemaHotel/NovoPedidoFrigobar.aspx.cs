@@ -126,9 +126,9 @@ namespace SistemaHotel
                 ped.DataAbertura = DateTime.Now;
                 
                 ped.ValorTotal = decimal.Parse(txtPreco.Text);
-                DALPedido.inserirPedidoFrigobar(ped);
+                DALPedidoFrigobar.inserirPedidoFrigobar(ped);
                 //busca o pedido pelo id_cliente e Data_Abertura
-                ped = DALPedido.buscarPedidoFrigobarIdClienteData(ped.IdCliente, ped.DataAbertura);
+                ped = DALPedidoFrigobar.buscarPedidoFrigobarIdClienteData(ped.IdCliente, ped.DataAbertura);
                 //campos relacionados ao Item_Pedido
                 ItemPedido itemPed = new ItemPedido();
                 itemPed.IdPedido = ped.IdPedido;
