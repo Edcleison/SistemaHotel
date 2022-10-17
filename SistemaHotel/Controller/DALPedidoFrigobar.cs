@@ -51,52 +51,6 @@ namespace SistemaHotel.Controller
                 }
             }
         }
-
-        public static PedidoCozinha buscarPedidoCozinhaIdClienteData(int IdCliente, DateTime DataAbertura)
-        {
-            PedidoCozinha ped = new PedidoCozinha();
-
-            using (SqlConnection connection = new SqlConnection(cnn))
-            {
-
-
-                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_PEDIDO]
-                                                                ,[ID_STATUS_PED]
-                                                                ,[ID_CLIENTE]                                                                
-                                                                ,[VALOR_TOTAL]
-                                                                ,[DATA_ABERTURA]                                                          
-                                                          FROM [dbo].[PEDIDO] WHERE ID_CLIENTE = @ID_CLIENTE and DATA_ABERTURA = @DATA_ABERTURA", connection))
-                {
-                    try
-                    {
-
-                        cmd.Parameters.AddWithValue("@ID_CLIENTE", IdCliente);
-                        cmd.Parameters.AddWithValue("@DATA_ABERTURA", DataAbertura);
-                        cmd.Connection.Open();
-                        SqlDataReader registro = cmd.ExecuteReader();
-                        if (registro.HasRows)
-                        {
-                            registro.Read();
-                            ped.IdPedido = Convert.ToInt32(registro["ID_PEDIDO"]);
-                            ped.IdStatus = Convert.ToInt32(registro["ID_STATUS_PED"]);
-                            ped.IdCliente = Convert.ToInt32(registro["ID_CLIENTE"]);
-                            ped.ValorTotal = Convert.ToDecimal(registro["VALOR_TOTAL"]);
-                            ped.DataAbertura = Convert.ToDateTime(registro["DATA_ABERTURA"]);
-                        }
-                    }
-                    catch (Exception erro)
-                    {
-                        throw new Exception(erro.Message);
-                    }
-                    finally
-                    {
-                        connection.Close();
-                    }
-                }
-
-            }
-            return ped;
-        }
         public static PedidoFrigobar buscarPedidoFrigobarIdClienteData(int IdCliente, DateTime DataAbertura)
         {
             PedidoFrigobar ped = new PedidoFrigobar();
@@ -141,7 +95,7 @@ namespace SistemaHotel.Controller
 
             }
             return ped;
-        }
+        } 
         public static void alterarStatusAtendimentoAdm(PedidoFrigobar ped)
         {
             using (SqlConnection connection = new SqlConnection(cnn))

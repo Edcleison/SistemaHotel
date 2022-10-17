@@ -4,3 +4,4 @@ C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\bin\SistemaHotel.pdb
 C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Debug\SistemaHotel.csproj.CoreCompileInputs.cache
 C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Debug\SistemaHotel.dll
 C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Debug\SistemaHotel.pdb
+C:\Curso\Projetos WebSite\SistemaHotel\SistemaHotel\obj\Debug\SistemaHotel.csproj.AssemblyReference.cache

@@ -54,6 +54,7 @@ namespace SistemaHotel
                             txtIdUsuarioE.Text = usu.IdUsuario.ToString();
                             txtNomeE.Text = usu.NomeUsuario;
                             txtSobrenomeE.Text = usu.SobrenomeUsuario;
+                            ddlPerfilUsuE.SelectedValue = perfUsu.IdPerfil.ToString();
                             txtLoginE.Text = usu.Login;
                             mdBack.Visible = true;
                             mdUsuE.Visible = true;
@@ -734,113 +735,129 @@ namespace SistemaHotel
 
         protected void alterarData_Click(object sender, EventArgs e)
         {
-            //data de saída atual
-            DateTime dataFim = DateTime.ParseExact(txtDataFimE.Text, "dd/MM/yyyy HH:mm", null);
-            //nova data de saída
-            // DateTime novaDataFim = DateTime.ParseExact($"{txtInputDataFimE.Text} {ddlInputHoraFimE}", "dd/MM/yyyy HH:mm", null);
-            DateTime novaDataFim = DateTime.ParseExact(txtInputDataFimE.Text, "dd/MM/yyyy HH:mm", null);
-
-            if (novaDataFim > DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) && novaDataFim > dataFim)
+            if (!string.IsNullOrEmpty(txtInputDataFimE.Text) && ddlQuartoE.SelectedValue != "SELECIONE")
             {
-                //campos relacionados a busca do cliente pelo cod_reserva
-                Cliente cli = DALCliente.buscarClienteReserva(txtCdReservaE.Text.ToUpper());
-                //alteração da data de saída
-                cli.DataSaida = Convert.ToDateTime(novaDataFim);
-                //flag para poder fazer outro pedido de frigobar
-                cli.FlagPedidoFrigobar = 'S';
+                //data de saída atual
+                DateTime dataFim = DateTime.ParseExact(txtDataFimE.Text, "dd/MM/yyyy HH:mm", null);
+                //nova data de saída
+                // DateTime novaDataFim = DateTime.ParseExact($"{txtInputDataFimE.Text} {ddlInputHoraFimE}", "dd/MM/yyyy HH:mm", null);
+                DateTime novaDataFim = DateTime.ParseExact(txtInputDataFimE.Text, "dd/MM/yyyy HH:mm", null);
 
-                DataTable dta = DALCliente.verificarOcupacaoQuarto(ddlQuartoE.SelectedValue);
-                if (dta.Rows.Count > 0)
+                if (novaDataFim > DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) && novaDataFim > dataFim)
                 {
-                    if (Convert.ToInt32(dta.Rows[0]["ID_CLIENTE"]) == cli.IdCliente)
+                    //campos relacionados a busca do cliente pelo cod_reserva
+                    Cliente cli = DALCliente.buscarClienteReserva(txtCdReservaE.Text.ToUpper());
+                    //alteração da data de saída
+                    cli.DataSaida = Convert.ToDateTime(novaDataFim);
+                    //flag para poder fazer outro pedido de frigobar
+                    cli.FlagPedidoFrigobar = 'S';
+
+                    DataTable dta = DALCliente.verificarOcupacaoQuarto(ddlQuartoE.SelectedValue);
+                    if (dta.Rows.Count > 0)
                     {
-                        //alterar a data de saída do cliente
-                        DALCliente.alterarCliente(cli);
-                        txtDataFimE.Text = novaDataFim.ToString("dd/MM/yyyy HH:mm");
-                        //verifica se o perfil usuário está  inativo e ativa
-                        Usuario u = DALUsuario.buscaUsuarioLogin(cli.CodReserva);
-                        PerfilUsuario pu = DALPerfilUsuario.buscarUsuarioPerfil(u.IdUsuario);
-                        if (pu.StatusPerfilUsuario == 'N')
+                        if (Convert.ToInt32(dta.Rows[0]["ID_CLIENTE"]) == cli.IdCliente)
                         {
-                            DALPerfilUsuario.ativarUsuario(u.IdUsuario);
-                        }
-                        //string msg = $"<script> alert('Data Alterada {novaDataFim.ToString("dd/MM/yyyy HH:mm")} ID Cliente {cli.IdCliente}'); </script>";
-                        //Response.Write(msg);
-                        Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            //alterar a data de saída do cliente
+                            DALCliente.alterarCliente(cli);
+                            txtDataFimE.Text = novaDataFim.ToString("dd/MM/yyyy HH:mm");
+                            //verifica se o perfil usuário está  inativo e ativa
+                            Usuario u = DALUsuario.buscaUsuarioLogin(cli.CodReserva);
+                            PerfilUsuario pu = DALPerfilUsuario.buscarUsuarioPerfil(u.IdUsuario);
+                            if (pu.StatusPerfilUsuario == 'N')
+                            {
+                                DALPerfilUsuario.ativarUsuario(u.IdUsuario);
+                            }
+                            //string msg = $"<script> alert('Data Alterada {novaDataFim.ToString("dd/MM/yyyy HH:mm")} ID Cliente {cli.IdCliente}'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                         Data Alterada {novaDataFim.ToString("dd/MM/yyyy HH:mm")} ID Cliente {cli.IdCliente}
                                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
 
-                    }
-                    else if (DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) < DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
-                    {
-                        //alterar a data de saída do cliente
-                        DALCliente.alterarCliente(cli);
-                        txtDataFimE.Text = novaDataFim.ToString("dd/MM/yyyy HH:mm");
-                        //verifica se o perfil usuário está  inativo e ativa
-                        Usuario u = DALUsuario.buscaUsuarioLogin(cli.CodReserva);
-                        PerfilUsuario pu = DALPerfilUsuario.buscarUsuarioPerfil(u.IdUsuario);
-                        if (pu.StatusPerfilUsuario == 'N')
-                        {
-                            DALPerfilUsuario.ativarUsuario(u.IdUsuario);
                         }
-                        //string msg = $"<script> alert('Data Alterada {novaDataFim.ToString("dd/MM/yyyy HH:mm")} ID Cliente {cli.IdCliente}'); </script>";
-                        //Response.Write(msg);
-                        Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                        else if (DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) < DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
+                        {
+                            //alterar a data de saída do cliente
+                            DALCliente.alterarCliente(cli);
+                            txtDataFimE.Text = novaDataFim.ToString("dd/MM/yyyy HH:mm");
+                            //verifica se o perfil usuário está  inativo e ativa
+                            Usuario u = DALUsuario.buscaUsuarioLogin(cli.CodReserva);
+                            PerfilUsuario pu = DALPerfilUsuario.buscarUsuarioPerfil(u.IdUsuario);
+                            if (pu.StatusPerfilUsuario == 'N')
+                            {
+                                DALPerfilUsuario.ativarUsuario(u.IdUsuario);
+                            }
+                            //string msg = $"<script> alert('Data Alterada {novaDataFim.ToString("dd/MM/yyyy HH:mm")} ID Cliente {cli.IdCliente}'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                         Data Alterada {novaDataFim.ToString("dd/MM/yyyy HH:mm")} ID Cliente {cli.IdCliente}
                                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
 
-                    }
-                    else
-                    {
-                        //string msg = $"<script> alert('Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null)} ID Cliente: {dta.Rows[0]["ID_CLIENTE"]}'); </script>";
-                        //Response.Write(msg);
-                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                        }
+                        else
+                        {
+                            //string msg = $"<script> alert('Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null)} ID Cliente: {dta.Rows[0]["ID_CLIENTE"]}'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                   Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null)} ID Cliente: {dta.Rows[0]["ID_CLIENTE"]}
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
-                    }
+                        }
 
-                }
-                else
-                {
-                    DALCliente.alterarCliente(cli);
-                    Usuario usu = DALUsuario.buscaUsuarioLogin(cli.CodReserva);
-                    PerfilUsuario perfUsu = DALPerfilUsuario.buscarUsuarioPerfil(usu.IdUsuario);
-                    if (perfUsu.StatusPerfilUsuario != 'S')
-                    {
-                        DALPerfilUsuario.ativarUsuario(usu.IdUsuario);
                     }
-                    //txtDataFimE.Text = novaDataFim.ToString();
-                    //string msg = $"<script> alert('Data Alterada: ID Cliente:{cli.IdCliente} Data:{novaDataFim}!'); </script>";
-                    //Response.Write(msg);
-                    Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                    else
+                    {
+                        DALCliente.alterarCliente(cli);
+                        Usuario usu = DALUsuario.buscaUsuarioLogin(cli.CodReserva);
+                        PerfilUsuario perfUsu = DALPerfilUsuario.buscarUsuarioPerfil(usu.IdUsuario);
+                        if (perfUsu.StatusPerfilUsuario != 'S')
+                        {
+                            DALPerfilUsuario.ativarUsuario(usu.IdUsuario);
+                        }
+                        //txtDataFimE.Text = novaDataFim.ToString();
+                        //string msg = $"<script> alert('Data Alterada: ID Cliente:{cli.IdCliente} Data:{novaDataFim}!'); </script>";
+                        //Response.Write(msg);
+                        Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                     Data Alterada: ID Cliente:{cli.IdCliente} Data:{novaDataFim}!
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                     </div>");
+                    }
                 }
-            }
-            else
-            {
-                //string msg = "<script> alert('Data não permitida!'); </script>";
-                //Response.Write(msg);
-                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                else
+                {
+                    //string msg = "<script> alert('Data não permitida!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                 button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                   Data não permitida!
                                     </div>");
 
+                }
+
             }
+            else
+            {
+                //string msg = "<script> alert('Preencha Todos os campos!'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                     Preencha todos os campos!
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                            </div>");
+            }
+            
 
         }
 

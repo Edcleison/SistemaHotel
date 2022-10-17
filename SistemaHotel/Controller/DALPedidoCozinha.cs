@@ -15,7 +15,6 @@ namespace SistemaHotel.Controller
     {
         static string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
 
-
         public static void inserirPedidoCozinha(PedidoCozinha ped)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
@@ -100,7 +99,6 @@ namespace SistemaHotel.Controller
             }
             return ped;
         }
-     
 
         public static void alterarStatusAtendimentoFuncionario(PedidoCozinha ped)
         {
