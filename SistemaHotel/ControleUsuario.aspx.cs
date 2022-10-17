@@ -501,7 +501,7 @@ namespace SistemaHotel
                 sb.AppendLine("<tr>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["ID_USUARIO"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["LOGIN"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_QUARTO"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["NUMERO_QUARTO"] + " - " + dtr["DESCRICAO_QUARTO"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["NOME"] + " " + dtr["SOBRENOME"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + Convert.ToDateTime(dtr["DATA_Entrada"]).ToString("dd/MM/yyyy HH:mm") + "</center></td>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + Convert.ToDateTime(dtr["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm") + "</center></td>");
@@ -751,6 +751,7 @@ namespace SistemaHotel
                     cli.DataSaida = Convert.ToDateTime(novaDataFim);
                     //flag para poder fazer outro pedido de frigobar
                     cli.FlagPedidoFrigobar = 'S';
+                    cli.IdQuarto = int.Parse( ddlQuartoE.SelectedValue);
 
                     DataTable dta = DALCliente.verificarOcupacaoQuarto(ddlQuartoE.SelectedValue);
                     if (dta.Rows.Count > 0)
@@ -837,10 +838,10 @@ namespace SistemaHotel
                     //string msg = "<script> alert('Data não permitida!'); </script>";
                     //Response.Write(msg);
                     Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                        Data não permitida!
+                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
-                                  Data não permitida!
                                     </div>");
 
                 }

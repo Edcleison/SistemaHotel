@@ -149,6 +149,7 @@ namespace SistemaHotel.Controller
                                                             ,C.DATA_ENTRADA
                                                             ,C.DATA_SAIDA
                                                             ,C.ID_QUARTO
+                                                            ,Q.NUMERO_QUARTO
                                                             ,Q.DESCRICAO_QUARTO
                                                             FROM [DBO].[USUARIO] U
                                                             INNER JOIN CLIENTE C ON(C.COD_RESERVA = U.LOGIN)
