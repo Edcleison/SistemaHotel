@@ -59,7 +59,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="container">
-                                <div class="jumbotron">
+                              <%--  <div class="jumbotron">--%>
                                     <div class="row">
                                         <div class="col-2">
                                             <span>Login: </span>
@@ -85,7 +85,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <%--</div>--%>
                         </div>
                         <div class="modal-footer">
                             <asp:LinkButton ID="btlogar" runat="server" class="btn btn-dark" OnClick="btlogar_Click">Logar</asp:LinkButton>

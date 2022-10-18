@@ -6,13 +6,10 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Login</title>
-    <link href="CSS/bootstrap.min.css" rel="stylesheet" />
-    <script src="Scripts/bootstrap.min.js"></script>
-<%--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">--%>  
-<%--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>--%>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <link href="CSS/Estilos.css" rel="stylesheet" />
-    <script src="Scripts/jquery-3.3.1.slim.min.js"></script>
-<%--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>--%>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
             setTimeout(function () {
@@ -62,35 +59,33 @@
                         </div>
                         <div class="modal-body">
                             <div class="container">
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Digite seu Login: </span>
+                              <%--  <div class="jumbotron">--%>
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <span>Login: </span>
+                                        </div>
+                                        <div class="col-8">
+                                            <asp:TextBox ID="txtLogin" class="form-control" runat="server"></asp:TextBox>
+                                        </div>
                                     </div>
-                                    <div class="col-sm">
-                                        <asp:TextBox ID="txtLogin" runat="server"></asp:TextBox>
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <span>&nbsp;</span>
+                                        </div>
                                     </div>
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <span>Senha: </span>
+                                        </div>
+                                        <div class="col-sm">
+                                            <asp:TextBox type="password" class="form-control" runat="server" ID="txtSenha"></asp:TextBox>
+                                        </div>
+                                        <div class="col-2">
+                                            <img id="olho" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Digite sua Senha: </span>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:TextBox type="password" runat="server" ID="txtSenha"></asp:TextBox>
-                                    </div>
-                                    <div class="col-sm">
-                                        <img id="olho" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
-                                    </div>
-                                </div>
-
-                            </div>
+                            <%--</div>--%>
                         </div>
                         <div class="modal-footer">
                             <asp:LinkButton ID="btlogar" runat="server" class="btn btn-dark" OnClick="btlogar_Click">Logar</asp:LinkButton>
@@ -127,48 +122,47 @@
                         </div>
                         <div class="modal-body">
                             <div class="container">
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Digite seu Login: </span>
-                                    </div>
+                                <div class="jumbotron">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <span>Login: </span>
+                                        </div>
 
-                                    <div class="col-sm">
-                                        <asp:TextBox type="text" runat="server" ID="txtLoginR"></asp:TextBox>
+                                        <div class="col-6">
+                                            <asp:TextBox type="text" class="form-control" runat="server" ID="txtLoginR"></asp:TextBox>
+                                        </div> 
                                     </div>
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <span>&nbsp;</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <span>Nova Senha: </span>
+                                        </div>
+                                        <div class="col-6">
+                                            <asp:TextBox type="password" class="form-control" runat="server" ID="txtNovaSenha"></asp:TextBox>
+                                        </div>
+                                        <div class="col-2">
+                                            <img id="olhoR" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Digite a Nova Senha: </span>
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <span>&nbsp;</span>
+                                        </div>
                                     </div>
-                                    <div class="col-sm">
-                                        <asp:TextBox type="password" runat="server" ID="txtNovaSenha"></asp:TextBox>
-                                    </div>
-                                    <div class="col-sm">
-                                        <img id="olhoR" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>&nbsp;</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <span>Confirme a senha: </span>
-                                    </div>
-                                    <div class="col-sm">
-                                        <asp:TextBox type="password" runat="server" ID="txtConfirmaSenha"></asp:TextBox>
-                                    </div>
-                                    <div class="col-sm">
-                                        <img id="olhoDois" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <span>Confirmar Nova Senha: </span>
+                                        </div>
+                                        <div class="col-6">
+                                            <asp:TextBox type="password" runat="server" class="form-control" ID="txtConfirmaSenha"></asp:TextBox>
+                                        </div>
+                                        <div class="col-2">
+                                            <img id="olhoDois" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -212,7 +206,7 @@
                 </div>
             </div>
         </div>
-    </form>   
+    </form>
 </body>
 </html>
 

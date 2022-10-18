@@ -2,30 +2,19 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <script src="Scripts/jquery-3.5.1.js"></script>
-<%--    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>--%>
-    <script src="Scripts/jquery.dataTables.min.js"></script>
-<%--    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>--%>
-    <script src="Scripts/dataTables.buttons.min.js"></script>
-<%--    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>--%>
-    <script src="Scripts/jszip.min.js"></script>
-<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>--%>
-    <script src="Scripts/pdfmake.min.js"></script>
-<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>--%>
-    <script src="Scripts/vfs_fonts.js"></script>
-<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>--%>
-    <script src="Scripts/buttons.html5.min.js"></script>
-<%--    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>--%>
-    <script src="Scripts/buttons.print.min.js"></script>
-<%--    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>--%>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 
-    <link href="CSS/jquery.dataTables.min.css" rel="stylesheet" />
-<%--    <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />--%>
-    <link href="CSS/buttons.dataTables.min.css" rel="stylesheet" />
-<%--    <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet" />--%>
+    <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet" />
 
-    <script src="Scripts/jquery-3.3.1.slim.min.js"></script>
-<%--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>--%>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
             setTimeout(function () {
@@ -113,80 +102,83 @@
                 </div>
                 <div class="modal-body">
                     <div class="container">
-                        <div class="row">
-                            <div class="col-sm">
-                                <span>Id Produto: </span>
+                        <div class="jumbotron">
+                            <div class="row">
+                                <div class="col-2">
+                                    <span>Id Produto: </span>
+                                </div>
+                                <div class="col-4">
+                                    <asp:TextBox runat="server" ID="txtIdProd" class="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                                <div class="col-2">
+                                    <img id="imgProd" alt="" class="rounded" src="" runat="server" />
+                                </div>
                             </div>
-                            <div class="col-sm">
-                                <asp:TextBox runat="server" ID="txtIdProd" Enabled="false"></asp:TextBox>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
                             </div>
-                            <div class="col-sm">
-                                <img id="imgProd" alt="" src="" runat="server" />
+                            <div class="row">
+                                <div class="col-2">
+                                    <span>Nome: </span>
+                                </div>
+                                <div class="col-4">
+                                    <asp:TextBox runat="server" ID="txtNomeProd" class="form-control" Enabled="false"></asp:TextBox>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <span>&nbsp;</span>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <span>Nome: </span>
+                            <div class="row">
+                                <div class="col-2">
+                                    <span>Descricao: </span>
+                                </div>
+                                <div class="col-4">
+                                    <asp:TextBox runat="server" ID="txtDescricao" class="form-control" Rows="5" Columns="40" TextMode="MultiLine" Enabled="false"></asp:TextBox>
+                                </div>
                             </div>
-                            <div class="col-sm">
-                                <asp:TextBox runat="server" ID="txtNomeProd" Enabled="false"></asp:TextBox>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <span>&nbsp;</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <span>Descricao: </span>
-                            </div>
-                            <div class="col-sm">
-                                <asp:TextBox runat="server" ID="txtDescricao" Rows="5" Columns="40" TextMode="MultiLine" Enabled="false"></asp:TextBox>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <span>&nbsp;</span>
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-sm">
-                                <span>Preço: </span>
+                            <div class="row">
+                                <div class="col-2">
+                                    <span>Preço: </span>
+                                </div>
+                                <div class="col-4">
+                                    <asp:TextBox runat="server" class="form-control" ID="txtPreco" onkeyup="formataValor(this,event);" Enabled="false"></asp:TextBox>
+                                </div>
+                                <div class="col-6">
+                                    <p>
+                                        <b>Seu desconto é de: </b>
+                                        <asp:Label ID="lblDesconto"  ForeColor="red" runat="server"></asp:Label>
+                                    </p>
+                                </div>
                             </div>
-                            <div class="col-sm">
-                                <asp:TextBox runat="server" ID="txtPreco" onkeyup="formataValor(this,event);" Enabled="false"></asp:TextBox>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <p><b>Seu desconto é de: </b>
-                                    <asp:Label ID="lblDesconto" ForeColor="red" runat="server"></asp:Label></p>
+                            <div class="row">
+                                <div class="col-2">
+                                    <span>Quantidade: </span>
+                                </div>
+                                <div class="col-4">
+                                    <asp:TextBox ID="txtQuantidade" TextMode="Number" class="form-control" runat="server" min="0" max="20" step="1" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span>&nbsp;</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <span>&nbsp;</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <span>Quantidade: </span>
-                            </div>
-                            <div class="col-sm">
-                                <asp:TextBox ID="txtQuantidade" TextMode="Number" runat="server" min="0" max="20" step="1" Enabled="false"></asp:TextBox>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <span>&nbsp;</span>
-                            </div>
-                        </div>
-
                     </div>
                     <div class="modal-footer">
                         <asp:LinkButton ID="lnkPedido" class="btn btn-dark" OnClick="lnkPedido_Click" runat="server"><i class="fa fa-check" aria-hidden="true"></i> Fechar Pedido</asp:LinkButton>
