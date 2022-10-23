@@ -104,11 +104,7 @@
                 dom: 'Bfrtip',
                 buttons: [
 
-                ],
-                
-
-
-
+                ],               
             });
         })
     </script>

@@ -30,7 +30,6 @@
             });
         });
     </script>
-
     <script type="text/javascript">
         $(document).ready(function () {
             $('#example').DataTable({
@@ -53,11 +52,7 @@
                 "info": false,
                 dom: 'Bfrtip',
                 buttons: [
-
                 ]
-
-
-
             });
         })
     </script>
@@ -74,7 +69,6 @@
                         "last": ">>",
                     },
                     "search": "Pesquisar:",
-
                 },
                 "scrollY": '150px',
                 "scrollCollapse": true,
@@ -86,9 +80,6 @@
                 buttons: [
 
                 ]
-
-
-
             });
         })
     </script>
