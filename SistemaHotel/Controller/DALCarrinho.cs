@@ -139,11 +139,11 @@ namespace SistemaHotel.Controller
             {
 
 
-                using (SqlCommand cmd = new SqlCommand(@"SELECT COUNT(ID_PRODUTO) AS QTDE FROM CARRINHO", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT COUNT(ID_PRODUTO) AS QTDE FROM CARRINHO WHERE ID_CLIENTE=@ID_CLIENTE", connection))
                 {
                     try
                     {
-                        cmd.Parameters.AddWithValue("@COD_RESERVA", idCliente);
+                        cmd.Parameters.AddWithValue("@ID_CLIENTE", idCliente);
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
                         adp = new SqlDataAdapter(cmd);
