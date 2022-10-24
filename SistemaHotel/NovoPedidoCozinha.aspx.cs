@@ -62,10 +62,12 @@ namespace SistemaHotel
                             carregarTabelaCarrinho(Session["login"].ToString());
                         }
                         carregarTabela();
-                        lblQtdeCarrinho.Text = DALCarrinho.buscarCarrinhoQtde(Session["login"].ToString());
+                        Cliente cli = DALCliente.buscarClienteReserva(Session["login"].ToString());
+                        lblQtdeCarrinho.Text = DALCarrinho.buscarCarrinhoQtde(cli.IdCliente);
                     }
                     carregarTabela();
-                    lblQtdeCarrinho.Text = DALCarrinho.buscarCarrinhoQtde(Session["login"].ToString());
+                    Cliente cliente = DALCliente.buscarClienteReserva(Session["login"].ToString());
+                    lblQtdeCarrinho.Text = DALCarrinho.buscarCarrinhoQtde(cliente.IdCliente);
                 }
                 else
                 {
@@ -159,7 +161,7 @@ namespace SistemaHotel
                             </div>");
 
             }
-            
+
 
         }
 

@@ -226,7 +226,7 @@
 
                                 <div class="row">
                                     <div class="col-2">
-                                        <span>Descricao: </span>
+                                        <span>Descrição: </span>
                                     </div>
                                     <div class="col-4">
                                         <asp:TextBox runat="server" ID="txtDescricao" class="form-control" Rows="5" Columns="40" TextMode="MultiLine"></asp:TextBox>
@@ -329,7 +329,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-2">
-                                        <span>Descricao: </span>
+                                        <span>Descrição: </span>
                                     </div>
                                     <div class="col-4">
                                         <asp:TextBox runat="server" ID="txtDescricaoE" class="form-control" Rows="5" Columns="40" TextMode="MultiLine"></asp:TextBox></td>

@@ -199,7 +199,7 @@ namespace SistemaHotel
             Usuario usu = DALUsuario.buscaUsuarioLogin(login);
 
             //varifica se todos os campos estão preenchidos
-            if (!string.IsNullOrEmpty(txtLogin.Text) && !string.IsNullOrEmpty(txtNovaSenha.Text) && !string.IsNullOrEmpty(txtConfirmaSenha.Text) && ddlPerfilNovoUsu.SelectedValue != "0")
+            if (!string.IsNullOrEmpty(txtLogin.Text) && !string.IsNullOrEmpty(txtNovaSenha.Text) && !string.IsNullOrEmpty(txtConfirmaSenha.Text) && ddlPerfilNovoUsu.SelectedValue != "SELECIONE")
             {
                 if (txtNovaSenha.Text.Length >= 8 && txtConfirmaSenha.Text.Length >= 8)
                 {
@@ -305,7 +305,7 @@ namespace SistemaHotel
                 //string msg = "<script> alert('Preencha todos os campos!'); </script>";
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                 Senhas Diferentes!
+                               Preencha todos os campos!
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
@@ -695,15 +695,15 @@ namespace SistemaHotel
                     }
                     catch (Exception erro)
                     {
-
-                        //string msg1 = $"<script> alert('{erro.Message}'); </script>";
-                        //Response.Write(msg1);
-                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                        {erro.Message}
+                           //string msg1 = $"<script> alert('{erro.Message}'); </script>";
+                            //Response.Write(msg1);
+                            Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                        por favor, inserir um horário
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
-                                            </div>");
+                                            </div>");                       
+
                     }
 
                 }
@@ -855,7 +855,7 @@ namespace SistemaHotel
                     //string msg1 = $"<script> alert('{erro.Message}'); </script>";
                     //Response.Write(msg1);
                     Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                        {erro.Message}
+                     por favor, inserir um horário
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>

@@ -54,9 +54,9 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                     </div>
-                    <div class="col-sm">
+                   <%-- <div class="col-sm">
                         <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/IMAGENS/SISTEMA/logo_hotel.jpeg" CssClass="linkhome" ImageAlign="Middle" />
-                    </div>
+                    </div>--%>
                 </nav>
                 <div class="collapse" id="navbarToggleExternalContent">
                     <div class="bg-dark p-4">

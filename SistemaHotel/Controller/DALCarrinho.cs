@@ -131,7 +131,7 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-        public static string buscarCarrinhoQtde(string codReserva)
+        public static string buscarCarrinhoQtde(int idCliente)
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
@@ -143,7 +143,7 @@ namespace SistemaHotel.Controller
                 {
                     try
                     {
-                        cmd.Parameters.AddWithValue("@COD_RESERVA", codReserva);
+                        cmd.Parameters.AddWithValue("@COD_RESERVA", idCliente);
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
                         adp = new SqlDataAdapter(cmd);

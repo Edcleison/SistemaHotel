@@ -67,16 +67,16 @@ namespace SistemaHotel
                             DALProduto.ativarProduto(rParametro);
                             //string msg = $"<script> alert('Produto Ativado! ID:{rParametro}'); </script>";
                             //Response.Write(msg);
-                            Response.Write($@"<div class='alert alert-sucess alert-dismissible fade show' role='alert'>
-                                           Produto Ativado! ID: {rParametro}
-                                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                        Produto Ativado!  ID {prod.IdProduto}
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
 
                         }
                         carregaDdl();
-                    }                 
+                    }
                 }
                 else
                 {
@@ -319,7 +319,14 @@ namespace SistemaHotel
 
             catch (Exception erro)
             {
-                string msg1 = $"<script> alert('{erro.Message}'); </script>";
+                //msg = "<script> alert('Preencha todos os campos!'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                      Preencha todos os campos!
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                            </div>");
 
             }
         }
