@@ -131,7 +131,7 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
-        public static string buscarCarrinhoQtde(int idCliente)
+        public static string buscarCarrinhoQtde(string CodReserva)
         {
             DataTable dta = new DataTable();
             SqlDataAdapter adp;
@@ -139,11 +139,13 @@ namespace SistemaHotel.Controller
             {
 
 
-                using (SqlCommand cmd = new SqlCommand(@"SELECT COUNT(ID_PRODUTO) AS QTDE FROM CARRINHO WHERE ID_CLIENTE=@ID_CLIENTE", connection))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT COUNT(ID_PRODUTO) AS QTDE FROM CARRINHO car
+                                                        INNER JOIN CLIENTE CLI ON (CAR.ID_CLIENTE=CLI.ID_CLIENTE)
+                                                        WHERE CLI.COD_RESERVA =@COD_RESERVA", connection))
                 {
                     try
                     {
-                        cmd.Parameters.AddWithValue("@ID_CLIENTE", idCliente);
+                        cmd.Parameters.AddWithValue("@COD_RESERVA", CodReserva);
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
                         adp = new SqlDataAdapter(cmd);

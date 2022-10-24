@@ -1,19 +1,19 @@
 ﻿<%@ Page Title="Pedido - Cozinha" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="NovoPedidoCozinha.aspx.cs" Inherits="SistemaHotel.NovoPedidoCozinha" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    
+   <script src="Scripts/jquery-3.5.1.js"></script>
+    <script src="Scripts/jquery.dataTables.min.js"></script>
+    <script src="Scripts/dataTables.buttons.min.js"></script>
+    <script src="Scripts/jszip.min.js"></script>
+    <script src="Scripts/pdfmake.min.js"></script>
+    <script src="Scripts/vfs_fonts.js"></script>
+    <script src="Scripts/buttons.html5.min.js"></script>
+    <script src="Scripts/buttons.print.min.js"></script>
 
-    <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet" />
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <link href="CSS/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="CSS/buttons.dataTables.min.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.3.1.slim.min.js" ></script>
     <script>
         $(document).ready(function () {
             setTimeout(function () {
@@ -257,11 +257,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <asp:LinkButton ID="lnkLimparCarrinho" class="btn btn-dark" OnClick="lnkLimparCarrinho_Click" runat="server"><i class="fa fa-trash" aria-hidden="true"></i> Excluir Carrinho</asp:LinkButton><i class="bi bi-cart"></i>
-                    <asp:LinkButton ID="lnkFechaPedido" class="btn btn-dark" OnClick="lnkFechaPedido_Click" runat="server"><i class="fa fa-check" aria-hidden="true"></i> Fechar Pedido</asp:LinkButton>
 
+                    <div class="modal-footer">
+                        <asp:LinkButton ID="lnkLimparCarrinho" class="btn btn-dark" OnClick="lnkLimparCarrinho_Click" runat="server"><i class="fa fa-trash" aria-hidden="true"></i> Excluir Carrinho</asp:LinkButton><i class="bi bi-cart"></i>
+                        <asp:LinkButton ID="lnkFechaPedido" class="btn btn-dark" OnClick="lnkFechaPedido_Click" runat="server"><i class="fa fa-check" aria-hidden="true"></i> Fechar Pedido</asp:LinkButton>
+                    </div>
                 </div>
             </div>
         </div>

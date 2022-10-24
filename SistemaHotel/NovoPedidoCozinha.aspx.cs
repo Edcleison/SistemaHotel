@@ -61,13 +61,11 @@ namespace SistemaHotel
                             mdCarr.Visible = true;
                             carregarTabelaCarrinho(Session["login"].ToString());
                         }
-                        carregarTabela();
-                        Cliente cli = DALCliente.buscarClienteReserva(Session["login"].ToString());
-                        lblQtdeCarrinho.Text = DALCarrinho.buscarCarrinhoQtde(cli.IdCliente);
+                        carregarTabela();                      
+                        lblQtdeCarrinho.Text = DALCarrinho.buscarCarrinhoQtde(Session["login"].ToString());
                     }
                     carregarTabela();
-                    Cliente cliente = DALCliente.buscarClienteReserva(Session["login"].ToString());
-                    lblQtdeCarrinho.Text = DALCarrinho.buscarCarrinhoQtde(cliente.IdCliente);
+                    lblQtdeCarrinho.Text = DALCarrinho.buscarCarrinhoQtde(Session["login"].ToString());
                 }
                 else
                 {
