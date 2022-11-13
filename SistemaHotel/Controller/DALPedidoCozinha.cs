@@ -134,6 +134,42 @@ namespace SistemaHotel.Controller
             }
         }
 
+        public static void alterarStatusAtendimentoAdm(PedidoCozinha ped)
+        {
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"UPDATE [DBO].[PEDIDO]
+                                                       SET [ID_STATUS_PED] = @ID_STATUS_PED
+                                                          ,[ID_ADM] = @ID_ADM                                                        
+                                                          ,[DATA_FINALIZACAO] = @DATA_FINALIZACAO
+                                                     WHERE ID_PEDIDO = @ID_PEDIDO", connection))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("ID_STATUS_PED", ped.IdStatus);
+                        cmd.Parameters.AddWithValue("ID_ADM", ped.IdAdm);
+                        cmd.Parameters.AddWithValue("DATA_FINALIZACAO", ped.DataFinalizacao);
+                        cmd.Parameters.AddWithValue("ID_PEDIDO", ped.IdPedido);
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        cmd.Connection.Close();
+                    }
+
+
+                }
+
+            }
+        }
+
+
+
 
 
 

@@ -103,7 +103,9 @@ namespace SistemaHotel.Controller
 
                 using (SqlCommand cmd = new SqlCommand(@"SELECT C.ID_PRODUTO 
                                                         ,COUNT(C.[ID_PRODUTO]) AS QTDE
-                                                        FROM CARRINHO C,PRODUTO P, CLIENTE CL
+                                                        FROM CARRINHO C
+                                                        INNER JOIN PRODUTO P ON P.ID_PRODUTO =C.ID_PRODUTO
+                                                        INNER JOIN CLIENTE CL ON CL.ID_CLIENTE = C.ID_CLIENTE
                                                         WHERE CL.COD_RESERVA=@COD_RESERVA AND P.ID_TIPO_PROD = @ID_TIPO_PROD
                                                         GROUP BY C.ID_PRODUTO", connection))
                 {

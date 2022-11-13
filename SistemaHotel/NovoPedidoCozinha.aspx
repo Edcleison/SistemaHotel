@@ -253,7 +253,7 @@
                             </div>
                             <hr />
                             <div class="col-sm">
-                                <span>Sub Total:<asp:Label ID="lblTotal" runat="server" autoPostback="true"></asp:Label></span>
+                                <span style="font-size:large;font-weight:bold;">Sub Total: <asp:Label ID="lblTotal" runat="server" autoPostback="true" Font-Bold="True" Font-Size="Large"></asp:Label></span>
                             </div>
                         </div>
                     </div>

@@ -538,6 +538,7 @@ namespace SistemaHotel
         {
             mdBack.Visible = true;
             mdCli.Visible = true;
+            txtInputDataIni.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
             carregaDdlQuarto();
 
         }
@@ -560,7 +561,7 @@ namespace SistemaHotel
                         DateTime dataIni = DateTime.ParseExact(txtInputDataIni.Text, "dd/MM/yyyy HH:mm", null);
                         DateTime dataFim = DateTime.ParseExact(txtInputDataFim.Text, "dd/MM/yyyy HH:mm", null);
 
-                        if (dataIni > DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
+                        if (DateTime.ParseExact(dataIni.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null) >= DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null))
                         {
                             if (dataIni < dataFim)
                             {

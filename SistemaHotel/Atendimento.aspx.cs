@@ -45,8 +45,8 @@ namespace SistemaHotel
                                     pedCoz.IdStatus = 2;
                                     pedCoz.DataFinalizacao = DateTime.Now;
                                     pedCoz.IdAdm = adm.IdAdm;
-                                    pedCoz.IdFuncionario = ped.IdPedido;
-                                    DALPedidoCozinha.alterarStatusAtendimentoFuncionario(pedCoz);
+                                    pedCoz.IdPedido= ped.IdPedido;
+                                    DALPedidoCozinha.alterarStatusAtendimentoAdm(pedCoz);
 
                                 }
                                 else
@@ -55,7 +55,7 @@ namespace SistemaHotel
                                     pedFrig.IdStatus = 2;
                                     pedFrig.DataFinalizacao = DateTime.Now;
                                     pedFrig.IdAdm = adm.IdAdm;
-                                    pedFrig.IdAdm = ped.IdPedido;
+                                    pedFrig.IdPedido = ped.IdPedido;
                                     DALPedidoFrigobar.alterarStatusAtendimentoAdm(pedFrig);
                                 }
 
@@ -77,7 +77,7 @@ namespace SistemaHotel
                                 pedCoz.IdStatus = 2;
                                 pedCoz.DataFinalizacao = DateTime.Now;
                                 pedCoz.IdFuncionario = fun.IdFuncionario;
-                                pedCoz.IdFuncionario = ped.IdPedido;
+                                pedCoz.IdPedido = ped.IdPedido;
                                 DALPedidoCozinha.alterarStatusAtendimentoFuncionario(pedCoz);
                                 //msg = $"<script> alert('Atendimento Finalizado: ID do Funcionário {fun.IdFuncionario}'); </script>";
                                 //Response.Write(msg);

@@ -497,14 +497,14 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-2">
-                                        <span>Data de Início:</span>
+                                        <span>Check-in:</span>
                                     </div>
                                     <div class="col-4">
                                         <asp:TextBox ID="txtInputDataIni" class="form-control" runat="server"></asp:TextBox>
 
                                     </div>
                                     <div class="col-2">
-                                        <span>Data Fim:</span>
+                                        <span>Check-out:</span>
                                     </div>
                                     <div class="col-4">
                                         <asp:TextBox ID="txtInputDataFim" class="form-control" runat="server"></asp:TextBox>
@@ -550,7 +550,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" visible="false" style="border-radius: 10px;">
                     <div class="modal-header">
-                        <h5 class="modal-title">Editar Data de Saída:</h5>
+                        <h5 class="modal-title">Editar Data de Check-out</h5>
                         <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </asp:LinkButton>
@@ -599,7 +599,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-2">
-                                        <span>Nova Data de Saída:</span>
+                                        <span>Nova Data de Check-out:</span>
                                     </div>
                                     <div class="col-4">
                                         <asp:TextBox ID="txtInputDataFimE" class="form-control" runat="server"></asp:TextBox>
