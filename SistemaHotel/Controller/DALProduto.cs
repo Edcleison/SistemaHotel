@@ -171,13 +171,18 @@ namespace SistemaHotel.Controller
 
         public static void alterarProduto(Produto prod)
         {
+            string sFoto = "";
+            if (prod.FotoProduto !="")
+            {
+                sFoto = ",[FOTO_PROD] = @FOTO_PROD";
+            }
             using (SqlConnection connection = new SqlConnection(cnn))
             {
-                using (SqlCommand cmd = new SqlCommand(@"UPDATE [DBO].[PRODUTO]
+                using (SqlCommand cmd = new SqlCommand($@"UPDATE [DBO].[PRODUTO]
                                                        SET [PRECO_UNI] =@PRECO_UNI
                                                           ,[DESCRICAO_PROD] = @DESCRICAO_PROD
                                                           ,[NOME_PROD] = @NOME_PROD
-                                                          ,[FOTO_PROD] = @FOTO_PROD                                                         
+                                                          {sFoto}                                                        
                                                           ,[ID_TIPO_PROD] = @ID_TIPO_PROD                                                         
                                                           WHERE  ID_PRODUTO = @ID_PRODUTO", connection))
                 {
@@ -188,7 +193,10 @@ namespace SistemaHotel.Controller
                         cmd.Parameters.AddWithValue("DESCRICAO_PROD", prod.DescricaoProduto);
                         cmd.Parameters.AddWithValue("NOME_PROD", prod.NomeProduto);
                         cmd.Parameters.AddWithValue("ID_TIPO_PROD", prod.TipoProduto);
-                        cmd.Parameters.AddWithValue("FOTO_PROD", prod.FotoProduto);
+                        if (prod.FotoProduto !="")
+                        {
+                            cmd.Parameters.AddWithValue("FOTO_PROD", prod.FotoProduto);
+                        }
                         cmd.Parameters.AddWithValue("ID_PRODUTO", prod.IdProduto);
                         cmd.ExecuteNonQuery();
                     }

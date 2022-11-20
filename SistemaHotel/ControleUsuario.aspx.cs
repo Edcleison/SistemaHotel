@@ -398,7 +398,7 @@ namespace SistemaHotel
             Usuario usuR = DALUsuario.buscarUsuarioId(int.Parse(txtIdUsuarioE.Text));
             PerfilUsuario perfUsuR = DALPerfilUsuario.buscarUsuarioPerfil(usuR.IdUsuario);
             //varifica se todos os campos estão preenchidos
-            if (!string.IsNullOrEmpty(txtLoginE.Text) && ddlPerfilUsuE.SelectedValue != "SELECIONE")
+            if (!string.IsNullOrEmpty(txtLoginE.Text) && !string.IsNullOrEmpty(txtNomeE.Text) && !string.IsNullOrEmpty(txtSobrenomeE.Text) && ddlPerfilUsuE.SelectedValue != "SELECIONE")
             {
 
                 Usuario usu = new Usuario();
@@ -545,9 +545,7 @@ namespace SistemaHotel
 
         protected void salvarNovoCliente_Click(object sender, EventArgs e)
         {
-
-
-            if (!string.IsNullOrEmpty(txtCodReserva.Text) && !string.IsNullOrEmpty(txtInputDataIni.Text) && !string.IsNullOrEmpty(txtInputDataFim.Text) && ddlQuarto.SelectedValue != "SELECIONE")
+            if (!string.IsNullOrEmpty(txtNomeCliente.Text) && !string.IsNullOrEmpty(txtSobrenomeCliente.Text) && !string.IsNullOrEmpty(txtCodReserva.Text) && !string.IsNullOrEmpty(txtInputDataIni.Text) && !string.IsNullOrEmpty(txtInputDataFim.Text) && ddlQuarto.SelectedValue != "SELECIONE")
             {
                 string sCdReserva = txtCodReserva.Text;
                 Usuario usu = new Usuario();
@@ -699,7 +697,7 @@ namespace SistemaHotel
                            //string msg1 = $"<script> alert('{erro.Message}'); </script>";
                             //Response.Write(msg1);
                             Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                        por favor, inserir um horário
+                        por favor, inseira um horário
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>

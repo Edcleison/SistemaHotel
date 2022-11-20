@@ -288,9 +288,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <asp:LinkButton ID="lnkSalvarProduto" class="btn btn-dark" OnClick="lnkSalvarProduto_Click" runat="server">Salvar</asp:LinkButton>
+                        <div class="modal-footer">
+                            <asp:LinkButton ID="lnkSalvarProduto" class="btn btn-dark" OnClick="lnkSalvarProduto_Click" runat="server">Salvar</asp:LinkButton>
+                        </div>
                     </div>
                 </div>
             </div>

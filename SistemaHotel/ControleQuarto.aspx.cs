@@ -15,7 +15,7 @@ using SistemaHotel.Utils;
 namespace SistemaHotel
 {
     public partial class ControleQuarto : System.Web.UI.Page
-    {      
+    {
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -28,15 +28,36 @@ namespace SistemaHotel
                         if (Request.QueryString["QUARTO_D"] != null)
                         {
                             rParametro = int.Parse(Criptografia.Decrypt(Request.QueryString["QUARTO_D"]));
-                            DALQuarto.inativarQuarto(rParametro);
-                            //string msg = $"<script> alert('Quarto Inativado: ID {rParametro}'); </script>";
-                            //Response.Write(msg);
-                            Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                            DataTable dta = DALCliente.verificarOcupacaoQuarto(Criptografia.Decrypt(Request.QueryString["QUARTO_D"]));
+                            if (dta.Rows.Count > 0)
+                            {
+                                if (DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) < DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
+                                {
+                                    DALQuarto.inativarQuarto(rParametro);
+                                    //string msg = $"<script> alert('Quarto Inativado: ID {rParametro}'); </script>";
+                                    //Response.Write(msg);
+                                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                      Quarto Inativado: ID {rParametro}
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
+                                }
+                                else
+                                {
+                                    //string msg = $"<script> alert('Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null)} ID Cliente: {dta.Rows[0]["ID_CLIENTE"]}'); </script>";
+                                    //Response.Write(msg);
+                                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                  Quarto {dta.Rows[0]["DESCRICAO_QUARTO"]} Ocupado até: {DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null)} ID Cliente: {dta.Rows[0]["ID_CLIENTE"]}
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                            </div>");
+                                }
+
+                            }
+
+
                         }
                         if (Request.QueryString["QUARTO_E"] != null)
                         {
@@ -196,7 +217,7 @@ namespace SistemaHotel
                 //string msg = "<script> alert('Preencha o Quarto!'); </script>";
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                  Preencha o Quarto!
+                                  Preencha todas as informações do Quarto!
                                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
@@ -229,7 +250,7 @@ namespace SistemaHotel
                 //string msg = "<script> alert('Preencha o Quarto!'); </script>";
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                               Preencha o Quarto!
+                                Preencha todas as informações do Quarto!
                                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>

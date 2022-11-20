@@ -154,10 +154,8 @@ namespace SistemaHotel
         }
         protected void lnkSalvarProduto_Click(object sender, EventArgs e)
         {
-            try
+            if (fuProduto.PostedFile.FileName != "" && txtNome.Text != "" && txtDescricao.Text != "" && txtPreco.Text != "" && ddlTipoProdS.SelectedValue != "SELECIONE")
             {
-                string msg = "";
-                string caminho = Server.MapPath(@"IMAGENS_PRODUTOS\");
                 Produto prod = new Produto();
                 prod.NomeProduto = txtNome.Text;
                 prod.DescricaoProduto = txtDescricao.Text;
@@ -167,43 +165,28 @@ namespace SistemaHotel
                 //faz o upload da foto e salva o nome no obj
                 try
                 {
-                    if (fuProduto.PostedFile.FileName != "" && txtNome.Text != "" && txtDescricao.Text != "" && txtPreco.Text != "" && ddlTipoProdS.SelectedValue != "SELECIONE")
-                    {
-                        prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
-                        string img = caminho + prod.FotoProduto;
-                        fuProduto.PostedFile.SaveAs(img);
-                        DALProduto.inserirProduto(prod);
+                    string msg = "";
+                    string caminho = Server.MapPath(@"IMAGENS_PRODUTOS\");
+                    prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
+                    string img = caminho + prod.FotoProduto;
+                    fuProduto.PostedFile.SaveAs(img);
+                    DALProduto.inserirProduto(prod);
 
-                        //msg = $"<script> alert('Produto Inserido!'); </script>";
-                        //Response.Write(msg);
-                        Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                    //msg = $"<script> alert('Produto Inserido!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                           Produto Inserido!
                                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
-                        limparCampos();
-
-                    }
-                    else
-                    {
-                        //msg = "<script> alert('Preencha todos os campos!'); </script>";
-                        //Response.Write(msg);
-                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                         Preencha todos os campos!
-                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                                <span aria-hidden='true'>&times;</span>
-                                              </button>
-                                            </div>");
-                    }
-
                 }
-                catch (Exception)
+                catch (Exception erro)
                 {
                     //msg = "<script> alert('Preencha todos os campos!'); </script>";
                     //Response.Write(msg);
                     Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                         Preencha todos os campos!
+                                        {erro.Message}
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
@@ -211,15 +194,19 @@ namespace SistemaHotel
 
 
                 }
-
-
+                limparCampos();
             }
-
-            catch (Exception erro)
+            else
             {
-                string msg1 = $"<script> alert('{erro.Message}'); </script>";
+                //msg = "<script> alert('Preencha todos os campos!'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                         Preencha todos os campos!
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                            </div>");
             }
-
         }
 
 
