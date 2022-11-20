@@ -107,7 +107,7 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ID</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>NOME</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>DESCRIÇÃO</center></th>");
-            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>PRECO</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>PREÇO</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>FOTO</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>STATUS</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>EDITAR</center></th>");
@@ -253,10 +253,9 @@ namespace SistemaHotel
         protected void lnkSalvarProdutoE_Click(object sender, EventArgs e)
         {
 
-            try
+            if (txtNomeE.Text != "" && txtDescricaoE.Text != "" && txtPrecoE.Text != "" && ddlTipoProdE.SelectedValue != "SELECIONE")
             {
-                string msg = "";
-                string caminho = Server.MapPath(@"IMAGENS_PRODUTOS\");
+
                 Produto prod = new Produto();
                 prod.NomeProduto = txtNomeE.Text;
                 prod.DescricaoProduto = txtDescricaoE.Text;
@@ -264,9 +263,12 @@ namespace SistemaHotel
                 prod.IdProduto = Convert.ToInt32(txtIdProdutoE.Text);
                 prod.TipoProduto = Convert.ToInt32(ddlTipoProdE.SelectedValue);
                 //alterar
-                try
+
+                if (fuProdE.PostedFile.FileName.ToString() != "")
                 {
-                    if (fuProdE.PostedFile.FileName != "" && txtNomeE.Text != "" && txtDescricaoE.Text != "" && txtPrecoE.Text != "" && ddlTipoProdE.SelectedValue != "SELECIONE")
+                    string msg = "";
+                    string caminho = Server.MapPath(@"IMAGENS_PRODUTOS\");
+                    try
                     {
                         //verificar se existe foto existe e deletar
                         Produto rProd = DALProduto.buscarProdutoId(prod.IdProduto);
@@ -277,59 +279,50 @@ namespace SistemaHotel
                         prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProdE.PostedFile.FileName;
                         string img = caminho + prod.FotoProduto;
                         fuProdE.PostedFile.SaveAs(img);
-                        DALProduto.alterarProduto(prod);
-                        //msg = $"<script> alert('O Produto Alterado:  ID {prod.IdProduto}'); </script>";
+
+                    }
+                    catch (Exception erro)
+                    {
+
+                        //msg = "<script> alert('Preencha todos os campos!'); </script>";
                         //Response.Write(msg);
-                        Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                     {erro.Message}
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                            </div>");
+                    }
+
+
+                }
+                DALProduto.alterarProduto(prod);
+                //msg = $"<script> alert('O Produto Alterado:  ID {prod.IdProduto}'); </script>";
+                //Response.Write(msg);
+                Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                        O Produto Alterado:  ID {prod.IdProduto}
                                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
-                        limparCampos();
-                    }
-                    else
-                    {
-                        //msg = "<script> alert('Preencha todos os campos!'); </script>";
-                        //Response.Write(msg);
-                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                      Preencha todos os campos!
-                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                                <span aria-hidden='true'>&times;</span>
-                                              </button>
-                                            </div>");
-
-                    }
-                }
-                catch (Exception)
-                {
-
-                    //msg = "<script> alert('Preencha todos os campos!'); </script>";
-                    //Response.Write(msg);
-                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                      Preencha todos os campos!
-                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                                <span aria-hidden='true'>&times;</span>
-                                              </button>
-                                            </div>");
-                }
-
-
+                limparCampos();
             }
-
-            catch (Exception erro)
+            else
             {
                 //msg = "<script> alert('Preencha todos os campos!'); </script>";
                 //Response.Write(msg);
                 Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                      Preencha todos os campos!
-                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                         Preencha todos os campos!
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
-
             }
+
+
         }
+
+
         private void carregaDdl()
         {
             DataTable dta = new DataTable();

@@ -67,7 +67,7 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>PREÇO</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>QTDE</center></th>");
             sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>STATUS</center></th>");
-            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DATA FIM</center></th>");
+            sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>DATA ATENDIMENTO</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
             sb.AppendLine("<tbody>");

@@ -2,7 +2,16 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <script src="Scripts/jquery-3.5.1.js"></script>
+    <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css" />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+    <%--<script src="Scripts/jquery-3.5.1.js"></script>
     <script src="Scripts/jquery.dataTables.min.js"></script>
     <script src="Scripts/dataTables.buttons.min.js"></script>
     <script src="Scripts/jszip.min.js"></script>
@@ -12,8 +21,8 @@
     <script src="Scripts/buttons.print.min.js"></script>
 
     <link href="CSS/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="CSS/buttons.dataTables.min.css" rel="stylesheet" />
-    <script src="Scripts/jquery-3.3.1.slim.min.js" ></script>
+    <link href="CSS/buttons.dataTables.min.css" rel="stylesheet" />--%>
+    <script src="Scripts/jquery-3.3.1.slim.min.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -306,7 +315,7 @@
                                         <p>*Senha mínimo 8 caracteres</p>
                                     </div>
                                     <div class="col-2">
-                                        <img id="olhoNovoUsu" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
+                                        <%--                                        <img id="olhoNovoUsu" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />--%>
                                     </div>
                                 </div>
 
@@ -323,7 +332,7 @@
                                         <asp:TextBox type="password" class="form-control" runat="server" ID="txtConfirmaSenha"> </asp:TextBox>
                                     </div>
                                     <div class="col-2">
-                                        <img id="olhoConfirmaNovoUsu" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />
+                                        <%--                                        <img id="olhoConfirmaNovoUsu" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" />--%>
                                     </div>
                                 </div>
                             </div>
@@ -497,14 +506,14 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-2">
-                                        <span>Data de Início:</span>
+                                        <span>Check-in:</span>
                                     </div>
                                     <div class="col-4">
                                         <asp:TextBox ID="txtInputDataIni" class="form-control" runat="server"></asp:TextBox>
 
                                     </div>
                                     <div class="col-2">
-                                        <span>Data Fim:</span>
+                                        <span>Check-out:</span>
                                     </div>
                                     <div class="col-4">
                                         <asp:TextBox ID="txtInputDataFim" class="form-control" runat="server"></asp:TextBox>
@@ -550,7 +559,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" visible="false" style="border-radius: 10px;">
                     <div class="modal-header">
-                        <h5 class="modal-title">Editar Data de Saída:</h5>
+                        <h5 class="modal-title">Editar Data de Check-out</h5>
                         <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </asp:LinkButton>
@@ -599,7 +608,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-2">
-                                        <span>Nova Data de Saída:</span>
+                                        <span>Nova Data de Check-out:</span>
                                     </div>
                                     <div class="col-4">
                                         <asp:TextBox ID="txtInputDataFimE" class="form-control" runat="server"></asp:TextBox>

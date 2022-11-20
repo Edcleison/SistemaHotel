@@ -39,7 +39,7 @@ namespace SistemaHotel
                             int totalDias = (int)dataSaida.Subtract(DateTime.Today).TotalDays;
                             decimal valorTotal = (prod.PrecoUnitario * totalDias) - totalDias;
                             txtPreco.Text = valorTotal.ToString();
-                            lblDesconto.Text = totalDias.ToString()+",00";
+                            lblDesconto.Text = totalDias.ToString() + ",00";
                             imgProd.Src = $@"IMAGENS_PRODUTOS\{prod.FotoProduto}";
                             if (prod.TipoProduto == 1)
                             {
@@ -119,34 +119,51 @@ namespace SistemaHotel
             Cliente cli = DALCliente.buscarClienteReserva(Session["login"].ToString());
             if (cli.FlagPedidoFrigobar == 'S')
             {
-                //campos relacionados ao novo pedido
-                PedidoFrigobar ped = new PedidoFrigobar();
-                ped.IdCliente = cli.IdCliente;
-                ped.IdStatus = 1;
-                ped.DataAbertura = DateTime.Now;
-                
-                ped.ValorTotal = decimal.Parse(txtPreco.Text);
-                DALPedidoFrigobar.inserirPedidoFrigobar(ped);
-                //busca o pedido pelo id_cliente e Data_Abertura
-                ped = DALPedidoFrigobar.buscarPedidoFrigobarIdClienteData(ped.IdCliente, ped.DataAbertura);
-                //campos relacionados ao Item_Pedido
-                ItemPedido itemPed = new ItemPedido();
-                itemPed.IdPedido = ped.IdPedido;
-                itemPed.IdProduto = int.Parse(txtIdProd.Text);
-                itemPed.IdCliente = cli.IdCliente;
-                itemPed.Quantidade = int.Parse(txtQuantidade.Text);
-                DALItemPedido.inserirItemPedido(itemPed);
-                //string msg = $"<script> alert('Pedido Realizado: ID: {ped.IdPedido}'); </script>";
-                //Response.Write(msg);
-                Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                if (txtQuantidade.Text != "0")
+                {
+
+                    //campos relacionados ao novo pedido
+                    PedidoFrigobar ped = new PedidoFrigobar();
+                    ped.IdCliente = cli.IdCliente;
+                    ped.IdStatus = 1;
+                    ped.DataAbertura = DateTime.Now;
+
+                    ped.ValorTotal = decimal.Parse(txtPreco.Text);
+                    DALPedidoFrigobar.inserirPedidoFrigobar(ped);
+                    //busca o pedido pelo id_cliente e Data_Abertura
+                    ped = DALPedidoFrigobar.buscarPedidoFrigobarIdClienteData(ped.IdCliente, ped.DataAbertura);
+                    //campos relacionados ao Item_Pedido
+                    ItemPedido itemPed = new ItemPedido();
+                    itemPed.IdPedido = ped.IdPedido;
+                    itemPed.IdProduto = int.Parse(txtIdProd.Text);
+                    itemPed.IdCliente = cli.IdCliente;
+                    itemPed.Quantidade = int.Parse(txtQuantidade.Text);
+                    DALItemPedido.inserirItemPedido(itemPed);
+                    //string msg = $"<script> alert('Pedido Realizado: ID: {ped.IdPedido}'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                            Pedido Realizado: ID: {ped.IdPedido}
                             <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                             </div>");
-                //inativa a flag para o cliente fazer pedidos de frigobar
-                cli.FlagPedidoFrigobar = 'N';
-                DALCliente.alterarCliente(cli);
+                    //inativa a flag para o cliente fazer pedidos de frigobar
+                    cli.FlagPedidoFrigobar = 'N';
+                    DALCliente.alterarCliente(cli);
+
+                }
+                else
+                {
+                    //string msg = $"<script> alert('Carrinho Vazio!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                        Selecione a quantidade!
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                            </div>");
+
+                }
 
             }
             else
@@ -160,6 +177,7 @@ namespace SistemaHotel
                                               </button>
                             </div>");
             }
+
 
 
         }

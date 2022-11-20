@@ -212,7 +212,10 @@ namespace SistemaHotel
 
         protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            carregarTabela(ddlTipo.SelectedValue.ToString());
+            if (ddlTipo.SelectedValue !="SELECIONE")
+            {
+                carregarTabela(ddlTipo.SelectedValue.ToString());
+            }    
         }
 
         private void carregaDdl()

@@ -95,7 +95,7 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ID</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>NOME</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>DESCRIÇÃO</center></th>");
-            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>PRECO UN</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>PREÇO UN</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>FOTO</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ADICIONAR</center></th>");
             sb.AppendLine("</tr>");
@@ -124,7 +124,7 @@ namespace SistemaHotel
         }
         protected void lnkPedido_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtQuantidade.Text))
+            if (!string.IsNullOrEmpty(txtQuantidade.Text) && txtQuantidade.Text !="0")
             {
                 Carrinho car = new Carrinho();
                 Cliente cli = DALCliente.buscarClienteReserva(Session["login"].ToString());
@@ -236,7 +236,7 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ID</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>NOME</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>DESCRIÇÃO</center></th>");
-            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>PRECO</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>PREÇO</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>REMOVER</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
