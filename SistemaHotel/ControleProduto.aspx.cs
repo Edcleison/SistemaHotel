@@ -55,6 +55,7 @@ namespace SistemaHotel
                             txtPrecoE.Text = prod.PrecoUnitario.ToString();
                             ddlTipoProdE.SelectedValue = prod.TipoProduto.ToString();
                             txtIdProdutoE.Text = rParametro.ToString();
+                            //fuProdE.PostedFile.FileName = prod.FotoProduto;
                             carregaDdlEditarTipoProduto();
                             mdBack.Visible = true;
                             mdProdE.Visible = true;
@@ -156,36 +157,43 @@ namespace SistemaHotel
         {
             if (fuProduto.PostedFile.FileName != "" && txtNome.Text != "" && txtDescricao.Text != "" && txtPreco.Text != "" && ddlTipoProdS.SelectedValue != "SELECIONE")
             {
-                Produto prod = new Produto();
-                prod.NomeProduto = txtNome.Text;
-                prod.DescricaoProduto = txtDescricao.Text;
-                prod.PrecoUnitario = decimal.Parse(txtPreco.Text.Replace(",", "."));
-                prod.TipoProduto = Convert.ToInt32(ddlTipoProdS.SelectedValue);
-                prod.StatusProd = 'S';
-                //faz o upload da foto e salva o nome no obj
-                try
-                {
-                    string msg = "";
-                    string caminho = Server.MapPath(@"IMAGENS_PRODUTOS\");
-                    prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
-                    string img = caminho + prod.FotoProduto;
-                    fuProduto.PostedFile.SaveAs(img);
-                    DALProduto.inserirProduto(prod);
 
-                    //msg = $"<script> alert('Produto Inserido!'); </script>";
-                    //Response.Write(msg);
-                    Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                if (int.Parse(txtPreco.Text.Replace(",","")) > 0)
+                {
+                    Produto prod = new Produto();
+                    prod.NomeProduto = txtNome.Text;
+                    prod.DescricaoProduto = txtDescricao.Text;
+                    //prod.PrecoUnitario = decimal.Parse(txtPreco.Text.Replace(",", "."));
+                    prod.PrecoUnitario = decimal.Parse(txtPreco.Text);
+                    prod.TipoProduto = Convert.ToInt32(ddlTipoProdS.SelectedValue);
+                    prod.StatusProd = 'S';
+                    //faz o upload da foto e salva o nome no obj
+
+                    if (fuProduto.PostedFile.FileName.EndsWith(".png") || fuProdE.PostedFile.FileName.EndsWith(".bitmap") || fuProduto.PostedFile.FileName.EndsWith(".jpg") || fuProduto.PostedFile.FileName.EndsWith(".jpeg"))
+                    {
+                        try
+                        {
+                            string msg = "";
+                            string caminho = Server.MapPath(@"IMAGENS_PRODUTOS\");
+                            prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
+                            string img = caminho + prod.FotoProduto;
+                            fuProduto.PostedFile.SaveAs(img);
+                            DALProduto.inserirProduto(prod);
+
+                            //msg = $"<script> alert('Produto Inserido!'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                           Produto Inserido!
                                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
-                }
-                catch (Exception erro)
-                {
-                    //msg = "<script> alert('Preencha todos os campos!'); </script>";
-                    //Response.Write(msg);
-                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                        }
+                        catch (Exception erro)
+                        {
+                            //msg = "<script> alert('Preencha todos os campos!'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                         {erro.Message}
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
@@ -193,8 +201,33 @@ namespace SistemaHotel
                                             </div>");
 
 
+                        }
+                        limparCampos();
+                    }
+                    else
+                    {
+                        //msg = "<script> alert('Preencha todos os campos!'); </script>";
+                        //Response.Write(msg);
+                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                       Só é permitido imagem com extensão: |.png |.bitmap |.jpg |.jpeg !
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button
+                                            </div>");
+                    }
                 }
-                limparCampos();
+                else
+                {
+                    //msg = "<script> alert('Preencha todos os campos!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                         Não é permitido preço negativo!
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                            </div>");
+
+                }
             }
             else
             {
@@ -242,57 +275,91 @@ namespace SistemaHotel
 
             if (txtNomeE.Text != "" && txtDescricaoE.Text != "" && txtPrecoE.Text != "" && ddlTipoProdE.SelectedValue != "SELECIONE")
             {
-
-                Produto prod = new Produto();
-                prod.NomeProduto = txtNomeE.Text;
-                prod.DescricaoProduto = txtDescricaoE.Text;
-                prod.PrecoUnitario = decimal.Parse(txtPrecoE.Text.Replace(",", "."));
-                prod.IdProduto = Convert.ToInt32(txtIdProdutoE.Text);
-                prod.TipoProduto = Convert.ToInt32(ddlTipoProdE.SelectedValue);
-                //alterar
-
-                if (fuProdE.PostedFile.FileName.ToString() != "")
+                if (int.Parse(txtPreco.Text) > 0)
                 {
-                    string msg = "";
-                    string caminho = Server.MapPath(@"IMAGENS_PRODUTOS\");
-                    try
+                    Produto prod = new Produto();
+                    prod.NomeProduto = txtNomeE.Text;
+                    prod.DescricaoProduto = txtDescricaoE.Text;
+                    prod.PrecoUnitario = decimal.Parse(txtPrecoE.Text.Replace(",", "."));
+                    prod.IdProduto = Convert.ToInt32(txtIdProdutoE.Text);
+                    prod.TipoProduto = Convert.ToInt32(ddlTipoProdE.SelectedValue);
+                    //alterar
+
+                    if (fuProdE.PostedFile.FileName != "")
                     {
-                        //verificar se existe foto existe e deletar
-                        Produto rProd = DALProduto.buscarProdutoId(prod.IdProduto);
-                        if (rProd.FotoProduto != "")
+                        if (fuProdE.PostedFile.FileName.EndsWith(".png")|| fuProdE.PostedFile.FileName.EndsWith(".jpg") || fuProdE.PostedFile.FileName.EndsWith(".bitmap") || fuProdE.PostedFile.FileName.EndsWith(".jpeg"))
                         {
-                            File.Delete(caminho + rProd.FotoProduto);
-                        }
-                        prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProdE.PostedFile.FileName;
-                        string img = caminho + prod.FotoProduto;
-                        fuProdE.PostedFile.SaveAs(img);
+                            string msg = "";
+                            string caminho = Server.MapPath(@"IMAGENS_PRODUTOS\");
+                            try
+                            {
+                                //verificar se existe foto existe e deletar
+                                Produto rProd = DALProduto.buscarProdutoId(prod.IdProduto);
+                                if (rProd.FotoProduto != "")
+                                {
+                                    File.Delete(caminho + rProd.FotoProduto);
+                                }
+                                prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProdE.PostedFile.FileName;
+                                string img = caminho + prod.FotoProduto;
+                                fuProdE.PostedFile.SaveAs(img);
 
-                    }
-                    catch (Exception erro)
-                    {
+                            }
+                            catch (Exception erro)
+                            {
 
-                        //msg = "<script> alert('Preencha todos os campos!'); </script>";
-                        //Response.Write(msg);
-                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                //msg = "<script> alert('Preencha todos os campos!'); </script>";
+                                //Response.Write(msg);
+                                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                      {erro.Message}
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
-                    }
+                            }
 
 
-                }
-                DALProduto.alterarProduto(prod);
-                //msg = $"<script> alert('O Produto Alterado:  ID {prod.IdProduto}'); </script>";
-                //Response.Write(msg);
-                Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                        }
+                        DALProduto.alterarProduto(prod);
+                        //msg = $"<script> alert('O Produto Alterado:  ID {prod.IdProduto}'); </script>";
+                        //Response.Write(msg);
+                        Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                        O Produto Alterado:  ID {prod.IdProduto}
                                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
-                limparCampos();
+                        limparCampos();
+
+                    }
+                    else
+                    {
+                        //msg = "<script> alert('Preencha todos os campos!'); </script>";
+                        //Response.Write(msg);
+                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                       Só é permitido imagem com extensão: |.png |.bitmap |.jpg |.jpeg !
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                            </div>");
+
+                    }
+                        
+
+                }
+                else
+                {
+                    //msg = "<script> alert('Preencha todos os campos!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                        Não é permitido preço negativo!
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                            </div>");
+
+                }
+
+                
             }
             else
             {

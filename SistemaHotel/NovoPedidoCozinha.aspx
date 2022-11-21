@@ -2,15 +2,17 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css" />
+   <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css" rel="stylesheet" />
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+
     <%--<script src="Scripts/jquery-3.5.1.js"></script>
     <script src="Scripts/jquery.dataTables.min.js"></script>
     <script src="Scripts/dataTables.buttons.min.js"></script>
@@ -44,6 +46,7 @@
             $('#example').DataTable({
                 "language": {
                     "emptyTable": "Não foram encontrados registros",
+                    "zeroRecords": "Não foram encontrados resultados",
                     "paginate": {
                         "previous": "<",
                         "next": ">",
@@ -70,7 +73,8 @@
         $(document).ready(function () {
             $('#exampleCarr').DataTable({
                 "language": {
-                    "emptyTable": "Não foram encontrados registros",
+                    "emptyTable": "Não foram encontrados registros",                 
+                    "zeroRecords": "Nenhum registro encontrado",
                     "paginate": {
                         "previous": "<",
                         "next": ">",
@@ -130,7 +134,7 @@
         </div>
         <div class="col-sm">
             <asp:LinkButton ID="lnkCarrinho" class="btn btn-dark" OnClick="lnkCarrinho_Click" runat="server">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>Carrinho de Compras
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Carrinho de Compras
                 <asp:Label runat="server" ID="lblQtdeCarrinho" class="badge badge-danger"></asp:Label>
             </asp:LinkButton>
         </div>
@@ -238,7 +242,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" visible="false" style="border-radius: 10px;">
                 <div class="modal-header">
-                    <h5 class="modal-title">Resumo Carrinho:</h5>
+                    <h5 class="modal-title">Resumo Carrinho</h5>
                     <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                     </asp:LinkButton>

@@ -199,7 +199,7 @@ namespace SistemaHotel
             Usuario usu = DALUsuario.buscaUsuarioLogin(login);
 
             //varifica se todos os campos estão preenchidos
-            if (!string.IsNullOrEmpty(txtLogin.Text) && !string.IsNullOrEmpty(txtNovaSenha.Text) && !string.IsNullOrEmpty(txtConfirmaSenha.Text) && ddlPerfilNovoUsu.SelectedValue != "SELECIONE")
+            if (!string.IsNullOrEmpty(txtNome.Text) && !string.IsNullOrEmpty(txtSobreNome.Text)&& !string.IsNullOrEmpty(txtLogin.Text) && !string.IsNullOrEmpty(txtNovaSenha.Text) && !string.IsNullOrEmpty(txtConfirmaSenha.Text) && ddlPerfilNovoUsu.SelectedValue != "SELECIONE")
             {
                 if (txtNovaSenha.Text.Length >= 8 && txtConfirmaSenha.Text.Length >= 8)
                 {
@@ -398,7 +398,7 @@ namespace SistemaHotel
             Usuario usuR = DALUsuario.buscarUsuarioId(int.Parse(txtIdUsuarioE.Text));
             PerfilUsuario perfUsuR = DALPerfilUsuario.buscarUsuarioPerfil(usuR.IdUsuario);
             //varifica se todos os campos estão preenchidos
-            if (!string.IsNullOrEmpty(txtLoginE.Text) && !string.IsNullOrEmpty(txtNomeE.Text) && !string.IsNullOrEmpty(txtSobrenomeE.Text) && ddlPerfilUsuE.SelectedValue != "SELECIONE")
+            if (!string.IsNullOrEmpty(txtNomeE.Text) && !string.IsNullOrEmpty(txtSobrenomeE.Text) && !string.IsNullOrEmpty(txtLoginE.Text) && !string.IsNullOrEmpty(txtNomeE.Text) && !string.IsNullOrEmpty(txtSobrenomeE.Text) && ddlPerfilUsuE.SelectedValue != "SELECIONE")
             {
 
                 Usuario usu = new Usuario();
@@ -697,7 +697,7 @@ namespace SistemaHotel
                            //string msg1 = $"<script> alert('{erro.Message}'); </script>";
                             //Response.Write(msg1);
                             Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                        por favor, inseira um horário
+                        Por favor, insira um horário!
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>

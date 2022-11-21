@@ -95,7 +95,7 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ID</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>NOME</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>DESCRIÇÃO</center></th>");
-            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>PREÇO UN</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>PREÇO UNIT.</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>FOTO</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ADICIONAR</center></th>");
             sb.AppendLine("</tr>");
@@ -126,25 +126,42 @@ namespace SistemaHotel
         {
             if (!string.IsNullOrEmpty(txtQuantidade.Text) && txtQuantidade.Text !="0")
             {
-                Carrinho car = new Carrinho();
-                Cliente cli = DALCliente.buscarClienteReserva(Session["login"].ToString());
-
-                car.IdProduto = int.Parse(txtIdProd.Text);
-                car.IdCliente = cli.IdCliente;
-
-                for (int i = 1; i <= int.Parse(txtQuantidade.Text); i++)
+                if (int.Parse(txtQuantidade.Text) > 0)
                 {
-                    DALCarrinho.inserirCarrinho(car);
-                }
+                    Carrinho car = new Carrinho();
+                    Cliente cli = DALCliente.buscarClienteReserva(Session["login"].ToString());
 
-                //string msg = $"<script> alert('Produto(s) Adicionado(s): ID: {car.IdProduto} Qtde: {txtQuantidade.Text}'); </script>";
-                //Response.Write(msg);
-                Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                    car.IdProduto = int.Parse(txtIdProd.Text);
+                    car.IdCliente = cli.IdCliente;
+
+                    for (int i = 1; i <= int.Parse(txtQuantidade.Text); i++)
+                    {
+                        DALCarrinho.inserirCarrinho(car);
+                    }
+
+                    //string msg = $"<script> alert('Produto(s) Adicionado(s): ID: {car.IdProduto} Qtde: {txtQuantidade.Text}'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                             Produto(s) Adicionado(s): ID: {car.IdProduto} Qtde: {txtQuantidade.Text} 
                             <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                             </div>");
+
+                }
+                else
+                {
+                    //string msg = $"<script> alert('Carrinho Vazio!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                        A quantidade não pode ser negativa!
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                            </div>");
+
+                }
+
 
             }
             else
@@ -236,7 +253,7 @@ namespace SistemaHotel
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>ID</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>NOME</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>DESCRIÇÃO</center></th>");
-            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>PREÇO</center></th>");
+            sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>PREÇO UNIT.</center></th>");
             sb.AppendLine("<th style='font-size:15px; letter-spacing: 1px;'><center>REMOVER</center></th>");
             sb.AppendLine("</tr>");
             sb.AppendLine("</thead>");
