@@ -1,18 +1,15 @@
 ﻿using SistemaHotel.Model;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Web;
+using System.Globalization;
+
 
 namespace SistemaHotel.Controller
 {
     public static class DALProduto
     {
+         
         static string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
 
         public static void inserirProduto(Produto prod)
@@ -34,7 +31,7 @@ namespace SistemaHotel.Controller
                     {
                         cmd.Connection.Open();
                         cmd.Parameters.AddWithValue("ID_TIPO_PROD", prod.TipoProduto);
-                        cmd.Parameters.AddWithValue("PRECO_UNI", prod.PrecoUnitario);
+                        cmd.Parameters.AddWithValue("PRECO_UNI", Convert.ToDecimal(prod.PrecoUnitario,new CultureInfo("en-US")));
                         cmd.Parameters.AddWithValue("DESCRICAO_PROD", prod.DescricaoProduto);
                         cmd.Parameters.AddWithValue("NOME_PROD", prod.NomeProduto);
                         cmd.Parameters.AddWithValue("FOTO_PROD", prod.FotoProduto);
@@ -169,6 +166,52 @@ namespace SistemaHotel.Controller
             return prod;
         }
 
+        public static Produto buscarProdutoNome(string NomeProduto)
+        {
+            Produto prod = new Produto();
+
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+
+                using (SqlCommand cmd = new SqlCommand(@"SELECT TOP 1 [ID_PRODUTO]
+                                                            ,[ID_TIPO_PROD]
+                                                            ,[PRECO_UNI]
+                                                            ,[DESCRICAO_PROD]
+                                                            ,[NOME_PROD]
+                                                            ,[FOTO_PROD]
+                                                        FROM [DBO].[PRODUTO] WHERE NOME_PROD = @NOME_PROD", connection))
+                {
+                    try
+                    {
+
+                        cmd.Parameters.AddWithValue("@NOME_PROD", NomeProduto);
+                        cmd.Connection.Open();
+                        SqlDataReader registro = cmd.ExecuteReader();
+                        if (registro.HasRows)
+                        {
+                            registro.Read();
+                            prod.IdProduto = Convert.ToInt32(registro["ID_PRODUTO"]);
+                            prod.TipoProduto = Convert.ToInt32(registro["ID_TIPO_PROD"]);
+                            prod.PrecoUnitario = Convert.ToDecimal(registro["PRECO_UNI"]);
+                            prod.DescricaoProduto = Convert.ToString(registro["DESCRICAO_PROD"]);
+                            prod.NomeProduto = Convert.ToString(registro["NOME_PROD"]);
+                            prod.FotoProduto = Convert.ToString(registro["FOTO_PROD"]);
+                        }
+                    }
+
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        cmd.Connection.Close();
+                    }
+                }
+            }
+            return prod;
+        }
+
         public static void alterarProduto(Produto prod)
         {
             string sFoto = "";
@@ -189,7 +232,7 @@ namespace SistemaHotel.Controller
                     try
                     {
                         cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("PRECO_UNI", prod.PrecoUnitario);
+                        cmd.Parameters.AddWithValue("PRECO_UNI", Convert.ToDecimal(prod.PrecoUnitario, new CultureInfo("en-US")));
                         cmd.Parameters.AddWithValue("DESCRICAO_PROD", prod.DescricaoProduto);
                         cmd.Parameters.AddWithValue("NOME_PROD", prod.NomeProduto);
                         cmd.Parameters.AddWithValue("ID_TIPO_PROD", prod.TipoProduto);

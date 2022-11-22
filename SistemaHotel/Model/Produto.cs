@@ -10,7 +10,7 @@ namespace SistemaHotel.Model
     {
         public int IdProduto { get; set; }
         public int TipoProduto { get; set; }
-        public decimal PrecoUnitario { get; set; }
+        public decimal  PrecoUnitario { get; set; }
         public string DescricaoProduto { get; set; }
         public string NomeProduto { get; set; }     
         public string FotoProduto { get; set; }

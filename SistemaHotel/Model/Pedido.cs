@@ -21,8 +21,8 @@ namespace SistemaHotel.Model
             IdStatus = 0;         
             IdCliente = 0;           
             ValorTotal = 0;
-            DataAbertura = DateTime.Now;
-            DataFinalizacao = DateTime.Now;
+            DataAbertura = DateTime.UtcNow;
+            DataFinalizacao = DateTime.UtcNow;
         }
     }
 

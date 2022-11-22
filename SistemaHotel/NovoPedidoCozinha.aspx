@@ -97,7 +97,6 @@
         })
     </script>
 
-
     <style>
         .modal-dialog modal-lg {
             min-width: 90%;
@@ -280,4 +279,6 @@
             </div>
         </div>
     </div>
+    <asp:HiddenField ID="dataHora" runat="server" />
 </asp:Content>
+

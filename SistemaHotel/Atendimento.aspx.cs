@@ -2,21 +2,18 @@
 using SistemaHotel.Model;
 using SistemaHotel.Utils;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
+using System.Globalization;
 using System.Text;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+
 
 namespace SistemaHotel
 {
     public partial class Atendimento : System.Web.UI.Page
     {
-
+        CultureInfo ptBR = new CultureInfo("pt-BR");
         string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -43,7 +40,7 @@ namespace SistemaHotel
                                 {
                                     PedidoCozinha pedCoz = new PedidoCozinha();
                                     pedCoz.IdStatus = 2;
-                                    pedCoz.DataFinalizacao = DateTime.Now;
+                                    pedCoz.DataFinalizacao = DateTime.UtcNow;
                                     pedCoz.IdAdm = adm.IdAdm;
                                     pedCoz.IdPedido= ped.IdPedido;
                                     DALPedidoCozinha.alterarStatusAtendimentoAdm(pedCoz);
@@ -53,7 +50,7 @@ namespace SistemaHotel
                                 {
                                     PedidoFrigobar pedFrig = new PedidoFrigobar();
                                     pedFrig.IdStatus = 2;
-                                    pedFrig.DataFinalizacao = DateTime.Now;
+                                    pedFrig.DataFinalizacao = DateTime.UtcNow;
                                     pedFrig.IdAdm = adm.IdAdm;
                                     pedFrig.IdPedido = ped.IdPedido;
                                     DALPedidoFrigobar.alterarStatusAtendimentoAdm(pedFrig);
@@ -75,7 +72,7 @@ namespace SistemaHotel
                                 Funcionario fun = DALFuncionario.buscarFuncionarioIdUsuario(usu.IdUsuario);
                                 PedidoCozinha pedCoz = new PedidoCozinha();
                                 pedCoz.IdStatus = 2;
-                                pedCoz.DataFinalizacao = DateTime.Now;
+                                pedCoz.DataFinalizacao = DateTime.UtcNow;
                                 pedCoz.IdFuncionario = fun.IdFuncionario;
                                 pedCoz.IdPedido = ped.IdPedido;
                                 DALPedidoCozinha.alterarStatusAtendimentoFuncionario(pedCoz);
@@ -100,7 +97,7 @@ namespace SistemaHotel
                                 Administracao adm = DALAdministracao.buscarAdmIdUsuario(usu.IdUsuario);
                                 PedidoFrigobar pedFrig = new PedidoFrigobar();
                                 pedFrig.IdStatus = 3;
-                                pedFrig.DataFinalizacao = DateTime.Now;
+                                pedFrig.DataFinalizacao = DateTime.UtcNow;
                                 pedFrig.IdAdm = adm.IdAdm;
                                 pedFrig.IdPedido = ped.IdPedido;
                                 DALPedidoFrigobar.alterarStatusAtendimentoAdm(pedFrig);
@@ -119,7 +116,7 @@ namespace SistemaHotel
                                 Funcionario fun = DALFuncionario.buscarFuncionarioIdUsuario(usu.IdUsuario);
                                 PedidoCozinha pedCoz = new PedidoCozinha();
                                 pedCoz.IdStatus = 3;
-                                pedCoz.DataFinalizacao = DateTime.Now;
+                                pedCoz.DataFinalizacao = DateTime.UtcNow;
                                 pedCoz.IdFuncionario = fun.IdFuncionario;
                                 pedCoz.IdPedido = ped.IdPedido;
                                 DALPedidoCozinha.alterarStatusAtendimentoFuncionario(pedCoz);

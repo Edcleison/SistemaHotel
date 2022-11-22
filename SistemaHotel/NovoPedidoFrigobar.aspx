@@ -71,7 +71,7 @@
             });
         })
     </script>
-
+   
 
     <style>
         .modal-dialog modal-lg {
@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="col-6">
                                     <p>
-                                        <b>Seu desconto é de: </b>
+                                        style='font-size:15px;Seu desconto é de: </b>
                                         <asp:Label ID="lblDesconto" ForeColor="red" runat="server"></asp:Label>
                                     </p>
                                 </div>

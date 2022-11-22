@@ -95,6 +95,43 @@ namespace SistemaHotel.Controller
             return dta;
         }
 
+        public static Quarto buscarQuartoNumero(string Numero)
+        {
+            Quarto qua = new Quarto();
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand(@"SELECT TOP 1 [ID_QUARTO]
+                                                          ,[NUMERO_QUARTO]
+                                                          ,[DESCRICAO_QUARTO]
+                                                      FROM [DBO].[QUARTO]
+                                                       WHERE NUMERO_QUARTO = @NUMERO_QUARTO", connection))
+                    {
+                        cmd.Parameters.AddWithValue("NUMERO_QUARTO", Numero);
+                        cmd.Connection.Open();
+                        SqlDataReader registro = cmd.ExecuteReader();
+                        if (registro.HasRows)
+                        {
+                            registro.Read();
+                            qua.IdQuarto = Convert.ToInt32(registro["ID_QUARTO"]);
+                            qua.NumeroQuarto = Convert.ToString(registro["NUMERO_QUARTO"]);
+                            qua.DescricaoQuarto = Convert.ToString(registro["DESCRICAO_QUARTO"]);
+                        }
+                    }
+                }
+                catch (Exception erro)
+                {
+                    throw new Exception(erro.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return qua;
+        }
+
         public static Quarto buscarQuartoId(int Id)
         {
             Quarto qua = new Quarto();
@@ -115,7 +152,7 @@ namespace SistemaHotel.Controller
                         {
                             registro.Read();
                             qua.IdQuarto = Convert.ToInt32(registro["ID_QUARTO"]);
-                            qua.NumeroQuarto = Convert.ToInt32(registro["NUMERO_QUARTO"]);
+                            qua.NumeroQuarto = Convert.ToString(registro["NUMERO_QUARTO"]);
                             qua.DescricaoQuarto = Convert.ToString(registro["DESCRICAO_QUARTO"]);
                         }
                     }

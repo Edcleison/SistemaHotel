@@ -25,8 +25,8 @@ namespace SistemaHotel.Model
             this.NomeCliente = "";
             this.SobreNomeCliente = "";
            
-            this.DataEntrada = DateTime.Now;
-            this.DataSaida = DateTime.Now;
+            this.DataEntrada = DateTime.UtcNow;
+            this.DataSaida = DateTime.UtcNow;
             this.FlagPedidoFrigobar = 'P';
         }
 

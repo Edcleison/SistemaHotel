@@ -1,21 +1,17 @@
 ﻿using SistemaHotel.Model;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using SistemaHotel.Controller;
 using SistemaHotel.Utils;
-
+using System.Globalization;
 
 namespace SistemaHotel
 {
     public partial class ControleQuarto : System.Web.UI.Page
     {
+        CultureInfo ptBR = new CultureInfo("pt-BR");
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -31,7 +27,7 @@ namespace SistemaHotel
                             DataTable dta = DALCliente.verificarOcupacaoQuarto(Criptografia.Decrypt(Request.QueryString["QUARTO_D"]));
                             if (dta.Rows.Count > 0)
                             {
-                                if (DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) < DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
+                                if (DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) < DateTime.ParseExact(DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
                                 {
                                     DALQuarto.inativarQuarto(rParametro);
                                     //string msg = $"<script> alert('Quarto Inativado: ID {rParametro}'); </script>";
@@ -197,20 +193,36 @@ namespace SistemaHotel
         {
             if (!string.IsNullOrEmpty(txtNumeroQuarto.Text) && !string.IsNullOrEmpty(txtDescricaoQuarto.Text))
             {
-                Quarto qua = new Quarto();
-                qua.NumeroQuarto = int.Parse(txtNumeroQuarto.Text);
-                qua.DescricaoQuarto = txtDescricaoQuarto.Text;
-                qua.StatusQuar = 'S';
-                DALQuarto.inserirQuarto(qua);
-                //string msg = "<script> alert('Quarto inserido!'); </script>";
-                //Response.Write(msg);
-                Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                Quarto rQua = DALQuarto.buscarQuartoNumero(txtNumeroQuarto.Text);
+                if (rQua.NumeroQuarto == "")
+                {
+                    Quarto qua = new Quarto();
+                    qua.NumeroQuarto = txtNumeroQuarto.Text;
+                    qua.DescricaoQuarto = txtDescricaoQuarto.Text;
+                    qua.StatusQuar = 'S';
+                    DALQuarto.inserirQuarto(qua);
+                    //string msg = "<script> alert('Quarto inserido!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                     Quarto inserido!
                                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
+                }
+                else
+                {
+                    //string msg = "<script> alert('Preencha o Quarto!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                 Quarto número {rQua.NumeroQuarto} já existe!
+                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                            </div>");
 
+                }
+               
             }
             else
             {
@@ -231,7 +243,7 @@ namespace SistemaHotel
             if (!string.IsNullOrEmpty(txtNumeroQuartoE.Text) & !string.IsNullOrEmpty(txtDescricaoQuartoE.Text))
             {
                 Quarto qua = new Quarto();
-                qua.NumeroQuarto = int.Parse(txtNumeroQuartoE.Text);
+                qua.NumeroQuarto = txtNumeroQuartoE.Text;
                 qua.DescricaoQuarto = txtDescricaoQuartoE.Text;
                 qua.IdQuarto = int.Parse(txtIdQuartoE.Text);
                 DALQuarto.alterarQuarto(qua);

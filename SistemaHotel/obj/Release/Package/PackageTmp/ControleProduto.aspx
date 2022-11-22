@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Produtos" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="ControleProduto.aspx.cs" Inherits="SistemaHotel.ControleProduto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
- <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css" rel="stylesheet" />
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -116,8 +116,8 @@
     <script src="Scripts/autoNumeric.js"></script>
     <script>
         jQuery(function ($) {
-            $('#ContentPlaceHolder1_txtPreco').autoNumeric({ aSep: '.', aDec: ',', vMax: '999999999.99' });
-            $('#ContentPlaceHolder1_txtPrecoE').autoNumeric({ aSep: '.', aDec: ',', vMax: '999999999.99' });
+            $('#ContentPlaceHolder1_txtPreco').autoNumeric({ aSep: '.', aDec: ',', vMax: '9999999.99' });
+            $('#ContentPlaceHolder1_txtPrecoE').autoNumeric({ aSep: '.', aDec: ',', vMax: '9999999.99' });
         });
     </script>
 
@@ -289,6 +289,11 @@
                                         <span>&nbsp;</span>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <b><span style="font-size: 15px;">Extenções Permitidas: | .png | .bitmap | .jpg | .jpeg</span></b>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -384,6 +389,16 @@
                                 <div class="row">
                                     <div class="col-4">
                                         <asp:FileUpload ID="fuProdE" class="custom-file" runat="server" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <span>&nbsp;</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <b><span style="font-size: 15px;">Extenções Permitidas: | .png | .bitmap | .jpg | .jpeg</span></b>
                                     </div>
                                 </div>
                             </div>

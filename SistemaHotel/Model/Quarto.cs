@@ -9,14 +9,14 @@ namespace SistemaHotel.Model
     {
 
         public int IdQuarto { get; set; }
-        public int NumeroQuarto { get; set; }
+        public string NumeroQuarto { get; set; }
         public string DescricaoQuarto { get; set; }
         public char StatusQuar { get; set; }
 
         public Quarto()
         {
             this.IdQuarto = 0;
-            this.NumeroQuarto = 0;
+            this.NumeroQuarto = "";
             this.DescricaoQuarto = "";
             this.StatusQuar = 'P';
         }

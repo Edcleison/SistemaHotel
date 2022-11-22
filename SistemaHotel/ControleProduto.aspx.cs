@@ -1,21 +1,19 @@
 ﻿using SistemaHotel.Model;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using SistemaHotel.Controller;
 using SistemaHotel.Utils;
 using System.IO;
+using System.Globalization;
 
 namespace SistemaHotel
 {
     public partial class ControleProduto : System.Web.UI.Page
     {
+        CultureInfo ptBR = new CultureInfo("pt-BR");
         string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
 
         protected void Page_Load(object sender, EventArgs e)
@@ -124,7 +122,7 @@ namespace SistemaHotel
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["ID_Produto"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["NOME_Prod"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_Prod"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["PRECO_Uni"] + "</td></center>");
+                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + Convert.ToDecimal(dtr["PRECO_UNI"],ptBR) + "</td></center>");
                 sb.AppendLine($@"<td style='font-size:15px; letter-spacing: 1px;'><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></center></td>");
                 if (dtr["STATUS_PROD"].ToString() == "S")
                 {
@@ -157,43 +155,46 @@ namespace SistemaHotel
         {
             if (fuProduto.PostedFile.FileName != "" && txtNome.Text != "" && txtDescricao.Text != "" && txtPreco.Text != "" && ddlTipoProdS.SelectedValue != "SELECIONE")
             {
+                Produto rProd = DALProduto.buscarProdutoNome(txtNome.Text);
 
-                if (int.Parse(txtPreco.Text.Replace(",","")) > 0)
+                if (rProd.NomeProduto == "")
                 {
-                    Produto prod = new Produto();
-                    prod.NomeProduto = txtNome.Text;
-                    prod.DescricaoProduto = txtDescricao.Text;
-                    //prod.PrecoUnitario = decimal.Parse(txtPreco.Text.Replace(",", "."));
-                    prod.PrecoUnitario = decimal.Parse(txtPreco.Text);
-                    prod.TipoProduto = Convert.ToInt32(ddlTipoProdS.SelectedValue);
-                    prod.StatusProd = 'S';
-                    //faz o upload da foto e salva o nome no obj
-
-                    if (fuProduto.PostedFile.FileName.EndsWith(".png") || fuProdE.PostedFile.FileName.EndsWith(".bitmap") || fuProduto.PostedFile.FileName.EndsWith(".jpg") || fuProduto.PostedFile.FileName.EndsWith(".jpeg"))
+                    if (Convert.ToDecimal(txtPreco.Text, ptBR) > 0)
                     {
-                        try
-                        {
-                            string msg = "";
-                            string caminho = Server.MapPath(@"IMAGENS_PRODUTOS\");
-                            prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
-                            string img = caminho + prod.FotoProduto;
-                            fuProduto.PostedFile.SaveAs(img);
-                            DALProduto.inserirProduto(prod);
+                        Produto prod = new Produto();
+                        prod.NomeProduto = txtNome.Text;
+                        prod.DescricaoProduto = txtDescricao.Text;
+                        prod.PrecoUnitario = Convert.ToDecimal(txtPreco.Text, ptBR);
+                        //prod.PrecoUnitario = decimal.Parse(txtPreco.Text);
+                        prod.TipoProduto = Convert.ToInt32(ddlTipoProdS.SelectedValue);
+                        prod.StatusProd = 'S';
+                        //faz o upload da foto e salva o nome no obj
 
-                            //msg = $"<script> alert('Produto Inserido!'); </script>";
-                            //Response.Write(msg);
-                            Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                        if (fuProduto.PostedFile.FileName.EndsWith(".png") || fuProdE.PostedFile.FileName.EndsWith(".bitmap") || fuProduto.PostedFile.FileName.EndsWith(".jpg") || fuProduto.PostedFile.FileName.EndsWith(".jpeg"))
+                        {
+                            try
+                            {
+                                string msg = "";
+                                string caminho = Server.MapPath(@"IMAGENS_PRODUTOS\");
+                                prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProduto.PostedFile.FileName;
+                                string img = caminho + prod.FotoProduto;
+                                fuProduto.PostedFile.SaveAs(img);
+                                DALProduto.inserirProduto(prod);
+
+                                //msg = $"<script> alert('Produto Inserido!'); </script>";
+                                //Response.Write(msg);
+                                Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
                                           Produto Inserido!
                                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
-                        }
-                        catch (Exception erro)
-                        {
-                            //msg = "<script> alert('Preencha todos os campos!'); </script>";
-                            //Response.Write(msg);
-                            Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                            }
+                            catch (Exception erro)
+                            {
+                                //msg = "<script> alert('Preencha todos os campos!'); </script>";
+                                //Response.Write(msg);
+                                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                         {erro.Message}
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
@@ -201,33 +202,48 @@ namespace SistemaHotel
                                             </div>");
 
 
+                            }
+                            limparCampos();
                         }
-                        limparCampos();
+                        else
+                        {
+                            //msg = "<script> alert('Preencha todos os campos!'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                       Só é permitido imagem com extensão: |.png |.bitmap |.jpg |.jpeg !
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button
+                                            </div>");
+                        }
                     }
                     else
                     {
                         //msg = "<script> alert('Preencha todos os campos!'); </script>";
                         //Response.Write(msg);
                         Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                       Só é permitido imagem com extensão: |.png |.bitmap |.jpg |.jpeg !
-                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                                <span aria-hidden='true'>&times;</span>
-                                              </button
-                                            </div>");
-                    }
-                }
-                else
-                {
-                    //msg = "<script> alert('Preencha todos os campos!'); </script>";
-                    //Response.Write(msg);
-                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                                          Não é permitido preço negativo!
                                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
 
+                    }
+
                 }
+                else
+                {
+
+                    //msg = "<script> alert('Preencha todos os campos!'); </script>";
+                    //Response.Write(msg);
+                    Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                        Produto {rProd.TipoProduto} já cadastrado!
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                            </div>");
+                }
+               
             }
             else
             {
@@ -275,50 +291,62 @@ namespace SistemaHotel
 
             if (txtNomeE.Text != "" && txtDescricaoE.Text != "" && txtPrecoE.Text != "" && ddlTipoProdE.SelectedValue != "SELECIONE")
             {
-                if (int.Parse(txtPreco.Text) > 0)
+                if (Convert.ToDecimal(txtPrecoE.Text, ptBR) > 0)
                 {
+
                     Produto prod = new Produto();
                     prod.NomeProduto = txtNomeE.Text;
                     prod.DescricaoProduto = txtDescricaoE.Text;
-                    prod.PrecoUnitario = decimal.Parse(txtPrecoE.Text.Replace(",", "."));
+                    prod.PrecoUnitario = Convert.ToDecimal(txtPrecoE.Text, ptBR);
                     prod.IdProduto = Convert.ToInt32(txtIdProdutoE.Text);
                     prod.TipoProduto = Convert.ToInt32(ddlTipoProdE.SelectedValue);
                     //alterar
 
                     if (fuProdE.PostedFile.FileName != "")
                     {
-                        if (fuProdE.PostedFile.FileName.EndsWith(".png")|| fuProdE.PostedFile.FileName.EndsWith(".jpg") || fuProdE.PostedFile.FileName.EndsWith(".bitmap") || fuProdE.PostedFile.FileName.EndsWith(".jpeg"))
+                        if (fuProdE.PostedFile.FileName.EndsWith(".png") || fuProdE.PostedFile.FileName.EndsWith(".jpg") || fuProdE.PostedFile.FileName.EndsWith(".bitmap") || fuProdE.PostedFile.FileName.EndsWith(".jpeg"))
                         {
                             string msg = "";
                             string caminho = Server.MapPath(@"IMAGENS_PRODUTOS\");
-                            try
-                            {
-                                //verificar se existe foto existe e deletar
-                                Produto rProd = DALProduto.buscarProdutoId(prod.IdProduto);
-                                if (rProd.FotoProduto != "")
-                                {
-                                    File.Delete(caminho + rProd.FotoProduto);
-                                }
-                                prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProdE.PostedFile.FileName;
-                                string img = caminho + prod.FotoProduto;
-                                fuProdE.PostedFile.SaveAs(img);
 
+                            //verificar se existe foto existe e deletar
+                            Produto rProd = DALProduto.buscarProdutoId(prod.IdProduto);
+                            if (rProd.FotoProduto != "")
+                            {
+                                File.Delete(caminho + rProd.FotoProduto);
                             }
-                            catch (Exception erro)
-                            {
+                            prod.FotoProduto = DateTime.Now.Millisecond.ToString() + fuProdE.PostedFile.FileName;
+                            string img = caminho + prod.FotoProduto;
+                            fuProdE.PostedFile.SaveAs(img);
 
-                                //msg = "<script> alert('Preencha todos os campos!'); </script>";
-                                //Response.Write(msg);
-                                Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                     {erro.Message}
-                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            DALProduto.alterarProduto(prod);
+                            //msg = $"<script> alert('O Produto Alterado:  ID {prod.IdProduto}'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                       O Produto Alterado:  ID {prod.IdProduto}
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
                                             </div>");
-                            }
+                            limparCampos();
 
 
                         }
+                        else
+                        {
+                            //msg = "<script> alert('Preencha todos os campos!'); </script>";
+                            //Response.Write(msg);
+                            Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                                       Só é permitido imagem com extensão: | .png | .bitmap | .jpg | .jpeg !
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                <span aria-hidden='true'>&times;</span>
+                                              </button>
+                                            </div>");
+
+                        }
+                    }
+                    else if (fuProdE.PostedFile.FileName == "")
+                    {
                         DALProduto.alterarProduto(prod);
                         //msg = $"<script> alert('O Produto Alterado:  ID {prod.IdProduto}'); </script>";
                         //Response.Write(msg);
@@ -329,21 +357,7 @@ namespace SistemaHotel
                                               </button>
                                             </div>");
                         limparCampos();
-
                     }
-                    else
-                    {
-                        //msg = "<script> alert('Preencha todos os campos!'); </script>";
-                        //Response.Write(msg);
-                        Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                       Só é permitido imagem com extensão: |.png |.bitmap |.jpg |.jpeg !
-                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                                <span aria-hidden='true'>&times;</span>
-                                              </button>
-                                            </div>");
-
-                    }
-                        
 
                 }
                 else
@@ -359,7 +373,7 @@ namespace SistemaHotel
 
                 }
 
-                
+
             }
             else
             {
@@ -372,8 +386,6 @@ namespace SistemaHotel
                                               </button>
                                             </div>");
             }
-
-
         }
 
 

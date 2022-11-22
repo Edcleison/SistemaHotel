@@ -1,22 +1,18 @@
 ﻿using SistemaHotel.Controller;
 using SistemaHotel.Model;
-using SistemaHotel.Utils;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
+using System.Globalization;
 using System.Text;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+
 
 namespace SistemaHotel
 {
     public partial class AcompanhamentoCliente : System.Web.UI.Page
     {
-
+        CultureInfo ptBR = new CultureInfo("pt-BR");
         string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -84,13 +80,13 @@ namespace SistemaHotel
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_PROD"] + "</td></center>");
                 if (dtr["ID_TIPO_PROD"].ToString() == "1")
                 {
-                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["PRECO_UNI"] + "</td></center>");
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + Convert.ToDecimal(dtr["PRECO_UNI"],ptBR) + "</td></center>");
                 }
                 else
                 {
                     //calcula o preco total do pedido de frigobar = (valor unitario (por dia) x qtde. de dias) - qtde de dias
                     int totalDias = (int)dataSaida.Subtract(DateTime.Today).TotalDays;
-                    decimal valorTotal = (Convert.ToDecimal(dtr["PRECO_UNI"].ToString()) * totalDias) - totalDias;
+                    decimal valorTotal = (Convert.ToDecimal(dtr["PRECO_UNI"],ptBR) * totalDias) - totalDias;
                     sb.AppendLine($"<td style='font-size:12px; letter-spacing: 1px;'><center>{valorTotal}</td></center>");
                 }
                 sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["QUANTIDADE"] + "</center></td>");
@@ -109,13 +105,13 @@ namespace SistemaHotel
                 {
                     if (dtr["ID_TIPO_PROD"].ToString() == "1")
                     {
-                        total += decimal.Parse(dtr["PRECO_UNI"].ToString()) * int.Parse(dtr["QUANTIDADE"].ToString());
+                        total += Convert.ToDecimal(dtr["PRECO_UNI"],ptBR) * int.Parse(dtr["QUANTIDADE"].ToString());
                     }
                     else
                     {
                         //calcula o preco total do pedido de frigobar = (valor unitario (por dia) x qtde. de dias) - qtde de dias
                         int totalDias = (int)dataSaida.Subtract(DateTime.Today).TotalDays;
-                        decimal valorTotal = (Convert.ToDecimal(dtr["PRECO_UNI"].ToString()) * totalDias) - totalDias;
+                        decimal valorTotal = (Convert.ToDecimal(dtr["PRECO_UNI"],ptBR) * totalDias) - totalDias;
                         total += valorTotal;
                     }
                 }

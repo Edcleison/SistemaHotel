@@ -2,20 +2,16 @@
 using SistemaHotel.Model;
 using SistemaHotel.Utils;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
+using System.Globalization;
 using System.Text;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace SistemaHotel
 {
     public partial class NovoPedidoFrigobar : System.Web.UI.Page
     {
+        CultureInfo ptBR = new CultureInfo("pt-BR");
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -100,7 +96,7 @@ namespace SistemaHotel
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["ID_Produto"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["NOME_PROD"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_PROD"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["PRECO_UNI"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + Convert.ToDecimal(dtr["PRECO_UNI"],ptBR) + "</center></td>");
                 sb.AppendLine($@"<td style='font-size:15px; letter-spacing: 1px;'><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></center></td>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center><a href='NovoPedidoFrigobar.aspx?PRODUTO_N=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-plus' style='color: green'></i></center></td>");
                 sb.AppendLine("</tr>");
@@ -126,7 +122,7 @@ namespace SistemaHotel
                     PedidoFrigobar ped = new PedidoFrigobar();
                     ped.IdCliente = cli.IdCliente;
                     ped.IdStatus = 1;
-                    ped.DataAbertura = DateTime.Now;
+                    ped.DataAbertura = DateTime.UtcNow;
 
                     ped.ValorTotal = decimal.Parse(txtPreco.Text);
                     DALPedidoFrigobar.inserirPedidoFrigobar(ped);

@@ -1,19 +1,17 @@
 ﻿using SistemaHotel.Controller;
 using SistemaHotel.Model;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Globalization;
+
 
 namespace SistemaHotel
 {
     public partial class PaginaMestre : System.Web.UI.MasterPage
     {
+        CultureInfo ptBR = new CultureInfo("pt-BR");
         DataTable dta = new DataTable();
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["login"] == null)

@@ -4,18 +4,16 @@ using SistemaHotel.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
+using System.Globalization;
 using System.Text;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+
 
 namespace SistemaHotel
 {
     public partial class NovoPedidoCozinha : System.Web.UI.Page
     {
+        CultureInfo ptBR = new CultureInfo("pt-BR");
         List<Carrinho> prodsCar = new List<Carrinho>();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -109,7 +107,7 @@ namespace SistemaHotel
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["ID_Produto"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["NOME_PROD"] + "</center></td>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["DESCRICAO_PROD"] + "</center></td>");
-                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + dtr["PRECO_UNI"] + "</center></td>");
+                sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center>" + Convert.ToDecimal(dtr["PRECO_UNI"],ptBR) + "</center></td>");
                 sb.AppendLine($@"<td style='font-size:15px; letter-spacing: 1px;'><center><img src='IMAGENS_PRODUTOS\{dtr["FOTO_Prod"]}'></center></td>");
                 sb.AppendLine("<td style='font-size:15px; letter-spacing: 1px;'><center><a href='NovoPedidoCozinha.aspx?PRODUTO_N=" + Criptografia.Encrypt(dtr["ID_Produto"].ToString()) + "'><i class='fa fa-plus' style='color: green'></i></center></td>");
                 sb.AppendLine("</tr>");
@@ -191,7 +189,7 @@ namespace SistemaHotel
                 PedidoCozinha ped = new PedidoCozinha();
                 ped.IdCliente = cli.IdCliente;
                 ped.IdStatus = 1;
-                ped.DataAbertura = DateTime.Now;
+                ped.DataAbertura = DateTime.UtcNow;
                 ped.ValorTotal = decimal.Parse(lblTotal.Text);
                 DALPedidoCozinha.inserirPedidoCozinha(ped);
                 //busca o pedido pelo id_cliente e Data_Abertura
@@ -265,10 +263,10 @@ namespace SistemaHotel
                 sb.AppendLine($"<td style='font-size:15px; letter-spacing: 1px;'><center> {dtr["ID_Produto"]}</center></td>");
                 sb.AppendLine($"<td style='font-size:15px; letter-spacing: 1px;'><center> {dtr["NOME_PROD"]}</center></td>");
                 sb.AppendLine($"<td style='font-size:15px; letter-spacing: 1px;'><center>{dtr["DESCRICAO_PROD"]}</center></td>");
-                sb.AppendLine($"<td style='font-size:15px; letter-spacing: 1px;'><center>{dtr["PRECO_UNI"]}</center></td>");
+                sb.AppendLine($"<td style='font-size:15px; letter-spacing: 1px;'><center>{Convert.ToDecimal(dtr["PRECO_UNI"],ptBR)}</center></td>");
                 sb.AppendLine($"<td style='font-size:15px; letter-spacing: 1px;'><center><a href='NovoPedidoCozinha.aspx?CARRINHO_C={Criptografia.Encrypt(dtr["ID_CARRINHO"].ToString())}'><i class='fa fa-minus' style='color: red'></i></center></td>");
                 sb.AppendLine("</tr>");
-                total += decimal.Parse(dtr["PRECO_UNI"].ToString());
+                total += Convert.ToDecimal(dtr["PRECO_UNI"],ptBR);
 
             }
             sb.AppendLine("</tbody>");

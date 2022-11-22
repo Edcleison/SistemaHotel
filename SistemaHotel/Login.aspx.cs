@@ -2,19 +2,13 @@
 using SistemaHotel.Model;
 using SistemaHotel.Utils;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-
+using System.Globalization;
 
 namespace SistemaHotel
 {
     public partial class Login : System.Web.UI.Page
     {
+        CultureInfo ptBR = new CultureInfo("pt-BR");
         protected void Page_Load(object sender, EventArgs e)
         {
             Session.Clear();
@@ -117,7 +111,7 @@ namespace SistemaHotel
             {
 
                 Cliente cli = DALCliente.buscarClienteReserva(login);
-                if (DateTime.ParseExact(cli.DataSaida.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) > DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
+                if (DateTime.ParseExact(cli.DataSaida.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) > DateTime.ParseExact(DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
                 {
                     if (login != "" && senha != "")
                     {

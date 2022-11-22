@@ -219,7 +219,7 @@
                                         <span>Número Quarto: </span>
                                     </div>
                                     <div class="col-4">
-                                        <asp:TextBox runat="server" class="form-control" onkeypress="return apenasNumeros(event);" ID="txtNumeroQuarto"></asp:TextBox>
+                                        <asp:TextBox runat="server" class="form-control" onkeypress="return apenasNumeros(event);" ID="txtNumeroQuarto"  MaxLength="20"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -279,7 +279,7 @@
                                         <span>Quarto: </span>
                                     </div>
                                     <div class="col-4">
-                                        <asp:TextBox runat="server" class="form-control" onkeypress="return apenasNumeros(event);" ID="txtNumeroQuartoE"></asp:TextBox>
+                                        <asp:TextBox runat="server" class="form-control" onkeypress="return apenasNumeros(event);" ID="txtNumeroQuartoE"  MaxLength="20"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="row">
