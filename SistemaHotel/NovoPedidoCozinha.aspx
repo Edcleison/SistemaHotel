@@ -13,17 +13,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
 
-    <%--<script src="Scripts/jquery-3.5.1.js"></script>
-    <script src="Scripts/jquery.dataTables.min.js"></script>
-    <script src="Scripts/dataTables.buttons.min.js"></script>
-    <script src="Scripts/jszip.min.js"></script>
-    <script src="Scripts/pdfmake.min.js"></script>
-    <script src="Scripts/vfs_fonts.js"></script>
-    <script src="Scripts/buttons.html5.min.js"></script>
-    <script src="Scripts/buttons.print.min.js"></script>
-
-    <link href="CSS/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="CSS/buttons.dataTables.min.css" rel="stylesheet" />--%>
     <script src="Scripts/jquery-3.3.1.slim.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -41,6 +30,7 @@
             });
         });
     </script>
+  
     <script type="text/javascript">
         $(document).ready(function () {
             $('#example').DataTable({
@@ -117,7 +107,7 @@
 
     <script src="Scripts/mascara.js"></script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" onload="getDateTime();" runat="server">
     <asp:Panel ID="PnlPedido" runat="server" Style="font-family: Calibri"></asp:Panel>
     <h5 class="p-3 mb-2 bg-dark text-white">Pedido Cozinha</h5>
     <hr />
@@ -279,6 +269,5 @@
             </div>
         </div>
     </div>
-    <asp:HiddenField ID="dataHora" runat="server" />
 </asp:Content>
 

@@ -27,7 +27,7 @@ namespace SistemaHotel
                             DataTable dta = DALCliente.verificarOcupacaoQuarto(Criptografia.Decrypt(Request.QueryString["QUARTO_D"]));
                             if (dta.Rows.Count > 0)
                             {
-                                if (DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) < DateTime.ParseExact(DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
+                                if (DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) < DateTime.ParseExact(HorarioBrasilia.getHoraBrasilia().ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
                                 {
                                     DALQuarto.inativarQuarto(rParametro);
                                     //string msg = $"<script> alert('Quarto Inativado: ID {rParametro}'); </script>";

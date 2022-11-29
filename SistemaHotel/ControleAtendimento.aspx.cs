@@ -79,16 +79,16 @@ namespace SistemaHotel
                 if (dtr["ID_ADM"].ToString() != "")
                 {
                     sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + Convert.ToDateTime(dtr["DATA_FINALIZACAO"]).ToString("dd/MM/yyyy HH:mm") + "</center></td>");
-                    sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_ADM"] + "</center></th>");
-                    sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME_ADM"] + " " + dtr["SOBRENOME_ADM"] + "</center></th>");
-                    sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["PERFIL_ADM"] + "</center></th>");
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_ADM"] + "</center></td>");
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME_ADM"] + " " + dtr["SOBRENOME_ADM"] + "</center></td>");
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["PERFIL_ADM"] + "</center></td>");
                 }
                 else if (dtr["ID_FUNCIONARIO"].ToString() != "")
                 {
                     sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + Convert.ToDateTime(dtr["DATA_FINALIZACAO"]).ToString("dd/MM/yyyy HH:mm") + "</center></td>");
-                    sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_FUNCIONARIO"] + "</center></th>");
-                    sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME_FUNC"] + " " + dtr["SOBRENOME_FUNC"] + "</center></th>");
-                    sb.AppendLine("<th style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["PERFIL_FUNC"] + "</center></th>");
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["ID_FUNCIONARIO"] + "</center></td>");
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["NOME_FUNC"] + " " + dtr["SOBRENOME_FUNC"] + "</center></td>");
+                    sb.AppendLine("<td style='font-size:12px; letter-spacing: 1px;'><center>" + dtr["PERFIL_FUNC"] + "</center></td>");
 
                 }
                 else

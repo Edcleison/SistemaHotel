@@ -40,7 +40,7 @@ namespace SistemaHotel
                                 {
                                     PedidoCozinha pedCoz = new PedidoCozinha();
                                     pedCoz.IdStatus = 2;
-                                    pedCoz.DataFinalizacao = DateTime.UtcNow;
+                                    pedCoz.DataFinalizacao =  HorarioBrasilia.getHoraBrasilia();;
                                     pedCoz.IdAdm = adm.IdAdm;
                                     pedCoz.IdPedido= ped.IdPedido;
                                     DALPedidoCozinha.alterarStatusAtendimentoAdm(pedCoz);
@@ -50,7 +50,7 @@ namespace SistemaHotel
                                 {
                                     PedidoFrigobar pedFrig = new PedidoFrigobar();
                                     pedFrig.IdStatus = 2;
-                                    pedFrig.DataFinalizacao = DateTime.UtcNow;
+                                    pedFrig.DataFinalizacao =  HorarioBrasilia.getHoraBrasilia();;
                                     pedFrig.IdAdm = adm.IdAdm;
                                     pedFrig.IdPedido = ped.IdPedido;
                                     DALPedidoFrigobar.alterarStatusAtendimentoAdm(pedFrig);
@@ -72,7 +72,7 @@ namespace SistemaHotel
                                 Funcionario fun = DALFuncionario.buscarFuncionarioIdUsuario(usu.IdUsuario);
                                 PedidoCozinha pedCoz = new PedidoCozinha();
                                 pedCoz.IdStatus = 2;
-                                pedCoz.DataFinalizacao = DateTime.UtcNow;
+                                pedCoz.DataFinalizacao =  HorarioBrasilia.getHoraBrasilia();;
                                 pedCoz.IdFuncionario = fun.IdFuncionario;
                                 pedCoz.IdPedido = ped.IdPedido;
                                 DALPedidoCozinha.alterarStatusAtendimentoFuncionario(pedCoz);
@@ -97,10 +97,15 @@ namespace SistemaHotel
                                 Administracao adm = DALAdministracao.buscarAdmIdUsuario(usu.IdUsuario);
                                 PedidoFrigobar pedFrig = new PedidoFrigobar();
                                 pedFrig.IdStatus = 3;
-                                pedFrig.DataFinalizacao = DateTime.UtcNow;
+                                pedFrig.DataFinalizacao =  HorarioBrasilia.getHoraBrasilia();;
                                 pedFrig.IdAdm = adm.IdAdm;
                                 pedFrig.IdPedido = ped.IdPedido;
                                 DALPedidoFrigobar.alterarStatusAtendimentoAdm(pedFrig);
+                                //busca os dados do cliente pelo cod_reserva
+                                Cliente cli = DALCliente.buscarClienteId(ped.IdCliente);
+                                //ativa a flag para o cliente fazer pedidos de frigobar
+                                cli.FlagPedidoFrigobar = 'S';
+                                DALCliente.alterarCliente(cli);
                                 //msg = $"<script> alert('Atendimento Recusado: ID do Administração {adm.IdAdm}'); </script>";
                                 //Response.Write(msg);
                                 Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
@@ -116,7 +121,7 @@ namespace SistemaHotel
                                 Funcionario fun = DALFuncionario.buscarFuncionarioIdUsuario(usu.IdUsuario);
                                 PedidoCozinha pedCoz = new PedidoCozinha();
                                 pedCoz.IdStatus = 3;
-                                pedCoz.DataFinalizacao = DateTime.UtcNow;
+                                pedCoz.DataFinalizacao =  HorarioBrasilia.getHoraBrasilia();;
                                 pedCoz.IdFuncionario = fun.IdFuncionario;
                                 pedCoz.IdPedido = ped.IdPedido;
                                 DALPedidoCozinha.alterarStatusAtendimentoFuncionario(pedCoz);

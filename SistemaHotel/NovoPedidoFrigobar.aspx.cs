@@ -122,7 +122,7 @@ namespace SistemaHotel
                     PedidoFrigobar ped = new PedidoFrigobar();
                     ped.IdCliente = cli.IdCliente;
                     ped.IdStatus = 1;
-                    ped.DataAbertura = DateTime.UtcNow;
+                    ped.DataAbertura =  HorarioBrasilia.getHoraBrasilia();;
 
                     ped.ValorTotal = decimal.Parse(txtPreco.Text);
                     DALPedidoFrigobar.inserirPedidoFrigobar(ped);

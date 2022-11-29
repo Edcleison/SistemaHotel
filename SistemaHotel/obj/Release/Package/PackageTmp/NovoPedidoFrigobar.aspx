@@ -164,11 +164,8 @@
                                 <div class="col-4">
                                     <asp:TextBox runat="server" class="form-control" ID="txtPreco" onkeyup="formataValor(this,event);" Enabled="false"></asp:TextBox>
                                 </div>
-                                <div class="col-6">
-                                    <p>
-                                        style='font-size:15px;Seu desconto é de: </b>
-                                        <asp:Label ID="lblDesconto" ForeColor="red" runat="server"></asp:Label>
-                                    </p>
+                                <div class="col-6">                              
+                                        <p style="font-size:15px;">Seu desconto é de  <asp:Label ID="lblDesconto" runat="server"></asp:Label></p>   
                                 </div>
                             </div>
                             <div class="row">

@@ -536,7 +536,7 @@ namespace SistemaHotel
         {
             mdBack.Visible = true;
             mdCli.Visible = true;
-            txtInputDataIni.Text = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm");
+            txtInputDataIni.Text =  HorarioBrasilia.getHoraBrasilia().ToString("dd/MM/yyyy HH:mm");
             carregaDdlQuarto();
 
         }
@@ -557,7 +557,7 @@ namespace SistemaHotel
                         DateTime dataIni = DateTime.ParseExact(txtInputDataIni.Text, "dd/MM/yyyy HH:mm", null);
                         DateTime dataFim = DateTime.ParseExact(txtInputDataFim.Text, "dd/MM/yyyy HH:mm", null);
 
-                        if (DateTime.ParseExact(dataIni.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null) >= DateTime.ParseExact(DateTime.UtcNow.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null))
+                        if (DateTime.ParseExact(dataIni.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null) >= DateTime.ParseExact(HorarioBrasilia.getHoraBrasilia().ToString("dd/MM/yyyy"), "dd/MM/yyyy", null))
                         {
                             if (dataIni < dataFim)
                             {
@@ -742,7 +742,7 @@ namespace SistemaHotel
                     // DateTime novaDataFim = DateTime.ParseExact($"{txtInputDataFimE.Text} {ddlInputHoraFimE}", "dd/MM/yyyy HH:mm", null);
                     DateTime novaDataFim = DateTime.ParseExact(txtInputDataFimE.Text, "dd/MM/yyyy HH:mm", null);
 
-                    if (novaDataFim > DateTime.ParseExact(DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) && novaDataFim > dataFim)
+                    if (novaDataFim > DateTime.ParseExact(HorarioBrasilia.getHoraBrasilia().ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) && novaDataFim > dataFim)
                     {
                         //campos relacionados a busca do cliente pelo cod_reserva
                         Cliente cli = DALCliente.buscarClienteReserva(txtCdReservaE.Text.ToUpper());
@@ -777,7 +777,7 @@ namespace SistemaHotel
                                             </div>");
 
                             }
-                            else if (DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) < DateTime.ParseExact(DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
+                            else if (DateTime.ParseExact(Convert.ToDateTime(dta.Rows[0]["DATA_SAIDA"]).ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) < DateTime.ParseExact(HorarioBrasilia.getHoraBrasilia().ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
                             {
                                 //alterar a data de saída do cliente
                                 DALCliente.alterarCliente(cli);

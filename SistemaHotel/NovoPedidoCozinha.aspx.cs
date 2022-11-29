@@ -189,7 +189,7 @@ namespace SistemaHotel
                 PedidoCozinha ped = new PedidoCozinha();
                 ped.IdCliente = cli.IdCliente;
                 ped.IdStatus = 1;
-                ped.DataAbertura = DateTime.UtcNow;
+                ped.DataAbertura = HorarioBrasilia.getHoraBrasilia();
                 ped.ValorTotal = decimal.Parse(lblTotal.Text);
                 DALPedidoCozinha.inserirPedidoCozinha(ped);
                 //busca o pedido pelo id_cliente e Data_Abertura

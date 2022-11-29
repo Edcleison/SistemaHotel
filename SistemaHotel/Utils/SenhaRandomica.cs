@@ -34,5 +34,6 @@ namespace SistemaHotel.Utils
 
             return senha.ToString();
         }
+
     }
 }

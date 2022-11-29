@@ -14,7 +14,6 @@ namespace SistemaHotel.Controller
     public static class DALPedidoCozinha
     {
         static string cnn = @"Data Source=den1.mssql8.gear.host;Initial Catalog=servicohotelaria;Persist Security Info=True;User ID=servicohotelaria;Password=Kd5rn9__2ARu";
-
         public static void inserirPedidoCozinha(PedidoCozinha ped)
         {
             using (SqlConnection connection = new SqlConnection(cnn))
@@ -29,7 +28,6 @@ namespace SistemaHotel.Controller
                                                         VALUES
                                                         (@ID_STATUS,@ID_CLIENTE,NULLIF(@ID_ADM,''),NULLIF(@ID_FUNCIONARIO,''),@VALOR_TOTAL,@DATA_ABERTURA)", connection))
                 {
-
                     try
                     {
                         cmd.Connection.Open();
@@ -49,7 +47,6 @@ namespace SistemaHotel.Controller
                     {
                         connection.Close();
                     }
-
                 }
             }
         }

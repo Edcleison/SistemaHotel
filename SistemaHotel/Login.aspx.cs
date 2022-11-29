@@ -111,7 +111,7 @@ namespace SistemaHotel
             {
 
                 Cliente cli = DALCliente.buscarClienteReserva(login);
-                if (DateTime.ParseExact(cli.DataSaida.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) > DateTime.ParseExact(DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
+                if (DateTime.ParseExact(cli.DataSaida.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null) > DateTime.ParseExact(HorarioBrasilia.getHoraBrasilia().ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null))
                 {
                     if (login != "" && senha != "")
                     {
@@ -257,7 +257,7 @@ namespace SistemaHotel
                             //string msg = "<script> alert('Senha Atualizada!'); </script>";
                             //Response.Write(msg);
                             Response.Write(@"<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                                         Senha Atualizada!
+                                         Senha atualizada!
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
@@ -269,7 +269,7 @@ namespace SistemaHotel
                             //string msg = "<script> alert('Digite as Senhas Iguais!'); </script>";
                             //Response.Write(msg);
                             Response.Write(@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                         Digite as Senhas Iguais!
+                                         Os campos de senha devem ser preenchidos igualmente!
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
@@ -281,7 +281,7 @@ namespace SistemaHotel
                         //string msg = "<script> alert('Senha mínimo 8 caracteres!'); </script>";
                         //Response.Write(msg);
                         Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                 Senha mínimo 8 caracteres!
+                                 Senha deve ter no mínimo 8 caracteres!
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>

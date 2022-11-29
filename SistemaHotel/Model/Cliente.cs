@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaHotel.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,8 +26,8 @@ namespace SistemaHotel.Model
             this.NomeCliente = "";
             this.SobreNomeCliente = "";
            
-            this.DataEntrada = DateTime.UtcNow;
-            this.DataSaida = DateTime.UtcNow;
+            this.DataEntrada =  HorarioBrasilia.getHoraBrasilia();;
+            this.DataSaida =  HorarioBrasilia.getHoraBrasilia();;
             this.FlagPedidoFrigobar = 'P';
         }
 

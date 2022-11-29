@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaHotel.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,8 +19,8 @@ namespace SistemaHotel.Model
             IdStatus = 0;         
             IdCliente = 0;           
             ValorTotal = 0;
-            DataAbertura = DateTime.UtcNow;
-            DataFinalizacao = DateTime.UtcNow;
+            DataAbertura =  HorarioBrasilia.getHoraBrasilia();;
+            DataFinalizacao =  HorarioBrasilia.getHoraBrasilia();;
         }
     }
 

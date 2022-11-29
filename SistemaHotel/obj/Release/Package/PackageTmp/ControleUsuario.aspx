@@ -121,6 +121,7 @@
             $('#tabelaClientes').DataTable({
                 "language": {
                     "emptyTable": "Não foram encontrados registros",
+                    "zeroRecords": "Não foram encontrados resultados",
                     "paginate": {
                         "previous": "<",
                         "next": ">",
@@ -249,7 +250,7 @@
             <div class="modal-dialog modal-personalizado" role="document">
                 <div class="modal-content" visible="false" style="border-radius: 10px;">
                     <div class="modal-header">
-                        <h5 class="modal-title">Novo Membro:</h5>
+                        <h5 class="modal-title">Novo Membro</h5>
                         <asp:LinkButton type="button" runat="server" class="close" data-dismiss="modal" OnClick="lnkVoltar_Click" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </asp:LinkButton>

@@ -133,6 +133,54 @@ namespace SistemaHotel.Controller
             }
         }
 
+        public static Cliente buscarClienteId(int IdCliente)
+        {
+            Cliente cli = new Cliente();
+            using (SqlConnection connection = new SqlConnection(cnn))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"SELECT [ID_CLIENTE]
+                                                          ,[ID_QUARTO]
+                                                          ,[COD_RESERVA]
+                                                          ,[NOME_CLIENTE]
+                                                          ,[SOBRENOME_CLIENTE]
+                                                          ,[DATA_ENTRADA]
+                                                          ,[DATA_SAIDA]
+                                                          ,[FLAG_PEDIDO_FRIGOBAR]
+                                                        FROM [dbo].[CLIENTE]
+                                                         WHERE ID_CLIENTE=@ID_CLIENTE", connection))
+                {
+                    try
+                    {
+
+                        cmd.Parameters.AddWithValue("ID_CLIENTE", IdCliente);
+                        cmd.Connection.Open();
+                        SqlDataReader registro = cmd.ExecuteReader();
+                        if (registro.HasRows)
+                        {
+                            registro.Read();
+                            cli.IdCliente = Convert.ToInt32(registro["ID_Cliente"]);
+                            cli.IdQuarto = Convert.ToInt32(registro["ID_QUARTO"]);
+                            cli.CodReserva = Convert.ToString(registro["COD_RESERVA"]);
+                            cli.NomeCliente = Convert.ToString(registro["NOME_CLIENTE"]);
+                            cli.SobreNomeCliente = Convert.ToString(registro["SOBRENOME_CLIENTE"]);
+                            cli.DataEntrada = Convert.ToDateTime(registro["DATA_ENTRADA"]);
+                            cli.DataSaida = Convert.ToDateTime(registro["DATA_SAIDA"]);
+                            cli.FlagPedidoFrigobar = Convert.ToChar(registro["FLAG_PEDIDO_FRIGOBAR"]);
+                        }
+                    }
+                    catch (Exception erro)
+                    {
+                        throw new Exception(erro.Message);
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                    return cli;
+                }
+            }
+        }
+
         public static DataTable verificarOcupacaoQuarto(string IdQuarto)
         {
             DataTable dta = new DataTable();

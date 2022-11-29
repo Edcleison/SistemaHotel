@@ -170,7 +170,7 @@ namespace SistemaHotel
                         prod.StatusProd = 'S';
                         //faz o upload da foto e salva o nome no obj
 
-                        if (fuProduto.PostedFile.FileName.EndsWith(".png") || fuProdE.PostedFile.FileName.EndsWith(".bitmap") || fuProduto.PostedFile.FileName.EndsWith(".jpg") || fuProduto.PostedFile.FileName.EndsWith(".jpeg"))
+                        if (fuProduto.PostedFile.FileName.EndsWith(".png") || fuProduto.PostedFile.FileName.EndsWith(".bitmap") || fuProduto.PostedFile.FileName.EndsWith(".jpg") || fuProduto.PostedFile.FileName.EndsWith(".jpeg"))
                         {
                             try
                             {
@@ -213,7 +213,7 @@ namespace SistemaHotel
                                        Só é permitido imagem com extensão: |.png |.bitmap |.jpg |.jpeg !
                                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
-                                              </button
+                                              </button>
                                             </div>");
                         }
                     }
@@ -237,7 +237,7 @@ namespace SistemaHotel
                     //msg = "<script> alert('Preencha todos os campos!'); </script>";
                     //Response.Write(msg);
                     Response.Write($@"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                        Produto {rProd.TipoProduto} já cadastrado!
+                                        Produto {rProd.NomeProduto} já cadastrado!
                                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                                 <span aria-hidden='true'>&times;</span>
                                               </button>
