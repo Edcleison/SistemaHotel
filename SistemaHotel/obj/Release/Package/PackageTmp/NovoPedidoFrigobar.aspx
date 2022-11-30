@@ -1,7 +1,13 @@
 ﻿<%@ Page Title="Pedido - Frigobar" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="NovoPedidoFrigobar.aspx.cs" Inherits="SistemaHotel.NovoPedidoFrigobar" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
- <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <%--    <link href="CSS/bootstrap.min.css" rel="stylesheet"  />--%>
+    <%--    <script src="Scripts/bootstrap.min.js" ></script>--%>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css" rel="stylesheet" />
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -12,18 +18,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
 
-
-    <%--<script src="Scripts/jquery-3.5.1.js"></script>
-    <script src="Scripts/jquery.dataTables.min.js"></script>
-    <script src="Scripts/dataTables.buttons.min.js"></script>
-    <script src="Scripts/jszip.min.js"></script>
-    <script src="Scripts/pdfmake.min.js"></script>
-    <script src="Scripts/vfs_fonts.js"></script>
-    <script src="Scripts/buttons.html5.min.js"></script>
-    <script src="Scripts/buttons.print.min.js"></script>
-
-    <link href="CSS/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="CSS/buttons.dataTables.min.css" rel="stylesheet" />--%>
     <script src="Scripts/jquery-3.3.1.slim.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -71,7 +65,7 @@
             });
         })
     </script>
-   
+
 
     <style>
         .modal-dialog modal-lg {
@@ -164,8 +158,9 @@
                                 <div class="col-4">
                                     <asp:TextBox runat="server" class="form-control" ID="txtPreco" onkeyup="formataValor(this,event);" Enabled="false"></asp:TextBox>
                                 </div>
-                                <div class="col-6">                              
-                                        <p style="font-size:15px;">Seu desconto é de  <asp:Label ID="lblDesconto" runat="server"></asp:Label></p>   
+                                <div class="col-6">
+                                    <p style="font-size: 15px;">Seu desconto é de 
+                                        <asp:Label ID="lblDesconto" runat="server"></asp:Label></p>
                                 </div>
                             </div>
                             <div class="row">

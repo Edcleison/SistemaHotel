@@ -1,7 +1,14 @@
 ﻿<%@ Page Title="Controle - Atendimentos" Language="C#" MasterPageFile="~/PaginaMestre.Master" AutoEventWireup="true" CodeBehind="ControleAtendimento.aspx.cs" Inherits="SistemaHotel.ControleAtendimento" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-   <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <%--    <link href="CSS/bootstrap.min.css" rel="stylesheet"  />--%>
+    <%--    <script src="Scripts/bootstrap.min.js" ></script>--%>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css" rel="stylesheet" />
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -56,9 +63,9 @@
             border-radius: 50%;
             width: 100px;
             height: 100px;
-        }      
+        }
     </style>
-    
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#example').DataTable({
@@ -130,9 +137,9 @@
                         </asp:DropDownList>
                     </p>
                 </div>
-                <div  class="col-sm">  
+                <div class="col-sm">
                     <span id="pesquisar">
-                    <asp:LinkButton ID="lnkPesquisar" class="btn btn-dark" OnClick="lnkPesquisar_Click" runat="server">Pesquisar</asp:LinkButton>
+                        <asp:LinkButton ID="lnkPesquisar" class="btn btn-dark" OnClick="lnkPesquisar_Click" runat="server">Pesquisar</asp:LinkButton>
                     </span>
                 </div>
             </div>
